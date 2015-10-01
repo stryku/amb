@@ -6,7 +6,7 @@ namespace AMB
 {
     namespace Utils
     {
-        enum Hotkey
+        enum class Hotkey
         {
             F1 = 0,
             F2,
