@@ -4,72 +4,75 @@
 
 #include <Windows.h>
 
-namespace Memory
+namespace AMB
 {
-    class ProcessMemoryReader
+    namespace Memory
     {
-    private:
-        HANDLE processHandle = NULL;
-
-        void _attachNewProcess( DWORD pid )
+        class ProcessMemoryReader
         {
-            Utils::safeCloseAndNullHandle( processHandle );
+        private:
+            HANDLE processHandle = NULL;
 
-            processHandle = OpenProcess( READ_CONTROL,
-                                         TRUE,
-                                         pid );
-        }
+            void _attachNewProcess( DWORD pid )
+            {
+                Utils::safeCloseAndNullHandle( processHandle );
 
-    public:
-        ProcessMemoryReader()
-        {}
-        ProcessMemoryReader( DWORD pid )
-        {
-            _attachNewProcess( pid );
-        }
-        ~ProcessMemoryReader()
-        {
-            Utils::safeCloseAndNullHandle( processHandle );
-        }
+                processHandle = OpenProcess( READ_CONTROL,
+                                             TRUE,
+                                             pid );
+            }
 
-        ProcessMemoryReader( ProcessMemoryReader &&rval ) :
-            processHandle( rval.processHandle )
-        {
-            rval.processHandle = NULL;
-        }
-        ProcessMemoryReader& operator=( ProcessMemoryReader &&rval )
-        {
-            processHandle = rval.processHandle;
+        public:
+            ProcessMemoryReader()
+            {}
+            ProcessMemoryReader( DWORD pid )
+            {
+                _attachNewProcess( pid );
+            }
+            ~ProcessMemoryReader()
+            {
+                Utils::safeCloseAndNullHandle( processHandle );
+            }
 
-            rval.processHandle = NULL;
-        }
-        ProcessMemoryReader( const ProcessMemoryReader& ) = delete;
-        ProcessMemoryReader& operator=( const ProcessMemoryReader& ) = delete;
+            ProcessMemoryReader( ProcessMemoryReader &&rval ) :
+                processHandle( rval.processHandle )
+            {
+                rval.processHandle = NULL;
+            }
+            ProcessMemoryReader& operator=( ProcessMemoryReader &&rval )
+            {
+                processHandle = rval.processHandle;
 
-        void attachNewProcess( DWORD pid )
-        {
-            _attachNewProcess( pid );
-        }
+                rval.processHandle = NULL;
+            }
+            ProcessMemoryReader( const ProcessMemoryReader& ) = delete;
+            ProcessMemoryReader& operator=( const ProcessMemoryReader& ) = delete;
 
-        template <typename T>
-        T read( LPCVOID ptrInProcess ) const
-        {
-            T value;
-            SIZE_T bytesRead;
+            void attachNewProcess( DWORD pid )
+            {
+                _attachNewProcess( pid );
+            }
 
-            if( processHandle == NULL )
-                return T();
+            template <typename T>
+            T read( LPCVOID ptrInProcess ) const
+            {
+                T value;
+                SIZE_T bytesRead;
 
-            ReadProcessMemory( processHandle, 
-                               ptrInProcess,
-                               &value,
-                               sizeof( T ), 
-                               &bytesRead );
+                if( processHandle == NULL )
+                    return T();
 
-            if( bytesRead != sizeof( T ) )
-                return T();
+                ReadProcessMemory( processHandle,
+                                   ptrInProcess,
+                                   &value,
+                                   sizeof( T ),
+                                   &bytesRead );
 
-            return value;
-        }
-    };
+                if( bytesRead != sizeof( T ) )
+                    return T();
+
+                return value;
+            }
+        };
+    }
 }

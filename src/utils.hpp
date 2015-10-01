@@ -2,17 +2,21 @@
 
 #include <Windows.h>
 
-namespace Utils
+namespace AMB
 {
-    void closeAndNullHandle( HANDLE &handle )
+    namespace Utils
     {
-        CloseHandle( handle );
-        handle = NULL;
-    }
 
-    void safeCloseAndNullHandle( HANDLE &handle )
-    {
-        if( handle != NULL )
-            closeAndNullHandle( handle );
+        void closeAndNullHandle( HANDLE &handle )
+        {
+            CloseHandle( handle );
+            handle = NULL;
+        }
+
+        void safeCloseAndNullHandle( HANDLE &handle )
+        {
+            if( handle != NULL )
+                closeAndNullHandle( handle );
+        }
     }
 }
