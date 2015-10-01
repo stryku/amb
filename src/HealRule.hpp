@@ -8,7 +8,7 @@ namespace AMB
     {
         namespace Heal
         {
-            class HealRule
+            struct HealRule
             {
                 size_t minHp, maxHp, minMana, maxMana;
                 Utils::Hotkey hotkey;
