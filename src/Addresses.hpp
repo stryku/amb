@@ -8,14 +8,14 @@ namespace AMB
     {
         struct Addresses
         {
-            DWORD XOR;
+            DWORD XOR = 0x933658;
 
             struct
             {
-                DWORD hp;
-                DWORD hpMax;
-                DWORD mana;
-                DWORD manaMax;
+                DWORD hp = 0xAD1030;
+                DWORD hpMax = 0xAD1024;
+                DWORD mana = 0x933688;
+                DWORD manaMax = 0x93365C;
             } character;
         };
     }
