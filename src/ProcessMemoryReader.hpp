@@ -11,14 +11,21 @@ namespace Memory
     private:
         HANDLE processHandle = NULL;
 
+        void _attachNewProcess( DWORD pid )
+        {
+            Utils::safeCloseAndNullHandle( processHandle );
+
+            processHandle = OpenProcess( READ_CONTROL,
+                                         TRUE,
+                                         pid );
+        }
+
     public:
         ProcessMemoryReader()
         {}
         ProcessMemoryReader( DWORD pid )
         {
-            processHandle = OpenProcess( READ_CONTROL,
-                                         TRUE,
-                                         pid );
+            _attachNewProcess( pid );
         }
         ~ProcessMemoryReader()
         {
@@ -38,6 +45,12 @@ namespace Memory
         }
         ProcessMemoryReader( const ProcessMemoryReader& ) = delete;
         ProcessMemoryReader& operator=( const ProcessMemoryReader& ) = delete;
+
+        void attachNewProcess( DWORD pid )
+        {
+            _attachNewProcess( pid );
+        }
+
 
     };
 }
