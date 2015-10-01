@@ -2,6 +2,8 @@
 
 #include <Windows.h>
 
+#include <random>
+
 namespace AMB
 {
     namespace Utils
@@ -20,6 +22,20 @@ namespace AMB
             F10,
             F11,
             F12
+        };
+
+        struct SleepTime
+        {
+            size_t min, max;
+
+            size_t get() const
+            {
+                static std::random_device rd;
+                static std::mt19937 mt( rd() );
+                std::uniform_real_distribution<size_t> dist( min, max );
+
+                return dist( mt );
+            }
         };
 
         void closeAndNullHandle( HANDLE &handle )
