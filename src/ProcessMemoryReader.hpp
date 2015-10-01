@@ -51,6 +51,25 @@ namespace Memory
             _attachNewProcess( pid );
         }
 
+        template <typename T>
+        T read( LPCVOID ptrInProcess ) const
+        {
+            T value;
+            SIZE_T bytesRead;
 
+            if( processHandle == NULL )
+                return T();
+
+            ReadProcessMemory( processHandle, 
+                               ptrInProcess,
+                               &value,
+                               sizeof( T ), 
+                               &bytesRead );
+
+            if( bytesRead != sizeof( T ) )
+                return T();
+
+            return value;
+        }
     };
 }
