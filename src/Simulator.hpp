@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utils.hpp"
+#include "TibiaWindowHwndFinder.hpp"
 
 #include <Windows.h>
 
@@ -15,7 +16,7 @@ namespace AMB
         private:
             static const size_t defMinSleepTime = 15;
             static const size_t defMaxSleepTime = 50;
-            HANDLE &processHandle;
+
             HWND windowHwnd;
 
             WPARAM hotkeyToWparam( Utils::Hotkey hotkey )
@@ -37,16 +38,11 @@ namespace AMB
                 }
             }
 
-            HWND getWindowHandle()
-            {
-                return FindWindow( 0, reinterpret_cast<LPCWSTR>( "Tibia" ) );
-            }
-
         public:
-            Simulator( HANDLE &processHandle ) :
-                processHandle( processHandle ),
-                windowHwnd( getWindowHandle() )
-            {}
+            Simulator( DWORD pid )
+            {
+                Utils::TibiaWindowHwndFinder::find( pid, windowHwnd );
+            }
             ~Simulator()
             {}
 

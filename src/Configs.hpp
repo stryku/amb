@@ -23,6 +23,7 @@ namespace AMB
 
         struct GlobalConfig
         {
+            DWORD pid;
             HealerConfig healerConfig;
         };
     };

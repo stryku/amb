@@ -11,47 +11,30 @@ namespace AMB
         class ProcessMemoryReader
         {
         private:
-            HANDLE processHandle = NULL;
+            HANDLE processHandle;
 
-            void _attachNewProcess( DWORD pid )
+            void attachNewProcess( DWORD pid )
             {
-                Utils::safeCloseAndNullHandle( processHandle );
-
-                processHandle = OpenProcess( READ_CONTROL,
+                processHandle = OpenProcess( PROCESS_ALL_ACCESS,
                                              TRUE,
                                              pid );
             }
+            
 
         public:
-            ProcessMemoryReader()
-            {}
             ProcessMemoryReader( DWORD pid )
             {
-                _attachNewProcess( pid );
+                attachNewProcess( pid );
             }
             ~ProcessMemoryReader()
             {
                 Utils::safeCloseAndNullHandle( processHandle );
             }
 
-            ProcessMemoryReader( ProcessMemoryReader &&rval ) :
-                processHandle( rval.processHandle )
-            {
-                rval.processHandle = NULL;
-            }
-            ProcessMemoryReader& operator=( ProcessMemoryReader &&rval )
-            {
-                processHandle = rval.processHandle;
-
-                rval.processHandle = NULL;
-            }
+            ProcessMemoryReader( ProcessMemoryReader &&rval ) = delete;
+            ProcessMemoryReader& operator=( ProcessMemoryReader &&rval ) = delete;
             ProcessMemoryReader( const ProcessMemoryReader& ) = delete;
             ProcessMemoryReader& operator=( const ProcessMemoryReader& ) = delete;
-
-            void attachNewProcess( DWORD pid )
-            {
-                _attachNewProcess( pid );
-            }
 
             template <typename T>
             T read( LPCVOID ptrInProcess ) const
@@ -66,10 +49,8 @@ namespace AMB
                                    ptrInProcess,
                                    &value,
                                    sizeof( T ),
-                                   &bytesRead );
+                                   NULL );
 
-                if( bytesRead != sizeof( T ) )
-                    return T();
 
                 return value;
             }
