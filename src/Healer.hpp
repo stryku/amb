@@ -16,8 +16,8 @@ namespace AMB
             class Healer : public Module
             {
             private:
-                static const size_t sleepMin = 700;
-                static const size_t sleepMax = 800;
+                static const size_t sleepMin = 400;
+                static const size_t sleepMax = 600;
 
                 Memory::TibiaStuffReader tibiaReader;
                 Simulate::Simulator simulator;
