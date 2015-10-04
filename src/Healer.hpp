@@ -38,7 +38,7 @@ namespace AMB
 
                     for( const auto &rule : config.healerConfig.rules )
                     {
-                        while( rule.passed( tibiaReader.hp(), tibiaReader.mana() ) )
+                        if( rule.passed( tibiaReader.hp(), tibiaReader.mana() ) )
                             executeRule( rule );
                     }
 
