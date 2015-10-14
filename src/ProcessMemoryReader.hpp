@@ -13,19 +13,13 @@ namespace AMB
         private:
             HANDLE processHandle;
 
-            void attachNewProcess( DWORD pid )
-            {
-                processHandle = OpenProcess( PROCESS_ALL_ACCESS,
-                                             TRUE,
-                                             pid );
-            }
-            
-
         public:
             ProcessMemoryReader( DWORD pid )
             {
                 attachNewProcess( pid );
             }
+            ProcessMemoryReader()
+            {}
             ~ProcessMemoryReader()
             {
                 Utils::safeCloseAndNullHandle( processHandle );
@@ -51,8 +45,16 @@ namespace AMB
                                    sizeof( T ),
                                    NULL );
 
-
                 return value;
+            }
+
+            void attachNewProcess( DWORD pid )
+            {
+                Utils::safeCloseAndNullHandle( processHandle );
+
+                processHandle = OpenProcess( PROCESS_ALL_ACCESS,
+                                             TRUE,
+                                             pid );
             }
         };
     }

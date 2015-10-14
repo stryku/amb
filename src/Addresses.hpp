@@ -24,7 +24,15 @@ namespace AMB
                 DWORD manaMax = 0x53365C;
             } character;
 
+            Addresses()
+            {}
             Addresses( DWORD pid )
+            {
+                attachNewProcess( pid );
+            }
+
+
+            void attachNewProcess( DWORD pid )
             {
                 base = Utils::getModuleBase( pid, "Tibia.exe" );
             }

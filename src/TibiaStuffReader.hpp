@@ -26,6 +26,8 @@ namespace AMB
                 memReader( pid ),
                 addresses( pid )
             {}
+            TibiaStuffReader()
+            {}
             ~TibiaStuffReader()
             {}
 
@@ -37,6 +39,12 @@ namespace AMB
             size_t mana() const
             {
                 return readWithXor( addresses.base + addresses.character.mana );
+            }
+
+            void attachNewProcess( DWORD pid )
+            {
+                memReader.attachNewProcess( pid );
+                addresses.attachNewProcess( pid );
             }
         };
     }
