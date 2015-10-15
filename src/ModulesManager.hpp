@@ -18,7 +18,7 @@ namespace AMB
             Configs::GlobalConfig &config;
 
         public:
-            ModulesManager( Configs::GlobalConfig &config ) :
+            ModulesManager( Configs::GlobalConfig &config ) : // todo change to pointer to ui from qt
                 config( config )
             {}
 

@@ -35,9 +35,9 @@ namespace AMB
 
             void run()
             {
-                auto run = std::bind( &Module::runMethod, this );
+                auto runLambda = std::bind( &Module::runMethod, this );
 
-                runThread = std::make_unique<std::thread>( run );
+                runThread = std::make_unique<std::thread>( runLambda );
             }
 
             void stop()

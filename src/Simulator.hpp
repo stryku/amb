@@ -14,8 +14,8 @@ namespace AMB
         class Simulator
         {
         private:
-            static const size_t defMinSleepTime = 15;
-            static const size_t defMaxSleepTime = 50;
+            static const size_t defMinRandomBetween = 15;
+            static const size_t defMaxRandomBetween = 50;
 
             HWND windowHwnd;
 
@@ -47,20 +47,20 @@ namespace AMB
             {}
 
             void hotkey( Utils::Hotkey hotkey,
-                         Utils::SleepTime sleepTime = { defMinSleepTime, defMaxSleepTime } )
+                         Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } )
             {
                 keyDownAndUp( hotkeyToWparam( hotkey ),
-                              sleepTime );
+                              RandomBetween );
             }
 
             void keyDownAndUp( WPARAM key,
-                               Utils::SleepTime sleepTime = { defMinSleepTime, defMaxSleepTime } )
+                               Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } )
             {
-                std::this_thread::sleep_for( std::chrono::milliseconds( sleepTime.get() ) );
+                std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
                 PostMessage( windowHwnd, WM_KEYDOWN, key, 0 );
-                std::this_thread::sleep_for( std::chrono::milliseconds( sleepTime.get() ) );
+                std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
                 PostMessage( windowHwnd, WM_KEYUP, key, 0 );
-                std::this_thread::sleep_for( std::chrono::milliseconds( sleepTime.get() ) );
+                std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
             }
         };
     }

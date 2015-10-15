@@ -12,7 +12,7 @@ namespace AMB
     {
         enum class ModuleId
         {
-            MOD_HEALER = 0
+            MOD_HEALER
         };
 
         class ModulesFactory

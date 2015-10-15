@@ -34,7 +34,7 @@ namespace AMB
                     auto mana = tibiaReader.mana();
 
                     auto sleepTo = std::chrono::system_clock::now() +
-                                   std::chrono::milliseconds( Utils::SleepTime{ sleepMin, sleepMax }.get() );
+                                   std::chrono::milliseconds( Utils::RandomBetween{ sleepMin, sleepMax }.get() );
 
                     for( const auto &rule : config.healerConfig.rules )
                     {

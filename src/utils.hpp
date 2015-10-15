@@ -26,7 +26,7 @@ namespace AMB
             F12
         };
 
-        struct SleepTime
+        struct RandomBetween
         {
             size_t min, max;
 
