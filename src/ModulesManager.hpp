@@ -20,15 +20,12 @@ namespace AMB
         public:
             ModulesManager( Configs::GlobalConfig &config ) : // todo change to pointer to ui from qt
                 config( config )
-            {}
+            {
+                modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>( config );
+            }
 
             void run( ModuleId modId )
             {
-                switch( modId )
-                {
-                    case ModuleId::MOD_HEALER: modules[modId] = ModulesFactory::get( modId, config );
-                }
-
                 modules[modId]->run();
             }
 
