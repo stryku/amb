@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Configs.hpp"
+#include "ModuleView.hpp"
+#include "TibiaStuffReader.hpp"
 
 #include <thread>
 #include <memory>
@@ -12,21 +14,29 @@ namespace AMB
         class Module
         {
         protected:
-            Configs::GlobalConfig &config;
             std::unique_ptr<std::thread> runThread;
+            Memory::TibiaStuffReader &tibiaReader;
+            Simulate::Simulator &simulator;
+            const void *ui; //todo
+
             bool continueRun = true;
 
             virtual void runDetails() = 0;
+            virtual void initConfig() = 0;
 
-            void runMethod()
+            virtual void runMethod()
             {
+                initConfig();
+
                 while( continueRun )
                     runDetails();
             }
 
         public:
-            Module( Configs::GlobalConfig &config ) :
-                config( config )
+            Module( Memory::TibiaStuffReader &tibiaReader, 
+                    Simulate::Simulator &simulator ) : // todo add to ptr to ui to module get controls from view
+                tibiaReader( tibiaReader ),
+                simulator( simulator )
             {}
             ~Module()
             {

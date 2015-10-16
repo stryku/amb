@@ -9,16 +9,19 @@ namespace AMB
 {
     namespace Configs
     {
-        /*class Config
+        struct Config
         {
-        public:
-            virtual void serialize( std::ostream &out ) = 0;
-            virtual void deserialize( std::istream &in ) = 0;
-        };*/
+            virtual void fromUi() = 0; // todo add ui ptr
+        };
 
-        struct HealerConfig
+        struct HealerConfig : public Config
         {
             std::vector<Modules::Heal::HealRule> rules;
+
+            void fromUi()
+            {
+
+            }
         };
 
         struct GlobalConfig
