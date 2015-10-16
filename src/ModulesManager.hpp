@@ -2,8 +2,7 @@
 
 #include "Healer.hpp"
 #include "Configs.hpp"
-
-#include "ModulesFactory.hpp"
+#include "ModuleId.hpp"
 
 #include <map>
 
@@ -14,7 +13,7 @@ namespace AMB
         class ModulesManager
         {
         private:
-            std::map<ModuleId, std::shared_ptr<Module>> modules;
+            std::map<ModuleId, std::unique_ptr<Module>> modules;
             Configs::GlobalConfig &config;
 
         public:
