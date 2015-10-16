@@ -39,10 +39,8 @@ namespace AMB
             }
 
         public:
-            Simulator( DWORD pid )
-            {
-                Utils::TibiaWindowHwndFinder::find( pid, windowHwnd );
-            }
+            Simulator()
+            {}
             ~Simulator()
             {}
 
@@ -61,6 +59,11 @@ namespace AMB
                 std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
                 PostMessage( windowHwnd, WM_KEYUP, key, 0 );
                 std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
+            }
+
+            void attachNewProcess( DWORD pid )
+            {
+                Utils::TibiaWindowHwndFinder::find( pid, windowHwnd );
             }
         };
     }
