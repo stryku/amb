@@ -8,7 +8,7 @@ namespace AMB
 {
     namespace Utils
     {
-        struct TibiaWindowHwndFinder
+        struct TibiaFinder
         {
             static std::mutex mtx;
             static HWND findedHwnd;
@@ -26,7 +26,7 @@ namespace AMB
                 return TRUE;
             }
 
-            static void find( DWORD pid, HWND &outHwnd )
+            static void findHwnd( DWORD pid, HWND &outHwnd )
             {
                 std::lock_guard<std::mutex> lock( mtx );
 

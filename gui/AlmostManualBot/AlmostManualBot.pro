@@ -15,6 +15,19 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    ../../src/utils.hpp \
+    ../../src/TibiaStuffReader.hpp \
+    ../../src/Simulator.hpp \
+    ../../src/ProcessMemoryReader.hpp \
+    ../../src/ModulesManager.hpp \
+    ../../src/ModuleId.hpp \
+    ../../src/Module.hpp \
+    ../../src/HealRule.hpp \
+    ../../src/Healer.hpp \
+    ../../src/Configs.hpp \
+    ../../src/Bot.hpp \
+    ../../src/Addresses.hpp \
+    ../../src/TibiaFinder.hpp
 
 FORMS    += mainwindow.ui
