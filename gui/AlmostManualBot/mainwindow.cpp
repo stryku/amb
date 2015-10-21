@@ -27,3 +27,8 @@ void MainWindow::updateTibiaClientsComboBox()
     for( auto &clientTitle : clientsTitles )
         comboBox->addItem( QString::fromStdWString( clientTitle ) );
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    updateTibiaClientsComboBox();
+}
