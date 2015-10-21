@@ -11,9 +11,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = AlmostManualBot
 TEMPLATE = app
 
+CONFIG += c++11
+
+INCLUDEPATH += ../../src
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    ../../src/TibiaFinder.cpp
 
 HEADERS  += mainwindow.h \
     ../../src/utils.hpp \
