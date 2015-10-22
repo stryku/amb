@@ -19,6 +19,8 @@ public:
               size_t maxMana,
               size_t size_tHotkey );
 
+    void resetTableHeaders();
+
     void clear();
 
 private:

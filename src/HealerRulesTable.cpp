@@ -6,18 +6,22 @@ HealerRulesTable::HealerRulesTable( QTableView *view ) :
     createModel();
 }
 
+void HealerRulesTable::resetTableHeaders()
+{
+    model->setHorizontalHeaderItem( minHpColumnIndex, new QStandardItem( QString( "Min HP" ) ) );
+    model->setHorizontalHeaderItem( maxHpColumnIndex, new QStandardItem( QString( "Max HP" ) ) );
+    model->setHorizontalHeaderItem( minManaColumnIndex, new QStandardItem( QString( "Min Mana" ) ) );
+    model->setHorizontalHeaderItem( maxManaColumnIndex, new QStandardItem( QString( "Max Mana" ) ) );
+    model->setHorizontalHeaderItem( hotkeyColumnIndex, new QStandardItem( QString( "Hotkey" ) ) );
+}
+
 void HealerRulesTable::createModel()
 {
-    QStandardItemModel *newModel = new QStandardItemModel( 0, 0 );
+    model = new QStandardItemModel( 0, 0 );
 
-    newModel->setHorizontalHeaderItem( minHpColumnIndex, new QStandardItem( QString( "Min HP" ) ) );
-    newModel->setHorizontalHeaderItem( maxHpColumnIndex, new QStandardItem( QString( "Max HP" ) ) );
-    newModel->setHorizontalHeaderItem( minManaColumnIndex, new QStandardItem( QString( "Min Mana" ) ) );
-    newModel->setHorizontalHeaderItem( maxManaColumnIndex, new QStandardItem( QString( "Max Mana" ) ) );
-    newModel->setHorizontalHeaderItem( hotkeyColumnIndex, new QStandardItem( QString( "Hotkey" ) ) );
+    view->setModel( model );
 
-    view->setModel( newModel );
-    model = newModel;
+    resetTableHeaders();
 }
 
 
@@ -66,4 +70,5 @@ void HealerRulesTable::add( size_t minHp,
 void HealerRulesTable::clear()
 {
     model->clear();
+    resetTableHeaders();
 }
