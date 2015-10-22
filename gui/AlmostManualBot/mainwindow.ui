@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
-    <height>407</height>
+    <width>512</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,6 +15,13 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnRefreshClientsComboBox">
+      <property name="text">
+       <string>Refresh</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QComboBox" name="cbTibiaClients">
       <item>
@@ -22,13 +29,6 @@
         <string>Select client</string>
        </property>
       </item>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnRefreshClientsComboBox">
-      <property name="text">
-       <string>Refresh</string>
-      </property>
      </widget>
     </item>
     <item row="1" column="0" colspan="2">
@@ -40,159 +40,147 @@
        <attribute name="title">
         <string>Healer</string>
        </attribute>
-       <widget class="QTableView" name="tableHealerRules">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>9</y>
-          <width>351</width>
-          <height>251</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QWidget" name="layoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>370</x>
-          <y>10</y>
-          <width>101</width>
-          <height>250</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Min HP</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="editHealerMinHp"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_2">
-           <property name="text">
-            <string>Max HP</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLineEdit" name="editHealerMaxHp"/>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Min Mana</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLineEdit" name="editHealerMinMana"/>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Max Mana</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLineEdit" name="editHealerMaxMana"/>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Hotkey</string>
-           </property>
-          </widget>
-         </item>
-         <item row="9" column="0">
-          <widget class="QComboBox" name="cbHealerHotkey">
-           <item>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>Not running</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTableView" name="tableHealerRules"/>
+        </item>
+        <item row="1" column="1">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
             <property name="text">
-             <string>F1</string>
+             <string>Min HP</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="editHealerMinHp"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_2">
             <property name="text">
-             <string>F2</string>
+             <string>Max HP</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLineEdit" name="editHealerMaxHp"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>F3</string>
+             <string>Min Mana</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLineEdit" name="editHealerMinMana"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>F4</string>
+             <string>Max Mana</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLineEdit" name="editHealerMaxMana"/>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_5">
             <property name="text">
-             <string>F5</string>
+             <string>Hotkey</string>
             </property>
-           </item>
-           <item>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QComboBox" name="cbHealerHotkey">
+            <item>
+             <property name="text">
+              <string>F1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>F12</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QPushButton" name="btnHealerAddRule">
             <property name="text">
-             <string>F6</string>
+             <string>Add</string>
             </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F7</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F8</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F9</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F10</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F11</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>F12</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="10" column="0">
-          <widget class="QPushButton" name="btnHealerAddRule">
-           <property name="text">
-            <string>Add</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QPushButton" name="btnHealerClear">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>260</y>
-          <width>111</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Clear</string>
-        </property>
-       </widget>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="btnHealerClear">
+          <property name="text">
+           <string>Clear</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -203,7 +191,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>510</width>
+     <width>512</width>
      <height>21</height>
     </rect>
    </property>
