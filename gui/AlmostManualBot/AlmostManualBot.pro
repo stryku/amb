@@ -11,13 +11,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = AlmostManualBot
 TEMPLATE = app
 
-CONFIG += c++11
+QMAKE_CXXFLAGS += -std=c++14
 
 INCLUDEPATH += ../../src
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    ../../src/TibiaFinder.cpp
+    ../../src/TibiaFinder.cpp \
+    ../../src/HealerRulesTable.cpp \
+    ../../src/utils.cpp
 
 HEADERS  += mainwindow.h \
     ../../src/utils.hpp \
@@ -32,6 +34,9 @@ HEADERS  += mainwindow.h \
     ../../src/Configs.hpp \
     ../../src/Bot.hpp \
     ../../src/Addresses.hpp \
-    ../../src/TibiaFinder.hpp
+    ../../src/TibiaFinder.hpp \
+    ../../src/HealerRulesTable.hpp
 
 FORMS    += mainwindow.ui
+
+win32:LIBS += -lpsapi

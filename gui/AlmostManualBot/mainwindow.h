@@ -1,10 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <TibiaFinder.hpp>
+#include <HealerRulesTable.hpp>
 
 #include <QMainWindow>
 
-#include <TibiaFinder.hpp>
+#include <memory>
 
 namespace Ui {
 class MainWindow;
@@ -19,10 +21,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_btnRefreshClientsComboBox_clicked();
+
+    void on_btnHealerAddRule_clicked();
 
 private:
     Ui::MainWindow *ui;
+    std::unique_ptr<HealerRulesTable> healerRulesTable;
+
 
     void updateTibiaClientsComboBox();
 };
