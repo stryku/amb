@@ -25,6 +25,8 @@ private slots:
 
     void on_btnHealerAddRule_clicked();
 
+    void on_btnHealerClear_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<HealerRulesTable> healerRulesTable;

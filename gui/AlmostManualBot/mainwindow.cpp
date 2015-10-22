@@ -57,3 +57,8 @@ void MainWindow::on_btnHealerAddRule_clicked()
                            maxMana,
                            hotkey );
 }
+
+void MainWindow::on_btnHealerClear_clicked()
+{
+    healerRulesTable->clear();
+}

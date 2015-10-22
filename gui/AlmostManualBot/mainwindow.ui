@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>497</width>
+    <width>510</width>
     <height>407</height>
    </rect>
   </property>
@@ -180,6 +180,19 @@
          </item>
         </layout>
        </widget>
+       <widget class="QPushButton" name="btnHealerClear">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>260</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -190,7 +203,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>497</width>
+     <width>510</width>
      <height>21</height>
     </rect>
    </property>

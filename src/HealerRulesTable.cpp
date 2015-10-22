@@ -62,3 +62,8 @@ void HealerRulesTable::add( size_t minHp,
 
     view->resizeColumnsToContents();
 }
+
+void HealerRulesTable::clear()
+{
+    model->clear();
+}
