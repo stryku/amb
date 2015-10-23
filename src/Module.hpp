@@ -57,6 +57,11 @@ namespace AMB
                 if( runThread->joinable() )
                     runThread->join();
             }
+
+            bool isRunning() const
+            {
+                return continueRun;
+            }
         };
     }
 }

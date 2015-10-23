@@ -32,6 +32,14 @@ namespace AMB
             {
                 modules[modId]->stop();
             }
+
+            void toggle( ModuleId modId )
+            {
+                if( modules[modId]->isRunning() )
+                    stop( modId );
+                else
+                    start( modId );
+            }
         };
     }
 }
