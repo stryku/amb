@@ -24,6 +24,19 @@ namespace AMB
             static BOOL CALLBACK checkWindowTitle( HWND hwnd, LPARAM lParam );
 
             static std::vector<std::wstring> findAllClientsTitles();
+
+            static DWORD findProcessId( const std::wstring &tibiaWindowTitle )
+            {
+                HWND hwnd = FindWindow( 0, tibiaWindowTitle.c_str() );
+                DWORD pid;
+
+                if( hProcess == NULL )
+                    return NULL;
+
+                 GetWindowThreadProcessId( hwnd, &pid );
+
+                 return pid;
+            }
         };
     }
 }
