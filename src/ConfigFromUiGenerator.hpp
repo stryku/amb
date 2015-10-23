@@ -2,6 +2,7 @@
 
 #include <Configs.hpp>
 #include <ModuleId.hpp>
+#include <TibiaFinder.hpp>
 
 #include <mainwindow.h>
 
@@ -18,6 +19,8 @@ namespace AMB
 
             void regenerate()
             {
+                regenerateCommon();
+                regenerateAllModules();
 
             }
 
@@ -29,6 +32,36 @@ namespace AMB
         private:
             const Ui::MainWindow *&ui;
             AMB::Configs::GlobalConfig config;
+
+            std::wstring getTibiaWindowTitle() const
+            {
+                const auto cbTibiaClients = ui->cbTibiaClients;
+                auto variant = cbTibiaClients->currentData();
+
+                return variant.toString().toStdWstring();
+            }
+
+            void regeneratePid()
+            {
+                auto title = getTibiaWindowTitle();
+
+                config.pid = TibiaFinder::findProcessId( title );
+            }
+
+            void regenerateCommon()
+            {
+                regeneratePid();
+            }
+
+            void regenerateAllModules()
+            {
+                for( auto id = ModuleId::BEGIN;
+                     id < ModuleId::END;
+                     ++id )
+                {
+                    regenerateModule( id );
+                }
+            }
         };
     }
 }
