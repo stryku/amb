@@ -23,8 +23,48 @@ public:
 
     void clear();
 
+    std::vector<AMB::Modules::Heal::HealRule> getRules() const
+    {
+       int rowCount = model->rowCount();
+       std::vector<AMB::Modules::Heal::HealRule> rules;
+
+       for( int i = 0; i < rowCount; ++i )
+            rules.push_back( getRule( i ) );
+
+       return rules;
+    }
+
 private:
     void createModel();
+
+    size_t getUInt( int row, int column ) const
+    {
+        auto item = model->item( row, column );
+        return item->data().toUInt();
+    }
+
+    AMB::Modules::Heal::HealRule getRule( int row ) const
+    {
+        size_t minHp;
+        size_t maxHp;
+        size_t minMana;
+        size_t maxMana;
+        size_t size_tHotkey;
+        AMB::Utils::Hotkey hotkey;
+
+        auto item = model->item( row, minHpColumnIndex );
+        minHp = item->data().toUInt();
+
+        minHp = getUInt( row, minHpColumnIndex );
+        maxHp = getUInt( row, maxHpColumnIndex );
+        minMana = getUInt( row, minManaColumnIndex );
+        maxMana = getUInt( row, maxManaColumnIndex );
+
+        size_tHotkey = getUInt( row, hotkeyColumnIndex );
+        hotkey = AMB::Utils::size_tToHotkey( size_tHotkey );
+
+        return { minHp, maxHp, minMana, maxMana, hotkey };
+    }
 
 private:
     typedef AMB::Modules::Heal::HealRule HealRule;

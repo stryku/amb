@@ -30,7 +30,7 @@ namespace AMB
                 HWND hwnd = FindWindow( 0, tibiaWindowTitle.c_str() );
                 DWORD pid;
 
-                if( hProcess == NULL )
+                if( hwnd == NULL )
                     return NULL;
 
                  GetWindowThreadProcessId( hwnd, &pid );

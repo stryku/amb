@@ -26,12 +26,6 @@ void HealerRulesTable::createModel()
 
 
 
-static const size_t minHpColumnIndex = 0;
-static const size_t maxHpColumnIndex = 1;
-static const size_t minManaColumnIndex = 2;
-static const size_t maxManaColumnIndex = 3;
-static const size_t hotkeyColumnIndex = 4;
-
 void HealerRulesTable::add( size_t minHp,
                             size_t maxHp,
                             size_t minMana,
