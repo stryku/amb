@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    auto p = ui->checkBoxHealerRun->palette();
+
+    p.setColor( QPalette::Active, QPalette::WindowText, QColor( "red" ) );
+    ui->checkBoxHealerRun->setPalette(p);
 
     healerRulesTable = std::make_unique<HealerRulesTable>( ui->tableHealerRules );
 

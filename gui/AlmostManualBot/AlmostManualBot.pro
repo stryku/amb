@@ -35,7 +35,8 @@ HEADERS  += mainwindow.h \
     ../../src/Bot.hpp \
     ../../src/Addresses.hpp \
     ../../src/TibiaFinder.hpp \
-    ../../src/HealerRulesTable.hpp
+    ../../src/HealerRulesTable.hpp \
+    ../../src/ConfigFromUiGenerator.hpp
 
 FORMS    += mainwindow.ui
 

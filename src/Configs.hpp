@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HealRule.hpp"
+#include <mainwindow.h>
 
 #include <vector>
 #include <iostream>
