@@ -1,11 +1,16 @@
 #pragma once
 
+
+
+#include <mainwindow.h>
+
 #include <Configs.hpp>
 #include <ModuleId.hpp>
 #include <TibiaFinder.hpp>
-#include <HealerRulesTable.hpp>
 
-#include <mainwindow.h>
+namespace Ui {
+class MainWindow;
+}
 
 namespace AMB
 {
@@ -14,66 +19,29 @@ namespace AMB
         class ConfigFromUiGenerator
         {
         public:
-            ConfigFromUiGenerator( const Ui::MainWindow *&ui,
-                                   const HealerRulesTable &healerRulesTable ) :
-                ui( ui ),
-                healerRulesTable( healerRulesTable )
-            {}
+            ConfigFromUiGenerator( const MainWindow *mainWindow,
+                                   const HealerRulesTable &healerRulesTable );
 
-            void regenerate()
-            {
-                regenerateCommon();
-                regenerateAllModules();
+            void regenerate();
 
-            }
+            const Configs::GlobalConfig& getConfigs() const;
 
-            void regenerateModule( Modules::ModuleId moduleId )
-            {
-                switch( moduleId )
-                {
-                    case ModuleId::HEALER: regenerateHealer();
-                }
-            }
+            void regenerateModule( Modules::ModuleId moduleId );
 
         private:
-            const Ui::MainWindow *&ui;
+            const MainWindow *mainWindow;
             const HealerRulesTable &healerRulesTable;
             AMB::Configs::GlobalConfig config;
 
-            std::wstring getTibiaWindowTitle() const
-            {
-                const auto cbTibiaClients = ui->cbTibiaClients;
-                auto variant = cbTibiaClients->currentData();
+            std::wstring getTibiaWindowTitle() const;
 
-                return variant.toString().toStdWstring();
-            }
+            void regenerateHealer();
 
-            void regenerateHealer()
-            {
-                config.healerConfig.rules = healerRulesTable.getRules();
-            }
+            void regeneratePid();
 
-            void regeneratePid()
-            {
-                auto title = getTibiaWindowTitle();
+            void regenerateCommon();
 
-                config.pid = TibiaFinder::findProcessId( title );
-            }
-
-            void regenerateCommon()
-            {
-                regeneratePid();
-            }
-
-            void regenerateAllModules()
-            {
-                for( auto id = ModuleId::BEGIN;
-                     id < ModuleId::END;
-                     ++id )
-                {
-                    regenerateModule( id );
-                }
-            }
+            void regenerateAllModules();
         };
     }
 }

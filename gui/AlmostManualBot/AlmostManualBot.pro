@@ -19,7 +19,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     ../../src/TibiaFinder.cpp \
     ../../src/HealerRulesTable.cpp \
-    ../../src/utils.cpp
+    ../../src/utils.cpp \
+    ../../src/ConfigFromUiGenerator.cpp \
+    ../../src/Bot.cpp \
+    ../../src/Addresses.cpp \
+    ../../src/BotCore.cpp \
+    ../../src/Healer.cpp \
+    ../../src/HealRule.cpp \
+    ../../src/Module.cpp \
+    ../../src/ModulesManager.cpp \
+    ../../src/Simulator.cpp \
+    ../../src/TibiaStuffReader.cpp
 
 HEADERS  += mainwindow.h \
     ../../src/utils.hpp \
@@ -32,11 +42,12 @@ HEADERS  += mainwindow.h \
     ../../src/HealRule.hpp \
     ../../src/Healer.hpp \
     ../../src/Configs.hpp \
-    ../../src/Bot.hpp \
     ../../src/Addresses.hpp \
     ../../src/TibiaFinder.hpp \
     ../../src/HealerRulesTable.hpp \
-    ../../src/ConfigFromUiGenerator.hpp
+    ../../src/ConfigFromUiGenerator.hpp \
+    ../../src/BotCore.hpp \
+    ../../src/Bot.hpp
 
 FORMS    += mainwindow.ui
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "HealRule.hpp"
-#include <mainwindow.h>
 
 #include <vector>
 #include <iostream>
@@ -10,19 +9,9 @@ namespace AMB
 {
     namespace Configs
     {
-        struct Config
-        {
-            virtual void fromUi() = 0; // todo add ui ptr
-        };
-
-        struct HealerConfig : public Config
+        struct HealerConfig
         {
             std::vector<Modules::Heal::HealRule> rules;
-
-            void fromUi()
-            {
-
-            }
         };
 
         struct GlobalConfig

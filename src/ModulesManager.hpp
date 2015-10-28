@@ -14,32 +14,19 @@ namespace AMB
         {
         private:
             std::map<ModuleId, std::unique_ptr<Module>> modules;
-            Configs::GlobalConfig &config;
 
         public:
-            ModulesManager( Configs::GlobalConfig &config ) : // todo change to pointer to ui from qt
-                config( config )
-            {
-                modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>( config );
-            }
+            ModulesManager( const Configs::GlobalConfig &config,
+                            Memory::TibiaStuffReader &tibiaReader,
+                            Simulate::Simulator &simulator);
 
-            void run( ModuleId modId )
-            {
-                modules[modId]->run();
-            }
+            void run( ModuleId modId );
 
-            void stop( ModuleId modId )
-            {
-                modules[modId]->stop();
-            }
+            void stop( ModuleId modId );
 
-            void toggle( ModuleId modId )
-            {
-                if( modules[modId]->isRunning() )
-                    stop( modId );
-                else
-                    start( modId );
-            }
+            void toggle( ModuleId modId );
+
+            bool isRunning( ModuleId modId );
         };
     }
 }

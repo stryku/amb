@@ -19,41 +19,16 @@ namespace AMB
                 static const size_t sleepMin = 400;
                 static const size_t sleepMax = 600;
 
-                Configs::HealerConfig config;
+                const Configs::HealerConfig &config;
 
-                void executeRule( const HealRule &rule )
-                {
-                    simulator.hotkey( rule.hotkey,
-                                      { sleepMin, sleepMax } );
-                }
+                void executeRule( const HealRule &rule );
 
-                void initConfig()
-                {
-                    config.fromUi();
-                }
-
-                void runDetails()
-                {
-                    auto hp = tibiaReader.hp();
-                    auto mana = tibiaReader.mana();
-
-                    auto sleepTo = std::chrono::system_clock::now() +
-                                   std::chrono::milliseconds( Utils::RandomBetween{ sleepMin, sleepMax }.get() );
-
-                    for( const auto &rule : config.rules )
-                    {
-                        if( rule.passed( tibiaReader.hp(), tibiaReader.mana() ) )
-                            executeRule( rule );
-                    }
-
-                    std::this_thread::sleep_until( sleepTo );
-                }
+                void runDetails();
 
             public:
-                Healer( Memory::TibiaStuffReader &tibiaReader,
-                        Simulate::Simulator &simulator ) :
-                    Module( tibiaReader, simulator )
-                {}
+                Healer( const Configs::HealerConfig &config,
+                        Memory::TibiaStuffReader &tibiaReader,
+                        Simulate::Simulator &simulator );
                 ~Healer()
                 {}
 

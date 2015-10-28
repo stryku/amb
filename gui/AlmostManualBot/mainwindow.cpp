@@ -1,15 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMainWindow>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    auto p = ui->checkBoxHealerRun->palette();
-
-    p.setColor( QPalette::Active, QPalette::WindowText, QColor( "red" ) );
-    ui->checkBoxHealerRun->setPalette(p);
+    stopModule( ui->checkBoxHealerRun,
+                AMB::Modules::ModuleId::MOD_HEALER );
 
     healerRulesTable = std::make_unique<HealerRulesTable>( ui->tableHealerRules );
 
@@ -65,4 +64,65 @@ void MainWindow::on_btnHealerAddRule_clicked()
 void MainWindow::on_btnHealerClear_clicked()
 {
     healerRulesTable->clear();
+}
+
+void MainWindow::toggleHealer()
+{
+    if( ui->checkBoxHealerRun->isChecked() )
+    {
+        stopModule( ui->checkBoxHealerRun,
+                    AMB::Modules::ModuleId::MOD_HEALER );
+    }
+    else
+    {
+        startModule( ui->checkBoxHealerRun,
+                     AMB::Modules::ModuleId::MOD_HEALER );
+    }
+}
+
+void MainWindow::startModule( QCheckBox *moduleCheckBox,
+                              AMB::Modules::ModuleId modId )
+{
+    auto p = moduleCheckBox->palette();
+
+    p.setColor( QPalette::Active, QPalette::WindowText, QColor( "green" ) );
+    moduleCheckBox->setPalette( p );
+    moduleCheckBox->setText( "Running" );
+
+    moduleToggleHandler( modId );
+}
+
+void MainWindow::stopModule( QCheckBox *moduleCheckBox,
+                             AMB::Modules::ModuleId modId )
+{
+    auto p = moduleCheckBox->palette();
+
+    p.setColor( QPalette::Active, QPalette::WindowText, QColor( "red" ) );
+    moduleCheckBox->setPalette( p );
+    moduleCheckBox->setText( "Not Running" );
+
+    moduleToggleHandler( modId );
+}
+
+const Ui::MainWindow* MainWindow::getUi() const
+{
+    return ui;
+}
+
+const HealerRulesTable& MainWindow::getHealerRulesTable() const
+{
+    return *( healerRulesTable.get() );
+}
+
+void MainWindow::setModuleToggleHandler( std::function<void( AMB::Modules::ModuleId )> newHandler )
+{
+    moduleToggleHandler = newHandler;
+}
+
+std::wstring MainWindow::getTibiaWindowTitle() const
+{
+    const auto cbTibiaClients = ui->cbTibiaClients;
+    auto variant = cbTibiaClients->currentData();
+
+    return variant.toString().toStdWString();
 }

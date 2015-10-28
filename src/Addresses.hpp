@@ -26,16 +26,9 @@ namespace AMB
 
             Addresses()
             {}
-            Addresses( DWORD pid )
-            {
-                attachNewProcess( pid );
-            }
+            Addresses( DWORD pid );
 
-
-            void attachNewProcess( DWORD pid )
-            {
-                base = Utils::getModuleBase( pid, "Tibia.exe" );
-            }
+            void attachNewProcess( DWORD pid );
         };
     }
 }
