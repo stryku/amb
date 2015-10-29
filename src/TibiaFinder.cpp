@@ -1,4 +1,4 @@
-#include "TibiaFinder.hpp"
+﻿#include "TibiaFinder.hpp"
 
 namespace AMB
 {
@@ -10,7 +10,7 @@ namespace AMB
 
             wchar_t title[maxTitleLength];
 
-            GetWindowText( hwnd,
+            GetWindowTextW( hwnd,
                            reinterpret_cast<LPWSTR>( title ),
                            maxTitleLength );
 

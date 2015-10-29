@@ -51,4 +51,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+win32:LIBS += -luser32
 win32:LIBS += -lpsapi
+win32:LIBS += -lkernel32
