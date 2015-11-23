@@ -1,4 +1,4 @@
-#include "Simulator.hpp"
+﻿#include "Simulator.hpp"
 
 namespace AMB
 {
@@ -24,20 +24,20 @@ namespace AMB
         }
 
         void Simulator::hotkey( Utils::Hotkey hotkey,
-                     Utils::RandomBetween RandomBetween )
+                                Utils::RandomBetween randomBetween )
         {
             keyDownAndUp( hotkeyToWparam( hotkey ),
-                          RandomBetween );
+                          randomBetween );
         }
 
         void Simulator::keyDownAndUp( WPARAM key,
-                           Utils::RandomBetween RandomBetween )
+                                      Utils::RandomBetween randomBetween )
         {
-            std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
+            std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
             PostMessage( windowHwnd, WM_KEYDOWN, key, 0 );
-            std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
+            std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
             PostMessage( windowHwnd, WM_KEYUP, key, 0 );
-            std::this_thread::sleep_for( std::chrono::milliseconds( RandomBetween.get() ) );
+            std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
         }
 
         void Simulator::attachNewProcess( DWORD pid )

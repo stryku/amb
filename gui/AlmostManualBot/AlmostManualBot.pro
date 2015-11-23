@@ -11,8 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = AlmostManualBot
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -std=c++14
-
 INCLUDEPATH += ../../src
 
 SOURCES += main.cpp\

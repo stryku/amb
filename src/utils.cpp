@@ -1,4 +1,4 @@
-#include "utils.hpp"
+﻿#include "utils.hpp"
 
 namespace AMB
 {
@@ -89,7 +89,7 @@ namespace AMB
         {
             static std::random_device rd;
             static std::mt19937 mt( rd() );
-            std::uniform_real_distribution<double> dist( min, max );
+            std::uniform_int_distribution<size_t> dist( min, max );
 
             return dist( mt );
         }
@@ -106,7 +106,7 @@ namespace AMB
                 closeAndNullHandle( handle );
         }
 
-        DWORD getModuleBase( DWORD pid, const char *sModuleName )
+        DWORD getModuleBase( DWORD pid, const char *sModuleName = "Tibia.exe" )
         {
 
             auto hProc = OpenProcess( PROCESS_ALL_ACCESS,
@@ -123,11 +123,11 @@ namespace AMB
 
             if( EnumProcessModules( hProc, hModules, cModules / sizeof( HMODULE ), &cModules ) )
             {
-                for( int i = 0; i < cModules / sizeof( HMODULE ); i++ )
+                for( DWORD i = 0; i < cModules / sizeof( HMODULE ); ++i )
                 {
                     if( GetModuleBaseNameA( hProc, hModules[i],  szBuf, sizeof( szBuf ) ) )
                     {
-                        if( _strcmpi( szBuf, "Tibia.exe" ) == 0 )
+                        if( _strcmpi( szBuf, sModuleName ) == 0 )
                         {
                             dwBase = (DWORD)hModules[i];
                             break;
