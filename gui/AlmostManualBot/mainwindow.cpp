@@ -68,7 +68,7 @@ void MainWindow::on_btnHealerClear_clicked()
 
 void MainWindow::toggleHealer()
 {
-    if( ui->checkBoxHealerRun->isChecked() )
+    if( !ui->checkBoxHealerRun->isChecked() )
     {
         stopModule( ui->checkBoxHealerRun,
                     AMB::Modules::ModuleId::MOD_HEALER );
@@ -125,4 +125,9 @@ std::wstring MainWindow::getTibiaWindowTitle() const
     auto variant = cbTibiaClients->currentData();
 
     return variant.toString().toStdWString();
+}
+
+void MainWindow::on_checkBoxHealerRun_clicked()
+{
+    toggleHealer();
 }

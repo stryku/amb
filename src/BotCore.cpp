@@ -1,4 +1,4 @@
-#include "BotCore.hpp"
+﻿#include "BotCore.hpp"
 
 namespace AMB
 {
@@ -20,7 +20,9 @@ namespace AMB
     }
 
     void BotCore::moduleToggleHandler( AMB::Modules::ModuleId modId )
-    {}
+    {
+        modulesManager.toggle( modId );
+    }
 
     BotCore::ModuleToggleHandler BotCore::getModuleToggleHandler()
     {

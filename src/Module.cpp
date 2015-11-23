@@ -1,4 +1,4 @@
-#include "Module.hpp"
+﻿#include "Module.hpp"
 
 namespace AMB
 {
@@ -23,6 +23,8 @@ namespace AMB
         void Module::run()
         {
             auto runLambda = std::bind( &Module::runMethod, this );
+
+            continueRun = true;
 
             runThread = std::make_unique<std::thread>( runLambda );
         }

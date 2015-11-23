@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 
@@ -41,6 +41,8 @@ private slots:
     void on_btnHealerAddRule_clicked();
 
     void on_btnHealerClear_clicked();
+
+    void on_checkBoxHealerRun_clicked();
 
 private:
     Ui::MainWindow *ui;

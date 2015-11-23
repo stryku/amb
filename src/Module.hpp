@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Configs.hpp"
 #include "TibiaStuffReader.hpp"
@@ -18,7 +18,7 @@ namespace AMB
             Memory::TibiaStuffReader &tibiaReader;
             Simulate::Simulator &simulator;
 
-            bool continueRun = true;
+            bool continueRun = false;
 
             virtual void runDetails() = 0;
 
