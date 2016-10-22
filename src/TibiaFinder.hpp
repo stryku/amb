@@ -5,6 +5,8 @@
 #include <mutex>
 #include <vector>
 #include <string>
+#include <locale>
+#include <codecvt>
 
 namespace AMB
 {
@@ -61,7 +63,8 @@ namespace AMB
 
             static DWORD findProcessId( const std::wstring &tibiaWindowTitle )
             {
-                HWND hwnd = FindWindow( 0, tibiaWindowTitle.c_str() );
+                auto str = std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(tibiaWindowTitle);
+                HWND hwnd = FindWindow(0, str.c_str());
                 DWORD pid;
 
                 if( hwnd == NULL )

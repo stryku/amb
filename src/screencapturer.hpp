@@ -77,7 +77,7 @@ namespace AMB
 
                     HBITMAP hbmp = CreateDIBitmap(hdc, &bmih, CBM_INIT, pixels.data(), &dbmi, DIB_RGB_COLORS);
                     if (hbmp == NULL) {
-                        ::MessageBox(NULL, L"Could not load the desired image image", L"Error", MB_OK);
+                        ::MessageBox(NULL, "Could not load the desired image image", "Error", MB_OK);
                         return;
                     }
 
