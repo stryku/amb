@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "utils.hpp"
 
@@ -14,14 +14,16 @@ namespace AMB
         {
             DWORD base;
 
-            DWORD XOR = 0x933658 - 0x400000;
+            DWORD XOR = 0x944FD8 - 0x400000;
 
-            struct
+            struct Character
             {
-                DWORD hp = 0xAD1030 - 0x400000;
-                DWORD hpMax = 0xAD1024;
-                DWORD mana = 0x933688 - 0x400000;
-                DWORD manaMax = 0x53365C;
+                DWORD hp = 0xAE2000 - 0x400000;
+                DWORD hpMax = 0xAE2048 - 0x400000;
+                DWORD mana = 0x94500C - 0x400000;
+                DWORD manaMax = 0x944FDC - 0x400000;
+
+                Character(){}
             } character;
 
             Addresses()

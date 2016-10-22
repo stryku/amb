@@ -14,16 +14,28 @@ namespace AMB
 
             void Healer::runDetails()
             {
-                auto hp = tibiaReader.hp();
-                auto mana = tibiaReader.mana();
+                std::cout<<"siema\n";
 
                 auto sleepTo = std::chrono::system_clock::now() +
                                std::chrono::milliseconds( Utils::RandomBetween{ sleepMin, sleepMax }.get() );
 
+                reader.newFrame();
+
                 for( const auto &rule : config.rules )
                 {
-                    if( rule.passed( tibiaReader.hp(), tibiaReader.mana() ) )
-                        executeRule( rule );
+                    if(reader.isVisible())
+                    {
+                        auto hp = reader.getHpPercent();
+                        auto mana = reader.getManaPercent();
+
+                        std::cout<<"hp: "<<hp<<", mana: "<<mana<<"\n";
+
+                        if( rule.passed( hp, mana ) )
+                        {
+                            std::cout<<"rule passed\n";
+                            executeRule( rule );
+                        }
+                    }
                 }
 
                 std::this_thread::sleep_until( sleepTo );

@@ -1,4 +1,4 @@
-#include "ModulesManager.hpp"
+﻿#include "ModulesManager.hpp"
 
 namespace AMB
 {

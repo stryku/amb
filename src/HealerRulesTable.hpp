@@ -1,4 +1,4 @@
-#ifndef HEALERRULESTABLE_HPP
+﻿#ifndef HEALERRULESTABLE_HPP
 #define HEALERRULESTABLE_HPP
 
 #include <HealRule.hpp>
@@ -7,6 +7,8 @@
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QList>
+
+#include <iostream>
 
 class HealerRulesTable
 {
@@ -40,16 +42,38 @@ private:
     size_t getUInt( int row, int column ) const
     {
         auto item = model->item( row, column );
-        return item->data().toUInt();
+
+        qDebug("model: %d, %d", model->rowCount(), model->columnCount());
+
+        qDebug("row: %d, %d = %d, %d", row, column, item->data(0).toUInt(), item->data(0).isValid());
+
+        return item->data(0).toUInt();
+    }
+
+    QString getQString( int row, int column ) const
+    {
+        auto item = model->item( row, column );
+
+        return item->data(0).toString();
+    }
+
+    AMB::Utils::Hotkey getHotkey( int row ) const
+    {
+        auto stringHotkey = getQString( row, hotkeyColumnIndex );
+        auto uintHot = stringHotkey.remove( 0, 1 ).toUInt() - 1;
+
+        qDebug("getHotkey( %d ) str = %s, uint = %d", row, stringHotkey.toStdString().c_str(), uintHot);
+
+        return AMB::Utils::size_tToHotkey( uintHot );
     }
 
     AMB::Modules::Heal::HealRule getRule( int row ) const
     {
+        qDebug("row: %d", row);
         size_t minHp;
         size_t maxHp;
         size_t minMana;
         size_t maxMana;
-        size_t size_tHotkey;
         AMB::Utils::Hotkey hotkey;
 
         auto item = model->item( row, minHpColumnIndex );
@@ -60,8 +84,9 @@ private:
         minMana = getUInt( row, minManaColumnIndex );
         maxMana = getUInt( row, maxManaColumnIndex );
 
-        size_tHotkey = getUInt( row, hotkeyColumnIndex );
-        hotkey = AMB::Utils::size_tToHotkey( size_tHotkey );
+        hotkey = getHotkey( row );
+
+        std::cout<<"HealerRulesTable::getRule returning { "<<minHp<<" "<< maxHp<<" "<< minMana<<" "<< maxMana<<" "<< static_cast<int>(hotkey) <<"}\n";
 
         return { minHp, maxHp, minMana, maxMana, hotkey };
     }

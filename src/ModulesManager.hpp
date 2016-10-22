@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Healer.hpp"
 #include "Configs.hpp"

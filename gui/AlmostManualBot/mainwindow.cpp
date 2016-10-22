@@ -119,6 +119,12 @@ void MainWindow::setModuleToggleHandler( std::function<void( AMB::Modules::Modul
     moduleToggleHandler = newHandler;
 }
 
+
+void MainWindow::setTtibiaWindowChangedHandler( std::function<void(const std::wstring&)> newHandler )
+{
+    tibiaWindowChangedHandler = newHandler;
+}
+
 std::wstring MainWindow::getTibiaWindowTitle() const
 {
     const auto cbTibiaClients = ui->cbTibiaClients;
@@ -130,4 +136,20 @@ std::wstring MainWindow::getTibiaWindowTitle() const
 void MainWindow::on_checkBoxHealerRun_clicked()
 {
     toggleHealer();
+}
+
+void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
+{
+    try
+    {
+        tibiaWindowChangedHandler( arg1.toStdWString() );
+    }
+    catch( std::bad_function_call &e )
+    {
+        qDebug()<<"Catch std::bad_function_call: " << e.what();
+    }
+    catch( std::exception &e )
+    {
+        qDebug()<<"Catch std::exception: "<<e.what();
+    }
 }

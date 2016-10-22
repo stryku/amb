@@ -1,4 +1,5 @@
 ﻿#include "utils.hpp"
+#include <iostream>
 
 namespace AMB
 {
@@ -139,6 +140,8 @@ namespace AMB
             delete[] hModules;
 
             CloseHandle( hProc );
+
+            std::cout<<"found base: "<<dwBase<<"\n";
 
             return dwBase;
         }

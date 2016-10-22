@@ -45,10 +45,14 @@ HEADERS  += mainwindow.h \
     ../../src/HealerRulesTable.hpp \
     ../../src/ConfigFromUiGenerator.hpp \
     ../../src/BotCore.hpp \
-    ../../src/Bot.hpp
+    ../../src/Bot.hpp \
+    ../../src/ScreenCapturer.hpp \
+    ../../src/tibiascreenreader.hpp \
+    ../../src/tibiareader.hpp
 
 FORMS    += mainwindow.ui
 
 win32:LIBS += -luser32
 win32:LIBS += -lpsapi
 win32:LIBS += -lkernel32
+win32:LIBS += -l"C:\Program Files\Microsoft SDKs\Windows\v7.1A\Lib\gdi32"

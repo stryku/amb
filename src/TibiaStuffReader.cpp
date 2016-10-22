@@ -1,10 +1,10 @@
-#include "TibiaStuffReader.hpp"
+﻿#include "TibiaStuffReader.hpp"
 
 namespace AMB
 {
     namespace Memory
     {
-        size_t TibiaStuffReader::readWithXor( DWORD ptr ) const
+        int TibiaStuffReader::readWithXor( DWORD ptr ) const
         {
             auto notXored = memReader.read<int32_t>( reinterpret_cast<LPCVOID>( ptr ) );
             auto xorVal = memReader.read<int32_t>( reinterpret_cast<LPCVOID>( addresses.base + addresses.XOR ) );
@@ -17,12 +17,12 @@ namespace AMB
             addresses( pid )
         {}
 
-        size_t TibiaStuffReader::hp() const
+        int TibiaStuffReader::hp() const
         {
             return readWithXor( addresses.base + addresses.character.hp );
         }
 
-        size_t TibiaStuffReader::mana() const
+        int TibiaStuffReader::mana() const
         {
             return readWithXor( addresses.base + addresses.character.mana );
         }

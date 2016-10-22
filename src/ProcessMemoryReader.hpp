@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "utils.hpp"
 
@@ -11,7 +11,7 @@ namespace AMB
         class ProcessMemoryReader
         {
         private:
-            HANDLE processHandle;
+            HANDLE processHandle = NULL;
 
         public:
             ProcessMemoryReader( DWORD pid )
@@ -39,11 +39,13 @@ namespace AMB
                 if( processHandle == NULL )
                     return T();
 
-                ReadProcessMemory( processHandle,
+                bytesRead = ReadProcessMemory( processHandle,
                                    ptrInProcess,
                                    &value,
                                    sizeof( T ),
                                    NULL );
+
+                auto er = GetLastError();
 
                 return value;
             }

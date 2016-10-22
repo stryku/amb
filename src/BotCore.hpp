@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Simulator.hpp"
 #include "TibiaStuffReader.hpp"
@@ -13,7 +13,6 @@ namespace AMB
     class BotCore
     {
     private:
-        typedef std::function<void( Modules::ModuleId )> ModuleToggleHandler;
 
         Memory::TibiaStuffReader reader;
         Simulate::Simulator simulator;
@@ -26,8 +25,8 @@ namespace AMB
 
         void attachNewProcess( DWORD pid );
 
-        void moduleToggleHandler( AMB::Modules::ModuleId modId );
+        void toggleModule( AMB::Modules::ModuleId modId );
 
-        ModuleToggleHandler getModuleToggleHandler();
+        bool isModuleRunning( Modules::ModuleId modId );
     };
 }

@@ -19,15 +19,17 @@ namespace AMB
         reader.attachNewProcess( pid );
     }
 
-    void BotCore::moduleToggleHandler( AMB::Modules::ModuleId modId )
+    void BotCore::toggleModule( AMB::Modules::ModuleId modId )
     {
         modulesManager.toggle( modId );
     }
 
-    BotCore::ModuleToggleHandler BotCore::getModuleToggleHandler()
+
+
+
+
+    bool BotCore::isModuleRunning( Modules::ModuleId modId )
     {
-        return std::bind( &BotCore::moduleToggleHandler,
-                          this,
-                          std::placeholders::_1 );
+        return modulesManager.isRunning( modId );
     }
 }

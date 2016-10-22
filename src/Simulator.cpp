@@ -1,4 +1,5 @@
 ﻿#include "Simulator.hpp"
+#include <QtDebug>
 
 namespace AMB
 {
@@ -26,6 +27,8 @@ namespace AMB
         void Simulator::hotkey( Utils::Hotkey hotkey,
                                 Utils::RandomBetween randomBetween )
         {
+            qDebug("simulating hotkey: %d", static_cast<int>(hotkey));
+            qDebug("simulating hotkey, wparam: %d", hotkeyToWparam( hotkey ));
             keyDownAndUp( hotkeyToWparam( hotkey ),
                           randomBetween );
         }
@@ -33,6 +36,7 @@ namespace AMB
         void Simulator::keyDownAndUp( WPARAM key,
                                       Utils::RandomBetween randomBetween )
         {
+            qDebug("simulating hotkey: %d, hwnd: %d", static_cast<int>(key),windowHwnd);
             std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
             PostMessage( windowHwnd, WM_KEYDOWN, key, 0 );
             std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
@@ -41,10 +45,12 @@ namespace AMB
         }
 
         void Simulator::attachNewProcess( DWORD pid )
-        {//
-           // Utils::TibiaWindowHwndFinder::find( pid, windowHwnd );
+        {
 
+            qDebug("Simulator::attachNewProcess( %d )", pid);
             windowHwnd = Utils::TibiaFinder::pidToHwnd( pid );
+
+            qDebug("Simulator::attachNewProcess windowHwnd = %d", windowHwnd);
         }
     }
 }
