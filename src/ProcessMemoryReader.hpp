@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "utils.hpp"
 
@@ -11,21 +11,15 @@ namespace AMB
         class ProcessMemoryReader
         {
         private:
-            HANDLE processHandle;
-
-            void attachNewProcess( DWORD pid )
-            {
-                processHandle = OpenProcess( PROCESS_ALL_ACCESS,
-                                             TRUE,
-                                             pid );
-            }
-            
+            HANDLE processHandle = NULL;
 
         public:
             ProcessMemoryReader( DWORD pid )
             {
                 attachNewProcess( pid );
             }
+            ProcessMemoryReader()
+            {}
             ~ProcessMemoryReader()
             {
                 Utils::safeCloseAndNullHandle( processHandle );
@@ -45,14 +39,24 @@ namespace AMB
                 if( processHandle == NULL )
                     return T();
 
-                ReadProcessMemory( processHandle,
+                bytesRead = ReadProcessMemory( processHandle,
                                    ptrInProcess,
                                    &value,
                                    sizeof( T ),
                                    NULL );
 
+                auto er = GetLastError();
 
                 return value;
+            }
+
+            void attachNewProcess( DWORD pid )
+            {
+                Utils::safeCloseAndNullHandle( processHandle );
+
+                processHandle = OpenProcess( PROCESS_ALL_ACCESS,
+                                             TRUE,
+                                             pid );
             }
         };
     }

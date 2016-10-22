@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Addresses.hpp"
 #include "ProcessMemoryReader.hpp"
@@ -13,31 +13,24 @@ namespace AMB
             ProcessMemoryReader memReader;
             Addresses addresses;
 
-            size_t readWithXor( DWORD ptr ) const
-            {
-                auto notXored = memReader.read<int32_t>( reinterpret_cast<LPCVOID>( ptr ) );
-                auto xorVal = memReader.read<int32_t>( reinterpret_cast<LPCVOID>( addresses.base + addresses.XOR ) );
-
-                return notXored ^ xorVal;
-            }
+            int readWithXor( DWORD ptr ) const;
 
         public:
-            TibiaStuffReader( DWORD pid ) :
-                memReader( pid ),
-                addresses( pid )
-            {}
+            TibiaStuffReader( DWORD pid );
+            TibiaStuffReader()
+            {
+                int a = 0;
+                a ++;
+                ++a;
+
+            }
             ~TibiaStuffReader()
             {}
 
-            size_t hp() const
-            {
-                return readWithXor( addresses.base + addresses.character.hp );
-            }
+            int hp() const;
+            int mana() const;
 
-            size_t mana() const
-            {
-                return readWithXor( addresses.base + addresses.character.mana );
-            }
+            void attachNewProcess( DWORD pid );
         };
     }
 }
