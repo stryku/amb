@@ -17,7 +17,6 @@ namespace AMB
 
         public:
             ModulesManager( const Configs::GlobalConfig &config,
-                            Memory::TibiaStuffReader &tibiaReader,
                             Simulate::Simulator &simulator);
 
             void run( ModuleId modId );

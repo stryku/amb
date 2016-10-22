@@ -7,8 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //stopModule( ui->checkBoxHealerRun,
-      //          AMB::Modules::ModuleId::MOD_HEALER );
 
     healerRulesTable = std::make_unique<HealerRulesTable>( ui->tableHealerRules );
 

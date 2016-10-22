@@ -2,7 +2,6 @@
 
 #include "HealRule.hpp"
 #include "Module.hpp"
-#include "TibiaStuffReader.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
 
@@ -30,7 +29,6 @@ namespace AMB
 
             public:
                 Healer( const Configs::HealerConfig &config,
-                        Memory::TibiaStuffReader &tibiaReader,
                         Simulate::Simulator &simulator );
                 ~Healer()
                 {}

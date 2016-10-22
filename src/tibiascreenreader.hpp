@@ -30,7 +30,7 @@ namespace AMB
 
                 size_t isHearthVisible() const
                 {
-                    const Pos pos{ 1199, 142 };
+                    const Pos pos{ 1200, 149 };
                     const size_t a = 11;
                     const std::vector<Rgba> hearthPixels =
                     {
@@ -185,11 +185,10 @@ namespace AMB
                         ++px;
 
                     return px;
-                    //return px * 100 / HpManaInfo::MaxLength;
                 }
 
-                const HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, Pos{ 1216, 147 } };
-                const HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, Pos{ 1216, 160} };
+                const HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, Pos{ 1217, 153 } };
+                const HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, Pos{ 1217, 166} };
                 const Image &screen;
             };
         }

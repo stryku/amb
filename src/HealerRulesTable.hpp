@@ -42,18 +42,12 @@ private:
     size_t getUInt( int row, int column ) const
     {
         auto item = model->item( row, column );
-
-        qDebug("model: %d, %d", model->rowCount(), model->columnCount());
-
-        qDebug("row: %d, %d = %d, %d", row, column, item->data(0).toUInt(), item->data(0).isValid());
-
         return item->data(0).toUInt();
     }
 
     QString getQString( int row, int column ) const
     {
         auto item = model->item( row, column );
-
         return item->data(0).toString();
     }
 
@@ -62,14 +56,11 @@ private:
         auto stringHotkey = getQString( row, hotkeyColumnIndex );
         auto uintHot = stringHotkey.remove( 0, 1 ).toUInt() - 1;
 
-        qDebug("getHotkey( %d ) str = %s, uint = %d", row, stringHotkey.toStdString().c_str(), uintHot);
-
         return AMB::Utils::size_tToHotkey( uintHot );
     }
 
     AMB::Modules::Heal::HealRule getRule( int row ) const
     {
-        qDebug("row: %d", row);
         size_t minHp;
         size_t maxHp;
         size_t minMana;
@@ -85,8 +76,6 @@ private:
         maxMana = getUInt( row, maxManaColumnIndex );
 
         hotkey = getHotkey( row );
-
-        std::cout<<"HealerRulesTable::getRule returning { "<<minHp<<" "<< maxHp<<" "<< minMana<<" "<< maxMana<<" "<< static_cast<int>(hotkey) <<"}\n";
 
         return { minHp, maxHp, minMana, maxMana, hotkey };
     }

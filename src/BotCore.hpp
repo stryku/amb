@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Simulator.hpp"
-#include "TibiaStuffReader.hpp"
 #include "ModulesManager.hpp"
 #include "ModuleId.hpp"
 
@@ -14,7 +13,6 @@ namespace AMB
     {
     private:
 
-        Memory::TibiaStuffReader reader;
         Simulate::Simulator simulator;
         Modules::ModulesManager modulesManager;
 

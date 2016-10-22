@@ -14,26 +14,24 @@ namespace AMB
 
             void Healer::runDetails()
             {
-                std::cout<<"siema\n";
-
+                qDebug("Healer::runDetails");
                 auto sleepTo = std::chrono::system_clock::now() +
                                std::chrono::milliseconds( Utils::RandomBetween{ sleepMin, sleepMax }.get() );
 
                 reader.newFrame();
-
-                for( const auto &rule : config.rules )
+                if (reader.isVisible())
                 {
-                    if(reader.isVisible())
+                    auto hp = reader.getHpPercent();
+                    auto mana = reader.getManaPercent();
+
+                    qDebug("Healer: hp: %d, mana: %d", hp, mana);
+
+                    for (const auto &rule : config.rules)
                     {
-                        auto hp = reader.getHpPercent();
-                        auto mana = reader.getManaPercent();
-
-                        std::cout<<"hp: "<<hp<<", mana: "<<mana<<"\n";
-
-                        if( rule.passed( hp, mana ) )
+                        if (rule.passed(hp, mana))
                         {
-                            std::cout<<"rule passed\n";
-                            executeRule( rule );
+                            qDebug("Rule passed");
+                            executeRule(rule);
                         }
                     }
                 }
@@ -42,9 +40,8 @@ namespace AMB
             }
 
             Healer::Healer( const Configs::HealerConfig &config,
-                    Memory::TibiaStuffReader &tibiaReader,
                     Simulate::Simulator &simulator ) :
-                Module( tibiaReader, simulator ),
+                Module( simulator ),
                 config( config )
             {}
         }

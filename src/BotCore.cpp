@@ -4,7 +4,6 @@ namespace AMB
 {
     BotCore::BotCore( const Configs::GlobalConfig &config ) :
         modulesManager( config,
-                        reader,
                         simulator )
     {}
 
@@ -16,7 +15,6 @@ namespace AMB
     void BotCore::attachNewProcess( DWORD pid )
     {
         simulator.attachNewProcess( pid );
-        reader.attachNewProcess( pid );
     }
 
     void BotCore::toggleModule( AMB::Modules::ModuleId modId )

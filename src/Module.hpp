@@ -1,7 +1,6 @@
 ﻿#pragma once
 
 #include "Configs.hpp"
-#include "TibiaStuffReader.hpp"
 #include "Simulator.hpp"
 
 #include <thread>
@@ -15,7 +14,6 @@ namespace AMB
         {
         protected:
             std::unique_ptr<std::thread> runThread;
-            Memory::TibiaStuffReader &tibiaReader;
             Simulate::Simulator &simulator;
 
             bool continueRun = false;
@@ -25,8 +23,7 @@ namespace AMB
             virtual void runMethod();
 
         public:
-            Module( Memory::TibiaStuffReader &tibiaReader, 
-                    Simulate::Simulator &simulator );
+            Module(Simulate::Simulator &simulator);
             ~Module();
 
             void run();

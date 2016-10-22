@@ -10,9 +10,7 @@ namespace AMB
                 runDetails();
         }
 
-        Module::Module( Memory::TibiaStuffReader &tibiaReader,
-                        Simulate::Simulator &simulator ) :
-            tibiaReader( tibiaReader ),
+        Module::Module(Simulate::Simulator &simulator) :
             simulator( simulator )
         {}
         Module::~Module()

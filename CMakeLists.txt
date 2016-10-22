@@ -55,7 +55,7 @@ set (AMB_src_qt	${src_dir_qt}/main.cpp
 set (AMB_inc_qt ${inc_dir_qt}/mainwindow.hpp)
 					
                     
-set (AMB_src ${src_dir}/Addresses.cpp
+set (AMB_src 
 					${src_dir}/Bot.cpp
 					${src_dir}/BotCore.cpp
 					${src_dir}/ConfigFromUiGenerator.cpp
@@ -67,12 +67,11 @@ set (AMB_src ${src_dir}/Addresses.cpp
 					${src_dir}/ModulesManager.cpp
 					${src_dir}/Simulator.cpp
 					${src_dir}/TibiaFinder.cpp
-					${src_dir}/TibiaStuffReader.cpp
 					${src_dir}/utils.cpp
                     
 					${src_dir}/Module.cpp)
 					
-set (AMB_inc ${inc_dir}/Addresses.hpp
+set (AMB_inc 
 					${inc_dir}/Bot.hpp
 					${inc_dir}/BotCore.hpp
 					${inc_dir}/ConfigFromUiGenerator.hpp
@@ -84,13 +83,11 @@ set (AMB_inc ${inc_dir}/Addresses.hpp
 					${inc_dir}/HealRule.hpp
 					${inc_dir}/ModuleId.hpp
 					${inc_dir}/ModulesManager.hpp
-					${inc_dir}/ProcessMemoryReader.hpp
 					${inc_dir}/ScreenCapturer.hpp
 					${inc_dir}/Simulator.hpp
 					${inc_dir}/TibiaFinder.hpp
 					${inc_dir}/TibiaReader.hpp
 					${inc_dir}/TibiaScreenReader.hpp
-					${inc_dir}/TibiaStuffReader.hpp
 					${inc_dir}/utils.hpp
                     
 					${inc_dir}/Module.hpp)

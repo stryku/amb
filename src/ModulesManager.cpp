@@ -5,11 +5,9 @@ namespace AMB
     namespace Modules
     {
         ModulesManager::ModulesManager( const Configs::GlobalConfig &config,
-                                        Memory::TibiaStuffReader &tibiaReader,
                                         Simulate::Simulator &simulator)
         {
             modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>( config.healerConfig,
-                                                                            tibiaReader,
                                                                             simulator );
         }
 

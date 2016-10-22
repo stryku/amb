@@ -7,9 +7,7 @@ namespace AMB
         enum class ModuleId
         {
             BEGIN,
-
             MOD_HEALER,
-
             END
         };
     }

@@ -34,7 +34,7 @@ namespace Configs
 
     void ConfigFromUiGenerator::regenerateHealer()
     {
-        std::cout<<"regenerating healer config\n";
+        qDebug("regenerating healer config");
         config.healerConfig.rules = healerRulesTable.getRules();
     }
 
