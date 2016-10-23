@@ -35,7 +35,8 @@ public:
     const HealerRulesTable& getHealerRulesTable() const;
 
     void setModuleToggleHandler( std::function<void( AMB::Modules::ModuleId )> newHandler );
-    void setTtibiaWindowChangedHandler( std::function<void(const std::wstring&)> newHandler );
+    void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
+    void setRefreshLayoutHandler( std::function<void()> refreshLayoutHandler);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -50,11 +51,14 @@ private slots:
 
     void on_cbTibiaClients_currentIndexChanged(const QString &arg1);
 
+    void on_refreshLayoutButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<HealerRulesTable> healerRulesTable;
     std::function<void(AMB::Modules::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
+    std::function<void()> refreshLayoutHandler;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();

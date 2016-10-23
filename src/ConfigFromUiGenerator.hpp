@@ -1,8 +1,6 @@
 #pragma once
 
-
-
-#include <mainwindow.hpp>
+#include <mainwindow.h>
 
 #include <Configs.hpp>
 #include <ModuleId.hpp>

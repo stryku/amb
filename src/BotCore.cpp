@@ -22,10 +22,6 @@ namespace AMB
         modulesManager.toggle( modId );
     }
 
-
-
-
-
     bool BotCore::isModuleRunning( Modules::ModuleId modId )
     {
         return modulesManager.isRunning( modId );

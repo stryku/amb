@@ -1,5 +1,5 @@
 #include "ConfigFromUiGenerator.hpp"
-#include <mainwindow.hpp>
+#include <mainwindow.h>
 
 namespace AMB
 {

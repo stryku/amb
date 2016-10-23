@@ -1,4 +1,4 @@
-﻿#include "mainwindow.hpp"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
 
@@ -123,6 +123,11 @@ void MainWindow::setTtibiaWindowChangedHandler( std::function<void(const std::ws
     tibiaWindowChangedHandler = newHandler;
 }
 
+void MainWindow::setRefreshLayoutHandler(std::function<void()> newHandler)
+{
+    refreshLayoutHandler = newHandler;
+}
+
 std::wstring MainWindow::getTibiaWindowTitle() const
 {
     const auto cbTibiaClients = ui->cbTibiaClients;
@@ -150,4 +155,10 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
     {
         qDebug()<<"Catch std::exception: "<<e.what();
     }
+}
+
+
+void MainWindow::on_refreshLayoutButton_clicked()
+{
+    refreshLayoutHandler();
 }

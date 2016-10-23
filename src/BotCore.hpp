@@ -20,11 +20,8 @@ namespace AMB
         BotCore( const Configs::GlobalConfig &config );
 
         void startModule( Modules::ModuleId moduleId );
-
         void attachNewProcess( DWORD pid );
-
         void toggleModule( AMB::Modules::ModuleId modId );
-
         bool isModuleRunning( Modules::ModuleId modId );
     };
 }

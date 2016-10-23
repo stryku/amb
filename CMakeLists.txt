@@ -52,7 +52,7 @@ include_directories (${inc_dir}
 set (AMB_src_qt	${src_dir_qt}/main.cpp
                         ${src_dir_qt}/mainwindow.cpp)
 					
-set (AMB_inc_qt ${inc_dir_qt}/mainwindow.hpp)
+set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
 					
                     
 set (AMB_src 
@@ -93,7 +93,7 @@ set (AMB_inc
 					${inc_dir}/Module.hpp)
                      
                      
-set (AMB_hdr ${inc_dir_qt}/mainwindow.hpp)
+set (AMB_hdr ${inc_dir_qt}/mainwindow.h)
 set (AMB_ui  ${ui_dir}/mainwindow.ui)
 set (AMB_gui_src ${src_dir_qt}/main.cpp)
 

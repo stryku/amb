@@ -20,16 +20,17 @@ namespace AMB
 
     Bot::ModuleToggleMethod Bot::getModuleToggleMethod()
     {
-        return std::bind( &Bot::toggleModule,
-                          this,
-                          std::placeholders::_1 );
+        return [this](Modules::ModuleId module) { toggleModule(module); };
     }
 
     Bot::TibiaWindowChangedHandler Bot::getTibiaWindowChangedHandler()
     {
-        return std::bind( &Bot::tibiaWindowChanged,
-                          this,
-                          std::placeholders::_1 );
+        return [this](const std::wstring &str) { tibiaWindowChanged(str); };
+    }
+
+    Bot::ResetLayoutHandler Bot::getResetLayoutHandler()
+    {
+        return [this] {resetLayoutHandler(); };
     }
 
     void Bot::toggleModule( Modules::ModuleId modId )
@@ -47,4 +48,8 @@ namespace AMB
         botCore.attachNewProcess( pid );
     }
 
+    void Bot::resetLayoutHandler()
+    {
+        
+    }
 }

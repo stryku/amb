@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils.hpp"
 #include "HealRule.hpp"
 
 #include <vector>

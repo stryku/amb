@@ -43,6 +43,17 @@ namespace AMB
             size_t get() const;
         };
 
+        struct Pos
+        {
+            int x, y;
+        };
+
+        struct Rect
+        {
+            int x, y;
+            size_t w, h;
+        };
+
         void closeAndNullHandle( HANDLE &handle );
 
         void safeCloseAndNullHandle( HANDLE &handle );
