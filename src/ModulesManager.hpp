@@ -1,9 +1,8 @@
-#pragma once
+﻿#pragma once
 
 #include "Healer.hpp"
 #include "Configs.hpp"
-
-#include "ModulesFactory.hpp"
+#include "ModuleId.hpp"
 
 #include <map>
 
@@ -14,28 +13,19 @@ namespace AMB
         class ModulesManager
         {
         private:
-            std::map<ModuleId, std::shared_ptr<Module>> modules;
-            Configs::GlobalConfig &config;
+            std::map<ModuleId, std::unique_ptr<Module>> modules;
 
         public:
-            ModulesManager( Configs::GlobalConfig &config ) :
-                config( config )
-            {}
+            ModulesManager( const Configs::GlobalConfig &config,
+                            Simulate::Simulator &simulator);
 
-            void run( ModuleId modId )
-            {
-                switch( modId )
-                {
-                    case ModuleId::MOD_HEALER: modules[modId] = ModulesFactory::get( modId, config );
-                }
+            void run( ModuleId modId );
 
-                modules[modId]->run();
-            }
+            void stop( ModuleId modId );
 
-            void stop( ModuleId modId )
-            {
-                modules[modId]->stop();
-            }
+            void toggle( ModuleId modId );
+
+            bool isRunning( ModuleId modId );
         };
     }
 }

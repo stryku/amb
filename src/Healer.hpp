@@ -2,8 +2,8 @@
 
 #include "HealRule.hpp"
 #include "Module.hpp"
-#include "TibiaStuffReader.hpp"
 #include "Simulator.hpp"
+#include "tibiareader.hpp"
 
 #include <chrono>
 
@@ -16,41 +16,20 @@ namespace AMB
             class Healer : public Module
             {
             private:
-                static const size_t sleepMin = 700;
-                static const size_t sleepMax = 800;
+                static const size_t sleepMin = 100;
+                static const size_t sleepMax = 450;
 
-                Memory::TibiaStuffReader tibiaReader;
-                Simulate::Simulator simulator;
+                Readers::details::TibiaReader reader;
 
-                void executeRule( const HealRule &rule )
-                {
-                    simulator.hotkey( rule.hotkey,
-                                      { sleepMin, sleepMax } );
-                }
+                const Configs::HealerConfig &config;
 
-                void runDetails()
-                {
-                    auto hp = tibiaReader.hp();
-                    auto mana = tibiaReader.mana();
+                void executeRule( const HealRule &rule );
 
-                    auto sleepTo = std::chrono::system_clock::now() +
-                                   std::chrono::milliseconds( Utils::SleepTime{ sleepMin, sleepMax }.get() );
-
-                    for( const auto &rule : config.healerConfig.rules )
-                    {
-                        while( rule.passed( tibiaReader.hp(), tibiaReader.mana() ) )
-                            executeRule( rule );
-                    }
-
-                    std::this_thread::sleep_until( sleepTo );
-                }
+                void runDetails();
 
             public:
-                Healer( Configs::GlobalConfig &config ) :
-                    Module( config ),
-                    tibiaReader( config.pid ),
-                    simulator( config.pid )
-                {}
+                Healer( const Configs::HealerConfig &config,
+                        Simulate::Simulator &simulator );
                 ~Healer()
                 {}
 

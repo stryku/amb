@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 
 #include "Configs.hpp"
+#include "Simulator.hpp"
 
 #include <thread>
 #include <memory>
@@ -12,41 +13,24 @@ namespace AMB
         class Module
         {
         protected:
-            Configs::GlobalConfig &config;
             std::unique_ptr<std::thread> runThread;
-            bool continueRun = true;
+            Simulate::Simulator &simulator;
+
+            bool continueRun = false;
 
             virtual void runDetails() = 0;
 
-            void runMethod()
-            {
-                while( continueRun )
-                    runDetails();
-            }
+            virtual void runMethod();
 
         public:
-            Module( Configs::GlobalConfig &config ) :
-                config( config )
-            {}
-            ~Module()
-            {
-                stop();
-            }
+            Module(Simulate::Simulator &simulator);
+            ~Module();
 
-            void run()
-            {
-                auto run = std::bind( &Module::runMethod, this );
+            void run();
 
-                runThread = std::make_unique<std::thread>( run );
-            }
+            void stop();
 
-            void stop()
-            {
-                continueRun = false;
-
-                if( runThread->joinable() )
-                    runThread->join();
-            }
+            bool isRunning() const;
         };
     }
 }

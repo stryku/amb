@@ -23,70 +23,30 @@ namespace AMB
             F9,
             F10,
             F11,
-            F12
+            F12,
+
+            UNKNOWN
         };
 
-        struct SleepTime
+        std::string hotkeyToStdString( Hotkey hotkey );
+
+        Hotkey stdStringToHotkey( const std::string &str );
+
+        Hotkey size_tToHotkey( size_t hotkey );
+
+        std::string size_tHotkeyToStdString( size_t hotkey );
+
+        struct RandomBetween
         {
             size_t min, max;
 
-            size_t get() const
-            {
-                static std::random_device rd;
-                static std::mt19937 mt( rd() );
-                std::uniform_real_distribution<double> dist( min, max );
-
-                return dist( mt );
-            }
+            size_t get() const;
         };
 
-        void closeAndNullHandle( HANDLE &handle )
-        {
-            CloseHandle( handle );
-            handle = NULL;
-        }
+        void closeAndNullHandle( HANDLE &handle );
 
-        void safeCloseAndNullHandle( HANDLE &handle )
-        {
-            if( handle != NULL )
-                closeAndNullHandle( handle );
-        }
+        void safeCloseAndNullHandle( HANDLE &handle );
 
-        DWORD getModuleBase( DWORD pid, const char *sModuleName )
-        {
-
-            auto hProc = OpenProcess( PROCESS_ALL_ACCESS,
-                                      TRUE,
-                                      pid );
-            HMODULE *hModules = nullptr;
-            char szBuf[50];
-            DWORD cModules;
-            DWORD dwBase = -1;
-            //------ 
-
-            EnumProcessModules( hProc, hModules, 0, &cModules );
-            hModules = new HMODULE[cModules / sizeof( HMODULE )];
-
-            if( EnumProcessModules( hProc, hModules, cModules / sizeof( HMODULE ), &cModules ) )
-            {
-                for( int i = 0; i < cModules / sizeof( HMODULE ); i++ )
-                {
-                    if( GetModuleBaseNameA( hProc, hModules[i],  szBuf, sizeof( szBuf ) ) )
-                    {
-                        if( _strcmpi( szBuf, "Tibia.exe" ) == 0 )
-                        {
-                            dwBase = (DWORD)hModules[i];
-                            break;
-                        }
-                    }
-                }
-            }
-
-            delete[] hModules;
-
-            CloseHandle( hProc );
-
-            return dwBase;
-        }
+        DWORD getModuleBase( DWORD pid, const char *sModuleName );
     }
 }
