@@ -33,5 +33,11 @@ namespace AMB
         {
             return modules[modId]->isRunning();
         }
+
+        void ModulesManager::attachToNewWindow(HWND hwnd)
+        {
+            for (auto &module : modules)
+                module.second->attachToNewWindow(hwnd);
+        }
     }
 }

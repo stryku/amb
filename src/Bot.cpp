@@ -30,7 +30,7 @@ namespace AMB
 
     Bot::ResetLayoutHandler Bot::getResetLayoutHandler()
     {
-        return [this] {resetLayoutHandler(); };
+        return [this] { resetLayoutHandler(); };
     }
 
     void Bot::toggleModule( Modules::ModuleId modId )

@@ -38,9 +38,9 @@ namespace AMB
                     std::memcmp(pixels.data(), pixelsArray.data(), N * sizeof(Rgba)) == 0;
             }
 
-            void reservePixels()
+            void resize()
             {
-                pixels.reserve(w*h);
+                pixels.resize(w*h);
             }
 
             void* pixelsPtr()

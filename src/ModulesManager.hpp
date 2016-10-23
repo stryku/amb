@@ -20,12 +20,11 @@ namespace AMB
                             Simulate::Simulator &simulator);
 
             void run( ModuleId modId );
-
             void stop( ModuleId modId );
-
             void toggle( ModuleId modId );
-
             bool isRunning( ModuleId modId );
+
+            void attachToNewWindow(HWND hwnd);
         };
     }
 }

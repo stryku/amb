@@ -18,6 +18,7 @@ namespace AMB
         struct GlobalConfig
         {
             DWORD pid;
+            HWND hwnd;
             HealerConfig healerConfig;
         };
     };

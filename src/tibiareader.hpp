@@ -4,6 +4,8 @@
 #include "tibiascreenreader.hpp"
 #include "config/layout/HealthHeartConfig.hpp"
 
+#include <cassert>
+
 #include <QtDebug>
 
 namespace AMB
@@ -15,9 +17,10 @@ namespace AMB
             class TibiaReader
             {
             public:
-                TibiaReader()
+                TibiaReader(HWND tibiaWindowHandle = NULL)
                     : reader{ screen, heartLayoutConfig }
                     , screenCapturer{ screen }
+                    , tibiaWindowHandle{ tibiaWindowHandle }
                 {}
 
                 size_t getHpPercent()
@@ -34,7 +37,8 @@ namespace AMB
 
                 void newFrame()
                 {
-                    screenCapturer.recapture();
+                    assert(tibiaWindowHandle != NULL);
+                    screenCapturer.recapture(tibiaWindowHandle);
                 }
 
                 bool isVisible() const
@@ -43,11 +47,17 @@ namespace AMB
                     return reader.isHearthVisible();
                 }
 
+                void attachToNewWindow(HWND hwnd)
+                {
+                    tibiaWindowHandle = hwnd;
+                }
+
             private:
                 const Layout::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;
                 TibiaScreenReader reader;
                 ScreenCapturer screenCapturer;
+                HWND tibiaWindowHandle;
             };
         }
     }

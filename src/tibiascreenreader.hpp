@@ -48,7 +48,7 @@ namespace AMB
                     Rgba otherPixels;
                     Pos pos;
 
-                    static const size_t MaxLength = 1303 - 1216;
+                    static const size_t MaxLength = 1302 - 1215;
                 };
 
                 size_t getPercent(const HpManaInfo &info) const
@@ -66,8 +66,8 @@ namespace AMB
                     return px;
                 }
 
-                const HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, Pos{ 1217, 153 } };
-                const HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, Pos{ 1217, 166} };
+                const HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, Pos{ 1215, 128 } };
+                const HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, Pos{ 1215, 141} };
                 const Graphics::Image &screen;
                 const Layout::HealthHeartConfig &heartConfig;
             };

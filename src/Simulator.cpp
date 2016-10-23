@@ -42,10 +42,9 @@ namespace AMB
             std::this_thread::sleep_for( std::chrono::milliseconds( randomBetween.get() ) );
         }
 
-        void Simulator::attachNewProcess( DWORD pid )
+        void Simulator::attachToNewWindow(HWND hwnd)
         {
-            qDebug("Simulator::attachNewProcess( %d )", pid);
-            windowHwnd = Utils::TibiaFinder::pidToHwnd( pid );
+            windowHwnd = hwnd;
         }
     }
 }

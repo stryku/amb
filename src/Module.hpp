@@ -19,7 +19,6 @@ namespace AMB
             bool continueRun = false;
 
             virtual void runDetails() = 0;
-
             virtual void runMethod();
 
         public:
@@ -27,10 +26,9 @@ namespace AMB
             ~Module();
 
             void run();
-
             void stop();
-
             bool isRunning() const;
+            virtual void attachToNewWindow(HWND hwnd) = 0;
         };
     }
 }

@@ -33,7 +33,7 @@ namespace AMB
             void keyDownAndUp( WPARAM key,
                                Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
 
-            void attachNewProcess( DWORD pid );
+            void attachToNewWindow(HWND hwnd);
         };
     }
 }

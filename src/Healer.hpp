@@ -27,13 +27,18 @@ namespace AMB
 
                 void runDetails();
 
+
+
             public:
-                Healer( const Configs::HealerConfig &config,
-                        Simulate::Simulator &simulator );
+                Healer(const Configs::HealerConfig &config,
+                       Simulate::Simulator &simulator);
                 ~Healer()
                 {}
 
-
+                void attachToNewWindow(HWND hwnd)
+                {
+                    reader.attachToNewWindow(hwnd);
+                }
             };
         }
     }

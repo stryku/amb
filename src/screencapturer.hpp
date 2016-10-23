@@ -33,7 +33,7 @@ namespace AMB
 
                     img.w = rc.right - rc.left;
                     img.h = rc.bottom - rc.top;
-                    img.reservePixels();
+                    img.resize();
 
                     HBITMAP hbmp = CreateCompatibleBitmap(hScreen,
                                                           rc.right - rc.left, rc.bottom - rc.top);
@@ -62,6 +62,8 @@ namespace AMB
                     }
 
                     DeleteObject(hbmp);
+
+                    return img;
                 }
 
                 std::vector<Rgba> capture(size_t x, size_t y, size_t w, size_t h)
@@ -106,29 +108,15 @@ namespace AMB
                     screen.toCb();
                 }
 
-                void recapture()
+                void recapture(HWND windowHandle)
                 {
-                    int x1, y1, x2, y2, w, h;
-                    x1 = GetSystemMetrics(SM_XVIRTUALSCREEN);
-                    y1 = GetSystemMetrics(SM_YVIRTUALSCREEN);
-                    x2 = GetSystemMetrics(SM_CXVIRTUALSCREEN);
-                    y2 = GetSystemMetrics(SM_CYVIRTUALSCREEN);
-                    w = x2 - x1;
-                    h = y2 - y1;
-
-                    screen.w = w;
-                    screen.h = h;
-
-                    screen.pixels = capture(0, 0, w, h);
+                    screen = captureWindow(windowHandle);
                 }
 
             private:
-
-
                 HDC     hScreen = GetDC(NULL);
                 HDC     hDC = CreateCompatibleDC(hScreen);
                 Graphics::Image &screen;
-                ;
             };
         }
     }

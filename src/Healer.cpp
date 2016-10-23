@@ -6,17 +6,17 @@ namespace AMB
     {
         namespace Heal
         {
-            void Healer::executeRule( const HealRule &rule )
+            void Healer::executeRule(const HealRule &rule)
             {
-                simulator.hotkey( rule.hotkey,
-                                  { sleepMin, sleepMax } );
+                simulator.hotkey(rule.hotkey,
+                { sleepMin, sleepMax });
             }
 
             void Healer::runDetails()
             {
                 qDebug("Healer::runDetails");
                 auto sleepTo = std::chrono::system_clock::now() +
-                               std::chrono::milliseconds( Utils::RandomBetween{ sleepMin, sleepMax }.get() );
+                    std::chrono::milliseconds(Utils::RandomBetween{ sleepMin, sleepMax }.get());
 
                 reader.newFrame();
                 if (reader.isVisible())
@@ -36,13 +36,13 @@ namespace AMB
                     }
                 }
 
-                std::this_thread::sleep_until( sleepTo );
+                std::this_thread::sleep_until(sleepTo);
             }
 
-            Healer::Healer( const Configs::HealerConfig &config,
-                    Simulate::Simulator &simulator ) :
-                Module( simulator ),
-                config( config )
+            Healer::Healer(const Configs::HealerConfig &config,
+                           Simulate::Simulator &simulator)
+                : Module{ simulator }
+                , config{ config }
             {}
         }
     }
