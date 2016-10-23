@@ -35,7 +35,8 @@ namespace AMB
 
                 size_t isHearthVisible() const
                 {
-                    return screen.getSprite(heartConfig.pos.x, 
+                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
+                    return screen.getSprite(x,
                                             heartConfig.pos.y,
                                             Layout::HealthHeartConfig::size.w, 
                                             Layout::HealthHeartConfig::size.h) == heartConfig.pixels;
