@@ -2,6 +2,7 @@
 
 #include "screencapturer.hpp"
 #include "tibiascreenreader.hpp"
+#include "config/layout/HealthHeartConfig.hpp"
 
 #include <QtDebug>
 
@@ -15,7 +16,7 @@ namespace AMB
             {
             public:
                 TibiaReader()
-                    : reader{ screen }
+                    : reader{ screen, heartLayoutConfig }
                     , screenCapturer{ screen }
                 {}
 
@@ -43,7 +44,8 @@ namespace AMB
                 }
 
             private:
-                Image screen;
+                const Layout::HealthHeartConfig heartLayoutConfig;
+                Graphics::Image screen;
                 TibiaScreenReader reader;
                 ScreenCapturer screenCapturer;
             };

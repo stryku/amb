@@ -141,8 +141,6 @@ namespace AMB
 
             CloseHandle( hProc );
 
-            std::cout<<"found base: "<<dwBase<<"\n";
-
             return dwBase;
         }
     }
