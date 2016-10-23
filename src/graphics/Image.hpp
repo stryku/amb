@@ -38,6 +38,16 @@ namespace AMB
                     std::memcmp(pixels.data(), pixelsArray.data(), N * sizeof(Rgba)) == 0;
             }
 
+            void reservePixels()
+            {
+                pixels.reserve(w*h);
+            }
+
+            void* pixelsPtr()
+            {
+                return &pixels[0];
+            }
+
             void toCb() const
             {
                 BITMAPINFOHEADER bmih;

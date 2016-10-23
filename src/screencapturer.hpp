@@ -25,6 +25,45 @@ namespace AMB
                     ReleaseDC(NULL, hScreen);
                 }
 
+                Graphics::Image captureWindow(HWND windowHandle)
+                {
+                    Graphics::Image img;
+                    RECT rc;
+                    GetClientRect(windowHandle, &rc);
+
+                    img.w = rc.right - rc.left;
+                    img.h = rc.bottom - rc.top;
+                    img.reservePixels();
+
+                    HBITMAP hbmp = CreateCompatibleBitmap(hScreen,
+                                                          rc.right - rc.left, rc.bottom - rc.top);
+                    SelectObject(hDC, hbmp);
+
+                    PrintWindow(windowHandle, hDC, PW_CLIENTONLY);
+
+
+                    BITMAPINFO MyBMInfo = { 0 };
+                    MyBMInfo.bmiHeader.biSize = sizeof(MyBMInfo.bmiHeader);
+
+                    if (0 == GetDIBits(hDC, hbmp, 0, 0, NULL, &MyBMInfo, DIB_RGB_COLORS))
+                    {
+                        // error handling
+                    }
+
+                    MyBMInfo.bmiHeader.biBitCount = 32;
+                    MyBMInfo.bmiHeader.biCompression = BI_RGB;  // no compression -> easier to use
+                                                                // correct the bottom-up ordering of lines (abs is in cstdblib and stdlib.h)
+                    MyBMInfo.bmiHeader.biHeight = abs(MyBMInfo.bmiHeader.biHeight);
+
+                    if (0 == GetDIBits(hDC, hbmp, 0, MyBMInfo.bmiHeader.biHeight,
+                        img.pixelsPtr(), &MyBMInfo, DIB_RGB_COLORS))
+                    {
+                        // error handling
+                    }
+
+                    DeleteObject(hbmp);
+                }
+
                 std::vector<Rgba> capture(size_t x, size_t y, size_t w, size_t h)
                 {
                     BITMAPINFO MyBMInfo = { 0 };
@@ -84,9 +123,12 @@ namespace AMB
                 }
 
             private:
+
+
                 HDC     hScreen = GetDC(NULL);
                 HDC     hDC = CreateCompatibleDC(hScreen);
                 Graphics::Image &screen;
+                ;
             };
         }
     }
