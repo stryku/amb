@@ -72,25 +72,30 @@ set (AMB_src
 					${src_dir}/Module.cpp)
 					
 set (AMB_inc 
-					${inc_dir}/Bot.hpp
-					${inc_dir}/BotCore.hpp
-					${inc_dir}/ConfigFromUiGenerator.hpp
-					${inc_dir}/Configs.hpp
                     
-					${inc_dir}/Healer.hpp
-					${inc_dir}/HealerRulesTable.hpp
-                    
-					${inc_dir}/HealRule.hpp
-					${inc_dir}/ModuleId.hpp
-					${inc_dir}/ModulesManager.hpp
-					${inc_dir}/ScreenCapturer.hpp
-					${inc_dir}/Simulator.hpp
-					${inc_dir}/TibiaFinder.hpp
-					${inc_dir}/TibiaReader.hpp
-					${inc_dir}/TibiaScreenReader.hpp
-					${inc_dir}/utils.hpp
-                    
-					${inc_dir}/Module.hpp)
+            ${inc_dir}/config/layout/HealthHeartConfig.hpp
+            ${inc_dir}/config/layout/LayoutConfig.hpp
+            ${inc_dir}/graphics/Image.hpp
+            ${inc_dir}/utils/Structs.hpp
+            ${inc_dir}/Bot.hpp
+            ${inc_dir}/BotCore.hpp
+            ${inc_dir}/ConfigFromUiGenerator.hpp
+            ${inc_dir}/Configs.hpp
+            
+            ${inc_dir}/Healer.hpp
+            ${inc_dir}/HealerRulesTable.hpp
+            
+            ${inc_dir}/HealRule.hpp
+            ${inc_dir}/ModuleId.hpp
+            ${inc_dir}/ModulesManager.hpp
+            ${inc_dir}/ScreenCapturer.hpp
+            ${inc_dir}/Simulator.hpp
+            ${inc_dir}/TibiaFinder.hpp
+            ${inc_dir}/TibiaReader.hpp
+            ${inc_dir}/TibiaScreenReader.hpp
+            ${inc_dir}/utils.hpp
+            
+            ${inc_dir}/Module.hpp)
                      
                      
 set (AMB_hdr ${inc_dir_qt}/mainwindow.h)
