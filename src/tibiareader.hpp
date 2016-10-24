@@ -39,6 +39,8 @@ namespace AMB
                 {
                     assert(tibiaWindowHandle != NULL);
                     screenCapturer.recapture(tibiaWindowHandle);
+                    if (screen.w == 0 && screen.h == 0)
+                        throw std::exception{ "Tibia window is minimalized!" };
                 }
 
                 bool isVisible() const

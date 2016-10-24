@@ -18,10 +18,16 @@ namespace AMB
                 const auto sleepTo = std::chrono::system_clock::now() +
                     std::chrono::milliseconds(Utils::RandomBetween{ static_cast<size_t>(advancedSettings.healer.randBetweenChecks.from), 
                                                                     static_cast<size_t>(advancedSettings.healer.randBetweenChecks.to) }.get());
-
-                reader.newFrame();
-                if (reader.isVisible())
+                try
                 {
+                    reader.newFrame();
+
+                    if (!reader.isVisible())
+                    {
+                        qDebug("Couldn't locate health and mana status!");
+                        return;
+                    }
+
                     auto hp = reader.getHpPercent();
                     auto mana = reader.getManaPercent();
 
@@ -35,9 +41,13 @@ namespace AMB
                             executeRule(rule);
                         }
                     }
-                }
 
-                std::this_thread::sleep_until(sleepTo);
+                    std::this_thread::sleep_until(sleepTo);
+                }
+                catch (std::exception &e)
+                {
+                    qDebug("Healer exception catch: %s", e.what());
+                }
             }
 
             Healer::Healer(const Configs::HealerConfig &config,

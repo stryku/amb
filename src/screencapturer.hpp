@@ -30,6 +30,11 @@ namespace AMB
                     Graphics::Image img;
                     RECT rc;
                     GetClientRect(windowHandle, &rc);
+                    if (rc.bottom == 0 && rc.right == 0)
+                    {
+                        qDebug("Window is minimized!");
+                        return {};
+                    }
 
                     img.w = rc.right - rc.left;
                     img.h = rc.bottom - rc.top;

@@ -13,7 +13,7 @@ namespace AMB
     {
         struct Image
         {
-            size_t w, h;
+            size_t w{ 0 }, h{ 0 };
             std::vector<Rgba> pixels;
 
             Rgba& pixel(size_t x, size_t y)
