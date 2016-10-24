@@ -6,6 +6,8 @@
 #include <random>
 #include <mutex>
 
+#include <QLineEdit>
+
 namespace AMB
 {
     namespace Utils
@@ -28,13 +30,13 @@ namespace AMB
             UNKNOWN
         };
 
-        std::string hotkeyToStdString( Hotkey hotkey );
+        std::string hotkeyToStdString(Hotkey hotkey);
 
-        Hotkey stdStringToHotkey( const std::string &str );
+        Hotkey stdStringToHotkey(const std::string &str);
 
-        Hotkey size_tToHotkey( size_t hotkey );
+        Hotkey size_tToHotkey(size_t hotkey);
 
-        std::string size_tHotkeyToStdString( size_t hotkey );
+        std::string size_tHotkeyToStdString(size_t hotkey);
 
         struct RandomBetween
         {
@@ -54,10 +56,19 @@ namespace AMB
             size_t w, h;
         };
 
-        void closeAndNullHandle( HANDLE &handle );
+        void closeAndNullHandle(HANDLE &handle);
 
-        void safeCloseAndNullHandle( HANDLE &handle );
+        void safeCloseAndNullHandle(HANDLE &handle);
 
-        DWORD getModuleBase( DWORD pid, const char *sModuleName );
+        DWORD getModuleBase(DWORD pid, const char *sModuleName);
+
+        template <typename T>
+        auto getFromToFromEdits(const T &fromToEdits)
+        {
+            return FromTo{
+                fromToEdits.from->text().toInt(),
+                fromToEdits.to->text().toInt()
+            };
+        }
     }
 }

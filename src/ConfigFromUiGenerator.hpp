@@ -25,6 +25,7 @@ namespace AMB
             const Configs::GlobalConfig& getConfigs() const;
 
             void regenerateModule( Modules::ModuleId moduleId );
+            void regenerateAdvancedSettings();
 
         private:
             const MainWindow *mainWindow;

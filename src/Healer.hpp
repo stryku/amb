@@ -16,12 +16,11 @@ namespace AMB
             class Healer : public Module
             {
             private:
-                static const size_t sleepMin = 100;
-                static const size_t sleepMax = 450;
 
                 Readers::details::TibiaReader reader;
 
                 const Configs::HealerConfig &config;
+                const Configs::AdvancedSettings &advancedSettings;
 
                 void executeRule( const HealRule &rule );
 
@@ -31,6 +30,7 @@ namespace AMB
 
             public:
                 Healer(const Configs::HealerConfig &config,
+                       const Configs::AdvancedSettings &advancedSettings,
                        Simulate::Simulator &simulator);
                 ~Healer()
                 {}

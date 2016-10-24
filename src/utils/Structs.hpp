@@ -20,6 +20,11 @@ namespace AMB
         size_t w, h;
     };
 
+    struct FromTo
+    {
+        int from, to;
+    };
+
     struct Rgba
     {
         uint8_t r;

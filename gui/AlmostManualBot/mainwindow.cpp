@@ -107,6 +107,20 @@ const Ui::MainWindow* MainWindow::getUi() const
     return ui;
 }
 
+const AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHealer() const
+{
+    AMB::Ui::Controls::AdvancedSettings::Healer healer;
+
+    healer.betweenChecks.from = ui->editRandBeetwenChecksFrom;
+    healer.betweenChecks.to = ui->editRandBeetwenChecksTo;
+
+    healer.sleepAfterHotkey.from = ui->editSleepAfterHotkeyFrom;
+    healer.sleepAfterHotkey.to = ui->editSleepAfterHotkeyTo;
+
+    return healer;
+}
+
+
 const HealerRulesTable& MainWindow::getHealerRulesTable() const
 {
     return *( healerRulesTable.get() );

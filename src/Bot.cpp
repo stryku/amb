@@ -35,8 +35,11 @@ namespace AMB
 
     void Bot::toggleModule( Modules::ModuleId modId )
     {
-        if( !botCore.isModuleRunning( modId ) )
-            configFromUiGenerator.regenerateModule( modId );
+        if (!botCore.isModuleRunning(modId))
+        {
+            configFromUiGenerator.regenerateModule(modId);
+            configFromUiGenerator.regenerateAdvancedSettings();
+        }
 
         botCore.toggleModule( modId );
     }

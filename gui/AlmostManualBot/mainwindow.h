@@ -3,15 +3,17 @@
 
 
 
+
+#include "TibiaFinder.hpp"
+#include "HealerRulesTable.hpp"
+#include "ModuleId.hpp"
+#include "ui/UiControls.hpp"
+
+
 #include <QMainWindow>
 #include <QCheckBox>
 #include <QtGlobal>
 #include <QDebug>
-
-#include <TibiaFinder.hpp>
-#include <HealerRulesTable.hpp>
-#include <ModuleId.hpp>
-
 
 #include <memory>
 #include <functional>
@@ -31,6 +33,7 @@ public:
     ~MainWindow();
 
     const Ui::MainWindow* getUi() const;
+    const AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
 
     const HealerRulesTable& getHealerRulesTable() const;
 

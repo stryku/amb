@@ -7,8 +7,9 @@ namespace AMB
         ModulesManager::ModulesManager( const Configs::GlobalConfig &config,
                                         Simulate::Simulator &simulator)
         {
-            modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>( config.healerConfig,
-                                                                            simulator );
+            modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>(config.healerConfig,
+                                                                           config.advancedSettings,
+                                                                           simulator );
         }
 
         void ModulesManager::run( ModuleId modId )

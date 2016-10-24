@@ -38,6 +38,17 @@ namespace Configs
         config.healerConfig.rules = healerRulesTable.getRules();
     }
 
+    void ConfigFromUiGenerator::regenerateAdvancedSettings()
+    {
+        qDebug("ConfigFromUiGenerator::regenerateAdvancedSettings");
+        const auto healerSettingsControls = mainWindow->getAdvancedSettingsHealer();
+        config.advancedSettings.healer = {
+            Utils::getFromToFromEdits(healerSettingsControls.betweenChecks),
+            Utils::getFromToFromEdits(healerSettingsControls.sleepAfterHotkey)
+        };
+    }
+
+
     void ConfigFromUiGenerator::regeneratePid()
     {
         auto title = mainWindow->getTibiaWindowTitle();

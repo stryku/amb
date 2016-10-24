@@ -200,6 +200,108 @@
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="tabAdvancedSettings">
+       <attribute name="title">
+        <string>Advanced Settings</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBoxHealer">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>117</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Healer</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="editRandBeetwenChecksFrom">
+           <property name="text">
+            <string>100</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="4">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Sleep after hotkey [ms]</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>To:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="editRandBeetwenChecksTo">
+           <property name="text">
+            <string>200</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="editSleepAfterHotkeyFrom">
+           <property name="text">
+            <string>100</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>To:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLineEdit" name="editSleepAfterHotkeyTo">
+           <property name="text">
+            <string>200</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>From:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>From:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="4">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Rand between checks [ms]</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
      </widget>
     </item>
     <item row="0" column="1">
