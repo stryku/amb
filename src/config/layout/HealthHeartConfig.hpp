@@ -11,11 +11,10 @@ namespace AMB
         struct HealthHeartConfig
         {
             static constexpr Size size = { 11,11 };
-            static constexpr Pos defaultPos = { 1198, 124 };
             static constexpr size_t offsetFromRight = 163;
-            Pos pos = defaultPos;
+            static constexpr size_t defaultY{ 124 };
 
-            const std::array<Rgba, size.w * size.h> pixels =
+            static constexpr std::array<Rgba, size.w * size.h> pixels =
             {
                 Rgba{ 70, 70, 70, 255 },
                 Rgba{ 70, 70, 70, 255 },

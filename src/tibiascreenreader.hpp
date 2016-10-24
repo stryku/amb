@@ -37,7 +37,7 @@ namespace AMB
                 {
                     const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
                     return screen.getSprite(x,
-                                            heartConfig.pos.y,
+                                            heartConfig.defaultY,
                                             Layout::HealthHeartConfig::size.w, 
                                             Layout::HealthHeartConfig::size.h) == heartConfig.pixels;
                 }
@@ -47,28 +47,31 @@ namespace AMB
                 {
                     Rgba firstPixel;
                     Rgba otherPixels;
-                    Pos pos;
+                    size_t offsetFromHeartY;
 
-                    static const size_t MaxLength = 1302 - 1215;
+                    static constexpr size_t MaxLength = 87;
+                    static constexpr size_t OffsetFromHeartX = 17;
                 };
 
                 size_t getPercent(const HpManaInfo &info) const
                 {
                     size_t px{ 0 };
+                    const Pos base{ info.OffsetFromHeartX + screen.w - Layout::HealthHeartConfig::offsetFromRight - 1,
+                                    info.offsetFromHeartY + heartConfig.defaultY };
 
-                    if (screen.cpixel(info.pos.x, info.pos.y) != info.firstPixel)
+                    if (screen.cpixel(base.x, base.y) != info.firstPixel)
                         return 0;
 
                     ++px;
 
-                    while (screen.cpixel(info.pos.x + px, info.pos.y) == info.otherPixels && px < HpManaInfo::MaxLength)
+                    while (screen.cpixel(base.x + px, base.y) == info.otherPixels && px < HpManaInfo::MaxLength)
                         ++px;
 
                     return px;
                 }
 
-                const HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, Pos{ 1215, 128 } };
-                const HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, Pos{ 1215, 141} };
+                static constexpr HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, 4 };
+                static constexpr HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, 17 };
                 const Graphics::Image &screen;
                 const Layout::HealthHeartConfig &heartConfig;
             };
