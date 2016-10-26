@@ -100,10 +100,12 @@ namespace AMB
 
                 img.pixels.reserve(reqw*reqh);
 
+                Pos base = { reqx, reqy + reqh - 1 };
+
                 auto it = img.pixels.begin();
-                for (size_t y = reqy + reqh - 1; y >= reqy; --y)
-                    for (size_t x = reqx; x < reqx + reqw; ++x)
-                        img.pixels.emplace_back(cpixel(x, y));
+                for (size_t y = 0; y < reqh; ++y)
+                    for (size_t x = 0; x < reqw; ++x)
+                        img.pixels.emplace_back(cpixel(base.x + x, base.y - y));
 
                 return img;
             }

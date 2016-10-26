@@ -6,8 +6,15 @@ namespace AMB
     {
         void Module::runMethod()
         {
-            while( continueRun )
-                runDetails();
+            try
+            {
+                while (continueRun)
+                    runDetails();
+            }
+            catch (std::exception& e)
+            {
+                qDebug("Module cought exception: %s", e.what());
+            }
         }
 
         Module::Module(Simulate::Simulator &simulator) :
@@ -20,7 +27,7 @@ namespace AMB
 
         void Module::run()
         {
-            auto runLambda = std::bind( &Module::runMethod, this );
+            auto runLambda = [this] {runMethod(); };
 
             continueRun = true;
 

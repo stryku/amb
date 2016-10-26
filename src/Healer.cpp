@@ -14,40 +14,31 @@ namespace AMB
 
             void Healer::runDetails()
             {
-                qDebug("Healer::runDetails");
                 const auto sleepTo = std::chrono::system_clock::now() +
                     std::chrono::milliseconds(Utils::RandomBetween{ static_cast<size_t>(advancedSettings.healer.randBetweenChecks.from), 
                                                                     static_cast<size_t>(advancedSettings.healer.randBetweenChecks.to) }.get());
-                try
+                reader.newFrame();
+
+                if (!reader.isVisible())
                 {
-                    reader.newFrame();
-
-                    if (!reader.isVisible())
-                    {
-                        qDebug("Couldn't locate health and mana status!");
-                        return;
-                    }
-
-                    auto hp = reader.getHpPercent();
-                    auto mana = reader.getManaPercent();
-
-                    qDebug("Healer: hp: %d, mana: %d", hp, mana);
-
-                    for (const auto &rule : config.rules)
-                    {
-                        if (rule.passed(hp, mana))
-                        {
-                            qDebug("Rule passed");
-                            executeRule(rule);
-                        }
-                    }
-
-                    std::this_thread::sleep_until(sleepTo);
+                    qDebug("Heart not on its place, refinding...");
+                    if (!reader.refindHeart())
+                        throw std::exception("Couldn't locate health and mana status!");
                 }
-                catch (std::exception &e)
+
+                auto hp = reader.getHpPercent();
+                auto mana = reader.getManaPercent();
+
+                for (const auto &rule : config.rules)
                 {
-                    qDebug("Healer exception catch: %s", e.what());
+                    if (rule.passed(hp, mana))
+                    {
+                        qDebug("Rule passed");
+                        executeRule(rule);
+                    }
                 }
+
+                std::this_thread::sleep_until(sleepTo);
             }
 
             Healer::Healer(const Configs::HealerConfig &config,

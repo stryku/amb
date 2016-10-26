@@ -17,14 +17,13 @@ namespace AMB
             {
             public:
                 TibiaScreenReader(const Graphics::Image &screen,
-                                  const Layout::HealthHeartConfig &heartConfig)
+                                  Layout::HealthHeartConfig &heartConfig)
                     : screen{ screen }
                     , heartConfig{ heartConfig }
                 {}
 
                 size_t getHpPercent() const
                 {
-                    qDebug("TibiaScreenReader Reading hp\n");
                     return getPercent(hpInfo);
                 }
 
@@ -37,9 +36,31 @@ namespace AMB
                 {
                     const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
                     return screen.getSprite(x,
-                                            heartConfig.defaultY,
+                                            heartConfig.y,
                                             Layout::HealthHeartConfig::size.w, 
                                             Layout::HealthHeartConfig::size.h) == heartConfig.pixels;
+                }
+
+                bool findHeart()
+                {
+                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
+
+                    qDebug("TibiaScreenReader refinding heart. Before: %d, %d", x, heartConfig.y);
+
+                    for (size_t y = 0; y < screen.h - heartConfig.size.h; ++y)
+                    {
+                        if (screen.getSprite(x, y,
+                                             Layout::HealthHeartConfig::size.w,
+                                             Layout::HealthHeartConfig::size.h) == heartConfig.pixels)
+                        {
+                            heartConfig.y = y;
+                            qDebug("TibiaScreenReader heart found: %d, %d", x, heartConfig.y);
+                            return true;
+                        }
+                    }
+
+                    qDebug("TibiaScreenReader heart NOT found!");
+                    return false;
                 }
 
             private:
@@ -57,7 +78,7 @@ namespace AMB
                 {
                     size_t px{ 0 };
                     const Pos base{ info.OffsetFromHeartX + screen.w - Layout::HealthHeartConfig::offsetFromRight - 1,
-                                    info.offsetFromHeartY + heartConfig.defaultY };
+                                    info.offsetFromHeartY + heartConfig.y };
 
                     if (screen.cpixel(base.x, base.y) != info.firstPixel)
                         return 0;
@@ -73,7 +94,7 @@ namespace AMB
                 static constexpr HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, 4 };
                 static constexpr HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, 17 };
                 const Graphics::Image &screen;
-                const Layout::HealthHeartConfig &heartConfig;
+                Layout::HealthHeartConfig &heartConfig;
             };
         }
     }

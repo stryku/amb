@@ -25,13 +25,11 @@ namespace AMB
 
                 size_t getHpPercent()
                 {
-                    qDebug("Reading hp\n");
                     return reader.getHpPercent();
                 }
 
                 size_t getManaPercent()
                 {
-                    qDebug("Reading mana\n");
                     return reader.getManaPercent();
                 }
 
@@ -54,8 +52,13 @@ namespace AMB
                     tibiaWindowHandle = hwnd;
                 }
 
+                bool refindHeart()
+                {
+                    return reader.findHeart();
+                }
+
             private:
-                const Layout::HealthHeartConfig heartLayoutConfig;
+                Layout::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;
                 TibiaScreenReader reader;
                 ScreenCapturer screenCapturer;
