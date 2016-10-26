@@ -12,7 +12,7 @@ namespace AMB
 class Bot
 {
 public:
-    using ModuleToggleMethod = std::function<void(Modules::ModuleId)>;
+    using ModuleToggleMethod = std::function<bool(Modules::ModuleId)>;
     using TibiaWindowChangedHandler = std::function<void(const std::wstring&)>;
     using ResetLayoutHandler = std::function<void()>;
 
@@ -23,7 +23,7 @@ public:
     int run();
 
 private:
-    void toggleModule( Modules::ModuleId modId );
+    bool toggleModule( Modules::ModuleId modId );
     void tibiaWindowChanged( const std::wstring &newWindowTitle );
     void resetLayoutHandler();
 

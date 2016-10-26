@@ -12,7 +12,7 @@ namespace AMB
     class BotCore
     {
     private:
-
+        DWORD attachedProcess{ NULL };
         Simulate::Simulator simulator;
         Modules::ModulesManager modulesManager;
 
@@ -23,5 +23,6 @@ namespace AMB
         void attachNewProcess( DWORD pid );
         void toggleModule( AMB::Modules::ModuleId modId );
         bool isModuleRunning( Modules::ModuleId modId );
+        DWORD getAttachedProcess() const { return attachedProcess; }
     };
 }

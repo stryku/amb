@@ -73,21 +73,28 @@ void MainWindow::toggleHealer()
     }
     else
     {
-        startModule( ui->checkBoxHealerRun,
-                     AMB::Modules::ModuleId::MOD_HEALER );
+        if (!startModule(ui->checkBoxHealerRun,
+                         AMB::Modules::ModuleId::MOD_HEALER))
+        {
+            ui->checkBoxHealerRun->setChecked(false);
+        }
     }
 }
 
-void MainWindow::startModule( QCheckBox *moduleCheckBox,
+bool MainWindow::startModule( QCheckBox *moduleCheckBox,
                               AMB::Modules::ModuleId modId )
 {
-    auto p = moduleCheckBox->palette();
+    if (moduleToggleHandler(modId))
+    {
+        auto p = moduleCheckBox->palette();
 
-    p.setColor( QPalette::Active, QPalette::WindowText, QColor( "green" ) );
-    moduleCheckBox->setPalette( p );
-    moduleCheckBox->setText( "Running" );
+        p.setColor(QPalette::Active, QPalette::WindowText, QColor("green"));
+        moduleCheckBox->setPalette(p);
+        moduleCheckBox->setText("Running");
+        return true;
+    }
 
-    moduleToggleHandler( modId );
+    return false;
 }
 
 void MainWindow::stopModule( QCheckBox *moduleCheckBox,
@@ -126,7 +133,7 @@ const HealerRulesTable& MainWindow::getHealerRulesTable() const
     return *( healerRulesTable.get() );
 }
 
-void MainWindow::setModuleToggleHandler( std::function<void( AMB::Modules::ModuleId )> newHandler )
+void MainWindow::setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler )
 {
     moduleToggleHandler = newHandler;
 }

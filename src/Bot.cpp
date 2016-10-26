@@ -1,4 +1,5 @@
 ﻿#include "Bot.hpp"
+#include <QMessageBox>
 
 namespace AMB
 {
@@ -20,7 +21,7 @@ namespace AMB
 
     Bot::ModuleToggleMethod Bot::getModuleToggleMethod()
     {
-        return [this](Modules::ModuleId module) { toggleModule(module); };
+        return [this](Modules::ModuleId module) { return toggleModule(module); };
     }
 
     Bot::TibiaWindowChangedHandler Bot::getTibiaWindowChangedHandler()
@@ -33,8 +34,19 @@ namespace AMB
         return [this] { resetLayoutHandler(); };
     }
 
-    void Bot::toggleModule( Modules::ModuleId modId )
+    bool Bot::toggleModule( Modules::ModuleId modId )
     {
+        if (botCore.getAttachedProcess() == NULL)
+        {
+            QMessageBox msgBox;
+            msgBox.setText("Error");
+            msgBox.setInformativeText("You need to select Tibia window first.");
+            msgBox.setStandardButtons(QMessageBox::Ok);
+            msgBox.setDefaultButton(QMessageBox::Ok);
+            msgBox.exec();
+            return false;
+        }
+
         if (!botCore.isModuleRunning(modId))
         {
             configFromUiGenerator.regenerateModule(modId);
@@ -42,6 +54,7 @@ namespace AMB
         }
 
         botCore.toggleModule( modId );
+        return true;
     }
 
     void Bot::tibiaWindowChanged( const std::wstring &newWindowTitle )
