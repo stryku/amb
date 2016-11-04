@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMainWindow>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -149,6 +150,11 @@ void MainWindow::setRefreshLayoutHandler(std::function<void()> newHandler)
     refreshLayoutHandler = newHandler;
 }
 
+void MainWindow::setConfigProvider(std::function<std::string()> provider)
+{
+    configToSaveProvider = provider;
+}
+
 std::wstring MainWindow::getTibiaWindowTitle() const
 {
     const auto cbTibiaClients = ui->cbTibiaClients;
@@ -182,4 +188,53 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
 void MainWindow::on_refreshLayoutButton_clicked()
 {
     refreshLayoutHandler();
+}
+
+void MainWindow::on_actionOpen_triggered()
+{
+    auto path = QFileDialog::getOpenFileName(this, 
+                                             "Open file", 
+                                             { "./configurations" }, 
+                                             "*.amb");
+
+    if (!path.length() == 0)
+    {
+
+    }
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+}
+
+void MainWindow::on_actionSave_as_triggered()
+{
+    assert(configToSaveProvider);
+
+    auto path = QFileDialog::getSaveFileName(this,
+                                             "Save file",
+                                             "./configurations",
+                                             "*.amb");
+
+    qDebug("%s", path.toStdString().c_str());
+
+    if (!path.length() == 0)
+    {
+        const auto config = configToSaveProvider();
+        std::ofstream out(path.toStdString());
+        if (out.is_open())
+            out << config;
+    }
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    auto path = QFileDialog::getExistingDirectory(this,
+                                                  "Save file",
+                                                  "./configurations");
+
+    if (!path.length() == 0)
+    {
+
+    }
 }

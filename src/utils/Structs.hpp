@@ -23,6 +23,17 @@ namespace AMB
     struct FromTo
     {
         int from, to;
+
+        void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
+        {
+            const auto elements =
+            {
+                Utils::PtreeElement<>{ path + ".from", utils::toString(from) },
+                Utils::PtreeElement<>{ path + ".to", utils::toString(to) }
+            };
+
+            builder.addElements(elements);
+        }
     };
 
     struct Rgba

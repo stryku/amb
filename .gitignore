@@ -6,3 +6,5 @@ gui/build*
 bin*
 *.user.*
 build*
+*.cpp.*
+*.hpp.*

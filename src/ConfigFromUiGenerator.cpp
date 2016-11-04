@@ -15,6 +15,7 @@ namespace Configs
     {
         regenerateCommon();
         regenerateAllModules();
+        regenerateAdvancedSettings();
     }
 
     const Configs::GlobalConfig& ConfigFromUiGenerator::getConfigs() const

@@ -39,22 +39,23 @@ public:
 
     void setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
-    void setRefreshLayoutHandler( std::function<void()> refreshLayoutHandler);
+    void setRefreshLayoutHandler(std::function<void()> newHandler);
+    void setConfigProvider( std::function<std::string()> provider);
 
     std::wstring getTibiaWindowTitle() const;
 
 private slots:
     void on_btnRefreshClientsComboBox_clicked();
-
     void on_btnHealerAddRule_clicked();
-
     void on_btnHealerClear_clicked();
-
     void on_checkBoxHealerRun_clicked();
-
     void on_cbTibiaClients_currentIndexChanged(const QString &arg1);
-
     void on_refreshLayoutButton_clicked();
+    void on_actionOpen_triggered();
+    void on_actionExit_triggered();
+    void on_actionSave_as_triggered();
+
+    void on_actionSave_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -62,6 +63,7 @@ private:
     std::function<bool(AMB::Modules::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;
+    std::function<std::string()> configToSaveProvider;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();

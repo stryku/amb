@@ -3,14 +3,15 @@
 
 namespace AMB
 {
-    Bot::Bot( int &argc, char *argv[] ):
-        application( argc, argv ),
-        configFromUiGenerator( &window,
-                               window.getHealerRulesTable() ),
-        botCore( configFromUiGenerator.getConfigs() )
+    Bot::Bot(int &argc, char *argv[]) :
+        application(argc, argv),
+        configFromUiGenerator(&window,
+                              window.getHealerRulesTable()),
+        botCore(configFromUiGenerator.getConfigs())
     {
-        window.setModuleToggleHandler( getModuleToggleMethod() );
-        window.setTtibiaWindowChangedHandler( getTibiaWindowChangedHandler() );
+        window.setModuleToggleHandler(getModuleToggleMethod());
+        window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
+        window.setConfigProvider(getConfigProvider());
     }
 
     int Bot::run()
@@ -33,6 +34,12 @@ namespace AMB
     {
         return [this] { resetLayoutHandler(); };
     }
+
+    Bot::ConfigProvider Bot::getConfigProvider()
+    {
+        return [this] {return getConfigurationToSave(); };
+    }
+
 
     bool Bot::toggleModule( Modules::ModuleId modId )
     {

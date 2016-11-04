@@ -15,12 +15,23 @@ public:
     using ModuleToggleMethod = std::function<bool(Modules::ModuleId)>;
     using TibiaWindowChangedHandler = std::function<void(const std::wstring&)>;
     using ResetLayoutHandler = std::function<void()>;
+    using ConfigProvider = std::function<std::string()>;
 
     Bot( int &argc, char *argv[] );
     ~Bot() {}
 
-
     int run();
+
+    std::string getConfigurationToSave()
+    {
+        configFromUiGenerator.regenerate();
+        return configFromUiGenerator.getConfigs().toString();
+    }
+
+    void openConfiguration()
+    {
+
+    }
 
 private:
     bool toggleModule( Modules::ModuleId modId );
@@ -30,6 +41,7 @@ private:
     ModuleToggleMethod getModuleToggleMethod();
     TibiaWindowChangedHandler getTibiaWindowChangedHandler();
     ResetLayoutHandler getResetLayoutHandler();
+    ConfigProvider getConfigProvider();
 
     QApplication application;
     MainWindow window;
