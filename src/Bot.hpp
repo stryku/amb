@@ -40,11 +40,9 @@ public:
 private:
     bool toggleModule( Modules::ModuleId modId );
     void tibiaWindowChanged( const std::wstring &newWindowTitle );
-    void resetLayoutHandler();
 
     ModuleToggleMethod getModuleToggleMethod();
     TibiaWindowChangedHandler getTibiaWindowChangedHandler();
-    ResetLayoutHandler getResetLayoutHandler();
     ConfigProvider getConfigProvider();
     ConfigLoader getConfigLoader();
 

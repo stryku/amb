@@ -38,7 +38,7 @@ namespace AMB
         {
             continueRun = false;
 
-            if( runThread->joinable() )
+            if (runThread != nullptr && runThread->joinable())
                 runThread->join();
         }
 

@@ -31,11 +31,6 @@ namespace AMB
         return [this](const std::wstring &str) { tibiaWindowChanged(str); };
     }
 
-    Bot::ResetLayoutHandler Bot::getResetLayoutHandler()
-    {
-        return [this] { resetLayoutHandler(); };
-    }
-
     Bot::ConfigProvider Bot::getConfigProvider()
     {
         return [this] {return getConfigurationToSave(); };
@@ -75,10 +70,5 @@ namespace AMB
         DWORD pid = Utils::TibiaFinder::findProcessId( newWindowTitle );
 
         botCore.attachNewProcess( pid );
-    }
-
-    void Bot::resetLayoutHandler()
-    {
-        
     }
 }
