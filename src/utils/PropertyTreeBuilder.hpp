@@ -30,7 +30,7 @@ namespace AMB
             template <typename T>
             PropertyTreeBuilder& addElement(const PtreeElement<T> &elem)
             {
-                tree.put(elem.path, utils::toString(elem.value));
+                tree.add(elem.path, utils::toString(elem.value));
                 return *this;
             }
 
@@ -48,6 +48,17 @@ namespace AMB
                 std::ostringstream oss;
                 boost::property_tree::write_xml(oss, tree);
                 return oss.str();
+            }
+
+            boost::property_tree::ptree buildTree() const
+            {
+                return tree;
+            }
+
+            PropertyTreeBuilder& addTree(const std::string &path, const boost::property_tree::ptree &subtree)
+            {
+                tree.add_child(path, subtree);
+                return *this;
             }
 
         private:

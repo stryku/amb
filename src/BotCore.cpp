@@ -17,6 +17,7 @@ namespace AMB
         auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);
         simulator.attachToNewWindow(hwnd);
         modulesManager.attachToNewWindow(hwnd);
+        attachedProcess = pid;
     }
 
     void BotCore::toggleModule( AMB::Modules::ModuleId modId )

@@ -28,6 +28,22 @@ namespace AMB
                     rule.toPropertyTreeBuilder(builder, path + ".heal_rules.heal_rule");
             }
 
+            auto toPtree() const
+            {
+                Utils::PropertyTreeBuilder builder;
+
+                if (rules.empty())
+                    return builder.addElement(Utils::PtreeElement<>{"heal_rules", ""}).buildTree();
+
+                for (const auto& rule : rules)
+                {
+                    auto tree = rule.toPtree();
+                    builder.addTree("heal_rules.heal_rule", tree);
+                }
+
+                return builder.buildTree();
+            }
+
             static HealerConfig fromPtree(boost::property_tree::ptree &tree)
             {
                 HealerConfig healer;
@@ -80,7 +96,7 @@ namespace AMB
 
                 builder.addElement(Utils::PtreeElement<>{"amb.version", "0.0.1"});
                 
-                healerConfig.toPropertyTreeBuilder(builder, "amb.healer_config");
+                builder.addTree("amb.healer_config", healerConfig.toPtree());
                 advancedSettings.toPropertyTreeBuilder(builder, "amb.advanced_settings");
 
                 return builder.build();

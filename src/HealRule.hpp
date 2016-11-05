@@ -29,6 +29,22 @@ namespace AMB
                     builder.addElements(elements);
                 }
 
+                auto toPtree() const
+                {
+                    Utils::PropertyTreeBuilder builder;
+
+                    const auto elements =
+                    {
+                        Utils::PtreeElement<>{ "hp.min", utils::toString(minHp) },
+                        Utils::PtreeElement<>{ "hp.max", utils::toString(maxHp) },
+                        Utils::PtreeElement<>{ "mana.min", utils::toString(minMana) },
+                        Utils::PtreeElement<>{ "mana.max", utils::toString(maxMana) },
+                        Utils::PtreeElement<>{ "hotkey", Utils::hotkeyToStdString(hotkey) }
+                    };
+
+                    return builder.addElements(elements).buildTree();
+                }
+
                 static HealRule fromPtree(boost::property_tree::ptree &tree)
                 {
                     HealRule rule;
