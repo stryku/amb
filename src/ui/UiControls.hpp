@@ -1,6 +1,7 @@
 #pragma once
 
 class QLineEdit;
+class HealerRulesTable;
 
 namespace AMB
 {
@@ -8,7 +9,7 @@ namespace AMB
     {
         namespace Controls
         {
-            namespace AdvancedSettings
+            struct AdvancedSettings
             {
                 struct Healer
                 {
@@ -16,8 +17,19 @@ namespace AMB
                     {
                         QLineEdit *from, *to;
                     }betweenChecks, sleepAfterHotkey;
-                };
-            }
+                } healer;
+            };
+
+            struct Healer
+            {
+                HealerRulesTable *healerRulesTable;
+            };
+
+            struct GlobalControls
+            {
+                Healer healer;
+                AdvancedSettings advancedSettings;
+            };
         }
     }
 }

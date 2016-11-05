@@ -33,14 +33,18 @@ public:
     ~MainWindow();
 
     const Ui::MainWindow* getUi() const;
-    const AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
+    AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
+    AMB::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
+    AMB::Ui::Controls::Healer getHealer() const;
+    AMB::Ui::Controls::GlobalControls getControls() const;
 
     const HealerRulesTable& getHealerRulesTable() const;
 
     void setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
     void setRefreshLayoutHandler(std::function<void()> newHandler);
-    void setConfigProvider( std::function<std::string()> provider);
+    void setConfigProvider(std::function<std::string()> provider);
+    void setConfigLoader( std::function<void(const std::string&)> loader);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -64,6 +68,7 @@ private:
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;
     std::function<std::string()> configToSaveProvider;
+    std::function<void(const std::string&)> configLoader;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();

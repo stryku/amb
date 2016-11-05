@@ -1,10 +1,12 @@
 ﻿#pragma once
 
-#include "mainwindow.h"
-#include <QApplication>
+#include "BotCore.hpp"
+#include "ConfigFromUiGenerator.hpp"
+#include "ui/updaters/UiUpdater.hpp"
 
-#include <BotCore.hpp>
-#include <ConfigFromUiGenerator.hpp>
+#include "mainwindow.h"
+
+#include <QApplication>
 
 
 namespace AMB
@@ -16,6 +18,7 @@ public:
     using TibiaWindowChangedHandler = std::function<void(const std::wstring&)>;
     using ResetLayoutHandler = std::function<void()>;
     using ConfigProvider = std::function<std::string()>;
+    using ConfigLoader = std::function<void(const std::string&)>;
 
     Bot( int &argc, char *argv[] );
     ~Bot() {}
@@ -28,9 +31,10 @@ public:
         return configFromUiGenerator.getConfigs().toString();
     }
 
-    void openConfiguration()
+    void openConfiguration(const std::string &configuration)
     {
-
+        configFromUiGenerator.loadConfigFromString(configuration);
+        uiUpdater.update(configFromUiGenerator.getConfigs(), window.getControls());
     }
 
 private:
@@ -42,10 +46,12 @@ private:
     TibiaWindowChangedHandler getTibiaWindowChangedHandler();
     ResetLayoutHandler getResetLayoutHandler();
     ConfigProvider getConfigProvider();
+    ConfigLoader getConfigLoader();
 
     QApplication application;
     MainWindow window;
     AMB::Configs::ConfigFromUiGenerator configFromUiGenerator;
+    AMB::Ui::Updaters::UiUpdater uiUpdater;
     AMB::BotCore botCore;
 };
 

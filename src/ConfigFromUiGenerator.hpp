@@ -27,19 +27,16 @@ namespace AMB
             void regenerateModule( Modules::ModuleId moduleId );
             void regenerateAdvancedSettings();
 
+            void loadConfigFromString(const std::string &str);
+
         private:
             const MainWindow *mainWindow;
             const HealerRulesTable &healerRulesTable;
             AMB::Configs::GlobalConfig config;
 
-            std::wstring getTibiaWindowTitle() const;
-
             void regenerateHealer();
-
             void regeneratePid();
-
             void regenerateCommon();
-
             void regenerateAllModules();
         };
     }

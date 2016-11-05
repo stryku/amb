@@ -26,6 +26,29 @@ namespace AMB
             }
         }
 
+        size_t hotkeyToSize_t(Hotkey hot)
+        {
+            switch (hot)
+            {
+            case AMB::Utils::Hotkey::F1: return 1;
+            case AMB::Utils::Hotkey::F2: return 2;
+            case AMB::Utils::Hotkey::F3: return 3;
+            case AMB::Utils::Hotkey::F4: return 4;
+            case AMB::Utils::Hotkey::F5: return 5;
+            case AMB::Utils::Hotkey::F6: return 6;
+            case AMB::Utils::Hotkey::F7: return 7;
+            case AMB::Utils::Hotkey::F8: return 8;
+            case AMB::Utils::Hotkey::F9: return 9;
+            case AMB::Utils::Hotkey::F10: return 10;
+            case AMB::Utils::Hotkey::F11: return 11;
+            case AMB::Utils::Hotkey::F12: return 12;
+
+            case AMB::Utils::Hotkey::UNKNOWN:
+            default:
+                return -1;
+            }
+        }
+
         Hotkey stdStringToHotkey( const std::string &str )
         {
             if( str == "F1" ) return Hotkey::F1;
@@ -142,6 +165,17 @@ namespace AMB
             CloseHandle( hProc );
 
             return dwBase;
+        }
+
+        std::string readWholeFileIntoString(const std::string &path)
+        {
+            std::ifstream t(path);
+            t.seekg(0, std::ios::end);
+            size_t size = t.tellg();
+            std::string buffer(size, ' ');
+            t.seekg(0);
+            t.read(&buffer[0], size);
+            return buffer;
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #include <random>
 #include <mutex>
+#include <fstream>
 
 #include <QLineEdit>
 
@@ -31,12 +32,11 @@ namespace AMB
         };
 
         std::string hotkeyToStdString(Hotkey hotkey);
-
         Hotkey stdStringToHotkey(const std::string &str);
-
         Hotkey size_tToHotkey(size_t hotkey);
-
         std::string size_tHotkeyToStdString(size_t hotkey);
+        size_t hotkeyToSize_t(Hotkey hot);
+
 
         struct RandomBetween
         {
@@ -70,5 +70,7 @@ namespace AMB
                 fromToEdits.to->text().toInt()
             };
         }
+
+        std::string readWholeFileIntoString(const std::string &path);
     }
 }

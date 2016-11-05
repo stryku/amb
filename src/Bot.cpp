@@ -12,6 +12,7 @@ namespace AMB
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
+        window.setConfigLoader(getConfigLoader());
     }
 
     int Bot::run()
@@ -38,6 +39,11 @@ namespace AMB
     Bot::ConfigProvider Bot::getConfigProvider()
     {
         return [this] {return getConfigurationToSave(); };
+    }
+
+    Bot::ConfigLoader Bot::getConfigLoader()
+    {
+        return[this](const std::string &str) { openConfiguration(str); };
     }
 
 

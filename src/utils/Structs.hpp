@@ -34,6 +34,16 @@ namespace AMB
 
             builder.addElements(elements);
         }
+
+        static FromTo fromPtree(boost::property_tree::ptree &tree)
+        {
+            FromTo ret;
+
+            ret.from = tree.get<int>("from");
+            ret.to = tree.get<int>("to");
+
+            return ret;
+        }
     };
 
     struct Rgba

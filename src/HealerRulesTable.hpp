@@ -1,14 +1,12 @@
 ﻿#ifndef HEALERRULESTABLE_HPP
 #define HEALERRULESTABLE_HPP
 
-#include <HealRule.hpp>
-#include <utils.hpp>
+#include "HealRule.hpp"
+#include "utils.hpp"
 
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QList>
-
-#include <iostream>
 
 class HealerRulesTable
 {

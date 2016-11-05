@@ -28,6 +28,21 @@ namespace AMB
 
                     builder.addElements(elements);
                 }
+
+                static HealRule fromPtree(boost::property_tree::ptree &tree)
+                {
+                    HealRule rule;
+
+                    rule.minHp = tree.get_child("hp.min").get_value<size_t>();
+                    rule.maxHp = tree.get_child("hp.max").get_value<size_t>();
+                    rule.minMana = tree.get_child("mana.min").get_value<size_t>();
+                    rule.maxMana = tree.get_child("mana.max").get_value<size_t>();
+
+                    auto strhot = tree.get_child("hotkey").get_value<std::string>();
+                    rule.hotkey = Utils::stdStringToHotkey(strhot);
+
+                    return rule;
+                }
             };
         }
     }

@@ -72,7 +72,9 @@ set (AMB_src
 					${src_dir}/Module.cpp)
 					
 set (AMB_inc 
-                    
+            ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
+            ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
+            ${inc_dir}/ui/updaters/UiUpdater.hpp
             ${inc_dir}/config/layout/HealthHeartConfig.hpp
             ${inc_dir}/config/layout/LayoutConfig.hpp
             ${inc_dir}/graphics/Image.hpp

@@ -1,5 +1,8 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+
+#include "utils.hpp"
+
 #include <QMainWindow>
 #include <QFileDialog>
 
@@ -115,7 +118,7 @@ const Ui::MainWindow* MainWindow::getUi() const
     return ui;
 }
 
-const AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHealer() const
+AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHealer() const
 {
     AMB::Ui::Controls::AdvancedSettings::Healer healer;
 
@@ -126,6 +129,35 @@ const AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSetting
     healer.sleepAfterHotkey.to = ui->editSleepAfterHotkeyTo;
 
     return healer;
+}
+
+AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
+{
+    AMB::Ui::Controls::AdvancedSettings controls;
+
+    controls.healer = getAdvancedSettingsHealer();
+
+    return controls;
+}
+
+
+AMB::Ui::Controls::Healer MainWindow::getHealer() const
+{
+    AMB::Ui::Controls::Healer healer;
+
+    healer.healerRulesTable = healerRulesTable.get();
+
+    return healer;
+}
+
+AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
+{
+    AMB::Ui::Controls::GlobalControls controls;
+
+    controls.healer = getHealer();
+    controls.advancedSettings = getAdvancedSettings();
+
+    return controls;
 }
 
 
@@ -153,6 +185,10 @@ void MainWindow::setRefreshLayoutHandler(std::function<void()> newHandler)
 void MainWindow::setConfigProvider(std::function<std::string()> provider)
 {
     configToSaveProvider = provider;
+}
+void MainWindow::setConfigLoader(std::function<void(const std::string&)> loader)
+{
+    configLoader = loader;
 }
 
 std::wstring MainWindow::getTibiaWindowTitle() const
@@ -199,12 +235,14 @@ void MainWindow::on_actionOpen_triggered()
 
     if (!path.length() == 0)
     {
-
+        auto fileContent = AMB::Utils::readWholeFileIntoString(path.toStdString());
+        configLoader(fileContent);
     }
 }
 
 void MainWindow::on_actionExit_triggered()
 {
+
 }
 
 void MainWindow::on_actionSave_as_triggered()
@@ -215,8 +253,6 @@ void MainWindow::on_actionSave_as_triggered()
                                              "Save file",
                                              "./configurations",
                                              "*.amb");
-
-    qDebug("%s", path.toStdString().c_str());
 
     if (!path.length() == 0)
     {
@@ -235,6 +271,9 @@ void MainWindow::on_actionSave_triggered()
 
     if (!path.length() == 0)
     {
-
+        const auto config = configToSaveProvider();
+        std::ofstream out(path.toStdString());
+        if (out.is_open())
+            out << config;
     }
 }
