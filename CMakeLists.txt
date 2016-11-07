@@ -72,6 +72,12 @@ set (AMB_src
 					${src_dir}/Module.cpp)
 					
 set (AMB_inc 
+            ${inc_dir}/ui/modules/looter/LooterCategoriesTable.hpp
+            ${inc_dir}/ui/modules/looter/Category.hpp
+            ${inc_dir}/ui/modules/looter/ToOnto.hpp
+
+            ${inc_dir}/ui/controls/Table.hpp
+
             ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp

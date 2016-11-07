@@ -12,7 +12,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    healerRulesTable = std::make_unique<HealerRulesTable>( ui->tableHealerRules );
+    healerRulesTable = std::make_unique<HealerRulesTable>(ui->tableHealerRules);
+    looterCategoriesTable = std::make_unique<AMB::Ui::Modules::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
 
     updateTibiaClientsComboBox();
 }

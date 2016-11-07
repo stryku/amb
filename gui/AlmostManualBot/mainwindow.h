@@ -1,13 +1,12 @@
 ﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
-
-
 #include "TibiaFinder.hpp"
 #include "HealerRulesTable.hpp"
 #include "ModuleId.hpp"
 #include "ui/UiControls.hpp"
+
+#include "ui/modules/looter/LooterCategoriesTable.hpp"
 
 
 #include <QMainWindow>
@@ -70,6 +69,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<HealerRulesTable> healerRulesTable;
+    std::unique_ptr<AMB::Ui::Modules::Looter::LooterCategoriesTable> looterCategoriesTable;
     std::function<bool(AMB::Modules::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;

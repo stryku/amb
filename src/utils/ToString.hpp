@@ -1,6 +1,7 @@
 #pragma once
 
-#include <utils/traits/traits.hpp>
+#include "utils/traits/traits.hpp"
+#include "cexpr/template.hpp"
 
 #include <string>
 
@@ -28,4 +29,10 @@ namespace utils
     }
 
     std::string toString(bool value);
+
+    template <typename ...Args>
+    auto toStringArray(const Args&... args)
+    {
+        return std::array<std::string, cexpr::TemplateArgs<Args...>::count> { toString(args)... };
+    }
 }

@@ -8,3 +8,4 @@ bin*
 build*
 *.cpp.*
 *.hpp.*
+*.ui.*
