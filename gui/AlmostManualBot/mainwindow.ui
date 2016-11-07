@@ -24,10 +24,24 @@
       </item>
      </widget>
     </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnRefreshClientsComboBox">
+      <property name="text">
+       <string>Refresh clients</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="refreshLayoutButton">
+      <property name="text">
+       <string>Refresh layout</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabHealer">
        <attribute name="title">
@@ -200,6 +214,106 @@
         </property>
        </widget>
       </widget>
+      <widget class="QWidget" name="tabLooter">
+       <attribute name="title">
+        <string>Looter</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBoxLooterRunning">
+          <property name="text">
+           <string>Not running</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTabWidget" name="tabWidget_2">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="looterTabCategories">
+           <attribute name="title">
+            <string>Categories</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>New category</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editLooterCategoriesNewCategorName"/>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="comboBoxLooterCategoriesToOnto">
+                 <item>
+                  <property name="text">
+                   <string>To</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Onto</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>Dest</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="editLooterCategoriesNewCategoryDestination"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="pushButtonLooterCategoriesNewCategoryAdd">
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QTableView" name="tableView"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="pushButtonLooterCategoriesEdit">
+              <property name="text">
+               <string>Edit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButtonLooterCategoriesClear">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="looterTabItems">
+           <attribute name="title">
+            <string>Items</string>
+           </attribute>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tabAdvancedSettings">
        <attribute name="title">
         <string>Advanced Settings</string>
@@ -302,20 +416,6 @@
         </layout>
        </widget>
       </widget>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnRefreshClientsComboBox">
-      <property name="text">
-       <string>Refresh clients</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QPushButton" name="refreshLayoutButton">
-      <property name="text">
-       <string>Refresh layout</string>
-      </property>
      </widget>
     </item>
    </layout>

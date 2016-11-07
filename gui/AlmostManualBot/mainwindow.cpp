@@ -277,3 +277,18 @@ void MainWindow::on_actionSave_triggered()
             out << config;
     }
 }
+
+void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonLooterCategoriesClear_clicked()
+{
+
+}

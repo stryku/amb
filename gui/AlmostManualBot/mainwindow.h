@@ -61,6 +61,12 @@ private slots:
 
     void on_actionSave_triggered();
 
+    void on_pushButtonLooterCategoriesNewCategoryAdd_clicked();
+
+    void on_pushButtonLooterCategoriesEdit_clicked();
+
+    void on_pushButtonLooterCategoriesClear_clicked();
+
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<HealerRulesTable> healerRulesTable;
