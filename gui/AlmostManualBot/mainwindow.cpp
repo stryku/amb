@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -281,12 +282,34 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
 {
+    AMB::Ui::Modules::Looter::Category category;
 
+    auto name = ui->editLooterCategoriesNewCategorName->text();
+
+    if (looterCategoriesTable->categoryExists(name.toStdString()))
+    {
+        auto msg = QString("Category '%1' already exist.").arg(name);
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    category.name = name.toStdString();
+    category.destination = ui->editLooterCategoriesNewCategoryDestination->text().toStdString();
+    category.toOnto = ui->comboBoxLooterCategoriesToOnto->currentIndex();
+
+    looterCategoriesTable->add(category);
 }
 
 void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
 {
+    if (looterCategoriesTable->isSelectedEditable())
+    {
+        const auto category = looterCategoriesTable->getSelectedCategory();
 
+        ui->editLooterCategoriesNewCategorName->setText(QString::fromStdString(category.name));
+        ui->editLooterCategoriesNewCategoryDestination->setText(QString::fromStdString(category.destination));
+        ui->comboBoxLooterCategoriesToOnto->setCurrentIndex(static_cast<int>(category.toOnto));
+    }
 }
 
 void MainWindow::on_pushButtonLooterCategoriesClear_clicked()

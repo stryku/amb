@@ -57,13 +57,10 @@ private slots:
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
     void on_actionSave_as_triggered();
-
     void on_actionSave_triggered();
 
     void on_pushButtonLooterCategoriesNewCategoryAdd_clicked();
-
     void on_pushButtonLooterCategoriesEdit_clicked();
-
     void on_pushButtonLooterCategoriesClear_clicked();
 
 private:

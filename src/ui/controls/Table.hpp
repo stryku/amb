@@ -8,6 +8,7 @@
 #include <QList>
 
 #include <array>
+#include <unordered_set>
 
 namespace AMB
 {
@@ -24,6 +25,7 @@ namespace AMB
                     , columnHeaders{ columnHeaders }
                 {
                     createModel();
+                    view->setSelectionBehavior(QAbstractItemView::SelectRows);
                 }
 
                 void clear()
@@ -32,22 +34,43 @@ namespace AMB
                     createHeaders();
                 }
 
-                template <typename ...Args>
-                void add(const Args&... args)
+                std::vector<size_t> selectedRows() const
                 {
-                    const std::array<std::string, 
-                                     cexpr::TemplateArgs<Args...>::count> items = 
-                        utils::toStringArray(args...);
-                    const auto rowCount = model->rowCount();
+                    std::vector<size_t> ret;
+                    std::unordered_set<size_t> set;
 
-                    for(size_t i = 0; i < items.size(); ++i)
+                    auto indexes = view->selectionModel()->selection().indexes();
+
+                    for (const auto &idx : indexes)
+                        set.insert(idx.row());
+
+                    ret.resize(set.size());
+
+                    std::copy(std::cbegin(set), std::cend(set), std::begin(ret));
+
+                    return ret;
+                }
+
+                template <typename ...Args>
+                void set(const size_t row, const Args&... args)
+                {
+                    const std::array<std::string,
+                                     cexpr::TemplateArgs<Args...>::count> items = utils::toStringArray(args...);
+
+                    for (size_t i = 0; i < items.size(); ++i)
                     {
-                        model->setItem(rowCount,
+                        model->setItem(row,
                                        i,
                                        new QStandardItem(QString::fromStdString(items[i])));
                     }
 
                     view->resizeColumnsToContents();
+                }
+
+                template <typename ...Args>
+                void add(const Args&... args)
+                {
+                    set(model->rowCount(), args...);
                 }
 
                 template <typename Type>
@@ -88,8 +111,6 @@ namespace AMB
                 void createHeaders()
                 {
                     auto rowCount = model->rowCount();
-
-                    model->appendRow(new QStandardItem());
 
                     for (size_t i = 0; i < columnHeaders.size(); ++i)
                     {

@@ -13,21 +13,21 @@ namespace AMB
                 struct ToOnto
                 {
                     using Type = size_t;
-                    constexpr static size_t TO = 0;
-                    constexpr static size_t ONTO = 1;
+                    constexpr static size_t To = 0;
+                    constexpr static size_t Onto = 1;
 
                     constexpr static const char* toString(size_t v)
                     {
                         return
-                            v == TO ? "TO" :
-                            v == ONTO ? "ONTO" :
+                            v == To ? "To" :
+                            v == Onto ? "Onto" :
                             "UNDEF";
                     }
 
                     static size_t fromString(const std::string &str)
                     {
-                        if (str == "TO") return TO;
-                        if (str == "ONTO") return ONTO;
+                        if (str == "To") return To;
+                        if (str == "Onto") return Onto;
                         return -1;
                     }
                 };

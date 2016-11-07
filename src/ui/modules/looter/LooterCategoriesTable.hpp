@@ -23,13 +23,55 @@ namespace AMB
                         return table.getItems<Category>();
                     }
 
+                    Category getCategory(const size_t row) const
+                    {
+                        return table.getItem<Category>(row);
+                    }
+
+                    bool isSelectedEditable() const
+                    {
+                        return table.selectedRows().size() == 1;
+                    }
+
+                    Category getSelectedCategory() const
+                    {
+                        const auto rows = table.selectedRows();
+
+                        if (rows.empty())
+                            return{};
+
+                        return table.getItem<Category>(rows[0]);
+                    }
+
                     void add(const Category &category)
                     {
-                        const std::string toOntoStr = (category.toOnto == ToOnto::TO) ? "To" : "Onto";
-
                         table.add(category.name, 
-                                  category.destination, 
-                                  toOntoStr);
+                                  ToOnto::toString(category.toOnto),
+                                  category.destination);
+                    }
+
+                    void set(const const Category &category, size_t row)
+                    {
+                        table.set(row,
+                                  category.name,
+                                  ToOnto::toString(category.toOnto),
+                                  category.destination);
+                    }
+
+                    bool categoryExists(const std::string &name) const
+                    {
+                        auto items = getCategories();
+
+                        return std::find_if(std::begin(items), std::end(items),
+                                            [&name](const Category &c)
+                                            {
+                                                return c.name == name;
+                                            }) != std::end(items);
+                    }
+
+                    void clear()
+                    {
+                        table.clear();
                     }
 
                 private:
