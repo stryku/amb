@@ -55,15 +55,14 @@ set (AMB_src_qt	${src_dir_qt}/main.cpp
 set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
 					
                     
-set (AMB_src 
+set (AMB_src
+            ${src_dir}/ui/modules/healer/HealRule.cpp
 					${src_dir}/Bot.cpp
 					${src_dir}/BotCore.cpp
 					${src_dir}/ConfigFromUiGenerator.cpp
                     
 					${src_dir}/Healer.cpp
-					${src_dir}/HealerRulesTable.cpp
                     
-					${src_dir}/HealRule.cpp
 					${src_dir}/ModulesManager.cpp
 					${src_dir}/Simulator.cpp
 					${src_dir}/TibiaFinder.cpp
@@ -75,6 +74,9 @@ set (AMB_inc
             ${inc_dir}/ui/modules/looter/LooterCategoriesTable.hpp
             ${inc_dir}/ui/modules/looter/Category.hpp
             ${inc_dir}/ui/modules/looter/ToOnto.hpp
+			
+            ${inc_dir}/ui/modules/healer/HealerRulesTable.hpp
+            ${inc_dir}/ui/modules/healer/HealRule.hpp
 
             ${inc_dir}/ui/controls/Table.hpp
 
@@ -91,9 +93,7 @@ set (AMB_inc
             ${inc_dir}/Configs.hpp
             
             ${inc_dir}/Healer.hpp
-            ${inc_dir}/HealerRulesTable.hpp
             
-            ${inc_dir}/HealRule.hpp
             ${inc_dir}/ModuleId.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp

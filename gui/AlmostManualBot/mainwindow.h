@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "TibiaFinder.hpp"
-#include "HealerRulesTable.hpp"
+#include "ui/modules/healer/HealerRulesTable.hpp"
 #include "ModuleId.hpp"
 #include "ui/UiControls.hpp"
 
@@ -37,7 +37,7 @@ public:
     AMB::Ui::Controls::Healer getHealer() const;
     AMB::Ui::Controls::GlobalControls getControls() const;
 
-    const HealerRulesTable& getHealerRulesTable() const;
+    const AMB::Ui::Modules::Healer::HealerRulesTable& getHealerRulesTable() const;
 
     void setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
@@ -63,9 +63,15 @@ private slots:
     void on_pushButtonLooterCategoriesEdit_clicked();
     void on_pushButtonLooterCategoriesClear_clicked();
 
+    void on_pushButtonHealerEdit_clicked();
+
+    void on_pushButtonHealerUp_clicked();
+
+    void on_pushButtonHealerDown_clicked();
+
 private:
     Ui::MainWindow *ui;
-    std::unique_ptr<HealerRulesTable> healerRulesTable;
+    std::unique_ptr<AMB::Ui::Modules::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<AMB::Ui::Modules::Looter::LooterCategoriesTable> looterCategoriesTable;
     std::function<bool(AMB::Modules::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;

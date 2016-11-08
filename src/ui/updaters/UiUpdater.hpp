@@ -5,7 +5,6 @@
 #include "ui/UiControls.hpp"
 
 #include <QLineEdit>
-#include <HealerRulesTable.hpp>
 
 namespace AMB
 {

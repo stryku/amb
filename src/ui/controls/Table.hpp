@@ -6,6 +6,7 @@
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QList>
+#include <QHeaderView>
 
 #include <array>
 #include <unordered_set>
@@ -26,6 +27,8 @@ namespace AMB
                 {
                     createModel();
                     view->setSelectionBehavior(QAbstractItemView::SelectRows);
+                    view->horizontalHeader()->setDragEnabled(true);
+                    view->horizontalHeader()->setDragDropMode(QAbstractItemView::InternalMove);
                 }
 
                 void clear()
@@ -80,6 +83,14 @@ namespace AMB
                 }
 
                 template <typename Type>
+                Type getAndRemoveItem(const size_t row) const
+                {
+                    const auto item = getItem<Type>(row);
+                    model->removeRow(row);
+                    return item;
+                }
+
+                template <typename Type>
                 std::vector<Type> getItems() const
                 {
                     int rowCount = model->rowCount();
@@ -120,7 +131,6 @@ namespace AMB
 
                     view->resizeColumnsToContents();
                 }
-
 
                 QTableView *view;
                 QStandardItemModel *model;

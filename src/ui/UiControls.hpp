@@ -1,7 +1,20 @@
 #pragma once
 
 class QLineEdit;
-class HealerRulesTable;
+
+namespace AMB
+{
+    namespace Ui
+    {
+        namespace Modules
+        {
+            namespace Healer
+            {
+                class HealerRulesTable;
+            }
+        }
+    }
+}
 
 namespace AMB
 {
@@ -22,7 +35,7 @@ namespace AMB
 
             struct Healer
             {
-                HealerRulesTable *healerRulesTable;
+                AMB::Ui::Modules::Healer::HealerRulesTable *healerRulesTable;
             };
 
             struct GlobalControls

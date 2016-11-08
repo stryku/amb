@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    healerRulesTable = std::make_unique<HealerRulesTable>(ui->tableHealerRules);
+    healerRulesTable = std::make_unique<AMB::Ui::Modules::Healer::HealerRulesTable>(ui->tableHealerRules);
     looterCategoriesTable = std::make_unique<AMB::Ui::Modules::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
 
     updateTibiaClientsComboBox();
@@ -58,11 +58,11 @@ void MainWindow::on_btnHealerAddRule_clicked()
 
     auto hotkey = hotkeyCombo->currentIndex();
 
-    healerRulesTable->add( minHeal,
-                           maxHeal,
-                           minMana,
-                           maxMana,
-                           hotkey );
+    healerRulesTable->add(minHeal,
+                          maxHeal,
+                          minMana,
+                          maxMana,
+                          hotkey);
 }
 
 void MainWindow::on_btnHealerClear_clicked()
@@ -163,7 +163,7 @@ AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
 }
 
 
-const HealerRulesTable& MainWindow::getHealerRulesTable() const
+const AMB::Ui::Modules::Healer::HealerRulesTable& MainWindow::getHealerRulesTable() const
 {
     return *( healerRulesTable.get() );
 }
@@ -304,7 +304,7 @@ void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
 {
     if (looterCategoriesTable->isSelectedEditable())
     {
-        const auto category = looterCategoriesTable->getSelectedCategory();
+        const auto category = looterCategoriesTable->getSelectedCategoryForEdit();
 
         ui->editLooterCategoriesNewCategorName->setText(QString::fromStdString(category.name));
         ui->editLooterCategoriesNewCategoryDestination->setText(QString::fromStdString(category.destination));
@@ -313,6 +313,21 @@ void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
 }
 
 void MainWindow::on_pushButtonLooterCategoriesClear_clicked()
+{
+    looterCategoriesTable->clear();
+}
+
+void MainWindow::on_pushButtonHealerEdit_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonHealerUp_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonHealerDown_clicked()
 {
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HealRule.hpp"
+#include "ui/modules/healer/HealRule.hpp"
 #include "Module.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
@@ -22,11 +22,9 @@ namespace AMB
                 const Configs::HealerConfig &config;
                 const Configs::AdvancedSettings &advancedSettings;
 
-                void executeRule( const HealRule &rule );
+                void executeRule( const AMB::Modules::Heal::HealRule &rule );
 
                 void runDetails();
-
-
 
             public:
                 Healer(const Configs::HealerConfig &config,

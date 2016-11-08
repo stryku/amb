@@ -6,7 +6,7 @@ namespace AMB
     {
         namespace Heal
         {
-            void Healer::executeRule(const HealRule &rule)
+            void Healer::executeRule(const AMB::Modules::Heal::HealRule &rule)
             {
                 simulator.hotkey(rule.hotkey, { static_cast<size_t>(advancedSettings.healer.sleepAfterHotkey.from),
                                                 static_cast<size_t>(advancedSettings.healer.sleepAfterHotkey.to) });

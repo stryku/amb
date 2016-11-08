@@ -33,14 +33,14 @@ namespace AMB
                         return table.selectedRows().size() == 1;
                     }
 
-                    Category getSelectedCategory() const
+                    Category getSelectedCategoryForEdit() const
                     {
                         const auto rows = table.selectedRows();
 
                         if (rows.empty())
                             return{};
 
-                        return table.getItem<Category>(rows[0]);
+                        return table.getAndRemoveItem<Category>(rows[0]);
                     }
 
                     void add(const Category &category)

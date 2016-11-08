@@ -1,7 +1,7 @@
 #pragma once
 
 #include "utils.hpp"
-#include "HealRule.hpp"
+#include "ui/modules/healer/HealRule.hpp"
 #include "utils/Structs.hpp"
 #include "utils/PropertyTreeBuilder.hpp"
 

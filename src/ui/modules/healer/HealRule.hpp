@@ -14,6 +14,31 @@ namespace AMB
                 size_t minHp, maxHp, minMana, maxMana;
                 Utils::Hotkey hotkey;
 
+                HealRule() = default;
+                HealRule(size_t minHp,
+                         size_t &maxHp,
+                         size_t &minMana,
+                         size_t &maxMana,
+                         Utils::Hotkey hotkey)
+                    : minHp{ minHp }
+                    , maxHp{ maxHp }
+                    , minMana{ minMana }
+                    , maxMana{ maxMana }
+                    , hotkey{ hotkey }
+                {}
+
+                HealRule(const std::string &minHp,
+                         const std::string &maxHp,
+                         const std::string &minMana,
+                         const std::string &maxMana,
+                         const std::string &hotkey)
+                    : minHp{ std::stoul(minHp) }
+                    , maxHp{ std::stoul(maxHp) }
+                    , minMana{ std::stoul(minMana) }
+                    , maxMana{ std::stoul(maxMana) }
+                    , hotkey{ Utils::stdStringToHotkey(hotkey) }
+                {}
+
                 bool passed( size_t characterHp, size_t characterMana ) const;
                 void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
                 {

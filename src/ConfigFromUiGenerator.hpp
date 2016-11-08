@@ -18,7 +18,7 @@ namespace AMB
         {
         public:
             ConfigFromUiGenerator( const MainWindow *mainWindow,
-                                   const HealerRulesTable &healerRulesTable );
+                                   const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable );
 
             void regenerate();
 
@@ -31,7 +31,7 @@ namespace AMB
 
         private:
             const MainWindow *mainWindow;
-            const HealerRulesTable &healerRulesTable;
+            const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable;
             AMB::Configs::GlobalConfig config;
 
             void regenerateHealer();

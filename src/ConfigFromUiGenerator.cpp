@@ -6,7 +6,7 @@ namespace AMB
     namespace Configs
     {
         ConfigFromUiGenerator::ConfigFromUiGenerator(const MainWindow *mainWindow,
-                                                     const HealerRulesTable &healerRulesTable) :
+                                                     const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable) :
             mainWindow(mainWindow),
             healerRulesTable(healerRulesTable)
         {}
