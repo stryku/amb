@@ -45,16 +45,12 @@ void MainWindow::on_btnRefreshClientsComboBox_clicked()
 
 void MainWindow::on_btnHealerAddRule_clicked()
 {
-    const auto minHealEdit = ui->editHealerMinHp;
-    const auto maxHealEdit = ui->editHealerMaxHp;
-    const auto minManaEdit = ui->editHealerMinMana;
-    const auto maxManaEdit = ui->editHealerMaxMana;
     const auto hotkeyCombo = ui->cbHealerHotkey;
 
-    size_t minHeal = minHealEdit->text().toUInt();
-    size_t maxHeal = maxHealEdit->text().toUInt();
-    size_t minMana = minManaEdit->text().toUInt();
-    size_t maxMana = maxManaEdit->text().toUInt();
+    size_t minHeal = ui->spinBoxHealerMinHp->value();
+    size_t maxHeal = ui->spinBoxHealerMaxHp->value();
+    size_t minMana = ui->spinBoxHealerMinMana->value();
+    size_t maxMana = ui->spinBoxHealerMaxMana->value();
 
     if (minHeal >= maxHeal || minMana >= maxMana)
     {
@@ -329,10 +325,10 @@ void MainWindow::on_pushButtonHealerEdit_clicked()
     {
         const auto rule = healerRulesTable->getSelectedForEdit();
 
-        ui->editHealerMinHp->setText(QString::number(rule.minHp));
-        ui->editHealerMaxHp->setText(QString::number(rule.maxHp));
-        ui->editHealerMinMana->setText(QString::number(rule.minMana));
-        ui->editHealerMaxMana->setText(QString::number(rule.maxMana));
+        ui->spinBoxHealerMinHp->setValue(rule.minHp);
+        ui->spinBoxHealerMaxHp->setValue(rule.maxHp);
+        ui->spinBoxHealerMinMana->setValue(rule.minMana);
+        ui->spinBoxHealerMaxMana->setValue(rule.maxMana);
         ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(AMB::Utils::hotkeyToSize_t(rule.hotkey)));
     }
 }

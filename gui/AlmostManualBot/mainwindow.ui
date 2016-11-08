@@ -62,21 +62,11 @@
          <rect>
           <x>375</x>
           <y>50</y>
-          <width>111</width>
+          <width>116</width>
           <height>250</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Min HP (min == 0)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="editHealerMinHp"/>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -84,8 +74,19 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLineEdit" name="editHealerMaxHp"/>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Min HP (min == 0)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Hotkey</string>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_3">
@@ -94,23 +95,10 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLineEdit" name="editHealerMinMana"/>
-         </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
             <string>Max Mana (max == 87)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLineEdit" name="editHealerMaxMana"/>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Hotkey</string>
            </property>
           </widget>
          </item>
@@ -182,6 +170,46 @@
           <widget class="QPushButton" name="btnHealerAddRule">
            <property name="text">
             <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMinHp">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>89</number>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMinMana">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMaxHp">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMaxMana">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
            </property>
           </widget>
          </item>
