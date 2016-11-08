@@ -102,6 +102,27 @@ namespace AMB
                     return ret;
                 }
 
+                void moveSelectedRowByOffset(int offset)
+                {
+                    const auto selected = selectedRows();
+
+                    if (selected.size() == 1)
+                    {
+                        const auto row = selected.front();
+                        int newRow = row + offset;
+                        
+                        if (newRow >= 0 && newRow < model->rowCount())
+                        {
+                            const auto rowItem = model->takeRow(row);
+                            if (row < newRow - offset)
+                                ++newRow;
+
+                            model->insertRow(newRow, rowItem);
+                            view->selectRow(newRow);
+                        }
+                    }
+                }
+
             private:
                 template <typename Type, size_t ...Columns>
                 Type getItemImpl(const size_t row, std::index_sequence<Columns...>) const

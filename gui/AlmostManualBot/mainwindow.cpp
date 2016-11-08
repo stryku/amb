@@ -56,6 +56,12 @@ void MainWindow::on_btnHealerAddRule_clicked()
     size_t minMana = minManaEdit->text().toUInt();
     size_t maxMana = maxManaEdit->text().toUInt();
 
+    if (minHeal >= maxHeal || minMana >= maxMana)
+    {
+        QMessageBox::information(this, "Error", "This rule is invalid.", QMessageBox::Ok);
+        return;
+    }
+
     auto hotkey = hotkeyCombo->currentIndex();
 
     healerRulesTable->add(minHeal,
@@ -319,15 +325,25 @@ void MainWindow::on_pushButtonLooterCategoriesClear_clicked()
 
 void MainWindow::on_pushButtonHealerEdit_clicked()
 {
+    if (healerRulesTable->isSelectedEditable())
+    {
+        const auto rule = healerRulesTable->getSelectedForEdit();
 
+        ui->editHealerMinHp->setText(QString::number(rule.minHp));
+        ui->editHealerMaxHp->setText(QString::number(rule.maxHp));
+        ui->editHealerMinMana->setText(QString::number(rule.minMana));
+        ui->editHealerMaxMana->setText(QString::number(rule.maxMana));
+        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(AMB::Utils::hotkeyToSize_t(rule.hotkey)));
+    }
 }
 
 void MainWindow::on_pushButtonHealerUp_clicked()
 {
-
+    healerRulesTable->moveSelectedRowByOffset(-1);
 }
 
 void MainWindow::on_pushButtonHealerDown_clicked()
 {
+    healerRulesTable->moveSelectedRowByOffset(1);
 
 }
