@@ -20,7 +20,7 @@ namespace AMB
 
                     std::vector<Category> getCategories() const
                     {
-                        return table.getItems<Category>();
+                        return table.getAll<Category>();
                     }
 
                     Category getCategory(const size_t row) const

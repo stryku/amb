@@ -7,12 +7,16 @@
 #include "ui/UiControls.hpp"
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
+#include "ui/modules/looter/LooterItemsTable.hpp"
+
+#include "db/Database.hpp"
 
 
 #include <QMainWindow>
 #include <QCheckBox>
 #include <QtGlobal>
 #include <QDebug>
+#include <QCompleter>
 
 #include <memory>
 #include <functional>
@@ -28,7 +32,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow( QWidget *parent = 0 );
+    explicit MainWindow(const AMB::Db::Database &db, QWidget *parent = 0);
     ~MainWindow();
 
     const Ui::MainWindow* getUi() const;
@@ -48,31 +52,40 @@ public:
     std::wstring getTibiaWindowTitle() const;
 
 private slots:
-    void on_btnRefreshClientsComboBox_clicked();
-    void on_btnHealerAddRule_clicked();
-    void on_btnHealerClear_clicked();
     void on_checkBoxHealerRun_clicked();
     void on_cbTibiaClients_currentIndexChanged(const QString &arg1);
     void on_refreshLayoutButton_clicked();
+
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
     void on_actionSave_as_triggered();
     void on_actionSave_triggered();
 
+    void on_pushButtonHealerEdit_clicked();
+    void on_pushButtonHealerUp_clicked();
+    void on_pushButtonHealerDown_clicked();
+    void on_btnRefreshClientsComboBox_clicked();
+    void on_btnHealerAddRule_clicked();
+    void on_btnHealerClear_clicked();
+
     void on_pushButtonLooterCategoriesNewCategoryAdd_clicked();
     void on_pushButtonLooterCategoriesEdit_clicked();
     void on_pushButtonLooterCategoriesClear_clicked();
-
-    void on_pushButtonHealerEdit_clicked();
-
-    void on_pushButtonHealerUp_clicked();
-
-    void on_pushButtonHealerDown_clicked();
+    void on_pushButtonLooterItemsEdit_clicked();
+    void on_pushButtonLooterItemsClear_clicked();
+    void on_pushButtonLooterItemsAdd_clicked();
 
 private:
     Ui::MainWindow *ui;
+
+    QCompleter *itemsCompleter;
+
+    const AMB::Db::Database &db;
+
     std::unique_ptr<AMB::Ui::Modules::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<AMB::Ui::Modules::Looter::LooterCategoriesTable> looterCategoriesTable;
+    std::unique_ptr<AMB::Ui::Modules::Looter::LooterItemsTable> looterItemsTable;
+
     std::function<bool(AMB::Modules::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;

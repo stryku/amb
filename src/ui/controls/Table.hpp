@@ -91,7 +91,7 @@ namespace AMB
                 }
 
                 template <typename Type>
-                std::vector<Type> getItems() const
+                std::vector<Type> getAll() const
                 {
                     int rowCount = model->rowCount();
                     std::vector<Type> ret;

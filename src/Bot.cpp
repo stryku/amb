@@ -3,11 +3,11 @@
 
 namespace AMB
 {
-    Bot::Bot(int &argc, char *argv[]) :
-        application(argc, argv),
-        configFromUiGenerator(&window,
-                              window.getHealerRulesTable()),
-        botCore(configFromUiGenerator.getConfigs())
+    Bot::Bot(int &argc, char *argv[])
+        : application(argc, argv)
+        , configFromUiGenerator(&window, window.getHealerRulesTable())
+        , botCore(configFromUiGenerator.getConfigs())
+        , window{ db }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());

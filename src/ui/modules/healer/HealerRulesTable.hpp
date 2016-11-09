@@ -24,7 +24,7 @@ namespace AMB
 
                     std::vector<HealRule> getRules() const
                     {
-                        return getItems<HealRule>();
+                        return getAll<HealRule>();
                     }
 
                     HealRule get(const size_t row) const

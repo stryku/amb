@@ -7,16 +7,30 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+#include <algorithm>
+
+MainWindow::MainWindow(const AMB::Db::Database &db, QWidget *parent)
+    : QMainWindow(parent)
+    , ui{ new Ui::MainWindow }
+    , db{ db }
 {
     ui->setupUi(this);
 
     healerRulesTable = std::make_unique<AMB::Ui::Modules::Healer::HealerRulesTable>(ui->tableHealerRules);
     looterCategoriesTable = std::make_unique<AMB::Ui::Modules::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
-
+    looterItemsTable = std::make_unique<AMB::Ui::Modules::Looter::LooterItemsTable>(ui->tableLooterItems);
+    
     updateTibiaClientsComboBox();
+    QStringList strList;
+
+    strList.reserve(db.items.size());
+
+    for (const auto &item : db.items.getNames())
+        strList << QString::fromStdString(item);
+
+    itemsCompleter = new QCompleter(strList, this);
+    itemsCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->editLooterItemsItem->setCompleter(itemsCompleter);
 }
 
 MainWindow::~MainWindow()
@@ -300,6 +314,12 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
     category.toOnto = ui->comboBoxLooterCategoriesToOnto->currentIndex();
 
     looterCategoriesTable->add(category);
+
+    ui->comboBoxLooterItemsCategories->clear();
+
+    const auto categories = looterCategoriesTable->getCategories();
+    for (const auto &cat : categories)
+        ui->comboBoxLooterItemsCategories->addItem(QString::fromStdString(cat.name));
 }
 
 void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
@@ -342,4 +362,31 @@ void MainWindow::on_pushButtonHealerDown_clicked()
 {
     healerRulesTable->moveSelectedRowByOffset(1);
 
+}
+
+void MainWindow::on_pushButtonLooterItemsEdit_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonLooterItemsClear_clicked()
+{
+    looterItemsTable->clear();
+}
+
+void MainWindow::on_pushButtonLooterItemsAdd_clicked()
+{
+    const auto itemName = ui->editLooterItemsItem->text().toStdString();
+
+    if (!db.items.get(itemName).isValid())
+    {
+        auto msg = QString("Item '%1' doesn't exist.").arg(itemName.c_str());
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    const size_t categoryIdx = ui->comboBoxLooterItemsCategories->currentIndex();
+    const auto category = looterCategoriesTable->getCategory(categoryIdx);
+
+    looterItemsTable->add({ itemName, category.name });
 }

@@ -3,6 +3,7 @@
 #include "BotCore.hpp"
 #include "ConfigFromUiGenerator.hpp"
 #include "ui/updaters/UiUpdater.hpp"
+#include "db/Database.hpp"
 
 #include "mainwindow.h"
 
@@ -51,6 +52,7 @@ private:
     AMB::Configs::ConfigFromUiGenerator configFromUiGenerator;
     AMB::Ui::Updaters::UiUpdater uiUpdater;
     AMB::BotCore botCore;
+    const AMB::Db::Database db;
 };
 
 }
