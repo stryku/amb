@@ -361,12 +361,38 @@ void MainWindow::on_pushButtonHealerUp_clicked()
 void MainWindow::on_pushButtonHealerDown_clicked()
 {
     healerRulesTable->moveSelectedRowByOffset(1);
-
 }
 
 void MainWindow::on_pushButtonLooterItemsEdit_clicked()
 {
+    if (!looterItemsTable->isSelectedEditable())
+        return;
 
+    const auto item = looterItemsTable->getSelectedForEdit();
+    const auto categories = looterCategoriesTable->getCategories();
+
+    const auto it = std::find_if(std::begin(categories), std::end(categories),
+                                 [&item](const AMB::Ui::Modules::Looter::Category &category)
+                                 {
+                                     return item.category == category.name;
+                                 });
+
+    bool setCombobox{ true };
+
+    if (it == std::end(categories))
+    {
+        auto msg = QString("Category '%1' doesn't exist anymore.").arg(item.name.c_str());
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        setCombobox = false;
+    }
+
+    ui->editLooterItemsItem->setText(QString::fromStdString(item.name));
+
+    if (setCombobox)
+    {
+        const auto idx = std::distance(std::begin(categories), it);
+        ui->comboBoxLooterItemsCategories->setCurrentIndex(static_cast<int>(idx));
+    }
 }
 
 void MainWindow::on_pushButtonLooterItemsClear_clicked()
@@ -382,6 +408,12 @@ void MainWindow::on_pushButtonLooterItemsAdd_clicked()
     {
         auto msg = QString("Item '%1' doesn't exist.").arg(itemName.c_str());
         QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    if (ui->comboBoxLooterItemsCategories->count() == 0)
+    {
+        QMessageBox::information(this, "Error", "Create at least one category in the 'Categories' tab.", QMessageBox::Ok);
         return;
     }
 
