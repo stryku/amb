@@ -28,6 +28,29 @@ namespace AMB
                     {
                         return !name.empty();
                     }
+
+                    auto toPtree() const
+                    {
+                        Utils::PropertyTreeBuilder builder;
+
+                        const auto elements =
+                        {
+                            Utils::PtreeElement<>{ "name", name },
+                            Utils::PtreeElement<>{ "category", category },
+                        };
+
+                        return builder.addElements(elements).buildTree();
+                    }
+
+                    static LootItem fromPtree(boost::property_tree::ptree &tree)
+                    {
+                        LootItem item;
+
+                        item.name = tree.get_child("name").get_value<std::string>();
+                        item.category = tree.get_child("category").get_value<std::string>();
+
+                        return item;
+                    }
                 };
             }
         }

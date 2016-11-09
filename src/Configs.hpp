@@ -5,6 +5,9 @@
 #include "utils/Structs.hpp"
 #include "utils/PropertyTreeBuilder.hpp"
 
+#include "ui/modules/looter/Category.hpp"
+#include "ui/modules/looter/LootItem.hpp"
+
 #include <vector>
 #include <iostream>
 
@@ -83,12 +86,67 @@ namespace AMB
             }
         };
 
+        struct Looter
+        {
+            std::vector<AMB::Ui::Modules::Looter::Category> categories;
+            std::vector<AMB::Ui::Modules::Looter::LootItem> items;
+
+            auto toPtree() const
+            {
+                Utils::PropertyTreeBuilder builder;
+
+                if (categories.empty())
+                    builder.addElement(Utils::PtreeElement<>{"categories", ""});
+                else
+                {
+                    for (const auto& category : categories)
+                    {
+                        auto tree = category.toPtree();
+                        builder.addTree("categories.category", tree);
+                    }
+                }
+
+                if (items.empty())
+                    builder.addElement(Utils::PtreeElement<>{"items", ""});
+                else
+                {
+                    for (const auto& item : items)
+                    {
+                        auto tree = item.toPtree();
+                        builder.addTree("items.item", tree);
+                    }
+                }
+
+                return builder.buildTree();
+            }
+
+            static Looter fromPtree(boost::property_tree::ptree &tree)
+            {
+                Looter healer;
+
+                for (auto &child : tree.get_child("categories"))
+                {
+                    const auto cat = AMB::Ui::Modules::Looter::Category::fromPtree(child.second);
+                    healer.categories.emplace_back(cat);
+                }
+
+                for (auto &child : tree.get_child("items"))
+                {
+                    const auto rule = AMB::Ui::Modules::Looter::LootItem::fromPtree(child.second);
+                    healer.items.emplace_back(rule);
+                }
+
+                return healer;
+            }
+        };
+
         struct GlobalConfig
         {
             DWORD pid;
             HWND hwnd;
             HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
+            Looter looter;
 
             std::string toString() const
             {
@@ -98,6 +156,7 @@ namespace AMB
                 
                 builder.addTree("amb.healer_config", healerConfig.toPtree());
                 advancedSettings.toPropertyTreeBuilder(builder, "amb.advanced_settings");
+                builder.addTree("amb.looter", looter.toPtree());
 
                 return builder.build();
             }
@@ -112,6 +171,7 @@ namespace AMB
 
                 ret.healerConfig = HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
                 ret.advancedSettings = AdvancedSettings::fromPtree(tree.get_child("amb.advanced_settings"));
+                ret.looter = Looter::fromPtree(tree.get_child("amb.looter"));
 
                 return ret;
             }

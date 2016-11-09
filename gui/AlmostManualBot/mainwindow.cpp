@@ -181,7 +181,17 @@ AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
 
 const AMB::Ui::Modules::Healer::HealerRulesTable& MainWindow::getHealerRulesTable() const
 {
-    return *( healerRulesTable.get() );
+    return *(healerRulesTable.get());
+}
+
+const AMB::Ui::Modules::Looter::LooterCategoriesTable& MainWindow::getLooterCategoriesTable() const
+{
+    return *(looterCategoriesTable.get());
+}
+
+const AMB::Ui::Modules::Looter::LooterItemsTable& MainWindow::getLooterItemsTable() const
+{
+    return *(looterItemsTable.get());
 }
 
 void MainWindow::setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler )

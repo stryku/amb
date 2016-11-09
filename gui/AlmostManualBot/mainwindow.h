@@ -42,6 +42,8 @@ public:
     AMB::Ui::Controls::GlobalControls getControls() const;
 
     const AMB::Ui::Modules::Healer::HealerRulesTable& getHealerRulesTable() const;
+    const AMB::Ui::Modules::Looter::LooterCategoriesTable& getLooterCategoriesTable() const;
+    const AMB::Ui::Modules::Looter::LooterItemsTable& getLooterItemsTable() const;
 
     void setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);

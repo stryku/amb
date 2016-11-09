@@ -5,7 +5,7 @@ namespace AMB
 {
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
-        , configFromUiGenerator(&window, window.getHealerRulesTable())
+        , configFromUiGenerator(&window, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable())
         , botCore(configFromUiGenerator.getConfigs())
         , window{ db }
     {

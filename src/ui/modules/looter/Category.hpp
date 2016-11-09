@@ -23,6 +23,31 @@ namespace AMB
                         , destination{ destination }
                     {}
 
+                    auto toPtree() const
+                    {
+                        Utils::PropertyTreeBuilder builder;
+
+                        const auto elements =
+                        {
+                            Utils::PtreeElement<>{ "name", name },
+                            Utils::PtreeElement<>{ "to_onto", ToOnto::toString(toOnto) },
+                            Utils::PtreeElement<>{ "destination", destination },
+                        };
+
+                        return builder.addElements(elements).buildTree();
+                    }
+
+                    static Category fromPtree(boost::property_tree::ptree &tree)
+                    {
+                        Category category;
+
+                        category.name = tree.get_child("name").get_value<std::string>();
+                        category.destination = tree.get_child("destination").get_value<std::string>();
+                        category.toOnto = ToOnto::fromString(tree.get_child("destination").get_value<std::string>());
+
+                        return category;
+                    }
+
                     std::string name;
                     ToOnto::Type toOnto{ ToOnto::To };
                     std::string destination;

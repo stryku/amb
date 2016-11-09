@@ -6,9 +6,13 @@ namespace AMB
     namespace Configs
     {
         ConfigFromUiGenerator::ConfigFromUiGenerator(const MainWindow *mainWindow,
-                                                     const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable) :
-            mainWindow(mainWindow),
-            healerRulesTable(healerRulesTable)
+                                                     const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable,
+                                                     const AMB::Ui::Modules::Looter::LooterCategoriesTable &looterCategoriesTable,
+                                                     const AMB::Ui::Modules::Looter::LooterItemsTable &looterItemsTable)
+            : mainWindow{ mainWindow }
+            , healerRulesTable{ healerRulesTable }
+            , looterCategoriesTable{ looterCategoriesTable }
+            , looterItemsTable{ looterItemsTable }
         {}
 
         void ConfigFromUiGenerator::regenerate()
@@ -28,6 +32,7 @@ namespace AMB
             switch (moduleId)
             {
                 case Modules::ModuleId::MOD_HEALER: regenerateHealer();
+                case Modules::ModuleId::MOD_LOOTER: regenerateLooter();
             }
         }
 
@@ -37,6 +42,13 @@ namespace AMB
         {
             qDebug("regenerating healer config");
             config.healerConfig.rules = healerRulesTable.getRules();
+        }
+        
+        void ConfigFromUiGenerator::regenerateLooter()
+        {
+            qDebug("regenerating looter config");
+            config.looter.categories = looterCategoriesTable.getCategories();
+            config.looter.items = looterItemsTable.getItems();
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()

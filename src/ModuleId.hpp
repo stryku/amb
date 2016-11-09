@@ -8,6 +8,7 @@ namespace AMB
         {
             BEGIN,
             MOD_HEALER,
+            MOD_LOOTER,
             END
         };
     }
