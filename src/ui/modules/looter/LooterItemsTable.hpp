@@ -70,6 +70,17 @@ namespace AMB
                                    item.name,
                                    item.category);
                     }
+
+                    bool itemExists(const std::string &name) const
+                    {
+                        auto items = getItems();
+
+                        return std::find_if(std::begin(items), std::end(items),
+                                            [&name](const LootItem &item)
+                                            {
+                                                return item.name == name;
+                                            }) != std::end(items);
+                    }
                 };
             }
         }

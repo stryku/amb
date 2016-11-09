@@ -158,6 +158,17 @@ AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
     return controls;
 }
 
+AMB::Ui::Controls::Looter MainWindow::getLotterControls() const
+{
+    AMB::Ui::Controls::Looter controls;
+
+    controls.looterCategoriesTable = looterCategoriesTable.get();
+    controls.looterItemsTable = looterItemsTable.get();
+    controls.categoriesCombobox = ui->comboBoxLooterItemsCategories;
+
+    return controls;
+}
+
 
 AMB::Ui::Controls::Healer MainWindow::getHealer() const
 {
@@ -174,6 +185,7 @@ AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
 
     controls.healer = getHealer();
     controls.advancedSettings = getAdvancedSettings();
+    controls.looter = getLotterControls();
 
     return controls;
 }
@@ -324,12 +336,6 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
     category.toOnto = ui->comboBoxLooterCategoriesToOnto->currentIndex();
 
     looterCategoriesTable->add(category);
-
-    ui->comboBoxLooterItemsCategories->clear();
-
-    const auto categories = looterCategoriesTable->getCategories();
-    for (const auto &cat : categories)
-        ui->comboBoxLooterItemsCategories->addItem(QString::fromStdString(cat.name));
 }
 
 void MainWindow::on_pushButtonLooterCategoriesEdit_clicked()
@@ -427,8 +433,30 @@ void MainWindow::on_pushButtonLooterItemsAdd_clicked()
         return;
     }
 
+    if (looterItemsTable->itemExists(itemName))
+    {
+        auto msg = QString("Item '%1' is already on the list.").arg(itemName.c_str());
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
     const size_t categoryIdx = ui->comboBoxLooterItemsCategories->currentIndex();
     const auto category = looterCategoriesTable->getCategory(categoryIdx);
 
     looterItemsTable->add({ itemName, category.name });
+}
+
+
+void MainWindow::on_tabWidgetLooter_currentChanged(int index)
+{
+    const size_t LooterItemsTabIdx = 1;
+
+    if (index == LooterItemsTabIdx)
+    {
+        ui->comboBoxLooterItemsCategories->clear();
+
+        const auto categories = looterCategoriesTable->getCategories();
+        for (const auto &cat : categories)
+            ui->comboBoxLooterItemsCategories->addItem(QString::fromStdString(cat.name));
+    }
 }

@@ -77,6 +77,7 @@ namespace AMB
         void ConfigFromUiGenerator::regenerateAllModules()
         {
             regenerateModule(Modules::ModuleId::MOD_HEALER);
+            regenerateModule(Modules::ModuleId::MOD_LOOTER);
         }
 
         void ConfigFromUiGenerator::loadConfigFromString(const std::string &str)
@@ -84,6 +85,7 @@ namespace AMB
             auto newConfig = AMB::Configs::GlobalConfig::fromString(str);
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
+            config.looter = newConfig.looter;
         }
     }
 }

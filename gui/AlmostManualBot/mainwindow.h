@@ -38,6 +38,7 @@ public:
     const Ui::MainWindow* getUi() const;
     AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
     AMB::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
+    AMB::Ui::Controls::Looter getLotterControls() const;
     AMB::Ui::Controls::Healer getHealer() const;
     AMB::Ui::Controls::GlobalControls getControls() const;
 
@@ -76,6 +77,9 @@ private slots:
     void on_pushButtonLooterItemsEdit_clicked();
     void on_pushButtonLooterItemsClear_clicked();
     void on_pushButtonLooterItemsAdd_clicked();
+
+
+    void on_tabWidgetLooter_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;

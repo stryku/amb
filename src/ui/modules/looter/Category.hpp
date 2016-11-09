@@ -43,7 +43,7 @@ namespace AMB
 
                         category.name = tree.get_child("name").get_value<std::string>();
                         category.destination = tree.get_child("destination").get_value<std::string>();
-                        category.toOnto = ToOnto::fromString(tree.get_child("destination").get_value<std::string>());
+                        category.toOnto = ToOnto::fromString(tree.get_child("to_onto").get_value<std::string>());
 
                         return category;
                     }
