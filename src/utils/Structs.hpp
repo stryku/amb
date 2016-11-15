@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PropertyTreeBuilder.hpp"
+
 #include <cstdint>
 
 namespace AMB

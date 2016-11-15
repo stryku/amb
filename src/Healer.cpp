@@ -1,5 +1,7 @@
 #include "Healer.hpp"
 
+#include "capture/DeadCreatureWindowFinder.hpp"
+
 namespace AMB
 {
     namespace Modules
@@ -38,6 +40,18 @@ namespace AMB
                     }
                 }
 
+                auto windows = reader.getDeadCreaturesWindows();
+
+                if (!windows.empty())
+                {
+                    int a = 22;
+                    a += 2;
+
+                    auto items = reader.readItemWindow(windows[0]);
+                    a += 2;
+
+                }
+
                 std::this_thread::sleep_until(sleepTo);
             }
 
@@ -45,6 +59,7 @@ namespace AMB
                            const Configs::AdvancedSettings &advancedSettings,
                            Simulate::Simulator &simulator)
                 : Module{ simulator }
+                , reader{ items }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
             {}

@@ -57,6 +57,11 @@ set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
                     
 set (AMB_src
             ${src_dir}/ui/modules/healer/HealRule.cpp
+            ${src_dir}/ui/modules/looter/Items.cpp
+            ${src_dir}/capture/DeadCreatureWindowFinder.cpp
+            ${src_dir}/capture/ItemCapturer.cpp
+            ${src_dir}/capture/ItemsWindowReader.cpp
+            
 					${src_dir}/Bot.cpp
 					${src_dir}/BotCore.cpp
 					${src_dir}/ConfigFromUiGenerator.cpp

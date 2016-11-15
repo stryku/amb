@@ -6,6 +6,7 @@
 #include <array>
 
 #include <Windows.h>
+#include "cexpr/crypto.hpp"
 
 namespace AMB
 {
@@ -32,7 +33,7 @@ namespace AMB
             }
 
             template <size_t N>
-            bool operator==(const std::array<Rgba, N> &pixelsArray)
+            bool operator==(const std::array<Rgba, N> &pixelsArray) const
             {
                 return N == pixels.size() &&
                     std::memcmp(pixels.data(), pixelsArray.data(), N * sizeof(Rgba)) == 0;
@@ -43,9 +44,14 @@ namespace AMB
                 pixels.resize(w*h);
             }
 
-            void* pixelsPtr()
+            void* pixelsPtr() 
             {
                 return &pixels[0];
+            }
+
+            const void* cpixelsPtr() const
+            {
+                return pixels.data();
             }
 
             void toCb() const
@@ -108,6 +114,14 @@ namespace AMB
                         img.pixels.emplace_back(cpixel(base.x + x, base.y - y));
 
                 return img;
+            }
+
+            auto hash() const
+            {
+                const auto begin = static_cast<const uint8_t*>(cpixelsPtr());
+                const auto end = begin + (sizeof(Rgba) * pixels.size());
+
+                return cexpr::hash(begin, end);
             }
         };
     }

@@ -4,6 +4,7 @@
 #include "Module.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
+#include "db/Items.hpp"
 
 #include <chrono>
 
@@ -16,7 +17,7 @@ namespace AMB
             class Healer : public Module
             {
             private:
-
+                Db::Items items;
                 Readers::details::TibiaReader reader;
 
                 const Configs::HealerConfig &config;

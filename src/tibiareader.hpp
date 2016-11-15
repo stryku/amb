@@ -3,6 +3,9 @@
 #include "screencapturer.hpp"
 #include "tibiascreenreader.hpp"
 #include "config/layout/HealthHeartConfig.hpp"
+#include "capture/DeadCreatureWindowFinder.hpp"
+#include "db/Items.hpp"
+#include "capture/ItemsWindowReader.hpp"
 
 #include <cassert>
 
@@ -17,9 +20,11 @@ namespace AMB
             class TibiaReader
             {
             public:
-                TibiaReader(HWND tibiaWindowHandle = NULL)
+                TibiaReader(const Db::Items &itemsDb, HWND tibiaWindowHandle = NULL)
                     : reader{ screen, heartLayoutConfig }
                     , screenCapturer{ screen }
+                    , deadCreatureWindowsFinder{ screen }
+                    , itemsWindowReader{ screen, itemsDb }
                     , tibiaWindowHandle{ tibiaWindowHandle }
                 {}
 
@@ -57,10 +62,22 @@ namespace AMB
                     return reader.findHeart();
                 }
 
+                auto getDeadCreaturesWindows() const
+                {
+                    return deadCreatureWindowsFinder.find();
+                }
+
+                auto readItemWindow(const Pos &pos) const
+                {
+                    return itemsWindowReader.read(pos);
+                }
+
             private:
                 Layout::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;
                 TibiaScreenReader reader;
+                Capture::DeadCreatureWindowFinder deadCreatureWindowsFinder;
+                Capture::ItemsWindowReader itemsWindowReader;
                 ScreenCapturer screenCapturer;
                 HWND tibiaWindowHandle;
             };

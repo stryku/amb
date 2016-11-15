@@ -14,6 +14,8 @@ namespace AMB
         class Items
         {
         public:
+            static const size_t BadId{ static_cast<size_t>(-1) };
+
             struct Item
             {
                 std::string name;
@@ -27,8 +29,11 @@ namespace AMB
 
             Items();
 
+            bool isThisEmpty(size_t id) const;
+
             Item get(size_t id) const;
             Item get(const std::string &name) const;
+            size_t getIdByHash(const cexpr::hash_t &hash) const;
 
             std::vector<std::string> getNames() const;
 
@@ -39,6 +44,7 @@ namespace AMB
 
         private:
             std::map<std::string, size_t> map;
+            std::map<cexpr::hash_t, size_t> hashMap;
         };
     }
 }

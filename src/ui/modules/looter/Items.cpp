@@ -7622,7 +7622,7 @@ namespace
         ,{ 12401565851975578598 }
         ,{ 7491107276446273638 }
         ,{ 12349051745133545476 }
-        ,{ 11876655800301230214 }
+        //,{ 11876655800301230214 }
         }
     },
         DbItem
@@ -13566,12 +13566,20 @@ namespace AMB
         Items::Items()
         {
             for (size_t i = 0; i < ItemsDb.size(); ++i)
+            {
                 map[ItemsDb[i].name] = i;
+
+                for (size_t j = 0; j < ItemsDb[i].hashes.size(); ++j)
+                {
+                    const auto hash = ItemsDb[i].hashes[j];
+                    hashMap[hash] = i;
+                }
+            }
         }
 
         Items::Item Items::get(size_t id) const
         {
-            if (id >= ItemsDb.size())
+            if (id == BadId || id >= ItemsDb.size())
                 return{};
 
             return ItemsDb[id];
@@ -13598,6 +13606,23 @@ namespace AMB
             return ret;
         }
 
+        size_t Items::getIdByHash(const cexpr::hash_t &hash) const
+        {
+            const auto it = hashMap.find(hash);
+
+            if (it == std::end(hashMap))
+                return BadId;
+
+            const auto id = it->second;
+            return id;
+        }
+
+        bool Items::isThisEmpty(size_t id) const
+        {
+            const cexpr::hash_t emptyHash{ 11876655800301230214 };
+
+            return ItemsDb[id].hashes[0] == emptyHash;
+        }
     }
 }
 
