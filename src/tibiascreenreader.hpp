@@ -34,7 +34,7 @@ namespace AMB
 
                 size_t isHearthVisible() const
                 {
-                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
+                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1;
                     return screen.getSprite(x,
                                             heartConfig.y,
                                             Layout::HealthHeartConfig::size.w, 
@@ -43,7 +43,7 @@ namespace AMB
 
                 bool findHeart()
                 {
-                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight - 1;
+                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1;
 
                     qDebug("TibiaScreenReader refinding heart. Before: %d, %d", x, heartConfig.y);
 
