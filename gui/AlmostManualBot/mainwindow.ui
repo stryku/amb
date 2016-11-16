@@ -41,7 +41,7 @@
     <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabHealer">
        <attribute name="title">
@@ -422,7 +422,7 @@
              <string>Clear</string>
             </property>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>0</x>
@@ -566,6 +566,57 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBoxAdvancedSettingsCommon">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>10</y>
+          <width>111</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Common</string>
+        </property>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>91</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="labelAdvancedSettingsCaptureMode">
+            <property name="text">
+             <string>Capture mode</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxAdvancedSettingsCaptureMode">
+            <item>
+             <property name="text">
+              <string>Only covered</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Only not covered</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Smart</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </widget>
      </widget>
