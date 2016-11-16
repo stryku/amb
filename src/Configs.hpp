@@ -7,6 +7,7 @@
 
 #include "ui/modules/looter/Category.hpp"
 #include "ui/modules/looter/LootItem.hpp"
+#include "capture/CaptureMode.hpp"
 
 #include <vector>
 #include <iostream>
@@ -69,10 +70,16 @@ namespace AMB
                 FromTo sleepAfterHotkey;
             } healer;
 
+            struct
+            {
+                Capture::Mode captureMode;
+            } common;
+
             void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
             {
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.rand_between_checks");
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
+                common.captureMode.toPropertyTreeBuilder(builder, path + ".common");
             }
 
             static AdvancedSettings fromPtree(boost::property_tree::ptree &tree)
@@ -81,6 +88,8 @@ namespace AMB
 
                 ret.healer.randBetweenChecks = FromTo::fromPtree(tree.get_child("healer.rand_between_checks"));
                 ret.healer.sleepAfterHotkey = FromTo::fromPtree(tree.get_child("healer.sleep_after_hotkey"));
+
+                ret.common.captureMode = Capture::Mode::fromPtree(tree.get_child("common"));
 
                 return ret;
             }

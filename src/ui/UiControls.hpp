@@ -38,6 +38,11 @@ namespace AMB
                         QLineEdit *from, *to;
                     }betweenChecks, sleepAfterHotkey;
                 } healer;
+
+                struct Common
+                {
+                    QComboBox *captureMode;
+                } common;
             };
 
             struct Healer

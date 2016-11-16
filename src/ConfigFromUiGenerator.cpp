@@ -1,6 +1,8 @@
 #include "ConfigFromUiGenerator.hpp"
 #include <mainwindow.h>
 
+#include <QComboBox>
+
 namespace AMB
 {
     namespace Configs
@@ -59,6 +61,10 @@ namespace AMB
                 Utils::getFromToFromEdits(healerSettingsControls.betweenChecks),
                 Utils::getFromToFromEdits(healerSettingsControls.sleepAfterHotkey)
             };
+
+            const auto commonSettingsControls = mainWindow->getAdvancedSettingsCommon();
+            const auto selected = static_cast<size_t>(commonSettingsControls.captureMode->currentIndex());
+            config.advancedSettings.common.captureMode.fromSize_t(selected);
         }
 
 

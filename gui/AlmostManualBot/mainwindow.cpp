@@ -149,6 +149,15 @@ AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHeale
     return healer;
 }
 
+AMB::Ui::Controls::AdvancedSettings::Common MainWindow::getAdvancedSettingsCommon() const
+{
+    AMB::Ui::Controls::AdvancedSettings::Common config;
+
+    config.captureMode = ui->comboBoxAdvancedSettingsCaptureMode;
+
+    return config;
+}
+
 AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
 {
     AMB::Ui::Controls::AdvancedSettings controls;

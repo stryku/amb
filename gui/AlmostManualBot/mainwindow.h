@@ -37,6 +37,7 @@ public:
 
     const Ui::MainWindow* getUi() const;
     AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
+    AMB::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
     AMB::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
     AMB::Ui::Controls::Looter getLotterControls() const;
     AMB::Ui::Controls::Healer getHealer() const;

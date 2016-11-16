@@ -101,7 +101,7 @@ namespace AMB
                 CoveredWndCapturer screenCapturerCovered;
 
                 HWND tibiaWindowHandle;
-                bool isTibia11Mode{ false };
+                bool isTibia11Mode{ true };
             };
         }
     }

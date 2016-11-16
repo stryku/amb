@@ -77,7 +77,7 @@ namespace AMB
                 size_t getPercent(const HpManaInfo &info) const
                 {
                     size_t px{ 0 };
-                    const Pos base{ info.OffsetFromHeartX + screen.w - Layout::HealthHeartConfig::offsetFromRight - 1,
+                    const Pos base{ info.OffsetFromHeartX + screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1,
                                     info.offsetFromHeartY + heartConfig.y };
 
                     if (screen.cpixel(base.x, base.y) != info.firstPixel)
@@ -91,8 +91,8 @@ namespace AMB
                     return px;
                 }
 
-                static constexpr HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, 4 };
-                static constexpr HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, 17 };
+                static constexpr HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, 5 };
+                static constexpr HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, 18 };
                 const Graphics::Image &screen;
                 Layout::HealthHeartConfig &heartConfig;
             };

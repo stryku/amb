@@ -4,6 +4,8 @@
 #include "Configs.hpp"
 #include "utils/Structs.hpp"
 
+#include <QComboBox>
+
 namespace AMB
 {
     namespace Ui
@@ -27,6 +29,9 @@ namespace AMB
 
                     str = QString::fromStdString(utils::toString(advancedSettingsConfig.healer.sleepAfterHotkey.from));
                     controls.healer.sleepAfterHotkey.to->setText(str);
+
+                    const auto val = static_cast<int>(advancedSettingsConfig.common.captureMode.toSize_t());
+                    controls.common.captureMode->setCurrentIndex(val);
                 }
             };
         }
