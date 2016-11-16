@@ -6,10 +6,16 @@
 #include "capture/DeadCreatureWindowFinder.hpp"
 #include "db/Items.hpp"
 #include "capture/ItemsWindowReader.hpp"
+#include "capture/CoveredWindowCapturer.hpp"
+#include "capture/NotCoveredWindowCapturer.hpp"
+#include "capture/WindowCapturer.hpp"
+#include "screencapturer.hpp"
 
 #include <cassert>
 
 #include <QtDebug>
+
+#include <Windows.h>
 
 namespace AMB
 {
@@ -22,7 +28,6 @@ namespace AMB
             public:
                 TibiaReader(const Db::Items &itemsDb, HWND tibiaWindowHandle = NULL)
                     : reader{ screen, heartLayoutConfig }
-                    , screenCapturer{ screen }
                     , deadCreatureWindowsFinder{ screen }
                     , itemsWindowReader{ screen, itemsDb }
                     , tibiaWindowHandle{ tibiaWindowHandle }
@@ -41,7 +46,12 @@ namespace AMB
                 void newFrame()
                 {
                     assert(tibiaWindowHandle != NULL);
-                    screenCapturer.recapture(tibiaWindowHandle);
+
+                    if(isTibia11Mode)
+                        screenCapturerNotCovered.captureWindow(tibiaWindowHandle, screen);
+                    else
+                        screenCapturerCovered.captureWindow(tibiaWindowHandle, screen);
+
                     if (screen.w == 0 && screen.h == 0)
                         throw std::exception{ "Tibia window is minimalized!" };
                 }
@@ -72,14 +82,26 @@ namespace AMB
                     return itemsWindowReader.read(pos);
                 }
 
+                void setCaptureMode(bool tibia11 = false)
+                {
+                    isTibia11Mode = tibia11;
+                }
+
             private:
+                using CoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::CoveredWindowCapturer>;
+                using NotCoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::NotCoveredWindowCapturer>;
+
                 Layout::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;
                 TibiaScreenReader reader;
                 Capture::DeadCreatureWindowFinder deadCreatureWindowsFinder;
                 Capture::ItemsWindowReader itemsWindowReader;
-                ScreenCapturer screenCapturer;
+
+                NotCoveredWndCapturer screenCapturerNotCovered;
+                CoveredWndCapturer screenCapturerCovered;
+
                 HWND tibiaWindowHandle;
+                bool isTibia11Mode{ false };
             };
         }
     }

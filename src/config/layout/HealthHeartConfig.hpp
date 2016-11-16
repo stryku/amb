@@ -12,6 +12,7 @@ namespace AMB
         {
             static constexpr Size size = { 11,11 };
             static constexpr size_t offsetFromRight = 163;
+            static constexpr size_t offsetFromRight_11 = 166;
             size_t y{ 124 };
 
             static constexpr std::array<Rgba, size.w * size.h> pixels =
