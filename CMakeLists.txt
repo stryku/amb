@@ -82,14 +82,17 @@ set (AMB_inc
 			
             ${inc_dir}/ui/modules/healer/HealerRulesTable.hpp
             ${inc_dir}/ui/modules/healer/HealRule.hpp
-
+			
             ${inc_dir}/ui/controls/Table.hpp
+            ${inc_dir}/client/TibiaClientType.hpp
 
             ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp
-            ${inc_dir}/config/layout/HealthHeartConfig.hpp
+
+            ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
             ${inc_dir}/config/layout/LayoutConfig.hpp
+
             ${inc_dir}/graphics/Image.hpp
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/Bot.hpp

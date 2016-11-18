@@ -4,6 +4,7 @@ vs_project/
 vs_project/*
 gui/build*
 bin*
+*.user
 *.user.*
 build*
 *.cpp.*
