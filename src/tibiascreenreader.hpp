@@ -2,7 +2,7 @@
 
 #include "screencapturer.hpp"
 #include "utils/Structs.hpp"
-#include "config/layout/HealthHeartConfig.hpp"
+#include "config/layout/health_heart/HealthHeartConfig.hpp"
 #include "graphics/Image.hpp"
 
 #include <QtDebug>
@@ -17,7 +17,7 @@ namespace AMB
             {
             public:
                 TibiaScreenReader(const Graphics::Image &screen,
-                                  Layout::HealthHeartConfig &heartConfig)
+                                  Amb::Config::Layout::HealthHeart::HealthHeartConfig &heartConfig)
                     : screen{ screen }
                     , heartConfig{ heartConfig }
                 {}
@@ -34,24 +34,24 @@ namespace AMB
 
                 size_t isHearthVisible() const
                 {
-                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1;
+                    const auto x = screen.w - heartConfig.offsetFromRight - 1;
                     return screen.getSprite(x,
                                             heartConfig.y,
-                                            Layout::HealthHeartConfig::size.w, 
-                                            Layout::HealthHeartConfig::size.h) == heartConfig.pixels;
+                                            heartConfig.size.w,
+                                            heartConfig.size.h) == heartConfig.pixels;
                 }
 
                 bool findHeart()
                 {
-                    const auto x = screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1;
+                    const auto x = screen.w - heartConfig.offsetFromRight - 1;
 
                     qDebug("TibiaScreenReader refinding heart. Before: %d, %d", x, heartConfig.y);
 
                     for (size_t y = 0; y < screen.h - heartConfig.size.h; ++y)
                     {
                         if (screen.getSprite(x, y,
-                                             Layout::HealthHeartConfig::size.w,
-                                             Layout::HealthHeartConfig::size.h) == heartConfig.pixels)
+                                             heartConfig.size.w,
+                                             heartConfig.size.h) == heartConfig.pixels)
                         {
                             heartConfig.y = y;
                             qDebug("TibiaScreenReader heart found: %d, %d", x, heartConfig.y);
@@ -77,7 +77,7 @@ namespace AMB
                 size_t getPercent(const HpManaInfo &info) const
                 {
                     size_t px{ 0 };
-                    const Pos base{ info.OffsetFromHeartX + screen.w - Layout::HealthHeartConfig::offsetFromRight_11 - 1,
+                    const Pos base{ info.OffsetFromHeartX + screen.w - heartConfig.offsetFromRight - 1,
                                     info.offsetFromHeartY + heartConfig.y };
 
                     if (screen.cpixel(base.x, base.y) != info.firstPixel)
@@ -94,7 +94,7 @@ namespace AMB
                 static constexpr HpManaInfo hpInfo = { Rgba{ 79, 79, 211, 255 }, Rgba{ 79, 79, 219, 255 }, 5 };
                 static constexpr HpManaInfo manaInfo = { Rgba{ 211, 79, 82, 255 }, Rgba{ 218, 80, 83, 255 }, 18 };
                 const Graphics::Image &screen;
-                Layout::HealthHeartConfig &heartConfig;
+                Amb::Config::Layout::HealthHeart::HealthHeartConfig &heartConfig;
             };
         }
     }

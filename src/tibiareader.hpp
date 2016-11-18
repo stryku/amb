@@ -2,7 +2,6 @@
 
 #include "screencapturer.hpp"
 #include "tibiascreenreader.hpp"
-#include "config/layout/HealthHeartConfig.hpp"
 #include "capture/DeadCreatureWindowFinder.hpp"
 #include "db/Items.hpp"
 #include "capture/ItemsWindowReader.hpp"
@@ -10,6 +9,7 @@
 #include "capture/NotCoveredWindowCapturer.hpp"
 #include "capture/WindowCapturer.hpp"
 #include "screencapturer.hpp"
+#include "config/layout/health_heart/HealthHeartConfigFactory.hpp"
 
 #include <cassert>
 
@@ -27,7 +27,8 @@ namespace AMB
             {
             public:
                 TibiaReader(const Db::Items &itemsDb, HWND tibiaWindowHandle = NULL)
-                    : reader{ screen, heartLayoutConfig }
+                    : heartLayoutConfig{ Amb::Config::Layout::HealthHeart::Factory{}.create(Amb::Client::TibiaClientType::Tibia10) }
+                    , reader{ screen, heartLayoutConfig }
                     , deadCreatureWindowsFinder{ screen }
                     , itemsWindowReader{ screen, itemsDb }
                     , tibiaWindowHandle{ tibiaWindowHandle }
@@ -91,7 +92,7 @@ namespace AMB
                 using CoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::CoveredWindowCapturer>;
                 using NotCoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::NotCoveredWindowCapturer>;
 
-                Layout::HealthHeartConfig heartLayoutConfig;
+                Amb::Config::Layout::HealthHeart::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;
                 TibiaScreenReader reader;
                 Capture::DeadCreatureWindowFinder deadCreatureWindowsFinder;
