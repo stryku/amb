@@ -91,7 +91,7 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/UiUpdater.hpp
 
             ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
-            ${inc_dir}/config/layout/LayoutConfig.hpp
+            ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
 
             ${inc_dir}/graphics/Image.hpp
             ${inc_dir}/utils/Structs.hpp
