@@ -48,6 +48,7 @@ namespace AMB
                 bool findHeart()
                 {
                     const auto x = screen.w - heartConfig.offsetFromRight - 1;
+                    screen.toCb();
 
                     qDebug("TibiaScreenReader refinding heart. Before: %d, %d", x, heartConfig.y);
 
