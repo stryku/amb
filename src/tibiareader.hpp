@@ -91,6 +91,7 @@ namespace AMB
                 void setTibiaClientType(Amb::Client::TibiaClientType clientType)
                 {
                     heartLayoutConfig = Amb::Config::Layout::HealthHeart::Factory{}.create(clientType);
+                    setCaptureMode(clientType == Amb::Client::TibiaClientType::Tibia11);
                     reader.setTibiaClientType(clientType);
                 }
 
