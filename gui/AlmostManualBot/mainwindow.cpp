@@ -164,6 +164,7 @@ AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
     AMB::Ui::Controls::AdvancedSettings controls;
 
     controls.healer = getAdvancedSettingsHealer();
+    controls.common = getAdvancedSettingsCommon();
 
     return controls;
 }
