@@ -65,6 +65,8 @@ set (AMB_src
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
 
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
+
+            ${inc_dir}/client/TibiaClientType.cpp
             
 					${src_dir}/Bot.cpp
 					${src_dir}/BotCore.cpp

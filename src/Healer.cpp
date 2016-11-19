@@ -63,6 +63,13 @@ namespace AMB
                 , config{ config }
                 , advancedSettings{ advancedSettings }
             {}
+
+            void Healer::applyConfigs()
+            {
+                reader.setTibiaClientType(advancedSettings.common.clientType);
+            }
+
+
         }
     }
 }

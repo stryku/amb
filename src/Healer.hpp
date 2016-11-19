@@ -26,6 +26,7 @@ namespace AMB
                 void executeRule( const AMB::Modules::Heal::HealRule &rule );
 
                 void runDetails();
+                void applyConfigs();
 
             public:
                 Healer(const Configs::HealerConfig &config,

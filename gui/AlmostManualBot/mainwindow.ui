@@ -572,19 +572,19 @@
          <rect>
           <x>170</x>
           <y>10</y>
-          <width>111</width>
-          <height>71</height>
+          <width>131</width>
+          <height>121</height>
          </rect>
         </property>
         <property name="title">
          <string>Common</string>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
-           <y>20</y>
-           <width>91</width>
+           <y>70</y>
+           <width>111</width>
            <height>41</height>
           </rect>
          </property>
@@ -611,6 +611,44 @@
             <item>
              <property name="text">
               <string>Smart</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>111</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="labelAdvancedSettingsCommonTibiaClient">
+            <property name="text">
+             <string>Tibia client</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxAdvancedSettingsCommonTibiaClient">
+            <item>
+             <property name="text">
+              <string>Tibia 10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Tibia 11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Flash</string>
              </property>
             </item>
            </widget>

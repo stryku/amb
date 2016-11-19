@@ -63,8 +63,11 @@ namespace AMB
             };
 
             const auto commonSettingsControls = mainWindow->getAdvancedSettingsCommon();
-            const auto selected = static_cast<size_t>(commonSettingsControls.captureMode->currentIndex());
+            auto selected = static_cast<size_t>(commonSettingsControls.captureMode->currentIndex());
             config.advancedSettings.common.captureMode.fromSize_t(selected);
+
+            selected = static_cast<size_t>(commonSettingsControls.clientType->currentIndex());
+            config.advancedSettings.common.clientType = Amb::Client::fromSize_t(selected);
         }
 
 

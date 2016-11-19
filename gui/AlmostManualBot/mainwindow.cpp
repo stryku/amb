@@ -154,6 +154,7 @@ AMB::Ui::Controls::AdvancedSettings::Common MainWindow::getAdvancedSettingsCommo
     AMB::Ui::Controls::AdvancedSettings::Common config;
 
     config.captureMode = ui->comboBoxAdvancedSettingsCaptureMode;
+    config.clientType = ui->comboBoxAdvancedSettingsCommonTibiaClient;
 
     return config;
 }

@@ -32,6 +32,9 @@ namespace AMB
 
                     const auto val = static_cast<int>(advancedSettingsConfig.common.captureMode.toSize_t());
                     controls.common.captureMode->setCurrentIndex(val);
+                    ;
+                    const auto client = static_cast<int>(Amb::Client::toSize_t(advancedSettingsConfig.common.clientType));
+                    controls.common.clientType->setCurrentIndex(val);
                 }
             };
         }

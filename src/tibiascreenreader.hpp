@@ -23,8 +23,12 @@ namespace AMB
                                   Amb::Config::Layout::HealthHeart::HealthHeartConfig &heartConfig)
                     : screen{ screen }
                     , heartConfig{ heartConfig }
-                    , barsConfig{ Amb::Config::Layout::HealthManaBars::Factory{}.create(Amb::Client::TibiaClientType::Tibia10) }
                 {}
+
+                void setTibiaClientType(Amb::Client::TibiaClientType clientType)
+                {
+                    barsConfig = Amb::Config::Layout::HealthManaBars::Factory{}.create(clientType);
+                }
 
                 size_t getHpPercent() const
                 {

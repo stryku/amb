@@ -8,6 +8,7 @@ namespace AMB
         {
             try
             {
+                applyConfigs();
                 while (continueRun)
                     runDetails();
             }

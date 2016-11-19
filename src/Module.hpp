@@ -20,6 +20,7 @@ namespace AMB
 
             virtual void runDetails() = 0;
             virtual void runMethod();
+            virtual void applyConfigs() = 0;
 
         public:
             Module(Simulate::Simulator &simulator);

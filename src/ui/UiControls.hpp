@@ -42,6 +42,7 @@ namespace AMB
                 struct Common
                 {
                     QComboBox *captureMode;
+                    QComboBox *clientType;
                 } common;
             };
 

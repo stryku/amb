@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <iostream>
+#include "client/TibiaClientType.hpp"
 
 namespace AMB
 {
@@ -73,6 +74,7 @@ namespace AMB
             struct
             {
                 Capture::Mode captureMode;
+                Amb::Client::TibiaClientType clientType;
             } common;
 
             void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
@@ -80,6 +82,7 @@ namespace AMB
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.rand_between_checks");
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
                 common.captureMode.toPropertyTreeBuilder(builder, path + ".common");
+                Amb::Client::toPropertyTreeBuilder(builder, common.clientType, path + ".common");
             }
 
             static AdvancedSettings fromPtree(boost::property_tree::ptree &tree)
@@ -90,6 +93,7 @@ namespace AMB
                 ret.healer.sleepAfterHotkey = FromTo::fromPtree(tree.get_child("healer.sleep_after_hotkey"));
 
                 ret.common.captureMode = Capture::Mode::fromPtree(tree.get_child("common"));
+                ret.common.clientType = Amb::Client::fromPtree(tree.get_child("common"));
 
                 return ret;
             }

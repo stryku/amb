@@ -26,9 +26,9 @@ namespace AMB
             class TibiaReader
             {
             public:
-                TibiaReader(const Db::Items &itemsDb, HWND tibiaWindowHandle = NULL)
-                    : heartLayoutConfig{ Amb::Config::Layout::HealthHeart::Factory{}.create(Amb::Client::TibiaClientType::Tibia10) }
-                    , reader{ screen, heartLayoutConfig }
+                TibiaReader(const Db::Items &itemsDb, 
+                            HWND tibiaWindowHandle = NULL)
+                    : reader{ screen, heartLayoutConfig }
                     , deadCreatureWindowsFinder{ screen }
                     , itemsWindowReader{ screen, itemsDb }
                     , tibiaWindowHandle{ tibiaWindowHandle }
@@ -86,6 +86,12 @@ namespace AMB
                 void setCaptureMode(bool tibia11 = false)
                 {
                     isTibia11Mode = tibia11;
+                }
+
+                void setTibiaClientType(Amb::Client::TibiaClientType clientType)
+                {
+                    heartLayoutConfig = Amb::Config::Layout::HealthHeart::Factory{}.create(clientType);
+                    reader.setTibiaClientType(clientType);
                 }
 
             private:
