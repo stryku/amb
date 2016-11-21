@@ -19,6 +19,17 @@ set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
 set (HOST_LIBS_DIR "C:/moje/libs/lib/x86")
 set (HOST_INC_DIR "C:/moje/libs/include")
 
+
+option(MODULE_COMPILE_HEALER "compile healer module" ON)
+if (MODULE_COMPILE_HEALER)
+    add_definitions(-DMODULE_COMPILE_HEALER)
+endif()
+
+option(MODULE_COMPILE_LOOTER "compile looter module" ON)
+if (MODULE_COMPILE_LOOTER)
+    add_definitions(-DMODULE_COMPILE_LOOTER)
+endif()
+
 set(BOOST_ROOT C:/moje/libs/boost/boost_1_61_0)
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
