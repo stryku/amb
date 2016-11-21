@@ -1,10 +1,10 @@
-﻿#include "Module.hpp"
+﻿#include "ModuleCore.hpp"
 
 namespace AMB
 {
     namespace Modules
     {
-        void Module::runMethod()
+        void ModuleCore::runMethod()
         {
             try
             {
@@ -14,19 +14,19 @@ namespace AMB
             }
             catch (std::exception& e)
             {
-                qDebug("Module cought exception: %s", e.what());
+                qDebug("ModuleCore cought exception: %s", e.what());
             }
         }
 
-        Module::Module(Simulate::Simulator &simulator) :
+        ModuleCore::ModuleCore(Simulate::Simulator &simulator) :
             simulator( simulator )
         {}
-        Module::~Module()
+        ModuleCore::~ModuleCore()
         {
             stop();
         }
 
-        void Module::run()
+        void ModuleCore::run()
         {
             auto runLambda = [this] {runMethod(); };
 
@@ -35,7 +35,7 @@ namespace AMB
             runThread = std::make_unique<std::thread>( runLambda );
         }
 
-        void Module::stop()
+        void ModuleCore::stop()
         {
             continueRun = false;
 
@@ -43,7 +43,7 @@ namespace AMB
                 runThread->join();
         }
 
-        bool Module::isRunning() const
+        bool ModuleCore::isRunning() const
         {
             return continueRun;
         }

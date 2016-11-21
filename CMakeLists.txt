@@ -90,7 +90,7 @@ set (AMB_src
 					${src_dir}/TibiaFinder.cpp
 					${src_dir}/utils.cpp
                     
-					${src_dir}/Module.cpp)
+					${src_dir}/ModuleCore.cpp)
 					
 set (AMB_inc 
             ${inc_dir}/ui/modules/looter/LooterCategoriesTable.hpp
@@ -133,7 +133,7 @@ set (AMB_inc
             ${inc_dir}/TibiaScreenReader.hpp
             ${inc_dir}/utils.hpp
             
-            ${inc_dir}/Module.hpp)
+            ${inc_dir}/ModuleCore.hpp)
                      
                      
 set (AMB_hdr ${inc_dir_qt}/mainwindow.h)

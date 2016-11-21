@@ -58,7 +58,7 @@ namespace AMB
             Healer::Healer(const Configs::HealerConfig &config,
                            const Configs::AdvancedSettings &advancedSettings,
                            Simulate::Simulator &simulator)
-                : Module{ simulator }
+                : ModuleCore{ simulator }
                 , reader{ items }
                 , config{ config }
                 , advancedSettings{ advancedSettings }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ui/modules/healer/HealRule.hpp"
-#include "Module.hpp"
+#include "ModuleCore.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
 #include "db/Items.hpp"
@@ -14,7 +14,7 @@ namespace AMB
     {
         namespace Heal
         {
-            class Healer : public Module
+            class Healer : public ModuleCore
             {
             private:
                 Db::Items items;

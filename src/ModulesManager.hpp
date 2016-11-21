@@ -13,7 +13,7 @@ namespace AMB
         class ModulesManager
         {
         private:
-            std::map<ModuleId, std::unique_ptr<Module>> modules;
+            std::map<ModuleId, std::unique_ptr<ModuleCore>> modules;
 
         public:
             ModulesManager( const Configs::GlobalConfig &config,

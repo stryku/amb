@@ -10,7 +10,7 @@ namespace AMB
 {
     namespace Modules
     {
-        class Module
+        class ModuleCore
         {
         protected:
             std::unique_ptr<std::thread> runThread;
@@ -23,8 +23,8 @@ namespace AMB
             virtual void applyConfigs() = 0;
 
         public:
-            Module(Simulate::Simulator &simulator);
-            ~Module();
+            ModuleCore(Simulate::Simulator &simulator);
+            ~ModuleCore();
 
             void run();
             void stop();
