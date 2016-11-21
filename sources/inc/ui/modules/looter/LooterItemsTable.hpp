@@ -9,19 +9,19 @@ namespace
     const size_t NumberOfTableColumns = 2;
 }
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
-        namespace Modules
+        namespace Module
         {
             namespace Looter
             {
-                class LooterItemsTable : public AMB::Ui::Controls::Table<NumberOfTableColumns>
+                class LooterItemsTable : public Amb::Ui::Controls::Table<NumberOfTableColumns>
                 {
                 private:
-                    using ItemType = AMB::Ui::Modules::Looter::LootItem;
-                    using Table = AMB::Ui::Controls::Table<NumberOfTableColumns>;
+                    using ItemType = Amb::Ui::Module::Looter::LootItem;
+                    using Table = Amb::Ui::Controls::Table<NumberOfTableColumns>;
 
                 public:
                     LooterItemsTable(QTableView *view)

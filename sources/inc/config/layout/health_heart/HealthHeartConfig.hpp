@@ -15,11 +15,11 @@ namespace Amb
             {
                 struct HealthHeartConfig
                 {
-                    AMB::Size size;
+                    Amb::Size size;
                     size_t offsetFromRight;
                     size_t y;
 
-                    std::array<AMB::Rgba, Static::pixelsSize> pixels;
+                    std::array<Amb::Rgba, Static::pixelsSize> pixels;
                 };
             }
         }

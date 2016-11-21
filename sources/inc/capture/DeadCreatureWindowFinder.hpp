@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace AMB
+namespace Amb
 {
     namespace Graphics
     {

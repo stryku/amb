@@ -11,7 +11,7 @@
 #include <array>
 #include <unordered_set>
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {

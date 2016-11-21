@@ -3,7 +3,7 @@
 #include "utils/Structs.hpp"
 
 
-namespace AMB
+namespace Amb
 {
     namespace Graphics
     {

@@ -10,7 +10,7 @@
 
 #include <QtDebug>
 
-namespace AMB
+namespace Amb
 {
     namespace Readers
     {

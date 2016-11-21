@@ -1,7 +1,7 @@
 ﻿#include "Bot.hpp"
 #include <QMessageBox>
 
-namespace AMB
+namespace Amb
 {
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
@@ -23,7 +23,7 @@ namespace AMB
 
     Bot::ModuleToggleMethod Bot::getModuleToggleMethod()
     {
-        return [this](Modules::ModuleId module) { return toggleModule(module); };
+        return [this](Module::ModuleId module) { return toggleModule(module); };
     }
 
     Bot::TibiaWindowChangedHandler Bot::getTibiaWindowChangedHandler()
@@ -42,7 +42,7 @@ namespace AMB
     }
 
 
-    bool Bot::toggleModule( Modules::ModuleId modId )
+    bool Bot::toggleModule( Module::ModuleId modId )
     {
         if (botCore.getAttachedProcess() == NULL)
         {

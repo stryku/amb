@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         namespace Heal
         {

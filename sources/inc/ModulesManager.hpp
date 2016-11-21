@@ -6,9 +6,9 @@
 
 #include <map>
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         class ModulesManager
         {

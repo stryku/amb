@@ -1,8 +1,8 @@
 #pragma once
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         enum class ModuleId
         {

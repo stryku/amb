@@ -2,7 +2,7 @@
 
 #include "utils/PropertyTreeBuilder.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {
@@ -31,9 +31,9 @@ namespace AMB
             {
                 switch (mode)
                 {
-                    case AMB::Capture::Mode::CaptureMode::OnlyCovered: return 0;
-                    case AMB::Capture::Mode::CaptureMode::OnlyNotCovered: return 1;
-                    case AMB::Capture::Mode::CaptureMode::Smart: return 2;
+                    case Amb::Capture::Mode::CaptureMode::OnlyCovered: return 0;
+                    case Amb::Capture::Mode::CaptureMode::OnlyNotCovered: return 1;
+                    case Amb::Capture::Mode::CaptureMode::Smart: return 2;
 
                     default:
                         assert(false);
@@ -46,9 +46,9 @@ namespace AMB
 
                 switch (mode)
                 {
-                    case AMB::Capture::Mode::CaptureMode::OnlyCovered: str = "OnlyCovered"; break;
-                    case AMB::Capture::Mode::CaptureMode::OnlyNotCovered: str = "OnlyNotCovered"; break;
-                    case AMB::Capture::Mode::CaptureMode::Smart: str = "Smart"; break;
+                    case Amb::Capture::Mode::CaptureMode::OnlyCovered: str = "OnlyCovered"; break;
+                    case Amb::Capture::Mode::CaptureMode::OnlyNotCovered: str = "OnlyNotCovered"; break;
+                    case Amb::Capture::Mode::CaptureMode::Smart: str = "Smart"; break;
 
                     default:
                         assert(false);

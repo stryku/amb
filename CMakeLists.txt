@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8.12)
-project (AMB)
+project (Amb)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
@@ -86,16 +86,16 @@ add_library (AMBMocObjects OBJECT
     ${AMB_ui_moc}  
 )
 
-add_executable(AMB ${AMB_src_qt}
+add_executable(Amb ${AMB_src_qt}
 						  ${AMB_inc_qt}
 						  ${AMB_src}
 						  ${AMB_inc} 
 						  $<TARGET_OBJECTS:AMBMocObjects>)
 						  
-target_link_libraries (AMB Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
+target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
 
 
-install(TARGETS AMB DESTINATION  ${install_dir}/)
+install(TARGETS Amb DESTINATION  ${install_dir}/)
 install(
     DIRECTORY ${resources_dir}/
     DESTINATION ${install_dir}

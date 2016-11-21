@@ -7,7 +7,7 @@
 
 #include <thread>
 
-namespace AMB
+namespace Amb
 {
     namespace Simulate
     {

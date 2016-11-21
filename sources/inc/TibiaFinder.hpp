@@ -8,7 +8,7 @@
 #include <locale>
 #include <codecvt>
 
-namespace AMB
+namespace Amb
 {
     namespace Utils
     {

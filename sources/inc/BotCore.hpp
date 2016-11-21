@@ -7,22 +7,22 @@
 #include <vector>
 #include <functional>
 
-namespace AMB
+namespace Amb
 {
     class BotCore
     {
     private:
         DWORD attachedProcess{ NULL };
         Simulate::Simulator simulator;
-        Modules::ModulesManager modulesManager;
+        Module::ModulesManager modulesManager;
 
     public:
         BotCore( const Configs::GlobalConfig &config );
 
-        void startModule( Modules::ModuleId moduleId );
+        void startModule( Module::ModuleId moduleId );
         void attachNewProcess( DWORD pid );
-        void toggleModule( AMB::Modules::ModuleId modId );
-        bool isModuleRunning( Modules::ModuleId modId );
+        void toggleModule( Amb::Module::ModuleId modId );
+        bool isModuleRunning( Module::ModuleId modId );
         DWORD getAttachedProcess() const { return attachedProcess; }
     };
 }

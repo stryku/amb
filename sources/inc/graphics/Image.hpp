@@ -8,7 +8,7 @@
 #include <Windows.h>
 #include "cexpr/crypto.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Graphics
     {

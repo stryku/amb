@@ -27,7 +27,7 @@ namespace Amb
             }
         }
 
-        void toPropertyTreeBuilder(AMB::Utils::PropertyTreeBuilder &builder, TibiaClientType type, const std::string &path)
+        void toPropertyTreeBuilder(Amb::Utils::PropertyTreeBuilder &builder, TibiaClientType type, const std::string &path)
         {
             std::string str;
 
@@ -43,7 +43,7 @@ namespace Amb
 
             const auto elements =
             {
-                AMB::Utils::PtreeElement<>{ path + ".client_type", str }
+                Amb::Utils::PtreeElement<>{ path + ".client_type", str }
             };
 
             builder.addElements(elements);

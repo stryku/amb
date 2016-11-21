@@ -3,14 +3,14 @@
 
 #include <QComboBox>
 
-namespace AMB
+namespace Amb
 {
     namespace Configs
     {
         ConfigFromUiGenerator::ConfigFromUiGenerator(const MainWindow *mainWindow,
-                                                     const AMB::Ui::Modules::Healer::HealerRulesTable &healerRulesTable,
-                                                     const AMB::Ui::Modules::Looter::LooterCategoriesTable &looterCategoriesTable,
-                                                     const AMB::Ui::Modules::Looter::LooterItemsTable &looterItemsTable)
+                                                     const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
+                                                     const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
+                                                     const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable)
             : mainWindow{ mainWindow }
             , healerRulesTable{ healerRulesTable }
             , looterCategoriesTable{ looterCategoriesTable }
@@ -29,12 +29,12 @@ namespace AMB
             return config;
         }
 
-        void ConfigFromUiGenerator::regenerateModule(Modules::ModuleId moduleId)
+        void ConfigFromUiGenerator::regenerateModule(Module::ModuleId moduleId)
         {
             switch (moduleId)
             {
-                case Modules::ModuleId::MOD_HEALER: regenerateHealer();
-                case Modules::ModuleId::MOD_LOOTER: regenerateLooter();
+                case Module::ModuleId::MOD_HEALER: regenerateHealer();
+                case Module::ModuleId::MOD_LOOTER: regenerateLooter();
             }
         }
 
@@ -85,13 +85,13 @@ namespace AMB
 
         void ConfigFromUiGenerator::regenerateAllModules()
         {
-            regenerateModule(Modules::ModuleId::MOD_HEALER);
-            regenerateModule(Modules::ModuleId::MOD_LOOTER);
+            regenerateModule(Module::ModuleId::MOD_HEALER);
+            regenerateModule(Module::ModuleId::MOD_LOOTER);
         }
 
         void ConfigFromUiGenerator::loadConfigFromString(const std::string &str)
         {
-            auto newConfig = AMB::Configs::GlobalConfig::fromString(str);
+            auto newConfig = Amb::Configs::GlobalConfig::fromString(str);
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;

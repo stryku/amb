@@ -9,7 +9,7 @@
 
 #include <QLineEdit>
 
-namespace AMB
+namespace Amb
 {
     namespace Utils
     {

@@ -2,7 +2,7 @@
 
 #include "utils.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Layout
     {

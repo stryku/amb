@@ -1,13 +1,13 @@
 ﻿#include "BotCore.hpp"
 
-namespace AMB
+namespace Amb
 {
     BotCore::BotCore( const Configs::GlobalConfig &config ) :
         modulesManager( config,
                         simulator )
     {}
 
-    void BotCore::startModule( Modules::ModuleId moduleId )
+    void BotCore::startModule( Module::ModuleId moduleId )
     {
         modulesManager.run( moduleId );
     }
@@ -20,12 +20,12 @@ namespace AMB
         attachedProcess = pid;
     }
 
-    void BotCore::toggleModule( AMB::Modules::ModuleId modId )
+    void BotCore::toggleModule( Amb::Module::ModuleId modId )
     {
         modulesManager.toggle( modId );
     }
 
-    bool BotCore::isModuleRunning( Modules::ModuleId modId )
+    bool BotCore::isModuleRunning( Module::ModuleId modId )
     {
         return modulesManager.isRunning( modId );
     }

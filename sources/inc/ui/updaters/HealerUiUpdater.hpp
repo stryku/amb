@@ -5,7 +5,7 @@
 #include "utils/Structs.hpp"
 #include "ui/modules/healer/HealerRulesTable.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {

@@ -6,9 +6,9 @@
 #include <thread>
 #include <memory>
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         class ModuleCore
         {

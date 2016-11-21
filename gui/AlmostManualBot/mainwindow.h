@@ -32,22 +32,22 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(const AMB::Db::Database &db, QWidget *parent = 0);
+    explicit MainWindow(const Amb::Db::Database &db, QWidget *parent = 0);
     ~MainWindow();
 
     const Ui::MainWindow* getUi() const;
-    AMB::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
-    AMB::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
-    AMB::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
-    AMB::Ui::Controls::Looter getLotterControls() const;
-    AMB::Ui::Controls::Healer getHealer() const;
-    AMB::Ui::Controls::GlobalControls getControls() const;
+    Amb::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
+    Amb::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
+    Amb::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
+    Amb::Ui::Controls::Looter getLotterControls() const;
+    Amb::Ui::Controls::Healer getHealer() const;
+    Amb::Ui::Controls::GlobalControls getControls() const;
 
-    const AMB::Ui::Modules::Healer::HealerRulesTable& getHealerRulesTable() const;
-    const AMB::Ui::Modules::Looter::LooterCategoriesTable& getLooterCategoriesTable() const;
-    const AMB::Ui::Modules::Looter::LooterItemsTable& getLooterItemsTable() const;
+    const Amb::Ui::Module::Healer::HealerRulesTable& getHealerRulesTable() const;
+    const Amb::Ui::Module::Looter::LooterCategoriesTable& getLooterCategoriesTable() const;
+    const Amb::Ui::Module::Looter::LooterItemsTable& getLooterItemsTable() const;
 
-    void setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler );
+    void setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
     void setRefreshLayoutHandler(std::function<void()> newHandler);
     void setConfigProvider(std::function<std::string()> provider);
@@ -87,13 +87,13 @@ private:
 
     QCompleter *itemsCompleter;
 
-    const AMB::Db::Database &db;
+    const Amb::Db::Database &db;
 
-    std::unique_ptr<AMB::Ui::Modules::Healer::HealerRulesTable> healerRulesTable;
-    std::unique_ptr<AMB::Ui::Modules::Looter::LooterCategoriesTable> looterCategoriesTable;
-    std::unique_ptr<AMB::Ui::Modules::Looter::LooterItemsTable> looterItemsTable;
+    std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
+    std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;
+    std::unique_ptr<Amb::Ui::Module::Looter::LooterItemsTable> looterItemsTable;
 
-    std::function<bool(AMB::Modules::ModuleId)> moduleToggleHandler;
+    std::function<bool(Amb::Module::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;
     std::function<std::string()> configToSaveProvider;
@@ -102,9 +102,9 @@ private:
     void updateTibiaClientsComboBox();
     void toggleHealer();
     bool startModule( QCheckBox *moduleCheckBox,
-                      AMB::Modules::ModuleId modId );
+                      Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,
-                     AMB::Modules::ModuleId modId );
+                     Amb::Module::ModuleId modId );
 };
 
 #endif // MAINWINDOW_H

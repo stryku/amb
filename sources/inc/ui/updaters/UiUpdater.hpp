@@ -7,7 +7,7 @@
 
 #include <QLineEdit>
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {

@@ -1,5 +1,7 @@
 #include "module/Module.hpp"
 
+#include "ui_mainwindow.h"
+
 namespace Amb
 {
     namespace Module
@@ -9,10 +11,9 @@ namespace Amb
 
         }
 
-        void Module::hideUi()
+        void Module::hideUi(::Ui::MainWindow *ui)
         {
 
         }
-
     }
 }

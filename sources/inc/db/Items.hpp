@@ -7,7 +7,7 @@
 #include <map>
 #include <string>
 
-namespace AMB
+namespace Amb
 {
     namespace Db
     {

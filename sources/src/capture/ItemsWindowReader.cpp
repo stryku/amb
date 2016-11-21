@@ -1,7 +1,7 @@
 #include "capture/ItemsWindowReader.hpp"
 #include "graphics/Image.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {

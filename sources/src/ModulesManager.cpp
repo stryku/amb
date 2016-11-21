@@ -1,8 +1,8 @@
 ﻿#include "ModulesManager.hpp"
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         ModulesManager::ModulesManager( const Configs::GlobalConfig &config,
                                         Simulate::Simulator &simulator)

@@ -3,11 +3,11 @@
 #include "capture/WindowCapturer.hpp"
 #include "graphics/Image.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {
-        class NotCoveredWindowCapturer : AMB::Capture::WindowCapturer<NotCoveredWindowCapturer>
+        class NotCoveredWindowCapturer : Amb::Capture::WindowCapturer<NotCoveredWindowCapturer>
         {
         public:
             void captureWindowImpl(HWND windowHandle, const Rect &rc)

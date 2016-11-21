@@ -1,6 +1,6 @@
 ﻿#include "TibiaFinder.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Utils
     {

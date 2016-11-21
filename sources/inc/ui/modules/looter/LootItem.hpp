@@ -4,11 +4,11 @@
 
 #include <string>
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
-        namespace Modules
+        namespace Module
         {
             namespace Looter
             {

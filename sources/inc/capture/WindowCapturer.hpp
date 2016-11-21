@@ -6,7 +6,7 @@
 
 #include <type_traits>
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {

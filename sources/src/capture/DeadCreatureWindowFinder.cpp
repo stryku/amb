@@ -2,7 +2,7 @@
 #include "graphics/Image.hpp"
 #include "capture/ConstPixels.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {

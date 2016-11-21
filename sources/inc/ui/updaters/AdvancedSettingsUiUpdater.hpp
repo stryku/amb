@@ -6,7 +6,7 @@
 
 #include <QComboBox>
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {

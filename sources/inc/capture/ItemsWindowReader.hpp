@@ -4,7 +4,7 @@
 #include "capture/ItemCapturer.hpp"
 #include "db/Items.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Capture
     {

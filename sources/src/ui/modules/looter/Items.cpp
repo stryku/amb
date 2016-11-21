@@ -2,7 +2,7 @@
 
 namespace 
 {
-    using DbItem = AMB::Db::Items::Item;
+    using DbItem = Amb::Db::Items::Item;
     const std::array<DbItem, 1822> ItemsDb = {
         DbItem
     {
@@ -13559,7 +13559,7 @@ namespace
     };
 }
 
-namespace AMB
+namespace Amb
 {
     namespace Db
     {

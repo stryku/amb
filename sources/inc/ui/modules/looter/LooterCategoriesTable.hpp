@@ -3,11 +3,11 @@
 #include "ui/controls/Table.hpp"
 #include "ui/modules/looter/Category.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
-        namespace Modules
+        namespace Module
         {
             namespace Looter
             {
@@ -77,7 +77,7 @@ namespace AMB
                 private:
                     static const size_t NumberOfColumns = 3;
 
-                    AMB::Ui::Controls::Table<NumberOfColumns> table;
+                    Amb::Ui::Controls::Table<NumberOfColumns> table;
                 };
             }
         }

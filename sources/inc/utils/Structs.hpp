@@ -4,7 +4,7 @@
 
 #include <cstdint>
 
-namespace AMB
+namespace Amb
 {
     struct Pos
     {

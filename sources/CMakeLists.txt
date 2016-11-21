@@ -4,7 +4,6 @@ set (AMB_inc
             ${inc_dir}/ConfigFromUiGenerator.hpp
             ${inc_dir}/Configs.hpp
             ${inc_dir}/Healer.hpp
-            ${inc_dir}/ModuleCore.hpp
             ${inc_dir}/ModuleId.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp
@@ -40,6 +39,7 @@ set (AMB_inc
             ${inc_dir}/graphics/Image.hpp
             
             ${inc_dir}/module/Module.hpp
+            ${inc_dir}/module/ModuleCore.hpp
             
             ${inc_dir}/ui/UiControls.hpp
             
@@ -73,7 +73,6 @@ set (AMB_src
             ${src_dir}/BotCore.cpp
             ${src_dir}/ConfigFromUiGenerator.cpp
             ${src_dir}/Healer.cpp
-            ${src_dir}/ModuleCore.cpp
             ${src_dir}/ModulesManager.cpp
             ${src_dir}/Simulator.cpp
             ${src_dir}/TibiaFinder.cpp
@@ -90,6 +89,7 @@ set (AMB_src
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
             
             ${src_dir}/module/Module.cpp
+            ${src_dir}/module/ModuleCore.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             

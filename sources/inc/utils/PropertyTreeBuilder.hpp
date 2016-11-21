@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace AMB
+namespace Amb
 {
     namespace Utils
     {

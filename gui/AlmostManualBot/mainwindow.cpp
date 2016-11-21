@@ -9,16 +9,16 @@
 
 #include <algorithm>
 
-MainWindow::MainWindow(const AMB::Db::Database &db, QWidget *parent)
+MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     : QMainWindow(parent)
     , ui{ new Ui::MainWindow }
     , db{ db }
 {
     ui->setupUi(this);
 
-    healerRulesTable = std::make_unique<AMB::Ui::Modules::Healer::HealerRulesTable>(ui->tableHealerRules);
-    looterCategoriesTable = std::make_unique<AMB::Ui::Modules::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
-    looterItemsTable = std::make_unique<AMB::Ui::Modules::Looter::LooterItemsTable>(ui->tableLooterItems);
+    healerRulesTable = std::make_unique<Amb::Ui::Module::Healer::HealerRulesTable>(ui->tableHealerRules);
+    looterCategoriesTable = std::make_unique<Amb::Ui::Module::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
+    looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
     
     updateTibiaClientsComboBox();
     QStringList strList;
@@ -40,7 +40,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTibiaClientsComboBox()
 {
-    auto clientsTitles = AMB::Utils::TibiaFinder::findAllClientsTitles();
+    auto clientsTitles = Amb::Utils::TibiaFinder::findAllClientsTitles();
     auto comboBox = ui->cbTibiaClients;
 
     comboBox->clear();
@@ -91,12 +91,12 @@ void MainWindow::toggleHealer()
     if( !ui->checkBoxHealerRun->isChecked() )
     {
         stopModule( ui->checkBoxHealerRun,
-                    AMB::Modules::ModuleId::MOD_HEALER );
+                    Amb::Module::ModuleId::MOD_HEALER );
     }
     else
     {
         if (!startModule(ui->checkBoxHealerRun,
-                         AMB::Modules::ModuleId::MOD_HEALER))
+                         Amb::Module::ModuleId::MOD_HEALER))
         {
             ui->checkBoxHealerRun->setChecked(false);
         }
@@ -104,7 +104,7 @@ void MainWindow::toggleHealer()
 }
 
 bool MainWindow::startModule( QCheckBox *moduleCheckBox,
-                              AMB::Modules::ModuleId modId )
+                              Amb::Module::ModuleId modId )
 {
     if (moduleToggleHandler(modId))
     {
@@ -120,7 +120,7 @@ bool MainWindow::startModule( QCheckBox *moduleCheckBox,
 }
 
 void MainWindow::stopModule( QCheckBox *moduleCheckBox,
-                             AMB::Modules::ModuleId modId )
+                             Amb::Module::ModuleId modId )
 {
     auto p = moduleCheckBox->palette();
 
@@ -136,9 +136,9 @@ const Ui::MainWindow* MainWindow::getUi() const
     return ui;
 }
 
-AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHealer() const
+Amb::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHealer() const
 {
-    AMB::Ui::Controls::AdvancedSettings::Healer healer;
+    Amb::Ui::Controls::AdvancedSettings::Healer healer;
 
     healer.betweenChecks.from = ui->editRandBeetwenChecksFrom;
     healer.betweenChecks.to = ui->editRandBeetwenChecksTo;
@@ -149,9 +149,9 @@ AMB::Ui::Controls::AdvancedSettings::Healer MainWindow::getAdvancedSettingsHeale
     return healer;
 }
 
-AMB::Ui::Controls::AdvancedSettings::Common MainWindow::getAdvancedSettingsCommon() const
+Amb::Ui::Controls::AdvancedSettings::Common MainWindow::getAdvancedSettingsCommon() const
 {
-    AMB::Ui::Controls::AdvancedSettings::Common config;
+    Amb::Ui::Controls::AdvancedSettings::Common config;
 
     config.captureMode = ui->comboBoxAdvancedSettingsCaptureMode;
     config.clientType = ui->comboBoxAdvancedSettingsCommonTibiaClient;
@@ -159,9 +159,9 @@ AMB::Ui::Controls::AdvancedSettings::Common MainWindow::getAdvancedSettingsCommo
     return config;
 }
 
-AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
+Amb::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
 {
-    AMB::Ui::Controls::AdvancedSettings controls;
+    Amb::Ui::Controls::AdvancedSettings controls;
 
     controls.healer = getAdvancedSettingsHealer();
     controls.common = getAdvancedSettingsCommon();
@@ -169,9 +169,9 @@ AMB::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
     return controls;
 }
 
-AMB::Ui::Controls::Looter MainWindow::getLotterControls() const
+Amb::Ui::Controls::Looter MainWindow::getLotterControls() const
 {
-    AMB::Ui::Controls::Looter controls;
+    Amb::Ui::Controls::Looter controls;
 
     controls.looterCategoriesTable = looterCategoriesTable.get();
     controls.looterItemsTable = looterItemsTable.get();
@@ -181,18 +181,18 @@ AMB::Ui::Controls::Looter MainWindow::getLotterControls() const
 }
 
 
-AMB::Ui::Controls::Healer MainWindow::getHealer() const
+Amb::Ui::Controls::Healer MainWindow::getHealer() const
 {
-    AMB::Ui::Controls::Healer healer;
+    Amb::Ui::Controls::Healer healer;
 
     healer.healerRulesTable = healerRulesTable.get();
 
     return healer;
 }
 
-AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
+Amb::Ui::Controls::GlobalControls MainWindow::getControls() const
 {
-    AMB::Ui::Controls::GlobalControls controls;
+    Amb::Ui::Controls::GlobalControls controls;
 
     controls.healer = getHealer();
     controls.advancedSettings = getAdvancedSettings();
@@ -202,22 +202,22 @@ AMB::Ui::Controls::GlobalControls MainWindow::getControls() const
 }
 
 
-const AMB::Ui::Modules::Healer::HealerRulesTable& MainWindow::getHealerRulesTable() const
+const Amb::Ui::Module::Healer::HealerRulesTable& MainWindow::getHealerRulesTable() const
 {
     return *(healerRulesTable.get());
 }
 
-const AMB::Ui::Modules::Looter::LooterCategoriesTable& MainWindow::getLooterCategoriesTable() const
+const Amb::Ui::Module::Looter::LooterCategoriesTable& MainWindow::getLooterCategoriesTable() const
 {
     return *(looterCategoriesTable.get());
 }
 
-const AMB::Ui::Modules::Looter::LooterItemsTable& MainWindow::getLooterItemsTable() const
+const Amb::Ui::Module::Looter::LooterItemsTable& MainWindow::getLooterItemsTable() const
 {
     return *(looterItemsTable.get());
 }
 
-void MainWindow::setModuleToggleHandler( std::function<bool( AMB::Modules::ModuleId )> newHandler )
+void MainWindow::setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler )
 {
     moduleToggleHandler = newHandler;
 }
@@ -286,7 +286,7 @@ void MainWindow::on_actionOpen_triggered()
 
     if (!path.length() == 0)
     {
-        auto fileContent = AMB::Utils::readWholeFileIntoString(path.toStdString());
+        auto fileContent = Amb::Utils::readWholeFileIntoString(path.toStdString());
         configLoader(fileContent);
     }
 }
@@ -331,7 +331,7 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
 {
-    AMB::Ui::Modules::Looter::Category category;
+    Amb::Ui::Module::Looter::Category category;
 
     auto name = ui->editLooterCategoriesNewCategorName->text();
 
@@ -376,7 +376,7 @@ void MainWindow::on_pushButtonHealerEdit_clicked()
         ui->spinBoxHealerMaxHp->setValue(rule.maxHp);
         ui->spinBoxHealerMinMana->setValue(rule.minMana);
         ui->spinBoxHealerMaxMana->setValue(rule.maxMana);
-        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(AMB::Utils::hotkeyToSize_t(rule.hotkey)));
+        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(Amb::Utils::hotkeyToSize_t(rule.hotkey)));
     }
 }
 
@@ -399,7 +399,7 @@ void MainWindow::on_pushButtonLooterItemsEdit_clicked()
     const auto categories = looterCategoriesTable->getCategories();
 
     const auto it = std::find_if(std::begin(categories), std::end(categories),
-                                 [&item](const AMB::Ui::Modules::Looter::Category &category)
+                                 [&item](const Amb::Ui::Module::Looter::Category &category)
                                  {
                                      return item.category == category.name;
                                  });

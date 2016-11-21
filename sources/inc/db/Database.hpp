@@ -2,7 +2,7 @@
 
 #include "db/Items.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Db
     {

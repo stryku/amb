@@ -3,9 +3,9 @@
 #include "utils/PropertyTreeBuilder.hpp"
 #include "utils.hpp"
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         namespace Heal
         {

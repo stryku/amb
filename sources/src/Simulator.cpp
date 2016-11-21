@@ -1,7 +1,7 @@
 ﻿#include "Simulator.hpp"
 #include <QtDebug>
 
-namespace AMB
+namespace Amb
 {
     namespace Simulate
     {

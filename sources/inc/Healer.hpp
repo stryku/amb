@@ -1,16 +1,16 @@
 #pragma once
 
 #include "ui/modules/healer/HealRule.hpp"
-#include "ModuleCore.hpp"
+#include "module/ModuleCore.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
 #include "db/Items.hpp"
 
 #include <chrono>
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         namespace Heal
         {
@@ -23,7 +23,7 @@ namespace AMB
                 const Configs::HealerConfig &config;
                 const Configs::AdvancedSettings &advancedSettings;
 
-                void executeRule( const AMB::Modules::Heal::HealRule &rule );
+                void executeRule( const Amb::Module::Heal::HealRule &rule );
 
                 void runDetails();
                 void applyConfigs();

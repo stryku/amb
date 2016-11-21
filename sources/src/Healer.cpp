@@ -2,13 +2,13 @@
 
 #include "capture/DeadCreatureWindowFinder.hpp"
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         namespace Heal
         {
-            void Healer::executeRule(const AMB::Modules::Heal::HealRule &rule)
+            void Healer::executeRule(const Amb::Module::Heal::HealRule &rule)
             {
                 simulator.hotkey(rule.hotkey, { static_cast<size_t>(advancedSettings.healer.sleepAfterHotkey.from),
                                                 static_cast<size_t>(advancedSettings.healer.sleepAfterHotkey.to) });

@@ -10,12 +10,12 @@
 #include <QApplication>
 
 
-namespace AMB
+namespace Amb
 {
 class Bot
 {
 public:
-    using ModuleToggleMethod = std::function<bool(Modules::ModuleId)>;
+    using ModuleToggleMethod = std::function<bool(Module::ModuleId)>;
     using TibiaWindowChangedHandler = std::function<void(const std::wstring&)>;
     using ResetLayoutHandler = std::function<void()>;
     using ConfigProvider = std::function<std::string()>;
@@ -39,7 +39,7 @@ public:
     }
 
 private:
-    bool toggleModule( Modules::ModuleId modId );
+    bool toggleModule( Module::ModuleId modId );
     void tibiaWindowChanged( const std::wstring &newWindowTitle );
 
     ModuleToggleMethod getModuleToggleMethod();
@@ -49,10 +49,10 @@ private:
 
     QApplication application;
     MainWindow window;
-    AMB::Configs::ConfigFromUiGenerator configFromUiGenerator;
-    AMB::Ui::Updaters::UiUpdater uiUpdater;
-    AMB::BotCore botCore;
-    const AMB::Db::Database db;
+    Amb::Configs::ConfigFromUiGenerator configFromUiGenerator;
+    Amb::Ui::Updaters::UiUpdater uiUpdater;
+    Amb::BotCore botCore;
+    const Amb::Db::Database db;
 };
 
 }

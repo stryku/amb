@@ -3,11 +3,11 @@
 class QLineEdit;
 class QComboBox;
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
-        namespace Modules
+        namespace Module
         {
             namespace Healer
             {
@@ -23,7 +23,7 @@ namespace AMB
     }
 }
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
@@ -48,13 +48,13 @@ namespace AMB
 
             struct Healer
             {
-                AMB::Ui::Modules::Healer::HealerRulesTable *healerRulesTable;
+                Amb::Ui::Module::Healer::HealerRulesTable *healerRulesTable;
             };
 
             struct Looter
             {
-                AMB::Ui::Modules::Looter::LooterItemsTable *looterItemsTable;
-                AMB::Ui::Modules::Looter::LooterCategoriesTable *looterCategoriesTable;
+                Amb::Ui::Module::Looter::LooterItemsTable *looterItemsTable;
+                Amb::Ui::Module::Looter::LooterCategoriesTable *looterCategoriesTable;
                 QComboBox *categoriesCombobox;
             };
 

@@ -13,13 +13,13 @@
 #include <iostream>
 #include "client/TibiaClientType.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Configs
     {
         struct HealerConfig
         {
-            std::vector<Modules::Heal::HealRule> rules;
+            std::vector<Module::Heal::HealRule> rules;
 
             void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
             {
@@ -55,7 +55,7 @@ namespace AMB
 
                 for (auto &child : tree.get_child("heal_rules"))
                 {
-                    const auto rule = Modules::Heal::HealRule::fromPtree(child.second);
+                    const auto rule = Module::Heal::HealRule::fromPtree(child.second);
                     healer.rules.emplace_back(rule);
                 }
 
@@ -101,8 +101,8 @@ namespace AMB
 
         struct Looter
         {
-            std::vector<AMB::Ui::Modules::Looter::Category> categories;
-            std::vector<AMB::Ui::Modules::Looter::LootItem> items;
+            std::vector<Amb::Ui::Module::Looter::Category> categories;
+            std::vector<Amb::Ui::Module::Looter::LootItem> items;
 
             auto toPtree() const
             {
@@ -139,13 +139,13 @@ namespace AMB
 
                 for (auto &child : tree.get_child("categories"))
                 {
-                    const auto cat = AMB::Ui::Modules::Looter::Category::fromPtree(child.second);
+                    const auto cat = Amb::Ui::Module::Looter::Category::fromPtree(child.second);
                     healer.categories.emplace_back(cat);
                 }
 
                 for (auto &child : tree.get_child("items"))
                 {
-                    const auto rule = AMB::Ui::Modules::Looter::LootItem::fromPtree(child.second);
+                    const auto rule = Amb::Ui::Module::Looter::LootItem::fromPtree(child.second);
                     healer.items.emplace_back(rule);
                 }
 

@@ -17,7 +17,7 @@
 
 #include <Windows.h>
 
-namespace AMB
+namespace Amb
 {
     namespace Readers
     {
@@ -96,8 +96,8 @@ namespace AMB
                 }
 
             private:
-                using CoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::CoveredWindowCapturer>;
-                using NotCoveredWndCapturer = AMB::Capture::WindowCapturer<AMB::Capture::NotCoveredWindowCapturer>;
+                using CoveredWndCapturer = Amb::Capture::WindowCapturer<Amb::Capture::CoveredWindowCapturer>;
+                using NotCoveredWndCapturer = Amb::Capture::WindowCapturer<Amb::Capture::NotCoveredWindowCapturer>;
 
                 Amb::Config::Layout::HealthHeart::HealthHeartConfig heartLayoutConfig;
                 Graphics::Image screen;

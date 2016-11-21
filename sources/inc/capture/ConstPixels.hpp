@@ -4,7 +4,7 @@
 
 #include <array>
 
-namespace AMB
+namespace Amb
 {
     struct ConstPixels
     {

@@ -3,19 +3,19 @@
 #include "ui/controls/Table.hpp"
 #include "ui/modules/healer/HealRule.hpp"
 
-namespace AMB
+namespace Amb
 {
     namespace Ui
     {
-        namespace Modules
+        namespace Module
         {
             namespace Healer
             {
-                class HealerRulesTable : public AMB::Ui::Controls::Table<5>
+                class HealerRulesTable : public Amb::Ui::Controls::Table<5>
                 {
                 private:
-                    using HealRule = AMB::Modules::Heal::HealRule;
-                    using Table = AMB::Ui::Controls::Table<5>;
+                    using HealRule = Amb::Module::Heal::HealRule;
+                    using Table = Amb::Ui::Controls::Table<5>;
 
                 public:
                     HealerRulesTable(QTableView *view)

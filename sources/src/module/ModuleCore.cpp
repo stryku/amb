@@ -1,8 +1,8 @@
-﻿#include "ModuleCore.hpp"
+﻿#include "module/ModuleCore.hpp"
 
-namespace AMB
+namespace Amb
 {
-    namespace Modules
+    namespace Module
     {
         void ModuleCore::runMethod()
         {
