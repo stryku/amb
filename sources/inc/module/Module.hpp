@@ -18,7 +18,7 @@ namespace Amb
             void hideUi();
 
         private:
-            std::unique_ptr<ModuleCore> moduleCore;
+            //std::unique_ptr<ModuleCore> moduleCore;
             //std::unique_ptr<ModuleUiRemover> moduleUiRemover;
         };
     }
