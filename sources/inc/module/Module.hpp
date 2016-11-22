@@ -1,9 +1,9 @@
 #pragma once
-#include "module/ModuleCore.hpp"
 
 #include <memory>
 
-namespace Ui {
+namespace Ui 
+{
     class MainWindow;
 }
 

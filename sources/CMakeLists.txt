@@ -3,8 +3,6 @@ set (AMB_inc
             ${inc_dir}/BotCore.hpp
             ${inc_dir}/ConfigFromUiGenerator.hpp
             ${inc_dir}/Configs.hpp
-            ${inc_dir}/Healer.hpp
-            ${inc_dir}/ModuleId.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp
             ${inc_dir}/Simulator.hpp
@@ -40,6 +38,11 @@ set (AMB_inc
             
             ${inc_dir}/module/Module.hpp
             ${inc_dir}/module/ModuleCore.hpp
+            ${inc_dir}/module/ModuleCore.hpp
+            ${inc_dir}/module/ModulesFactory.hpp
+            
+            ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
+            
             
             ${inc_dir}/ui/UiControls.hpp
             
@@ -90,6 +93,9 @@ set (AMB_src
             
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
+            ${src_dir}/module/ModulesFactory.cpp
+            
+            ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             

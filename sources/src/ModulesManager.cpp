@@ -1,15 +1,19 @@
 ﻿#include "ModulesManager.hpp"
+#include "module/ModulesFactory.hpp"
+#include "Simulator.hpp"
 
 namespace Amb
 {
     namespace Module
     {
-        ModulesManager::ModulesManager( const Configs::GlobalConfig &config,
-                                        Simulate::Simulator &simulator)
-        {
+        ModulesManager::ModulesManager(const Configs::GlobalConfig &config,
+                                       Simulate::Simulator &simulator,
+                                       Amb::Module::Factory &modulesFactory)
+            : modules{ modulesFactory.create(config, simulator) }
+        {/*
             modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>(config.healerConfig,
                                                                            config.advancedSettings,
-                                                                           simulator );
+                                                                           simulator );*/
         }
 
         void ModulesManager::run( ModuleId modId )

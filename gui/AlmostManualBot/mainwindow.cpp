@@ -131,7 +131,7 @@ void MainWindow::stopModule( QCheckBox *moduleCheckBox,
     moduleToggleHandler( modId );
 }
 
-const Ui::MainWindow* MainWindow::getUi() const
+Ui::MainWindow* MainWindow::getUi()
 {
     return ui;
 }

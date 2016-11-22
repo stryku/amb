@@ -2,13 +2,18 @@
 
 #include "Simulator.hpp"
 #include "ModulesManager.hpp"
-#include "ModuleId.hpp"
+#include "module/ModuleId.hpp"
 
 #include <vector>
 #include <functional>
 
 namespace Amb
 {
+    namespace Module
+    {
+        class Factory;
+    }
+
     class BotCore
     {
     private:
@@ -17,7 +22,8 @@ namespace Amb
         Module::ModulesManager modulesManager;
 
     public:
-        BotCore( const Configs::GlobalConfig &config );
+        BotCore(const Configs::GlobalConfig &config,
+                Amb::Module::Factory &modulesFactory);
 
         void startModule( Module::ModuleId moduleId );
         void attachNewProcess( DWORD pid );

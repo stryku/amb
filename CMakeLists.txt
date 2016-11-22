@@ -20,14 +20,9 @@ set (HOST_LIBS_DIR "C:/moje/libs/lib/x86")
 set (HOST_INC_DIR "C:/moje/libs/include")
 
 
-option(MODULE_COMPILE_HEALER "compile healer module" ON)
-if (MODULE_COMPILE_HEALER)
-    add_definitions(-DMODULE_COMPILE_HEALER)
-endif()
-
-option(MODULE_COMPILE_LOOTER "compile looter module" ON)
-if (MODULE_COMPILE_LOOTER)
-    add_definitions(-DMODULE_COMPILE_LOOTER)
+option(AMB_PRO_COMPILATION "compile healer module" ON)
+if (AMB_PRO_COMPILATION)
+    add_definitions(-DAMB_PRO_COMPILATION)
 endif()
 
 set(BOOST_ROOT C:/moje/libs/boost/boost_1_61_0)

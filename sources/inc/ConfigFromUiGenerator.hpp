@@ -3,7 +3,7 @@
 #include <mainwindow.h>
 
 #include <Configs.hpp>
-#include <ModuleId.hpp>
+#include <module/ModuleId.hpp>
 #include <TibiaFinder.hpp>
 
 namespace Ui {

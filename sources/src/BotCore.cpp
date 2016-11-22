@@ -2,9 +2,11 @@
 
 namespace Amb
 {
-    BotCore::BotCore( const Configs::GlobalConfig &config ) :
-        modulesManager( config,
-                        simulator )
+    BotCore::BotCore(const Configs::GlobalConfig &config,
+                     Amb::Module::Factory &modulesFactory) :
+        modulesManager(config,
+                       simulator,
+                       modulesFactory)
     {}
 
     void BotCore::startModule( Module::ModuleId moduleId )

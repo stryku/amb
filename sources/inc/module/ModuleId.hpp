@@ -6,10 +6,13 @@ namespace Amb
     {
         enum class ModuleId
         {
-            BEGIN,
             MOD_HEALER,
+
+#ifdef AMB_PRO_COMPILATION
             MOD_LOOTER,
-            END
+#endif
+
+            DUMMY
         };
     }
 }

@@ -5,8 +5,9 @@ namespace Amb
 {
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
+        , modulesFactory{ window.getUi() }
         , configFromUiGenerator(&window, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable())
-        , botCore(configFromUiGenerator.getConfigs())
+        , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
         , window{ db }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());

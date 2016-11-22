@@ -1,23 +1,31 @@
 ﻿#pragma once
 
-#include "Healer.hpp"
 #include "Configs.hpp"
-#include "ModuleId.hpp"
+#include "module/ModuleId.hpp"
+#include "module/ModuleCore.hpp"
 
-#include <map>
+#include <unordered_map>
 
 namespace Amb
 {
+    namespace Simulate
+    {
+        class Simulator;
+    }
+
     namespace Module
     {
+        class Factory;
+
         class ModulesManager
         {
         private:
-            std::map<ModuleId, std::unique_ptr<ModuleCore>> modules;
+            std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> modules;
 
         public:
-            ModulesManager( const Configs::GlobalConfig &config,
-                            Simulate::Simulator &simulator);
+            ModulesManager(const Configs::GlobalConfig &config,
+                           Simulate::Simulator &simulator,
+                           Amb::Module::Factory &modulesFactory);
 
             void run( ModuleId modId );
             void stop( ModuleId modId );

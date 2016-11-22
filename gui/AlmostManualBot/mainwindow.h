@@ -3,7 +3,7 @@
 
 #include "TibiaFinder.hpp"
 #include "ui/modules/healer/HealerRulesTable.hpp"
-#include "ModuleId.hpp"
+#include "module/ModuleId.hpp"
 #include "ui/UiControls.hpp"
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
@@ -35,7 +35,7 @@ public:
     explicit MainWindow(const Amb::Db::Database &db, QWidget *parent = 0);
     ~MainWindow();
 
-    const Ui::MainWindow* getUi() const;
+    Ui::MainWindow* getUi();
     Amb::Ui::Controls::AdvancedSettings::Healer getAdvancedSettingsHealer() const;
     Amb::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
     Amb::Ui::Controls::AdvancedSettings getAdvancedSettings() const;

@@ -4,6 +4,7 @@
 #include "ConfigFromUiGenerator.hpp"
 #include "ui/updaters/UiUpdater.hpp"
 #include "db/Database.hpp"
+#include "module/ModulesFactory.hpp"
 
 #include "mainwindow.h"
 
@@ -49,6 +50,7 @@ private:
 
     QApplication application;
     MainWindow window;
+    Amb::Module::Factory modulesFactory;
     Amb::Configs::ConfigFromUiGenerator configFromUiGenerator;
     Amb::Ui::Updaters::UiUpdater uiUpdater;
     Amb::BotCore botCore;

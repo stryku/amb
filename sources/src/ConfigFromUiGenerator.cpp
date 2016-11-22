@@ -34,7 +34,9 @@ namespace Amb
             switch (moduleId)
             {
                 case Module::ModuleId::MOD_HEALER: regenerateHealer();
+#ifdef AMB_PRO_COMPILATION
                 case Module::ModuleId::MOD_LOOTER: regenerateLooter();
+#endif
             }
         }
 
@@ -86,7 +88,10 @@ namespace Amb
         void ConfigFromUiGenerator::regenerateAllModules()
         {
             regenerateModule(Module::ModuleId::MOD_HEALER);
+
+#ifdef AMB_PRO_COMPILATION
             regenerateModule(Module::ModuleId::MOD_LOOTER);
+#endif
         }
 
         void ConfigFromUiGenerator::loadConfigFromString(const std::string &str)
