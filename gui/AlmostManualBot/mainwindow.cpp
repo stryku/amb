@@ -237,6 +237,11 @@ void MainWindow::setConfigProvider(std::function<std::string()> provider)
 {
     configToSaveProvider = provider;
 }
+void MainWindow::setCurrentConfigFilePathProvider(std::function<std::string()> provider)
+{
+    currentConfigFilePathProvider = provider;
+}
+
 void MainWindow::setConfigLoader(std::function<void(const std::string&)> loader)
 {
     configLoader = loader;
@@ -286,7 +291,7 @@ void MainWindow::on_actionOpen_triggered()
 
     if (!path.length() == 0)
     {
-        auto fileContent = Amb::Utils::readWholeFileIntoString(path.toStdString());
+        auto fileContent = configFileManager.load(path.toStdString());
         configLoader(fileContent);
     }
 }
@@ -308,25 +313,21 @@ void MainWindow::on_actionSave_as_triggered()
     if (!path.length() == 0)
     {
         const auto config = configToSaveProvider();
-        std::ofstream out(path.toStdString());
-        if (out.is_open())
-            out << config;
+        configFileManager.save(config, path.toStdString());
     }
 }
 
 void MainWindow::on_actionSave_triggered()
 {
-    auto path = QFileDialog::getExistingDirectory(this,
-                                                  "Save file",
-                                                  "./configurations");
+    assert(currentConfigFilePathProvider);
 
-    if (!path.length() == 0)
-    {
-        const auto config = configToSaveProvider();
-        std::ofstream out(path.toStdString());
-        if (out.is_open())
-            out << config;
-    }
+    const auto currentPath = currentConfigFilePathProvider();
+
+    if (configFileManager.isPathEmpty())
+        on_actionSave_as_triggered();
+
+    const auto config = configToSaveProvider();
+    configFileManager.save(config);
 }
 
 void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()

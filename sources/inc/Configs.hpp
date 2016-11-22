@@ -157,6 +157,7 @@ namespace Amb
         {
             DWORD pid;
             HWND hwnd;
+            std::string currentConfigFilePath;
             HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
             Looter looter;

@@ -20,6 +20,7 @@ public:
     using TibiaWindowChangedHandler = std::function<void(const std::wstring&)>;
     using ResetLayoutHandler = std::function<void()>;
     using ConfigProvider = std::function<std::string()>;
+    using CurrentConfigFilePathProvider = std::function<std::string()>;
     using ConfigLoader = std::function<void(const std::string&)>;
 
     Bot( int &argc, char *argv[] );
@@ -46,6 +47,7 @@ private:
     ModuleToggleMethod getModuleToggleMethod();
     TibiaWindowChangedHandler getTibiaWindowChangedHandler();
     ConfigProvider getConfigProvider();
+    CurrentConfigFilePathProvider getCurrentConfigFilePathProvider();
     ConfigLoader getConfigLoader();
 
     QApplication application;

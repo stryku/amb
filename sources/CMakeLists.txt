@@ -22,6 +22,8 @@ set (AMB_inc
             
             ${inc_dir}/client/TibiaClientType.hpp
             
+            ${inc_dir}/config/ConfigFileManager.hpp
+            
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
             
             ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
@@ -86,6 +88,8 @@ set (AMB_src
             ${src_dir}/capture/ItemsWindowReader.cpp
             
             ${src_dir}/client/TibiaClientType.cpp
+            
+            ${src_dir}/config/ConfigFileManager.cpp
             
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             

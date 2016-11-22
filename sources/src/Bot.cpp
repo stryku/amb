@@ -14,6 +14,7 @@ namespace Amb
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
         window.setConfigLoader(getConfigLoader());
+        window.setCurrentConfigFilePathProvider(getCurrentConfigFilePathProvider());
     }
 
     int Bot::run()
@@ -36,6 +37,15 @@ namespace Amb
     {
         return [this] {return getConfigurationToSave(); };
     }
+
+    Bot::CurrentConfigFilePathProvider Bot::getCurrentConfigFilePathProvider()
+    {
+        return [this] 
+        {
+            return configFromUiGenerator.getConfigs().currentConfigFilePath;
+        };
+    }
+
 
     Bot::ConfigLoader Bot::getConfigLoader()
     {

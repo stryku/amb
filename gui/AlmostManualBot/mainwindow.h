@@ -11,6 +11,7 @@
 
 #include "db/Database.hpp"
 
+#include "config/ConfigFileManager.hpp"
 
 #include <QMainWindow>
 #include <QCheckBox>
@@ -51,6 +52,7 @@ public:
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
     void setRefreshLayoutHandler(std::function<void()> newHandler);
     void setConfigProvider(std::function<std::string()> provider);
+    void setCurrentConfigFilePathProvider(std::function<std::string()> provider);
     void setConfigLoader( std::function<void(const std::string&)> loader);
 
     std::wstring getTibiaWindowTitle() const;
@@ -88,6 +90,7 @@ private:
     QCompleter *itemsCompleter;
 
     const Amb::Db::Database &db;
+    Amb::Config::ConfigFileManager configFileManager;
 
     std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;
@@ -97,6 +100,7 @@ private:
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
     std::function<void()> refreshLayoutHandler;
     std::function<std::string()> configToSaveProvider;
+    std::function<std::string()> currentConfigFilePathProvider;
     std::function<void(const std::string&)> configLoader;
 
     void updateTibiaClientsComboBox();
