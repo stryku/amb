@@ -1,0 +1,11 @@
+gui
+    remove reset layout button
+
+config
+    config loader
+    detect corrupted file
+    config different versions loader
+    
+modules
+    looter
+        create
