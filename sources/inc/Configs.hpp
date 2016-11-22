@@ -80,7 +80,7 @@ namespace Amb
             void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
             {
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.rand_between_checks");
-                healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
+                healer.sleepAfterHotkey.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
                 common.captureMode.toPropertyTreeBuilder(builder, path + ".common");
                 Amb::Client::toPropertyTreeBuilder(builder, common.clientType, path + ".common");
             }

@@ -1,4 +1,4 @@
-#include "Healer.hpp"
+#include "module/modules/Healer.hpp"
 
 #include "capture/DeadCreatureWindowFinder.hpp"
 
