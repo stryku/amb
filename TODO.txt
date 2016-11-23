@@ -1,0 +1,14 @@
+gui
+    remove reset layout button
+    character nick to window title
+    open config to window title
+    menu item about
+
+config
+    config loader
+    detect corrupted file
+    config different versions loader
+    
+modules
+    looter
+        create

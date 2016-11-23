@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8.12)
-project (AMB)
+project (Amb)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
@@ -19,6 +19,12 @@ set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
 set (HOST_LIBS_DIR "C:/moje/libs/lib/x86")
 set (HOST_INC_DIR "C:/moje/libs/include")
 
+
+option(AMB_PRO_COMPILATION "compile healer module" ON)
+if (AMB_PRO_COMPILATION)
+    add_definitions(-DAMB_PRO_COMPILATION)
+endif()
+
 set(BOOST_ROOT C:/moje/libs/boost/boost_1_61_0)
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
@@ -36,8 +42,8 @@ find_package (Qt5UiTools REQUIRED)
 set (src_root ${CMAKE_CURRENT_SOURCE_DIR})
 set (src_dir_qt ${src_root}/gui/AlmostManualBot)
 set (inc_dir_qt ${src_root}/gui/AlmostManualBot)
-set (src_dir ${src_root}/src)
-set (inc_dir ${src_root}/src)
+set (src_dir ${src_root}/sources/src)
+set (inc_dir ${src_root}/sources/inc)
 set (ui_dir ${src_root}/gui/AlmostManualBot)
 set (resources_dir ${src_root}/resources)
 set (install_dir ${src_root}/bin)
@@ -52,48 +58,15 @@ include_directories (${inc_dir}
 set (AMB_src_qt	${src_dir_qt}/main.cpp
                         ${src_dir_qt}/mainwindow.cpp)
 					
-set (AMB_inc_qt ${inc_dir_qt}/mainwindow.hpp)
+set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
 					
-                    
-set (AMB_src 
-					${src_dir}/Bot.cpp
-					${src_dir}/BotCore.cpp
-					${src_dir}/ConfigFromUiGenerator.cpp
-                    
-					${src_dir}/Healer.cpp
-					${src_dir}/HealerRulesTable.cpp
-                    
-					${src_dir}/HealRule.cpp
-					${src_dir}/ModulesManager.cpp
-					${src_dir}/Simulator.cpp
-					${src_dir}/TibiaFinder.cpp
-					${src_dir}/utils.cpp
-                    
-					${src_dir}/Module.cpp)
-					
-set (AMB_inc 
-					${inc_dir}/Bot.hpp
-					${inc_dir}/BotCore.hpp
-					${inc_dir}/ConfigFromUiGenerator.hpp
-					${inc_dir}/Configs.hpp
-                    
-					${inc_dir}/Healer.hpp
-					${inc_dir}/HealerRulesTable.hpp
-                    
-					${inc_dir}/HealRule.hpp
-					${inc_dir}/ModuleId.hpp
-					${inc_dir}/ModulesManager.hpp
-					${inc_dir}/ScreenCapturer.hpp
-					${inc_dir}/Simulator.hpp
-					${inc_dir}/TibiaFinder.hpp
-					${inc_dir}/TibiaReader.hpp
-					${inc_dir}/TibiaScreenReader.hpp
-					${inc_dir}/utils.hpp
-                    
-					${inc_dir}/Module.hpp)
+
+add_subdirectory(sources)                    
+             
+
                      
                      
-set (AMB_hdr ${inc_dir_qt}/mainwindow.hpp)
+set (AMB_hdr ${inc_dir_qt}/mainwindow.h)
 set (AMB_ui  ${ui_dir}/mainwindow.ui)
 set (AMB_gui_src ${src_dir_qt}/main.cpp)
 
@@ -108,16 +81,16 @@ add_library (AMBMocObjects OBJECT
     ${AMB_ui_moc}  
 )
 
-add_executable(AMB ${AMB_src_qt}
+add_executable(Amb ${AMB_src_qt}
 						  ${AMB_inc_qt}
 						  ${AMB_src}
 						  ${AMB_inc} 
 						  $<TARGET_OBJECTS:AMBMocObjects>)
 						  
-target_link_libraries (AMB Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
+target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
 
 
-install(TARGETS AMB DESTINATION  ${install_dir}/)
+install(TARGETS Amb DESTINATION  ${install_dir}/)
 install(
     DIRECTORY ${resources_dir}/
     DESTINATION ${install_dir}

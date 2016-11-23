@@ -15,13 +15,6 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="1">
-     <widget class="QPushButton" name="btnRefreshClientsComboBox">
-      <property name="text">
-       <string>Refresh</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QComboBox" name="cbTibiaClients">
       <item>
@@ -31,7 +24,21 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnRefreshClientsComboBox">
+      <property name="text">
+       <string>Refresh clients</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QPushButton" name="refreshLayoutButton">
+      <property name="text">
+       <string>Refresh layout</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -45,7 +52,7 @@
          <rect>
           <x>9</x>
           <y>49</y>
-          <width>351</width>
+          <width>361</width>
           <height>251</height>
          </rect>
         </property>
@@ -53,23 +60,13 @@
        <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>370</x>
+          <x>375</x>
           <y>50</y>
           <width>116</width>
           <height>250</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label">
-           <property name="text">
-            <string>Min HP (min == 0)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="editHealerMinHp"/>
-         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
@@ -77,8 +74,19 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
-          <widget class="QLineEdit" name="editHealerMaxHp"/>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Min HP (min == 0)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Hotkey</string>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_3">
@@ -87,23 +95,10 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLineEdit" name="editHealerMinMana"/>
-         </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
             <string>Max Mana (max == 87)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QLineEdit" name="editHealerMaxMana"/>
-         </item>
-         <item row="8" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Hotkey</string>
            </property>
           </widget>
          </item>
@@ -178,6 +173,46 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMinHp">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>89</number>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMinMana">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMaxHp">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QSpinBox" name="spinBoxHealerMaxMana">
+           <property name="suffix">
+            <string/>
+           </property>
+           <property name="maximum">
+            <number>87</number>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
        <widget class="QPushButton" name="btnHealerClear">
@@ -185,7 +220,7 @@
          <rect>
           <x>10</x>
           <y>300</y>
-          <width>111</width>
+          <width>61</width>
           <height>23</height>
          </rect>
         </property>
@@ -206,6 +241,421 @@
          <string>Not running</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButtonHealerEdit">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>300</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonHealerDown">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>300</y>
+          <width>41</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Down</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonHealerUp">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>300</y>
+          <width>31</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Up</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabLooter">
+       <attribute name="title">
+        <string>Looter</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="QCheckBox" name="checkBoxLooterRunning">
+          <property name="text">
+           <string>Not running</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTabWidget" name="tabWidgetLooter">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="looterTabCategories">
+           <attribute name="title">
+            <string>Categories</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>New category</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="editLooterCategoriesNewCategorName"/>
+               </item>
+               <item row="1" column="0" colspan="2">
+                <widget class="QComboBox" name="comboBoxLooterCategoriesToOnto">
+                 <item>
+                  <property name="text">
+                   <string>To</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Onto</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>Dest</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="editLooterCategoriesNewCategoryDestination"/>
+               </item>
+               <item row="3" column="0">
+                <widget class="QPushButton" name="pushButtonLooterCategoriesNewCategoryAdd">
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="2">
+             <widget class="QTableView" name="tableViewLooterCategoriesCategoriesList">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="pushButtonLooterCategoriesEdit">
+              <property name="text">
+               <string>Edit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pushButtonLooterCategoriesClear">
+              <property name="text">
+               <string>Clear</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="looterTabItems">
+           <attribute name="title">
+            <string>Items</string>
+           </attribute>
+           <widget class="QTableView" name="tableLooterItems">
+            <property name="geometry">
+             <rect>
+              <x>199</x>
+              <y>9</y>
+              <width>256</width>
+              <height>221</height>
+             </rect>
+            </property>
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustIgnored</enum>
+            </property>
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="pushButtonLooterItemsEdit">
+            <property name="geometry">
+             <rect>
+              <x>200</x>
+              <y>230</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Edit</string>
+            </property>
+           </widget>
+           <widget class="QPushButton" name="pushButtonLooterItemsClear">
+            <property name="geometry">
+             <rect>
+              <x>380</x>
+              <y>230</y>
+              <width>75</width>
+              <height>23</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Clear</string>
+            </property>
+           </widget>
+           <widget class="QWidget" name="layoutWidget">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>10</y>
+              <width>188</width>
+              <height>77</height>
+             </rect>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Item</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="editLooterItemsItem"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Category</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBoxLooterItemsCategories"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QPushButton" name="pushButtonLooterItemsAdd">
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabAdvancedSettings">
+       <attribute name="title">
+        <string>Advanced Settings</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBoxHealer">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>151</width>
+          <height>117</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Healer</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="editRandBeetwenChecksFrom">
+           <property name="text">
+            <string>100</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="4">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Sleep after hotkey [ms]</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>To:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QLineEdit" name="editRandBeetwenChecksTo">
+           <property name="text">
+            <string>300</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="editSleepAfterHotkeyFrom">
+           <property name="text">
+            <string>50</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>To:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QLineEdit" name="editSleepAfterHotkeyTo">
+           <property name="text">
+            <string>80</string>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>From:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>From:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="4">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Rand between checks [ms]</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QGroupBox" name="groupBoxAdvancedSettingsCommon">
+        <property name="geometry">
+         <rect>
+          <x>170</x>
+          <y>10</y>
+          <width>131</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Common</string>
+        </property>
+        <widget class="QWidget" name="layoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>70</y>
+           <width>111</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="labelAdvancedSettingsCaptureMode">
+            <property name="text">
+             <string>Capture mode</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxAdvancedSettingsCaptureMode">
+            <item>
+             <property name="text">
+              <string>Only covered</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Only not covered</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Smart</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>111</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="labelAdvancedSettingsCommonTibiaClient">
+            <property name="text">
+             <string>Tibia client</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBoxAdvancedSettingsCommonTibiaClient">
+            <item>
+             <property name="text">
+              <string>Tibia 10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Tibia 11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Flash</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -220,6 +670,17 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_as"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -230,6 +691,26 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as...</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
