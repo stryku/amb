@@ -4,18 +4,20 @@ namespace Amb
 {
     namespace Utils
     {
-        template <typename WrappedType, typename Observer>
+        template <typename WrappedType>
         class Observable
         {
         public:
-            Observable(Observer &observer)
-                : observer{ observer }
+            using CallbackType = std::function<void(const WrappedType&)>;
+
+            Observable(CallbackType callback)
+                : callback{ callback }
             {}
 
             void set(const WrappedType &v)
             {
                 value = v;
-                observer.notifyChanged(value);
+                callback(value);
             }
 
             WrappedType get() const
@@ -25,7 +27,7 @@ namespace Amb
 
         private:
             WrappedType value;
-            Observer &observer;
+            CallbackType callback;
         };
     }
 }

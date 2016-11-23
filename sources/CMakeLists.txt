@@ -64,6 +64,7 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/LooterUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp
+            ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
             
             ${inc_dir}/utils/log.hpp
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
