@@ -40,18 +40,6 @@ namespace Amb
                     }
                 }
 
-                auto windows = reader.getDeadCreaturesWindows();
-
-                if (!windows.empty())
-                {
-                    int a = 22;
-                    a += 2;
-
-                    auto items = reader.readItemWindow(windows[0]);
-                    a += 2;
-
-                }
-
                 std::this_thread::sleep_until(sleepTo);
             }
 

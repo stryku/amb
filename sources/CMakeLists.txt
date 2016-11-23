@@ -43,8 +43,9 @@ set (AMB_inc
             ${inc_dir}/module/ModuleCore.hpp
             ${inc_dir}/module/ModulesFactory.hpp
             
-            ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
+            ${inc_dir}/module/modules/Healer.hpp
             
+            ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
             ${inc_dir}/ui/UiControls.hpp
             
