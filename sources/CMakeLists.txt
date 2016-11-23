@@ -69,6 +69,7 @@ set (AMB_inc
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/utils/ToString.hpp
+            ${inc_dir}/utils/Observable.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
                     
