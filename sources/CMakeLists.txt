@@ -19,11 +19,14 @@ set (AMB_inc
             ${inc_dir}/capture/ItemsWindowReader.hpp
             ${inc_dir}/capture/NotCoveredWindowCapturer.hpp
             ${inc_dir}/capture/WindowCapturer.hpp
+            ${inc_dir}/capture/FrameCapturer.hpp
             
             ${inc_dir}/client/TibiaClientType.hpp
             
             ${inc_dir}/client/window/TibiaWindow.hpp
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
+            
+            ${inc_dir}/client/reader/HealthManaReader.hpp
             
             ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
             
@@ -97,8 +100,11 @@ set (AMB_src
             ${src_dir}/capture/DeadCreatureWindowFinder.cpp
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp
+            ${src_dir}/capture/FrameCapturer.cpp
             
             ${src_dir}/client/TibiaClientType.cpp
+            
+            ${src_dir}/client/reader/HealthManaReader.cpp
             
             ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
             
