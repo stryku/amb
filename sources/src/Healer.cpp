@@ -47,7 +47,6 @@ namespace Amb
                            const Configs::AdvancedSettings &advancedSettings,
                            Simulate::Simulator &simulator)
                 : ModuleCore{ simulator }
-                , reader{ items }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
             {}

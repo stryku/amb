@@ -17,7 +17,6 @@ namespace Amb
             class Healer : public ModuleCore
             {
             private:
-                Db::Items items;
                 Readers::details::TibiaReader reader;
 
                 const Configs::HealerConfig &config;
@@ -32,9 +31,7 @@ namespace Amb
                 Healer(const Configs::HealerConfig &config,
                        const Configs::AdvancedSettings &advancedSettings,
                        Simulate::Simulator &simulator);
-                ~Healer()
-                {}
-
+                
                 void attachToNewWindow(HWND hwnd)
                 {
                     reader.attachToNewWindow(hwnd);
