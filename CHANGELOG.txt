@@ -1,0 +1,7 @@
+v0.1-beta - 23.11.2016
+-spent: 81,5h
+-healer
+-different screen reading methods
+-tibia11 healing support
+-menu: Open, Save, Save as
+

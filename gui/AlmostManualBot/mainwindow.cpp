@@ -8,6 +8,7 @@
 #include <QMessageBox>
 
 #include <algorithm>
+#include <experimental/filesystem>
 
 MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     : QMainWindow(parent)
@@ -216,6 +217,17 @@ const Amb::Ui::Module::Looter::LooterItemsTable& MainWindow::getLooterItemsTable
 {
     return *(looterItemsTable.get());
 }
+
+void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> observer)
+{
+    configFileManager.setPathObserver(
+    [this, observer](const std::string &path)
+    {
+        const auto filename = std::experimental::filesystem::path(path).filename();
+        observer(filename.string());
+    });
+}
+
 
 void MainWindow::setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler )
 {

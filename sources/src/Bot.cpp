@@ -7,14 +7,17 @@ namespace Amb
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
         , configFromUiGenerator(&window, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable())
+        , mainWindowTitleUpdater{ window }
         , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
         , window{ db }
+        , currentCharacterName{ getCharacterNameObserver() }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
         window.setConfigLoader(getConfigLoader());
-        window.setCurrentConfigFilePathProvider(getCurrentConfigFilePathProvider());
+        window.setScriptNameObserver(getScriptNameObserver());
+        mainWindowTitleUpdater.setBasic();
     }
 
     int Bot::run()
@@ -38,14 +41,26 @@ namespace Amb
         return [this] {return getConfigurationToSave(); };
     }
 
-    Bot::CurrentConfigFilePathProvider Bot::getCurrentConfigFilePathProvider()
+    /*Bot::CurrentConfigFilePathProvider Bot::getCurrentConfigFilePathProvider()
     {
         return [this] 
         {
-            return configFromUiGenerator.getConfigs().currentConfigFilePath;
+            return configFromUiGenerator.getConfigs();
+        };
+    }*/
+
+    Bot::StringValueObserver Bot::getCharacterNameObserver()
+    {
+        return [this](const std::string &str) 
+        { 
+            mainWindowTitleUpdater.characterNameChanged(str); 
         };
     }
 
+    Bot::StringValueObserver Bot::getScriptNameObserver()
+    {
+        return [this](const std::string &str) { mainWindowTitleUpdater.scriptNameChanged(str); };
+    }
 
     Bot::ConfigLoader Bot::getConfigLoader()
     {
@@ -80,6 +95,9 @@ namespace Amb
     {
         DWORD pid = Utils::TibiaFinder::findProcessId( newWindowTitle );
 
-        botCore.attachNewProcess( pid );
+        botCore.attachNewProcess(pid);
+
+        const auto charName = Utils::wstringToString(newWindowTitle).substr(std::size("Tibia - ") - 1);
+        currentCharacterName.set(charName);
     }
 }

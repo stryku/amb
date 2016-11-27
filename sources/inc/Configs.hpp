@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils/Observable.hpp"
 #include "utils.hpp"
 #include "ui/modules/healer/HealRule.hpp"
 #include "utils/Structs.hpp"
@@ -12,6 +13,7 @@
 #include <vector>
 #include <iostream>
 #include "client/TibiaClientType.hpp"
+
 
 namespace Amb
 {
@@ -158,6 +160,8 @@ namespace Amb
             DWORD pid;
             HWND hwnd;
             std::string currentConfigFilePath;
+            std::string currentCharacterName;
+
             HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
             Looter looter;
