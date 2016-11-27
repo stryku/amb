@@ -1,21 +1,34 @@
 #pragma once
 
+#include <functional>
+
 namespace Amb
 {
     namespace Utils
     {
-        template <typename WrappedType, typename Observer>
+        template <typename WrappedType>
         class Observable
         {
         public:
-            Observable(Observer &observer)
-                : observer{ observer }
+            using CallbackType = std::function<void(const WrappedType&)>;
+
+            Observable() = default;
+
+            Observable(CallbackType callback)
+                : callback{ callback }
             {}
+
+            void setCallback(CallbackType cb)
+            {
+                callback = cb;
+            }
 
             void set(const WrappedType &v)
             {
                 value = v;
-                observer.notifyChanged(value);
+
+                if(callback)
+                    callback(value);
             }
 
             WrappedType get() const
@@ -25,7 +38,7 @@ namespace Amb
 
         private:
             WrappedType value;
-            Observer &observer;
+            CallbackType callback;
         };
     }
 }

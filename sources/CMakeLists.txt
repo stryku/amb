@@ -64,6 +64,9 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/LooterUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp
+            ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
+            
+            ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
             
             ${inc_dir}/utils/log.hpp
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
@@ -106,5 +109,9 @@ set (AMB_src
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
             ${src_dir}/ui/modules/looter/Items.cpp
+            
+            ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
+            
+            ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
             
             PARENT_SCOPE)

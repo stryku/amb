@@ -53,7 +53,8 @@ public:
     void setRefreshLayoutHandler(std::function<void()> newHandler);
     void setConfigProvider(std::function<std::string()> provider);
     void setCurrentConfigFilePathProvider(std::function<std::string()> provider);
-    void setConfigLoader( std::function<void(const std::string&)> loader);
+    void setConfigLoader(std::function<void(const std::string&)> loader);
+    void setScriptNameObserver( std::function<void(const std::string&)> observer);
 
     std::wstring getTibiaWindowTitle() const;
 
