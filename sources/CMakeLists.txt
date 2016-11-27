@@ -28,6 +28,8 @@ set (AMB_inc
             
             ${inc_dir}/client/reader/HealthManaReader.hpp
             
+            ${inc_dir}/client/TibiaClientWindowRectObserver.hpp
+            
             ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
             
             ${inc_dir}/config/ConfigFileManager.hpp
@@ -82,6 +84,7 @@ set (AMB_inc
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/utils/ToString.hpp
             ${inc_dir}/utils/Observable.hpp
+            ${inc_dir}/utils/ThreadWorker.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
                     
@@ -106,6 +109,8 @@ set (AMB_src
             
             ${src_dir}/client/reader/HealthManaReader.cpp
             
+            ${src_dir}/client/TibiaClientWindowRectObserver.cpp
+            
             ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
@@ -125,6 +130,8 @@ set (AMB_src
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
             ${src_dir}/ui/modules/looter/Items.cpp
+            
+            ${src_dir}/utils/ThreadWorker.cpp
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             
