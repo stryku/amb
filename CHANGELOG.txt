@@ -1,3 +1,6 @@
+v0.2
+-changing window title
+
 v0.1-beta - 23.11.2016
 -spent: 81,5h
 -healer
