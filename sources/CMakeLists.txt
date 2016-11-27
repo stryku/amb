@@ -22,6 +22,11 @@ set (AMB_inc
             
             ${inc_dir}/client/TibiaClientType.hpp
             
+            ${inc_dir}/client/window/TibiaWindow.hpp
+            ${inc_dir}/client/window/TibiaItemsWindow.hpp
+            
+            ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
+            
             ${inc_dir}/config/ConfigFileManager.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
@@ -44,6 +49,7 @@ set (AMB_inc
             ${inc_dir}/module/ModulesFactory.hpp
             
             ${inc_dir}/module/modules/Healer.hpp
+            ${inc_dir}/module/modules/LooterModule.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -94,6 +100,8 @@ set (AMB_src
             
             ${src_dir}/client/TibiaClientType.cpp
             
+            ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
+            
             ${src_dir}/config/ConfigFileManager.cpp
             
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
@@ -103,6 +111,8 @@ set (AMB_src
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
             ${src_dir}/module/ModulesFactory.cpp
+            
+            ${src_dir}/module/modules/LooterModule.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
