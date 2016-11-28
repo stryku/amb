@@ -10,8 +10,9 @@ namespace Amb
         {
             LooterModule::LooterModule(const Configs::Looter &config,
                                        const Configs::AdvancedSettings &advancedSettings,
-                                       Simulate::Simulator &simulator)
-                : ModuleCore{ simulator }
+                                       Simulate::Simulator &simulator,
+                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+                : ModuleCore{ simulator, tibiaClientWindowInfo }
                 , reader{ items }
                 , config{ config }
                 , advancedSettings{ advancedSettings }

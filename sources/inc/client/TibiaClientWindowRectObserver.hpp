@@ -2,6 +2,7 @@
 
 #include "utils/Observable.hpp"
 #include "utils/ThreadWorker.hpp"
+#include "client/TibiaClientWindowInfo.hpp"
 
 #include <Windows.h>
 
@@ -12,12 +13,12 @@ namespace Amb
         class TibiaClientWindowRectObserver
         {
         private:
-            using Observable = Utils::Observable<Rect>;
+            using Observable = Utils::Observable<TibiaClientWindowInfo>;
 
         public:
             TibiaClientWindowRectObserver(Observable::CallbackType cb);
 
-            void run(HWND tibiaWindowHandle);
+            void run(HWND tibiaWindowHandle = NULL);
             void attachToNewWindow(HWND tibiaWindowHandle);
 
         private:

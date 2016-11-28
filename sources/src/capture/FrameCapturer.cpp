@@ -5,12 +5,12 @@ namespace Amb
 {
     namespace Capture
     {
-        FrameCapturer::FrameCapturer(Graphics::Image &screen, boost::optional<Rect> frameRect)
+        FrameCapturer::FrameCapturer(Graphics::Image &screen, const Rect &clientRect)
             : screen{ screen }
-            , frameRect(frameRect)
+            , clientRect{ clientRect }
         {}
 
-        void FrameCapturer::set(Mode::CaptureMode newCaptureMode)
+        void FrameCapturer::setCaptureMode(const Mode::CaptureMode newCaptureMode)
         {
             captureMode = newCaptureMode;
         }
@@ -20,17 +20,14 @@ namespace Amb
             windowHandle = newWindowHandle;
         }
 
-        void FrameCapturer::newFrame()
-        {
-            newFrame(frameRect);
-        }
-
         void FrameCapturer::newFrame(const boost::optional<Rect> &rect)
         {
             if (captureMode == Mode::CaptureMode::OnlyCovered)
-                screenCapturerCovered.captureWindow(windowHandle, screen, frameRect);
+                screenCapturerCovered.captureWindow(windowHandle, clientRect, screen, rect);
             else
-                screenCapturerNotCovered.captureWindow(windowHandle, screen, frameRect);
+                screenCapturerNotCovered.captureWindow(windowHandle, clientRect, screen, rect);
+
+            screen.toCb();
         }
     }
 }

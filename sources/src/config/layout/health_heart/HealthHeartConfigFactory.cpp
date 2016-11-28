@@ -22,11 +22,38 @@ namespace Amb
                     switch (clientType)
                     {
                         case Amb::Client::TibiaClientType::Tibia10: 
-                        config.offsetFromRight = Static::offsetFromRight_10;
+                            config.offsetFromRight = Static::offsetFromRight_10;
                         break;
 
                         case Amb::Client::TibiaClientType::Tibia11:
                             config.offsetFromRight = Static::offsetFromRight_11;
+                        break;
+
+                        case Amb::Client::TibiaClientType::Flash:
+                        default:
+                            assert(false);
+                    }
+
+                    return config;
+                }
+
+                HealthHeartConfig_2 Factory::create_2(Client::TibiaClientType clientType) const
+                {
+                    HealthHeartConfig_2 config;
+                    config.rect.rect.w = Static::size.w;
+                    config.rect.rect.h = Static::size.h;
+                    config.rect.rect.y = 0;
+
+
+
+                    switch (clientType)
+                    {
+                        case Amb::Client::TibiaClientType::Tibia10: 
+                            config.rect.rect.x = -static_cast<int>(Static::offsetFromRight_10);
+                        break;
+
+                        case Amb::Client::TibiaClientType::Tibia11:
+                            config.rect.rect.x = -static_cast<int>(Static::offsetFromRight_11);
                         break;
 
                         case Amb::Client::TibiaClientType::Flash:

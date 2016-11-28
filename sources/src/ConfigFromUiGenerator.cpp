@@ -8,10 +8,12 @@ namespace Amb
     namespace Configs
     {
         ConfigFromUiGenerator::ConfigFromUiGenerator(const MainWindow *mainWindow,
+                                                     const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                                      const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
                                                      const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
                                                      const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable)
             : mainWindow{ mainWindow }
+            , config{ tibiaClientWindowInfo }
             , healerRulesTable{ healerRulesTable }
             , looterCategoriesTable{ looterCategoriesTable }
             , looterItemsTable{ looterItemsTable }
@@ -94,9 +96,9 @@ namespace Amb
 #endif
         }
 
-        void ConfigFromUiGenerator::loadConfigFromString(const std::string &str)
+        void ConfigFromUiGenerator::loadConfigFromString(const std::string &str, const Client::TibiaClientWindowInfo &info)
         {
-            auto newConfig = Amb::Configs::GlobalConfig::fromString(str);
+            auto newConfig = Amb::Configs::GlobalConfig::fromString(str, info);
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;

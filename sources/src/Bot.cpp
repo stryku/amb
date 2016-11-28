@@ -6,11 +6,12 @@ namespace Amb
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
-        , configFromUiGenerator(&window, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable())
+        , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
         , mainWindowTitleUpdater{ window }
         , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
         , window{ db }
         , currentCharacterName{ getCharacterNameObserver() }
+        , clientRectObserver{ getClientRectObserver() }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
@@ -23,6 +24,7 @@ namespace Amb
     int Bot::run()
     {
         window.show();
+        clientRectObserver.run();
         return application.exec();
     }
 
@@ -41,13 +43,13 @@ namespace Amb
         return [this] {return getConfigurationToSave(); };
     }
 
-    /*Bot::CurrentConfigFilePathProvider Bot::getCurrentConfigFilePathProvider()
+    Bot::ClientInfoObserver Bot::getClientRectObserver()
     {
-        return [this] 
-        {
-            return configFromUiGenerator.getConfigs();
+        return [this](const Client::TibiaClientWindowInfo &info)
+        { 
+            tibiaClientWindowInfo = info;
         };
-    }*/
+    }
 
     Bot::StringValueObserver Bot::getCharacterNameObserver()
     {
@@ -99,5 +101,8 @@ namespace Amb
 
         const auto charName = Utils::wstringToString(newWindowTitle).substr(std::size("Tibia - ") - 1);
         currentCharacterName.set(charName);
+
+        const auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);
+        clientRectObserver.attachToNewWindow(hwnd);
     }
 }

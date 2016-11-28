@@ -19,7 +19,8 @@ namespace Amb
             public:
                 LooterModule(const Configs::Looter &config,
                              const Configs::AdvancedSettings &advancedSettings,
-                             Simulate::Simulator &simulator);
+                             Simulate::Simulator &simulator,
+                             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
 
                 void attachToNewWindow(HWND hwnd);
 
@@ -30,8 +31,10 @@ namespace Amb
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;
 
-                void runDetails();
-                void applyConfigs();
+                void runDetails() override
+                {}
+                void applyConfigs() override
+                {}
             };
         }
     }
