@@ -19,8 +19,8 @@ namespace Amb
                 RECT rc;
                 GetClientRect(tibiaWindowHandle, &rc);
                 RECT rcOnMonitor = rc;
-                ClientToScreen(tibiaWindowHandle, reinterpret_cast<POINT*>(&rc.left));
-                ClientToScreen(tibiaWindowHandle, reinterpret_cast<POINT*>(&rc.right));
+                ClientToScreen(tibiaWindowHandle, reinterpret_cast<POINT*>(&rcOnMonitor.left));
+                ClientToScreen(tibiaWindowHandle, reinterpret_cast<POINT*>(&rcOnMonitor.right));
                 if (rc.bottom == 0 && rc.right == 0)
                 {
                     qDebug("Window is minimized!");
@@ -32,6 +32,7 @@ namespace Amb
                 TibiaClientWindowInfo value;
                 value.rect = Rect::fromWindowsRect(rc);
                 value.rectOnMonitors = Rect::fromWindowsRect(rcOnMonitor);
+                value.corners = RectCorners::fromRect(value.rect);
 
                 rect.set(value);
             };

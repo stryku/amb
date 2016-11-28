@@ -1,13 +1,14 @@
 #include "capture/FrameCapturer.hpp"
 #include "graphics/Image.hpp"
+#include "client/TibiaClientWindowInfo.hpp"
 
 namespace Amb
 {
     namespace Capture
     {
-        FrameCapturer::FrameCapturer(Graphics::Image &screen, const Rect &clientRect)
+        FrameCapturer::FrameCapturer(Graphics::Image &screen, const Client::TibiaClientWindowInfo &clientInfo)
             : screen{ screen }
-            , clientRect{ clientRect }
+            , clientInfo{ clientInfo }
         {}
 
         void FrameCapturer::setCaptureMode(const Mode::CaptureMode newCaptureMode)
@@ -23,9 +24,9 @@ namespace Amb
         void FrameCapturer::newFrame(const boost::optional<Rect> &rect)
         {
             if (captureMode == Mode::CaptureMode::OnlyCovered)
-                screenCapturerCovered.captureWindow(windowHandle, clientRect, screen, rect);
+                screenCapturerCovered.captureWindow(windowHandle, clientInfo.rect, screen, rect);
             else
-                screenCapturerNotCovered.captureWindow(windowHandle, clientRect, screen, rect);
+                screenCapturerNotCovered.captureWindow(windowHandle, clientInfo.rectOnMonitors, screen, rect);
 
             screen.toCb();
         }

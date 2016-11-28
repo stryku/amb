@@ -20,7 +20,7 @@ namespace Amb
 
         ModuleCore::ModuleCore(Simulate::Simulator &simulator, const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
             : simulator{ simulator }
-            , frameCapturer{ screen, tibiaClientWindowInfo.rect }
+            , frameCapturer{ screen, tibiaClientWindowInfo }
             , tibiaClientWindowInfo{ tibiaClientWindowInfo }
         {}
 
