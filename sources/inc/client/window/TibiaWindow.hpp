@@ -10,9 +10,9 @@ namespace Amb
         {
             struct TibiaWindow
             {
-                static constexpr size_t MinPixelsBetweenPatterns = 43;
+                static constexpr size_t MinPixelsBetweenPatterns = 39;
                 static constexpr size_t PatternsOffsetFromRight = 14;
-                static constexpr size_t Width = 175;
+                static constexpr size_t Width = 176;
                 static constexpr Size PatternSize = { 9,3 };
 
                 static constexpr Pos BeginOfWindowPatternOffset = Pos{ 162, 5 };

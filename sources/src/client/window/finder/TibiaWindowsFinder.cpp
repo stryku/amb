@@ -28,7 +28,7 @@ namespace Amb
 
                     rect.rect.w = TibiaWindow::PatternSize.w;
                     rect.rect.h = TibiaWindow::PatternSize.h;
-                    rect.rect.x = TibiaWindow::BeginOfWindowPatternOffset.x;
+                    rect.rect.x = TibiaWindow::BeginOfWindowPatternOffset.x - TibiaWindow::Width;
                     rect.rect.y = TibiaWindow::BeginOfWindowPatternOffset.y;
 
                     return rect.relativeToRect(lastCapturedRect);
@@ -52,6 +52,7 @@ namespace Amb
                         else if (sprite == TibiaWindow::EndOfWindowPatternPixels)
                         {
                             window.rect.h = rect.y + TibiaWindow::EndOfWindowPatternOffsetFromEnd.y - window.rect.y;
+                            ++rect.y;
                             return window;
                         }
                     }

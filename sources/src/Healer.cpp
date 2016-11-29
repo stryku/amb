@@ -74,12 +74,6 @@ namespace Amb
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
             }
-
-            void Healer::initFrameRect()
-            {
-                //frameRect.
-            }
-
         }
     }
 }

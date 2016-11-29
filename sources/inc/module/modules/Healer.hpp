@@ -26,7 +26,6 @@ namespace Amb
                 //void setTibiaClientType(Client::TibiaClientType type) override;
                 void runDetails() override;
                 void applyConfigs() override;
-                void initFrameRect() override;
 
 
             public:
@@ -34,11 +33,6 @@ namespace Amb
                        const Configs::AdvancedSettings &advancedSettings,
                        Simulate::Simulator &simulator,
                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
-                
-                void attachToNewWindow(HWND hwnd)
-                {
-                    frameCapturer.attachToNewWindow(hwnd);
-                }
             };
         }
     }

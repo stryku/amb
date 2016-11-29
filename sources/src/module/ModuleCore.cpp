@@ -55,5 +55,11 @@ namespace Amb
         {
             //frameCapturer.captureWindow()
         }
+
+        void ModuleCore::attachToNewWindow(HWND hwnd)
+        {
+            frameCapturer.attachToNewWindow(hwnd);
+            simulator.attachToNewWindow(hwnd);
+        }
     }
 }

@@ -85,6 +85,8 @@ private slots:
 
     void on_tabWidgetLooter_currentChanged(int index);
 
+    void on_checkBoxLooterRunning_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -106,6 +108,7 @@ private:
 
     void updateTibiaClientsComboBox();
     void toggleHealer();
+    void toggleLooter();
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,

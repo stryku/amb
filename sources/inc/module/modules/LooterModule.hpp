@@ -5,6 +5,7 @@
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
 #include "db/Items.hpp"
+#include "client/window/finder/TibiaWindowsFinder.hpp"
 
 #include <chrono>
 
@@ -26,7 +27,8 @@ namespace Amb
 
             private:
                 Db::Items items;
-                Readers::details::TibiaReader reader;
+                Client::Window::Finder::TibiaWindowsFinder windowsFinder;
+                //Readers::details::TibiaReader reader;
 
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;

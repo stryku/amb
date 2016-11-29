@@ -1,5 +1,4 @@
 #include "module/modules/LooterModule.hpp"
-#include "client/window/finder/TibiaWindowsFinder.hpp"
 
 #include <chrono>
 
@@ -14,15 +13,11 @@ namespace Amb
                                        Simulate::Simulator &simulator,
                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
                 : ModuleCore{ simulator, tibiaClientWindowInfo }
-                , reader{ items }
+                //, /*reader*/{ items }
+                , windowsFinder{ screen }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
             {}
-
-            void LooterModule::attachToNewWindow(HWND hwnd)
-            {
-                reader.attachToNewWindow(hwnd);
-            }
 
             void LooterModule::runDetails()
             {
@@ -44,7 +39,7 @@ namespace Amb
 
             void LooterModule::applyConfigs()
             {
-
+                frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
             }
         }
     }
