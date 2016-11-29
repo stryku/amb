@@ -1,4 +1,5 @@
 #include "module/modules/LooterModule.hpp"
+#include "client/window/finder/TibiaWindowsFinder.hpp"
 
 #include <chrono>
 
@@ -23,12 +24,25 @@ namespace Amb
                 reader.attachToNewWindow(hwnd);
             }
 
-            void runDetails()
+            void LooterModule::runDetails()
             {
+                const int offsetFromRight = 176;
+                RelativeRect captureRect;
+                captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
+                captureRect.rect.x = -offsetFromRight;
+                captureRect.rect.y = 0;
+                captureRect.rect.w = offsetFromRight;
+                captureRect.rect.h = tibiaClientWindowInfo.rect.h;
 
+                Client::Window::Finder::TibiaWindowsFinder finder(screen);
+                frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
+
+                frameCapturer.captureRightStrip();
+
+                auto windows = finder.findAll(frameCapturer.getLastCaptureRect());
             }
 
-            void applyConfigs()
+            void LooterModule::applyConfigs()
             {
 
             }

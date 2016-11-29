@@ -30,5 +30,25 @@ namespace Amb
 
             screen.toCb();
         }
+
+        void FrameCapturer::captureRightStrip()
+        {
+            const int offsetFromRight = 176;
+            RelativeRect captureRect;
+            captureRect.relationPoint = clientInfo.corners.topRight;
+            captureRect.rect.x = -offsetFromRight;
+            captureRect.rect.y = 0;
+            captureRect.rect.w = offsetFromRight;
+            captureRect.rect.h = clientInfo.rect.h;
+
+            newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
+            lastCaptureRect = captureRect;
+        }
+
+        const RelativeRect& FrameCapturer::getLastCaptureRect() const
+        {
+            return lastCaptureRect;
+        }
+
     }
 }

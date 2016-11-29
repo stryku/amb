@@ -14,7 +14,7 @@ namespace Amb
     {
         namespace Looter
         {
-            class LooterModule : public ModuleCore
+            class LooterModule final : public ModuleCore
             {
             public:
                 LooterModule(const Configs::Looter &config,
@@ -31,10 +31,8 @@ namespace Amb
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;
 
-                void runDetails() override
-                {}
-                void applyConfigs() override
-                {}
+                void runDetails() override;
+                void applyConfigs() override;
             };
         }
     }
