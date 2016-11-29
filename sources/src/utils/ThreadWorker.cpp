@@ -19,6 +19,5 @@ namespace Amb
                     thread.join();
             }
         }
-
     }
 }

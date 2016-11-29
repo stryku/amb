@@ -1,27 +1,15 @@
 #pragma once
 
+#include "client/TibiaClientType.hpp"
+#include "config/layout/health_heart/HealthHeartConfig.hpp"
+#include "config/layout/health_mana_bars/HealthManaBars.hpp"
+
 namespace Amb
 {
-    namespace Config
-    {
-        namespace Layout
-        {
-            namespace HealthHeart
-            {
-                struct HealthHeartConfig;
-            }
-
-            namespace HealthManaBars
-            {
-                struct BarConfig;
-            }
-        }
-    }
     namespace Graphics
     {
         struct Image;
     }
-
 
     namespace Client
     {
@@ -29,18 +17,23 @@ namespace Amb
         {
             class HealthManaReader
             {
-                HealthManaReader(const Graphics::Image &screen,
-                                 Amb::Config::Layout::HealthHeart::HealthHeartConfig &heartConfig);
+            public:
+                HealthManaReader(const Graphics::Image &screen);
 
-                size_t getHpPercent() const;
-                size_t getManaPercent() const;
-                bool findHeart();
+                size_t getHpPercent(const RelativeRect &lastCapturedRect) const;
+                size_t getManaPercent(const RelativeRect &lastCapturedRect) const;
+                bool isVisible(const RelativeRect &lastCapturedRect) const;
+                bool findHeart(const RelativeRect &lastCapturedRect);
+
+                void setTibiaClientType(Client::TibiaClientType clientType);
+
 
             private:
-                size_t getPercent(const Config::Layout::HealthManaBars::BarConfig &config) const;
+                size_t getPercent(const Config::Layout::HealthManaBars::BarConfig &config, const RelativeRect &lastCapturedRect) const;
 
                 const Graphics::Image &screen;
-                Amb::Config::Layout::HealthHeart::HealthHeartConfig &heartConfig;
+                Amb::Config::Layout::HealthHeart::HealthHeartConfig heartLayoutConfig;
+                Amb::Config::Layout::HealthHeart::HealthHeartConfig_2 heartLayoutConfig_2;
                 Amb::Config::Layout::HealthManaBars::BarsConfig barsConfig;
             };
         }

@@ -6,6 +6,8 @@
 #include "db/Database.hpp"
 #include "module/ModulesFactory.hpp"
 #include "ui/updaters/MainWindowTitleUpdater.hpp"
+#include "client/TibiaClientWindowRectObserver.hpp"
+#include "client/TibiaClientRectCornersObserver.hpp"
 
 #include "mainwindow.h"
 
@@ -24,6 +26,7 @@ namespace Amb
         using CurrentConfigFilePathProvider = std::function<std::string()>;
         using ConfigLoader = std::function<void(const std::string&)>;
         using StringValueObserver = Utils::Observable<std::string>::CallbackType;
+        using ClientInfoObserver = std::function<void(const Client::TibiaClientWindowInfo&)>;
 
         Bot(int &argc, char *argv[]);
         ~Bot() {}
@@ -38,7 +41,8 @@ namespace Amb
 
         void openConfiguration(const std::string &configuration)
         {
-            configFromUiGenerator.loadConfigFromString(configuration);
+            configFromUiGenerator.loadConfigFromString(configuration,
+                                                       tibiaClientWindowInfo);
             uiUpdater.update(configFromUiGenerator.getConfigs(), window.getControls());
         }
 
@@ -53,6 +57,7 @@ namespace Amb
         ConfigLoader getConfigLoader();
         StringValueObserver getCharacterNameObserver();
         StringValueObserver getScriptNameObserver();
+        ClientInfoObserver getClientRectObserver();
 
         QApplication application;
         MainWindow window;
@@ -62,6 +67,10 @@ namespace Amb
         Amb::Ui::Updaters::UiUpdater uiUpdater;
         Utils::Observable<std::string> currentConfigFilePath;
         Utils::Observable<std::string> currentCharacterName;
+        //RectCorners currentTibiaClientWindowRectCorners;
+        //Rect currentTibiaClientWindowRect;
+        Client::TibiaClientWindowInfo tibiaClientWindowInfo;
+        Client::TibiaClientWindowRectObserver clientRectObserver;
         Amb::BotCore botCore;
         const Amb::Db::Database db;
     };

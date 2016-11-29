@@ -25,10 +25,13 @@ namespace Amb
 
             void set(const WrappedType &v)
             {
-                value = v;
+                if (value != v)
+                {
+                    value = v;
 
-                if(callback)
-                    callback(value);
+                    if (callback)
+                        callback(value);
+                }
             }
 
             WrappedType get() const

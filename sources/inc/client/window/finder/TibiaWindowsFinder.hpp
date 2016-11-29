@@ -4,6 +4,11 @@
 
 namespace Amb
 {
+    namespace Graphics
+    {
+        class Image;
+    }
+
     namespace Client
     {
         namespace Window
@@ -18,9 +23,16 @@ namespace Amb
                 class TibiaWindowsFinder
                 {
                 public:
-                    std::vector<TibiaWindow> findAll();
+                    TibiaWindowsFinder(const Graphics::Image &screen)
+                        : screen{ screen }
+                    {}
+
+                    std::vector<TibiaWindow> findAll();/*
                     std::vector<MonsterLootWindow> findMonsterLootWindows();
-                    std::vector<PlayerContainerWindow> findPlayerContainerWindows();
+                    std::vector<PlayerContainerWindow> findPlayerContainerWindows();*/
+
+                private:
+                    const Graphics::Image &screen;
                 };
             }
         }

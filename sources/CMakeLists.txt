@@ -29,6 +29,7 @@ set (AMB_inc
             ${inc_dir}/client/reader/HealthManaReader.hpp
             
             ${inc_dir}/client/TibiaClientWindowRectObserver.hpp
+            ${inc_dir}/client/TibiaClientRectCornersObserver.hpp
             
             ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
             
@@ -110,6 +111,7 @@ set (AMB_src
             ${src_dir}/client/reader/HealthManaReader.cpp
             
             ${src_dir}/client/TibiaClientWindowRectObserver.cpp
+            ${src_dir}/client/TibiaClientRectCornersObserver.cpp
             
             ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
             

@@ -21,6 +21,13 @@ namespace Amb
 
                     std::array<Amb::Rgba, Static::pixelsSize> pixels;
                 };
+
+                struct HealthHeartConfig_2
+                {
+                    RelativeRect rect;
+
+                    std::array<Amb::Rgba, Static::pixelsSize> pixels;
+                };
             }
         }
     }

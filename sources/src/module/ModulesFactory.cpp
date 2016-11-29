@@ -3,6 +3,7 @@
 
 #include "Configs.hpp"
 #include "Simulator.hpp"
+#include "utils/Structs.hpp"
 
 #include "ui_mainwindow.h"
 
@@ -14,7 +15,8 @@ namespace
     {
         return std::make_unique<Amb::Module::Heal::Healer>(config.healerConfig,
                                                            config.advancedSettings,
-                                                           simulator);
+                                                           simulator,
+                                                           config.tibiaClientWindowInfo);
     }
 }
 
@@ -22,13 +24,7 @@ namespace
 #ifdef AMB_PRO_COMPILATION
 namespace
 {
-    std::unique_ptr<Amb::Module::Heal::Healer> createHealer(const Amb::Configs::GlobalConfig &config,
-                                                            Amb::Simulate::Simulator &simulator)
-    {
-        return std::make_unique<Amb::Module::Heal::Healer>(config.healerConfig,
-                                                           config.advancedSettings,
-                                                           simulator);
-    }
+
 }
 #else
 #include "module/ui_remover/LooterUiRemover.hpp"
@@ -52,8 +48,6 @@ namespace Amb
                                                                                   Simulate::Simulator &simulator)
         {
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> map;
-
-            map[ModuleId::MOD_HEALER] = createHealer(config, simulator);
 
 #ifdef AMB_PRO_COMPILATION
             map[ModuleId::MOD_HEALER] = createHealer(config, simulator);

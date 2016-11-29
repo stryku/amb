@@ -1,6 +1,6 @@
 #pragma once
 
-#include "client/window/TibiaWindow.h"
+#include "client/window/TibiaWindow.hpp"
 #include "db/Items.hpp"
 
 namespace Amb
@@ -14,8 +14,8 @@ namespace Amb
                 std::vector<Db::ItemId> items;
             };
 
-            using MonsterLootWindow = TibiaItemsWindow;
-            using PlayerContainerWindow = TibiaItemsWindow;
+            //using MonsterLootWindow = TibiaItemsWindow;
+            //using PlayerContainerWindow = TibiaItemsWindow;
         }
     }
 }
