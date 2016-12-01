@@ -56,6 +56,7 @@ namespace Amb
 
             void toCb() const
             {
+#ifndef NDEBUG
                 BITMAPINFOHEADER bmih;
                 bmih.biSize = sizeof(BITMAPINFOHEADER);
                 bmih.biWidth = w;
@@ -95,6 +96,12 @@ namespace Amb
 
                 // cleanup
                 DeleteObject(hbmp);
+#endif
+            }
+
+            Image getSprite(const Rect &rect) const
+            {
+                return getSprite(rect.x, rect.y, rect.w, rect.h);
             }
 
             Image getSprite(size_t reqx, size_t reqy, size_t reqw, size_t reqh) const

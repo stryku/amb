@@ -7,7 +7,7 @@ namespace Amb
 {
     namespace Capture
     {
-        class CoveredWindowCapturer : Amb::Capture::WindowCapturer<CoveredWindowCapturer>
+        class CoveredWindowCapturer : public Amb::Capture::WindowCapturer<CoveredWindowCapturer>
         {
         public:
             void captureWindowImpl(HWND windowHandle, Rect)

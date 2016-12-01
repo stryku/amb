@@ -15,8 +15,8 @@ namespace Amb
                 namespace Static
                 {
                     static constexpr Amb::Size size = { 11,11 };
-                    static constexpr size_t offsetFromRight_11 = 166;
-                    static constexpr size_t offsetFromRight_10 = 163;
+                    static constexpr size_t offsetFromRight_11 = 167;
+                    static constexpr size_t offsetFromRight_10 = 164;
 
                     static constexpr size_t pixelsSize = size.w * size.h;
                     static constexpr std::array<Amb::Rgba, pixelsSize> pixels =

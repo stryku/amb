@@ -48,10 +48,10 @@ namespace Amb
                 {
                     assert(tibiaWindowHandle != NULL);
 
-                    if(isTibia11Mode)
-                        screenCapturerNotCovered.captureWindow(tibiaWindowHandle, screen);
-                    else
-                        screenCapturerCovered.captureWindow(tibiaWindowHandle, screen);
+                    //if(isTibia11Mode)
+                        //screenCapturerNotCovered.captureWindow(tibiaWindowHandle, screen);
+                    //else
+                        //screenCapturerCovered.captureWindow(tibiaWindowHandle, screen);
 
                     if (screen.w == 0 && screen.h == 0)
                         throw std::exception{ "Tibia window is minimalized!" };

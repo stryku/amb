@@ -484,3 +484,28 @@ void MainWindow::on_tabWidgetLooter_currentChanged(int index)
             ui->comboBoxLooterItemsCategories->addItem(QString::fromStdString(cat.name));
     }
 }
+
+void MainWindow::toggleLooter()
+{
+#ifdef AMB_PRO_COMPILATION
+    if (!ui->checkBoxLooterRunning->isChecked())
+    {
+        stopModule(ui->checkBoxHealerRun,
+                   Amb::Module::ModuleId::MOD_LOOTER);
+    }
+    else
+    {
+        if (!startModule(ui->checkBoxLooterRunning,
+            Amb::Module::ModuleId::MOD_LOOTER))
+        {
+            ui->checkBoxHealerRun->setChecked(false);
+        }
+    }
+#endif
+}
+
+void MainWindow::on_checkBoxLooterRunning_clicked()
+{
+    toggleLooter();
+}
+
