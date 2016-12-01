@@ -487,6 +487,7 @@ void MainWindow::on_tabWidgetLooter_currentChanged(int index)
 
 void MainWindow::toggleLooter()
 {
+#ifdef AMB_PRO_COMPILATION
     if (!ui->checkBoxLooterRunning->isChecked())
     {
         stopModule(ui->checkBoxHealerRun,
@@ -500,9 +501,11 @@ void MainWindow::toggleLooter()
             ui->checkBoxHealerRun->setChecked(false);
         }
     }
+#endif
 }
 
 void MainWindow::on_checkBoxLooterRunning_clicked()
 {
     toggleLooter();
 }
+
