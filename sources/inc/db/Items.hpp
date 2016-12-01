@@ -11,10 +11,11 @@ namespace Amb
 {
     namespace Db
     {
+        using ItemId = size_t;
         class Items
         {
         public:
-            static const size_t BadId{ static_cast<size_t>(-1) };
+            static const ItemId BadId{ static_cast<ItemId>(-1) };
 
             struct Item
             {
@@ -29,11 +30,11 @@ namespace Amb
 
             Items();
 
-            bool isThisEmpty(size_t id) const;
+            bool isThisEmpty(ItemId id) const;
 
-            Item get(size_t id) const;
+            Item get(ItemId id) const;
             Item get(const std::string &name) const;
-            size_t getIdByHash(const cexpr::hash_t &hash) const;
+            ItemId getIdByHash(const cexpr::hash_t &hash) const;
 
             std::vector<std::string> getNames() const;
 
@@ -43,8 +44,8 @@ namespace Amb
             }
 
         private:
-            std::map<std::string, size_t> map;
-            std::map<cexpr::hash_t, size_t> hashMap;
+            std::map<std::string, ItemId> map;
+            std::map<cexpr::hash_t, ItemId> hashMap;
         };
     }
 }

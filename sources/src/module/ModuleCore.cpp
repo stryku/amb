@@ -18,9 +18,12 @@ namespace Amb
             }
         }
 
-        ModuleCore::ModuleCore(Simulate::Simulator &simulator) :
-            simulator( simulator )
+        ModuleCore::ModuleCore(Simulate::Simulator &simulator, const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+            : simulator{ simulator }
+            , frameCapturer{ screen, tibiaClientWindowInfo }
+            , tibiaClientWindowInfo{ tibiaClientWindowInfo }
         {}
+
         ModuleCore::~ModuleCore()
         {
             stop();
@@ -32,7 +35,7 @@ namespace Amb
 
             continueRun = true;
 
-            runThread = std::make_unique<std::thread>( runLambda );
+            runThread = std::make_unique<std::thread>(runLambda);
         }
 
         void ModuleCore::stop()
@@ -46,6 +49,17 @@ namespace Amb
         bool ModuleCore::isRunning() const
         {
             return continueRun;
+        }
+
+        void ModuleCore::newFrame()
+        {
+            //frameCapturer.captureWindow()
+        }
+
+        void ModuleCore::attachToNewWindow(HWND hwnd)
+        {
+            frameCapturer.attachToNewWindow(hwnd);
+            simulator.attachToNewWindow(hwnd);
         }
     }
 }

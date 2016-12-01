@@ -6,20 +6,25 @@ namespace Amb
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
-        , configFromUiGenerator(&window, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable())
+        , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
+        , mainWindowTitleUpdater{ window }
         , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
         , window{ db }
+        , currentCharacterName{ getCharacterNameObserver() }
+        , clientRectObserver{ getClientRectObserver() }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
         window.setConfigLoader(getConfigLoader());
-        window.setCurrentConfigFilePathProvider(getCurrentConfigFilePathProvider());
+        window.setScriptNameObserver(getScriptNameObserver());
+        mainWindowTitleUpdater.setBasic();
     }
 
     int Bot::run()
     {
         window.show();
+        clientRectObserver.run();
         return application.exec();
     }
 
@@ -38,14 +43,26 @@ namespace Amb
         return [this] {return getConfigurationToSave(); };
     }
 
-    Bot::CurrentConfigFilePathProvider Bot::getCurrentConfigFilePathProvider()
+    Bot::ClientInfoObserver Bot::getClientRectObserver()
     {
-        return [this] 
-        {
-            return configFromUiGenerator.getConfigs().currentConfigFilePath;
+        return [this](const Client::TibiaClientWindowInfo &info)
+        { 
+            tibiaClientWindowInfo = info;
         };
     }
 
+    Bot::StringValueObserver Bot::getCharacterNameObserver()
+    {
+        return [this](const std::string &str) 
+        { 
+            mainWindowTitleUpdater.characterNameChanged(str); 
+        };
+    }
+
+    Bot::StringValueObserver Bot::getScriptNameObserver()
+    {
+        return [this](const std::string &str) { mainWindowTitleUpdater.scriptNameChanged(str); };
+    }
 
     Bot::ConfigLoader Bot::getConfigLoader()
     {
@@ -80,6 +97,12 @@ namespace Amb
     {
         DWORD pid = Utils::TibiaFinder::findProcessId( newWindowTitle );
 
-        botCore.attachNewProcess( pid );
+        botCore.attachNewProcess(pid);
+
+        const auto charName = Utils::wstringToString(newWindowTitle).substr(std::size("Tibia - ") - 1);
+        currentCharacterName.set(charName);
+
+        const auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);
+        clientRectObserver.attachToNewWindow(hwnd);
     }
 }

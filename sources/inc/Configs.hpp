@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils/Observable.hpp"
 #include "utils.hpp"
 #include "ui/modules/healer/HealRule.hpp"
 #include "utils/Structs.hpp"
@@ -8,10 +9,12 @@
 #include "ui/modules/looter/Category.hpp"
 #include "ui/modules/looter/LootItem.hpp"
 #include "capture/CaptureMode.hpp"
+#include "client/TibiaClientWindowInfo.hpp"
 
 #include <vector>
 #include <iostream>
 #include "client/TibiaClientType.hpp"
+
 
 namespace Amb
 {
@@ -155,9 +158,16 @@ namespace Amb
 
         struct GlobalConfig
         {
+            GlobalConfig(const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+                : tibiaClientWindowInfo{ tibiaClientWindowInfo }
+            {}
+
             DWORD pid;
             HWND hwnd;
+            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo;
             std::string currentConfigFilePath;
+            std::string currentCharacterName;
+
             HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
             Looter looter;
@@ -166,7 +176,7 @@ namespace Amb
             {
                 Utils::PropertyTreeBuilder builder;
 
-                builder.addElement(Utils::PtreeElement<>{"amb.version", "0.0.1"});
+                builder.addElement(Utils::PtreeElement<>{"amb.version", AMB_VERSION});
                 
                 builder.addTree("amb.healer_config", healerConfig.toPtree());
                 advancedSettings.toPropertyTreeBuilder(builder, "amb.advanced_settings");
@@ -175,9 +185,9 @@ namespace Amb
                 return builder.build();
             }
 
-            static GlobalConfig fromString(const std::string &str)
+            static GlobalConfig fromString(const std::string &str, const Client::TibiaClientWindowInfo &info)
             {
-                GlobalConfig ret;
+                GlobalConfig ret{ info };
 
                 boost::property_tree::ptree tree;
                 std::istringstream iss(str);

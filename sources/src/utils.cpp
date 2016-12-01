@@ -1,5 +1,7 @@
 ﻿#include "utils.hpp"
 #include <iostream>
+#include <locale>
+#include <codecvt>
 
 namespace Amb
 {
@@ -176,6 +178,22 @@ namespace Amb
             t.seekg(0);
             t.read(&buffer[0], size);
             return buffer;
+        }
+
+        std::wstring stringToWstring(const std::string& str)
+        {
+            using convert_typeX = std::codecvt_utf8<wchar_t>;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+            return converterX.from_bytes(str);
+        }
+
+        std::string wstringToString(const std::wstring& wstr)
+        {
+            using convert_typeX = std::codecvt_utf8<wchar_t>;
+            std::wstring_convert<convert_typeX, wchar_t> converterX;
+
+            return converterX.to_bytes(wstr);
         }
     }
 }

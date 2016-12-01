@@ -72,5 +72,9 @@ namespace Amb
         }
 
         std::string readWholeFileIntoString(const std::string &path);
+        std::string wstringToString(const std::wstring &wstr);
+        std::wstring stringToWstring(const std::string &str);
     }
+
+
 }

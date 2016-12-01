@@ -19,17 +19,32 @@ namespace Amb
                 const auto sleepTo = std::chrono::system_clock::now() +
                     std::chrono::milliseconds(Utils::RandomBetween{ static_cast<size_t>(advancedSettings.healer.randBetweenChecks.from), 
                                                                     static_cast<size_t>(advancedSettings.healer.randBetweenChecks.to) }.get());
-                reader.newFrame();
 
-                if (!reader.isVisible())
+                const int offsetFromRight = 176;
+                RelativeRect captureRect;
+                captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
+                captureRect.rect.x = -offsetFromRight;
+                captureRect.rect.y = 0;
+                captureRect.rect.w = offsetFromRight;
+                captureRect.rect.h = tibiaClientWindowInfo.rect.h;
+
+                frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
+
+                if (!healthManaReader.isVisible(captureRect))
                 {
+                    //captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
+                    //frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
+
                     qDebug("Heart not on its place, refinding...");
-                    if (!reader.refindHeart())
-                        throw std::exception("Couldn't locate health and mana status!");
+                    if (!healthManaReader.findHeart(captureRect))
+                    {
+                        qDebug("Couldn't locate health and mana status!");
+                        return;
+                    }
                 }
 
-                auto hp = reader.getHpPercent();
-                auto mana = reader.getManaPercent();
+                auto hp = healthManaReader.getHpPercent(captureRect);
+                auto mana = healthManaReader.getManaPercent(captureRect);
 
                 for (const auto &rule : config.rules)
                 {
@@ -45,19 +60,20 @@ namespace Amb
 
             Healer::Healer(const Configs::HealerConfig &config,
                            const Configs::AdvancedSettings &advancedSettings,
-                           Simulate::Simulator &simulator)
-                : ModuleCore{ simulator }
-                , reader{ items }
+                           Simulate::Simulator &simulator,
+                           const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+                : ModuleCore{ simulator, tibiaClientWindowInfo }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
+                , healthManaReader{ screen }
+                //, topRightCorner{ topRightCorner }
             {}
 
             void Healer::applyConfigs()
             {
-                reader.setTibiaClientType(advancedSettings.common.clientType);
+                healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
+                frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
             }
-
-
         }
     }
 }

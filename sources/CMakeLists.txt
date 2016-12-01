@@ -19,8 +19,19 @@ set (AMB_inc
             ${inc_dir}/capture/ItemsWindowReader.hpp
             ${inc_dir}/capture/NotCoveredWindowCapturer.hpp
             ${inc_dir}/capture/WindowCapturer.hpp
+            ${inc_dir}/capture/FrameCapturer.hpp
             
             ${inc_dir}/client/TibiaClientType.hpp
+            
+            ${inc_dir}/client/window/TibiaWindow.hpp
+            ${inc_dir}/client/window/TibiaItemsWindow.hpp
+            
+            ${inc_dir}/client/reader/HealthManaReader.hpp
+            
+            ${inc_dir}/client/TibiaClientWindowRectObserver.hpp
+            ${inc_dir}/client/TibiaClientRectCornersObserver.hpp
+            
+            ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
             
             ${inc_dir}/config/ConfigFileManager.hpp
             
@@ -44,6 +55,7 @@ set (AMB_inc
             ${inc_dir}/module/ModulesFactory.hpp
             
             ${inc_dir}/module/modules/Healer.hpp
+            ${inc_dir}/module/modules/LooterModule.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -64,11 +76,16 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/LooterUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp
+            ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
+            
+            ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
             
             ${inc_dir}/utils/log.hpp
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/utils/ToString.hpp
+            ${inc_dir}/utils/Observable.hpp
+            ${inc_dir}/utils/ThreadWorker.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
                     
@@ -87,8 +104,16 @@ set (AMB_src
             ${src_dir}/capture/DeadCreatureWindowFinder.cpp
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp
+            ${src_dir}/capture/FrameCapturer.cpp
             
             ${src_dir}/client/TibiaClientType.cpp
+            
+            ${src_dir}/client/reader/HealthManaReader.cpp
+            
+            ${src_dir}/client/TibiaClientWindowRectObserver.cpp
+            ${src_dir}/client/TibiaClientRectCornersObserver.cpp
+            
+            ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
             
@@ -100,10 +125,18 @@ set (AMB_src
             ${src_dir}/module/ModuleCore.cpp
             ${src_dir}/module/ModulesFactory.cpp
             
+            ${src_dir}/module/modules/LooterModule.cpp
+            
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
             ${src_dir}/ui/modules/looter/Items.cpp
+            
+            ${src_dir}/utils/ThreadWorker.cpp
+            
+            ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
+            
+            ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
             
             PARENT_SCOPE)

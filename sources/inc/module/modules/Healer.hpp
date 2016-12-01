@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ui/modules/healer/HealRule.hpp"
+#include "client/reader/HealthManaReader.hpp"
 #include "module/ModuleCore.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
@@ -17,28 +18,21 @@ namespace Amb
             class Healer : public ModuleCore
             {
             private:
-                Db::Items items;
-                Readers::details::TibiaReader reader;
-
                 const Configs::HealerConfig &config;
                 const Configs::AdvancedSettings &advancedSettings;
+                Client::Reader::HealthManaReader healthManaReader;
 
                 void executeRule( const Amb::Module::Heal::HealRule &rule );
+                //void setTibiaClientType(Client::TibiaClientType type) override;
+                void runDetails() override;
+                void applyConfigs() override;
 
-                void runDetails();
-                void applyConfigs();
 
             public:
                 Healer(const Configs::HealerConfig &config,
                        const Configs::AdvancedSettings &advancedSettings,
-                       Simulate::Simulator &simulator);
-                ~Healer()
-                {}
-
-                void attachToNewWindow(HWND hwnd)
-                {
-                    reader.attachToNewWindow(hwnd);
-                }
+                       Simulate::Simulator &simulator,
+                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
             };
         }
     }

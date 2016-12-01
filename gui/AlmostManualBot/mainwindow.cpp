@@ -8,6 +8,7 @@
 #include <QMessageBox>
 
 #include <algorithm>
+#include <experimental/filesystem>
 
 MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     : QMainWindow(parent)
@@ -216,6 +217,17 @@ const Amb::Ui::Module::Looter::LooterItemsTable& MainWindow::getLooterItemsTable
 {
     return *(looterItemsTable.get());
 }
+
+void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> observer)
+{
+    configFileManager.setPathObserver(
+    [this, observer](const std::string &path)
+    {
+        const auto filename = std::experimental::filesystem::path(path).filename();
+        observer(filename.string());
+    });
+}
+
 
 void MainWindow::setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler )
 {
@@ -472,3 +484,28 @@ void MainWindow::on_tabWidgetLooter_currentChanged(int index)
             ui->comboBoxLooterItemsCategories->addItem(QString::fromStdString(cat.name));
     }
 }
+
+void MainWindow::toggleLooter()
+{
+#ifdef AMB_PRO_COMPILATION
+    if (!ui->checkBoxLooterRunning->isChecked())
+    {
+        stopModule(ui->checkBoxHealerRun,
+                   Amb::Module::ModuleId::MOD_LOOTER);
+    }
+    else
+    {
+        if (!startModule(ui->checkBoxLooterRunning,
+            Amb::Module::ModuleId::MOD_LOOTER))
+        {
+            ui->checkBoxHealerRun->setChecked(false);
+        }
+    }
+#endif
+}
+
+void MainWindow::on_checkBoxLooterRunning_clicked()
+{
+    toggleLooter();
+}
+
