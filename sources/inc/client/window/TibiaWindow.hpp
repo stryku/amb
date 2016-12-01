@@ -10,9 +10,11 @@ namespace Amb
         {
             struct TibiaWindow
             {
-                static constexpr size_t MinPixelsBetweenPatterns = 43;
+                static constexpr size_t MinPixelsBetweenPatterns = 39;
                 static constexpr size_t PatternsOffsetFromRight = 14;
+                static constexpr size_t Width = 176;
                 static constexpr Size PatternSize = { 9,3 };
+
                 static constexpr Pos BeginOfWindowPatternOffset = Pos{ 162, 5 };
                 static constexpr std::array<Rgba, PatternSize.w*PatternSize.h> BeginOfWindowPatternPixels = { Rgba{ 36, 36, 36, 255 }, Rgba{ 47, 47, 47, 255 }, Rgba{ 38, 38, 38, 255 }, Rgba{ 108, 108, 108, 255 }, Rgba{ 181, 181, 181, 255 }, Rgba{ 181, 181, 181, 255 }, Rgba{ 92, 92, 92, 255 }, Rgba{ 39, 39, 39, 255 }, Rgba{ 34, 34, 34, 255 }, Rgba{ 52, 52, 52, 255 }, Rgba{ 46, 46, 46, 255 }, Rgba{ 101, 101, 101, 255 }, Rgba{ 176, 176, 176, 255 }, Rgba{ 108, 108, 108, 255 }, Rgba{ 133, 133, 133, 255 }, Rgba{ 174, 174, 174, 255 }, Rgba{ 82, 82, 82, 255 }, Rgba{ 42, 41, 41, 255 }, Rgba{ 43, 44, 43, 255 }, Rgba{ 102, 102, 102, 255 }, Rgba{ 175, 175, 175, 255 }, Rgba{ 104, 104, 104, 255 }, Rgba{ 50, 49, 48, 255 }, Rgba{ 49, 49, 49, 255 }, Rgba{ 131, 131, 131, 255 }, Rgba{ 174, 174, 174, 255 }, Rgba{ 86, 86, 86, 255 } };
 
@@ -21,6 +23,7 @@ namespace Amb
 
                 static constexpr Rect IconRect = Rect{ 5,2, 11,11 };
                 static constexpr Pos TitleOffset = Pos{ 20,10 };
+
 
                 Graphics::Image icon;
                 Graphics::Image title;

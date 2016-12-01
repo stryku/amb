@@ -22,9 +22,17 @@ namespace
 
 
 #ifdef AMB_PRO_COMPILATION
+#include "module/modules/LooterModule.hpp"
 namespace
 {
-
+    std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
+                                                                    Amb::Simulate::Simulator &simulator)
+    {
+        return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
+                                                                   config.advancedSettings,
+                                                                   simulator,
+                                                                   config.tibiaClientWindowInfo);
+    }
 }
 #else
 #include "module/ui_remover/LooterUiRemover.hpp"
@@ -49,8 +57,9 @@ namespace Amb
         {
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> map;
 
-#ifdef AMB_PRO_COMPILATION
             map[ModuleId::MOD_HEALER] = createHealer(config, simulator);
+#ifdef AMB_PRO_COMPILATION
+            map[ModuleId::MOD_LOOTER] = createLooter(config, simulator);
 #else
             removeProVersionUi(ui);
 #endif //MODULE_COMPILE_LOOTER

@@ -5,6 +5,7 @@
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
 #include "db/Items.hpp"
+#include "client/window/finder/TibiaWindowsFinder.hpp"
 
 #include <chrono>
 
@@ -14,7 +15,7 @@ namespace Amb
     {
         namespace Looter
         {
-            class LooterModule : public ModuleCore
+            class LooterModule final : public ModuleCore
             {
             public:
                 LooterModule(const Configs::Looter &config,
@@ -26,15 +27,14 @@ namespace Amb
 
             private:
                 Db::Items items;
-                Readers::details::TibiaReader reader;
+                Client::Window::Finder::TibiaWindowsFinder windowsFinder;
+                //Readers::details::TibiaReader reader;
 
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;
 
-                void runDetails() override
-                {}
-                void applyConfigs() override
-                {}
+                void runDetails() override;
+                void applyConfigs() override;
             };
         }
     }

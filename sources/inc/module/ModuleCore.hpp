@@ -26,7 +26,7 @@ namespace Amb
             bool isRunning() const;
 
             //virtual void setTibiaClientType(Client::TibiaClientType type) = 0;
-            virtual void attachToNewWindow(HWND hwnd) = 0;
+            void attachToNewWindow(HWND hwnd);
 
         protected:
             std::unique_ptr<std::thread> runThread;
@@ -42,7 +42,6 @@ namespace Amb
             virtual void runDetails() = 0;
             virtual void runMethod();
             virtual void applyConfigs() = 0;
-            virtual void initFrameRect() = 0;
         };
     }
 }
