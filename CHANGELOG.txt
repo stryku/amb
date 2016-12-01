@@ -1,5 +1,8 @@
-v0.2
+v0.2-beta - 01.12.2016
+-spent: 109,5h
+-loc: 4,4k
 -changing window title
+-fixed reading screen bugs
 
 v0.1-beta - 23.11.2016
 -spent: 81,5h
