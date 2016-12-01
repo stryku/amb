@@ -53,7 +53,8 @@ public:
     void setRefreshLayoutHandler(std::function<void()> newHandler);
     void setConfigProvider(std::function<std::string()> provider);
     void setCurrentConfigFilePathProvider(std::function<std::string()> provider);
-    void setConfigLoader( std::function<void(const std::string&)> loader);
+    void setConfigLoader(std::function<void(const std::string&)> loader);
+    void setScriptNameObserver( std::function<void(const std::string&)> observer);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -84,6 +85,8 @@ private slots:
 
     void on_tabWidgetLooter_currentChanged(int index);
 
+    void on_checkBoxLooterRunning_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -105,6 +108,7 @@ private:
 
     void updateTibiaClientsComboBox();
     void toggleHealer();
+    void toggleLooter();
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,

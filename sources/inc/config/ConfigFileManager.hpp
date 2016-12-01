@@ -1,5 +1,7 @@
 #pragma once
 
+#include "utils/Observable.hpp"
+
 #include <string>
 #include <fstream>
 
@@ -10,12 +12,20 @@ namespace Amb
         class ConfigFileManager
         {
         public:
+            ConfigFileManager() = default;
+            ConfigFileManager(Utils::Observable<std::string>::CallbackType cb);
+
+            void setPathObserver(Utils::Observable<std::string>::CallbackType cb)
+            {
+                currentFilePath.setCallback(cb);
+            }
+
             void save(const std::string &configs, std::string path = "");
             std::string load(const std::string &path);
             bool isPathEmpty() const;
 
         private:
-            std::string currentFilePath;
+            Utils::Observable<std::string> currentFilePath;
         };
     }
 }

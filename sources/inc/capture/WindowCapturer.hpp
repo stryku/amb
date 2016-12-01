@@ -6,6 +6,10 @@
 
 #include <type_traits>
 
+#include <boost/optional.hpp>
+
+#include <QDebug>
+
 namespace Amb
 {
     namespace Capture
@@ -25,30 +29,26 @@ namespace Amb
                 ReleaseDC(NULL, hScreen);
             }
 
-            void captureWindow(HWND windowHandle, Graphics::Image &img)
+            void captureWindow(HWND windowHandle, const Rect& clientRect, Graphics::Image &img, boost::optional<Rect> rect = {})
             {
-                //Graphics::Image img;
-                RECT rc;
-                GetClientRect(windowHandle, &rc);
-                if (rc.bottom == 0 && rc.right == 0)
-                {
-                    qDebug("Window is minimized!");
-                    //return{};
-                }
+                //Rect rc = rect ? rect.get() : clientRect;
+                Rect rc = clientRect;
 
-                img.w = rc.right - rc.left;
-                img.h = rc.bottom - rc.top;
-                img.resize();
+                Graphics::Image fullWindow;
+
+                fullWindow.w = rc.w;
+                fullWindow.h = rc.h;
+                fullWindow.resize();
 
                 HBITMAP hbmp = CreateCompatibleBitmap(hScreen,
-                                                      rc.right - rc.left, rc.bottom - rc.top);
+                                                      rc.w, rc.h);
                 SelectObject(hDC, hbmp);
 
                 static_cast<CaptureDetails*>(this)->captureWindowImpl(windowHandle, 
-                                                                      Rect{ static_cast<int>(rc.left), 
-                                                                            static_cast<int>(rc.top),
-                                                                            static_cast<size_t>(img.w),
-                                                                            static_cast<size_t>(img.h)});
+                                                                      Rect{ static_cast<int>(rc.x), 
+                                                                            static_cast<int>(rc.y),
+                                                                            static_cast<size_t>(rc.w),
+                                                                            static_cast<size_t>(rc.h)});
 
                 BITMAPINFO MyBMInfo = { 0 };
                 MyBMInfo.bmiHeader.biSize = sizeof(MyBMInfo.bmiHeader);
@@ -64,12 +64,14 @@ namespace Amb
                 MyBMInfo.bmiHeader.biHeight = abs(MyBMInfo.bmiHeader.biHeight);
 
                 if (0 == GetDIBits(hDC, hbmp, 0, MyBMInfo.bmiHeader.biHeight,
-                    img.pixelsPtr(), &MyBMInfo, DIB_RGB_COLORS))
+                    fullWindow.pixelsPtr(), &MyBMInfo, DIB_RGB_COLORS))
                 {
                     // error handling
                 }
 
                 DeleteObject(hbmp);
+
+                img = fullWindow.getSprite(rect.get());
 
                 //return img;
             }
@@ -77,6 +79,30 @@ namespace Amb
         protected:
             HDC hScreen{ NULL };
             HDC hDC{ NULL };
+
+        private:
+            RECT getRectToCapture(const Rect& clientRect, const boost::optional<Rect> &rect) const
+            {
+                RECT rc;
+                const auto r = rect.get();
+
+                if (rect)
+                {
+                    rc.left = r.x;
+                    rc.top = r.y;
+                    rc.bottom = rc.top + r.h;
+                    rc.right = rc.left + r.w;
+                }
+                else
+                {
+                    rc.left = clientRect.x;
+                    rc.top = clientRect.y;
+                    rc.right = rc.left + clientRect.w;
+                    rc.bottom = rc.top + clientRect.h;
+                }
+
+                return rc;
+            }
         };
     }
 }
