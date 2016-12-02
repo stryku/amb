@@ -11,6 +11,7 @@ namespace Amb
         {
             struct TibiaItemsWindow : public TibiaWindow
             {
+                TibiaItemsWindow() = default;
                 TibiaItemsWindow(const TibiaWindow &window)
                     : TibiaWindow(window)
                 {}
@@ -20,4 +21,3 @@ namespace Amb
         }
     }
 }
-

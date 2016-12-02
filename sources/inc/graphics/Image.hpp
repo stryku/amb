@@ -113,7 +113,8 @@ namespace Amb
 
                 img.pixels.reserve(reqw*reqh);
 
-                Pos base = { reqx, reqy + reqh - 1 };
+                Pos base = { static_cast<int>(reqx), 
+                             static_cast<int>(reqy + reqh - 1) };
 
                 auto it = img.pixels.begin();
                 for (size_t y = 0; y < reqh; ++y)

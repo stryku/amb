@@ -73,6 +73,11 @@ namespace Amb
         {
             return Pos{ x + static_cast<int>(w), y + static_cast<int>(h) };
         }
+
+        Pos pos() const
+        {
+            return topLeft();
+        }
     };
 
 

@@ -1,22 +1,24 @@
 #include "capture/ItemsWindowReader.hpp"
 #include "graphics/Image.hpp"
+#include "client/window/TibiaItemsWindow.hpp"
 
 namespace Amb
 {
     namespace Capture
     {
+        ItemsWindowReader::ItemsWindowReader(const Graphics::Image &screen,
+                                             const Db::Items &itemsDb)
+            : screen{ screen }
+            , itemsDb{ itemsDb }
+            , itemCapturer{ screen, this->itemsDb }
+        {}
 
-
-        ItemWindow ItemsWindowReader::read(const Pos &pos) const
+        std::vector<Db::ItemId> ItemsWindowReader::readItems(const Client::Window::TibiaItemsWindow &window) const
         {
-            ItemWindow ret;
-
-            ret.startPos = pos;
-            const auto rows = countVisibleItemsRows(pos);
-            ret.items = readItems(pos, rows);
-
-            return ret;
+            const auto rows = countVisibleItemsRows(window.rect.pos());
+            return readItems(window.rect.pos(), rows);
         }
+
 
         size_t ItemsWindowReader::countVisibleItemsRows(const Pos &pos) const
         {

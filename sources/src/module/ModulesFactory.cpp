@@ -4,10 +4,12 @@
 #include "Configs.hpp"
 #include "Simulator.hpp"
 #include "utils/Structs.hpp"
+#include "db/Items.hpp"
 
 #include "ui_mainwindow.h"
 
 #include "module/modules/Healer.hpp"
+
 namespace 
 {
     std::unique_ptr<Amb::Module::Heal::Healer> createHealer(const Amb::Configs::GlobalConfig &config,
@@ -31,7 +33,8 @@ namespace
         return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
                                                                    config.advancedSettings,
                                                                    simulator,
-                                                                   config.tibiaClientWindowInfo);
+                                                                   config.tibiaClientWindowInfo,
+                                                                   Amb::Db::Items{});
     }
 }
 #else
