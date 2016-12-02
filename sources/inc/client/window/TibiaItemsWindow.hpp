@@ -11,11 +11,12 @@ namespace Amb
         {
             struct TibiaItemsWindow : public TibiaWindow
             {
+                TibiaItemsWindow(const TibiaWindow &window)
+                    : TibiaWindow(window)
+                {}
+
                 std::vector<Db::ItemId> items;
             };
-
-            //using MonsterLootWindow = TibiaItemsWindow;
-            //using PlayerContainerWindow = TibiaItemsWindow;
         }
     }
 }

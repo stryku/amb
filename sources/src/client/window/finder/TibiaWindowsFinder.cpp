@@ -1,5 +1,6 @@
 #include "client/window/finder/TibiaWindowsFinder.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
+#include "capture/ConstPixels.hpp"
 
 namespace Amb
 {
@@ -9,7 +10,7 @@ namespace Amb
         {
             namespace Finder
             {
-                std::vector<TibiaWindow> TibiaWindowsFinder::findAll(const RelativeRect &lastCapturedRect)
+                std::vector<TibiaWindow> TibiaWindowsFinder::findAll(const RelativeRect &lastCapturedRect) const
                 {
                     auto rect = createInitialWindowPatternRect(lastCapturedRect);
 
@@ -32,6 +33,31 @@ namespace Amb
                     rect.rect.y = TibiaWindow::BeginOfWindowPatternOffset.y;
 
                     return rect.relativeToRect(lastCapturedRect);
+                }
+
+                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findMonsterLootWindows(const RelativeRect &lastCapturedRect) const
+                {
+                    constexpr Pos patternOffsetFromWindow{ 20,10 };
+                    constexpr Size patternSize{ 28,1 };
+
+                    const auto allWindows = findAll(lastCapturedRect);
+
+                    std::vector<TibiaItemsWindow> monsterLootWindows;
+
+                    for (const auto &window : allWindows)
+                    {
+                        const Rect rect{ window.rect.x + patternOffsetFromWindow.x,
+                                         window.rect.y + patternOffsetFromWindow.y,
+                                         patternSize.w,
+                                         patternSize.h };
+
+                        const auto sprite = screen.getSprite(rect);
+
+                        if (sprite == ConstPixels::Dead || sprite == ConstPixels::Slain)
+                            monsterLootWindows.emplace_back(window);
+                    }
+
+                    return monsterLootWindows;
                 }
 
 
