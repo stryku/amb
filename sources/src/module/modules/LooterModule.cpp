@@ -26,11 +26,12 @@ namespace Amb
                 frameCapturer.captureRightStrip();
                 const auto &lastCapturedRect = frameCapturer.getLastCaptureRect();
                 auto windows = windowsFinder.findAll(lastCapturedRect);
-                auto monsterWindows = windowsFinder.findMonsterLootWindows(lastCapturedRect);
+                auto itemWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect);
+                //auto monsterWindows = windowsFinder.findMonsterLootWindows(lastCapturedRect);
 
-                if (!monsterWindows.empty())
+                if (!itemWindows.empty())
                 {
-                    auto items = itemsWindowReader.readItems(monsterWindows[0]);
+                    auto items = itemsWindowReader.readItems(itemWindows[0]);
                 }
             }
 
