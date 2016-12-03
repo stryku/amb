@@ -19,7 +19,6 @@ namespace Amb
             return readItems(window.rect.pos(), rows);
         }
 
-
         size_t ItemsWindowReader::countVisibleItemsRows(const Pos &pos) const
         {
             const size_t headerSize{ 20 };

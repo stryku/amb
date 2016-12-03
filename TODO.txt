@@ -5,10 +5,19 @@ gui
     menu item about
 
 config
-    config loader
     detect corrupted file
     config different versions loader
     
 modules
     looter
-        create
+        check out potions images
+        
+        
+        
+helpers
+    db updater
+        items
+        monsters
+        run it on raspberry
+    amb_helper
+        db manager
