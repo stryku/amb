@@ -421,7 +421,7 @@ void MainWindow::on_pushButtonLooterItemsEdit_clicked()
 
     if (it == std::end(categories))
     {
-        auto msg = QString("Category '%1' doesn't exist anymore.").arg(item.name.c_str());
+        auto msg = QString("Category '%1' doesn't exist anymore.").arg(item.category.c_str());
         QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
         setCombobox = false;
     }
