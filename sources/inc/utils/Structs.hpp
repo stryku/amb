@@ -128,6 +128,16 @@ namespace Amb
 
             return ret;
         }
+
+        Pos relativeToThis(const Pos &point) const
+        {
+            Pos ret = Pos{ relationPoint.x + rect.x, relationPoint.y + rect.y };;
+
+            ret.x += point.x;
+            ret.y += point.y;
+
+            return ret;
+        }
     };
 
     struct RelativeRectToReferencePoint

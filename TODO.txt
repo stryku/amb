@@ -8,6 +8,13 @@ config
     detect corrupted file
     config different versions loader
     
+simulators
+    mouse
+        click
+        move
+    kb
+        ctrl, shift klick
+        
 modules
     looter
         check out potions images

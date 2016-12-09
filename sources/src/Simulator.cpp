@@ -46,5 +46,12 @@ namespace Amb
         {
             windowHwnd = hwnd;
         }
+
+        void Simulator::mouseClick(const Pos &pos) const
+        {
+            PostMessage(windowHwnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(500, 200));
+            PostMessage(windowHwnd, WM_LBUTTONUP, MK_LBUTTON, MAKELPARAM(500, 200));
+        }
+
     }
 }

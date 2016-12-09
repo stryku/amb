@@ -9,23 +9,19 @@
 
 namespace Amb
 {
+    struct Pos;
+
     namespace Simulate
     {
         class Simulator
         {
-        private:
-            static const size_t defMinRandomBetween = 15;
-            static const size_t defMaxRandomBetween = 50;
-
-            HWND windowHwnd;
-
-            static WPARAM hotkeyToWparam( Utils::Hotkey hotkey );
-
         public:
             Simulator()
             {}
             ~Simulator()
             {}
+
+            void mouseClick(const Pos &pos) const;
 
             void hotkey( Utils::Hotkey hotkey,
                          Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
@@ -34,6 +30,14 @@ namespace Amb
                                Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
 
             void attachToNewWindow(HWND hwnd);
+
+        private:
+            static const size_t defMinRandomBetween = 15;
+            static const size_t defMaxRandomBetween = 50;
+
+            HWND windowHwnd;
+
+            static WPARAM hotkeyToWparam(Utils::Hotkey hotkey);
         };
     }
 }

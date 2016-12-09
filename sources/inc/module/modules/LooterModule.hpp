@@ -25,8 +25,6 @@ namespace Amb
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                              const Db::Items &itemsDb);
 
-                void attachToNewWindow(HWND hwnd);
-
             private:
                 Db::Items items;
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
@@ -37,6 +35,10 @@ namespace Amb
 
                 void runDetails() override;
                 void applyConfigs() override;
+
+                void moveItems(const Client::Window::TibiaItemsWindow &from, 
+                               const Client::Window::TibiaItemsWindow &to,
+                               const RelativeRect &capturedRect);
             };
         }
     }
