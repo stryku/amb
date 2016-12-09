@@ -50,7 +50,7 @@ namespace Amb
                                   category.destination);
                     }
 
-                    void set(const const Category &category, size_t row)
+                    void set(const Category &category, size_t row)
                     {
                         table.set(row,
                                   category.name,

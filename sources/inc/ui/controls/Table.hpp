@@ -93,7 +93,7 @@ namespace Amb
                 template <typename Type>
                 std::vector<Type> getAll() const
                 {
-                    int rowCount = model->rowCount();
+                    size_t rowCount = static_cast<size_t>(model->rowCount());
                     std::vector<Type> ret;
 
                     for (size_t i = 0; i < rowCount; ++i)
@@ -114,7 +114,7 @@ namespace Amb
                         if (newRow >= 0 && newRow < model->rowCount())
                         {
                             const auto rowItem = model->takeRow(row);
-                            if (row < newRow - offset)
+                            if (static_cast<int>(row) < newRow - offset)
                                 ++newRow;
 
                             model->insertRow(newRow, rowItem);
