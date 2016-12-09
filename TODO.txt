@@ -28,3 +28,6 @@ helpers
         run it on raspberry
     amb_helper
         db manager
+     
+items
+    smp

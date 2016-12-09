@@ -29,6 +29,11 @@ namespace Amb
             void keyDownAndUp( WPARAM key,
                                Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
 
+            void ctrlDown();
+            void ctrlUp();
+            void shiftDown();
+            void shiftUp();
+
             void attachToNewWindow(HWND hwnd);
 
         private:

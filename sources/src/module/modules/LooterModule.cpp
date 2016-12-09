@@ -116,7 +116,9 @@ namespace Amb
                         toPos = capturedRect.relativeToThis(toPos);
 
                         fromPos += from.itemOffset(i);
+                        simulator.ctrlDown();
                         mouseSimulator.dragAndDrop(fromPos, toPos);
+                        simulator.ctrlUp();
                     }
                 }
             }
