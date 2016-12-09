@@ -34,6 +34,7 @@ namespace Amb
 
             Item get(ItemId id) const;
             Item get(const std::string &name) const;
+            ItemId getId(const std::string &name) const;
             ItemId getIdByHash(const cexpr::hash_t &hash) const;
 
             std::vector<std::string> getNames() const;

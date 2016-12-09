@@ -17,6 +17,11 @@ namespace Amb
                 {}
 
                 std::vector<Db::ItemId> items;
+                static constexpr Pos itemOffset(const size_t itemNumber)
+                {
+                    return Pos{ static_cast<int>((itemNumber % 4) * 37 + 20), 
+                                static_cast<int>((itemNumber / 4) * 37 + 20) };
+                }
             };
         }
     }

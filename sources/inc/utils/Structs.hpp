@@ -20,6 +20,18 @@ namespace Amb
         {
             return !(*this == rhs);
         }
+
+        Pos& operator+(const Pos &rhs)
+        {
+            return Pos{ x + rhs.x, y + rhs.y };
+        }
+
+        Pos& operator+=(const Pos &rhs)
+        {
+            x += rhs.x;
+            y += rhs.y;
+            return *this;
+        }
     };
 
     struct Size

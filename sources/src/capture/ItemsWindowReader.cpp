@@ -52,7 +52,7 @@ namespace Amb
                     const auto itemId = itemCapturer.captureId({ static_cast<int>(rowStart.x + j *offset), 
                                                                  static_cast<int>(rowStart.y + i *offset) });
 
-                    if (itemId == Db::Items::BadId || itemsDb.isThisEmpty(itemId))
+                    if (itemId != Db::Items::BadId && itemsDb.isThisEmpty(itemId))
                         return items;
 
                     items.emplace_back(itemId);

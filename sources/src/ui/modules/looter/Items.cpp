@@ -43,6 +43,17 @@ namespace Amb
             return ItemsDb[id];
         }
 
+        ItemId Items::getId(const std::string &name) const
+        {
+            const auto it = map.find(name);
+
+            if (it == std::end(map))
+                return static_cast<ItemId>(-1);
+
+            const auto id = it->second;
+            return id;
+        }
+
         std::vector<std::string> Items::getNames() const
         {
             std::vector<std::string> ret;
