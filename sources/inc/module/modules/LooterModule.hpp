@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "ui/modules/healer/HealRule.hpp"
 #include "module/ModuleCore.hpp"
@@ -36,14 +36,16 @@ namespace Amb
                 void runDetails() override;
                 void applyConfigs() override;
 
-                void moveItems(const Client::Window::TibiaItemsWindow &from, 
-                               const std::vector<Client::Window::TibiaItemsWindow> &to,
-                               const RelativeRect &capturedRect);
+                void lootItemsFromWindow(const std::vector<size_t> &itemsPositions,
+                                         const Client::Window::TibiaItemsWindow &windowToLootFrom,
+                                         const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
+                                         const RelativeRect &capturedRect);
 
                 bool lootableItem(const Db::ItemId &id) const;
 
                 Pos findPosToMoveLootItem(const Db::ItemId &id, const std::vector<Client::Window::TibiaItemsWindow> &to) const;
                 const Amb::Ui::Module::Looter::LootItem& findItem(const Db::ItemId &id) const;
+                std::vector<size_t> findLootableItemsPositions(const std::vector<Db::ItemId> &items) const;
             };
         }
     }

@@ -1,6 +1,8 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 
+#include <boost/range/adaptor/reversed.hpp>
+
 #include <chrono>
 
 namespace Amb
@@ -25,20 +27,44 @@ namespace Amb
             {
                 frameCapturer.captureRightStrip();
                 const auto &lastCapturedRect = frameCapturer.getLastCaptureRect();
-                auto windows = windowsFinder.findAll(lastCapturedRect);
-                auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect);
                 auto monsterWindows = windowsFinder.findMonsterLootWindows(lastCapturedRect);
 
-                if (!monsterWindows.empty() && !playerWindows.empty())
+                if (!monsterWindows.empty())
                 {
-                    monsterWindows[0].items = itemsWindowReader.readItems(monsterWindows[0]);
-                    if (!monsterWindows[0].items.empty())
+                    const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect);
+
+                    if (!playerWindows.empty())
                     {
-                        moveItems(monsterWindows[0], playerWindows, lastCapturedRect);
+                        for (auto &monsterWindow : monsterWindows)
+                        {
+                            const auto items = itemsWindowReader.readItems(monsterWindow);
+                            const auto lootableItemsPositions = findLootableItemsPositions(items);
+
+                            if (!lootableItemsPositions.empty())
+                            {
+                                monsterWindow.items = items;
+                                lootItemsFromWindow(lootableItemsPositions, 
+                                                    monsterWindow, 
+                                                    playerWindows, 
+                                                    lastCapturedRect);
+                                break;
+                            }
+                        }
                     }
                 }
 
                 std::this_thread::sleep_for(std::chrono::milliseconds{ 200 });
+            }
+
+            std::vector<size_t> LooterModule::findLootableItemsPositions(const std::vector<Db::ItemId> &items) const
+            {
+                std::vector<size_t> ret;
+
+                for(size_t i = 0; i < items.size(); ++i)
+                    if (lootableItem(items[i]))
+                        ret.push_back(i);
+
+                return ret;
             }
 
             void LooterModule::applyConfigs()
@@ -79,7 +105,6 @@ namespace Amb
                     assert(false);
             }
 
-
             Pos LooterModule::findPosToMoveLootItem(const Db::ItemId &id, 
                                                     const std::vector<Client::Window::TibiaItemsWindow> &playerWindows) const
             {
@@ -97,34 +122,30 @@ namespace Amb
                 return pos;
             }
 
-            void LooterModule::moveItems(const Client::Window::TibiaItemsWindow &from,
-                                         const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
-                                         const RelativeRect &capturedRect)
+            void LooterModule::lootItemsFromWindow(const std::vector<size_t> &itemsPositions,
+                                                   const Client::Window::TibiaItemsWindow &windowToLootFrom,
+                                                   const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
+                                                   const RelativeRect &capturedRect)
             {
-                auto fromPos = Pos{ from.rect.x + 20, from.rect.y + 20 };
+                auto windowRelativePos = Pos{ windowToLootFrom.rect.x + 20, 
+                                              windowToLootFrom.rect.y + 20 };
 
-                fromPos = capturedRect.relativeToThis(fromPos);
+                windowRelativePos = capturedRect.relativeToThis(windowRelativePos);
 
-                if (from.items.empty())
-                    return;
-
-                for(int i = from.items.size() - 1; i >= 0; --i)
+                for (auto itemPositionInWindow : boost::adaptors::reverse(itemsPositions))
                 {
-                    if (from.items[i] != Db::Items::BadId && lootableItem(from.items[i]))
-                    {
-                        auto toPos = findPosToMoveLootItem(from.items[i], playerContainers);
-                        toPos = capturedRect.relativeToThis(toPos);
+                    const auto &itemId = windowToLootFrom.items[itemPositionInWindow];
+                    auto toPos = findPosToMoveLootItem(itemId, playerContainers);
+                    toPos = capturedRect.relativeToThis(toPos);
 
-                        fromPos += from.itemOffset(i);
-                        simulator.ctrlDown();
-                        mouseSimulator.dragAndDrop(fromPos, toPos);
-                        simulator.ctrlUp();
-                    }
+                    const auto fromPos = windowRelativePos + windowToLootFrom.itemOffset(itemPositionInWindow);
+                    simulator.ctrlDown();
+                    std::this_thread::sleep_for(std::chrono::milliseconds{ 100 });
+                    mouseSimulator.dragAndDrop(fromPos, toPos);
+                    std::this_thread::sleep_for(std::chrono::milliseconds{ 100 });
+                    simulator.ctrlUp();
                 }
             }
-
         }
     }
 }
-
-

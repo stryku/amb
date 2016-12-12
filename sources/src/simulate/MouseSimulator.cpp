@@ -93,10 +93,9 @@ namespace Amb
             const Amb::Utils::RandomBetween random = { 50,100 };
 
             POINT p;
-            GetCursorPos(&p);
 
             down(from, Button::LEFT);
-            std::this_thread::sleep_for(std::chrono::milliseconds{ random.get() });
+            GetCursorPos(&p);
             SetCursorPos(p.x, p.y + delta);
             std::this_thread::sleep_for(std::chrono::milliseconds{ random.get() });
             up(to, Button::LEFT);
