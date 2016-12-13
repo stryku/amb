@@ -31,8 +31,6 @@ namespace Amb
 
             Containers();
 
-            bool isThisEmpty(ItemId id) const;
-
             Container get(ItemId id) const;
             Container get(const std::string &name) const;
             ItemId getId(const std::string &name) const;

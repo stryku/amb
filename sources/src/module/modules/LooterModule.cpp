@@ -14,13 +14,14 @@ namespace Amb
             LooterModule::LooterModule(const Configs::Looter &config,
                                        const Configs::AdvancedSettings &advancedSettings,
                                        Simulate::Simulator &simulator,
-                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
-                                       const Db::Items &itemsDb)
+                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo/*,
+                                       const Db::Items &itemsDb,
+                                       const Db::Containers &containers*/)
                 : ModuleCore{ simulator, tibiaClientWindowInfo }
                 , windowsFinder{ screen }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
-                , itemsWindowReader{ screen, itemsDb }
+                , itemsWindowReader{ screen, items }
             {}
 
             void LooterModule::runDetails()
@@ -87,7 +88,7 @@ namespace Amb
                 return found != std::cend(config.items);
             }
 
-            const Amb::Ui::Module::Looter::LootItem& LooterModule::findItem(const Db::ItemId &id) const
+            const Amb::Ui::Module::Looter::LootItem& LooterModule::findLootableItem(const Db::ItemId &id) const
             {
                 const auto pred = [this, id](const Amb::Ui::Module::Looter::LootItem &item)
                 {
@@ -108,7 +109,7 @@ namespace Amb
             Pos LooterModule::findPosToMoveLootItem(const Db::ItemId &id, 
                                                     const std::vector<Client::Window::TibiaItemsWindow> &playerWindows) const
             {
-                const auto& lootableItem = findItem(id);
+                const auto& lootableItem = findLootableItem(id);
                 const size_t containerIndex = lootableItem.category[0] - '0';
                 size_t itemPos = 0;
 
@@ -135,8 +136,18 @@ namespace Amb
                 for (auto itemPositionInWindow : boost::adaptors::reverse(itemsPositions))
                 {
                     const auto &itemId = windowToLootFrom.items[itemPositionInWindow];
-                    auto toPos = findPosToMoveLootItem(itemId, playerContainers);
-                    toPos = capturedRect.relativeToThis(toPos);
+
+                    const auto destinationName = findLootableItemDestination(itemId);
+                    auto toOptional = findDestinationPosition(destinationName, playerContainers);
+
+                    if (!toOptional)
+                    {
+                        qDebug("Destination not found: %s", destinationName.c_str());
+                        continue;
+                    }
+
+                    auto toPos = *toOptional;
+                    toPos=  capturedRect.relativeToThis(toPos);
 
                     const auto fromPos = windowRelativePos + windowToLootFrom.itemOffset(itemPositionInWindow);
                     simulator.ctrlDown();
@@ -146,6 +157,40 @@ namespace Amb
                     simulator.ctrlUp();
                 }
             }
+
+            std::string LooterModule::findLootableItemDestination(const Db::ItemId &id) const
+            {
+                const auto &item = findLootableItem(id);
+                const auto &categoryName = item.category;
+
+                const auto pred = [&categoryName](const Amb::Ui::Module::Looter::Category &category)
+                {
+                    return categoryName == category.name;
+                };
+
+                const auto found = std::find_if(std::cbegin(config.categories),
+                                                std::cend(config.categories),
+                                                pred);
+
+                if (found != std::cend(config.categories))
+                    return found->destination;
+                else
+                    assert(false);
+            }
+
+            boost::optional<Pos> LooterModule::findDestinationPosition(const std::string &destinationName,
+                                                                       const std::vector<Client::Window::TibiaItemsWindow> &playerContainers) const
+            {
+                const auto destinationContainerDbItem = containers.get(destinationName);
+
+                for (const auto &window : playerContainers)
+                    if (window.icon.hash() == destinationContainerDbItem.iconHash)
+                        return window.itemPosition(0);
+
+                return{};
+            }
+
+
         }
     }
 }

@@ -33,8 +33,7 @@ namespace
         return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
                                                                    config.advancedSettings,
                                                                    simulator,
-                                                                   config.tibiaClientWindowInfo,
-                                                                   Amb::Db::Items{});
+                                                                   config.tibiaClientWindowInfo);
     }
 }
 #else

@@ -90,6 +90,16 @@ namespace Amb
         {
             return topLeft();
         }
+
+        Rect operator+(const Pos &pos) const
+        {
+            Rect ret = *this;
+
+            ret.x += pos.x;
+            ret.y += pos.y;
+
+            return ret;
+        }
     };
 
 

@@ -1,6 +1,7 @@
 #include "client/window/finder/TibiaWindowsFinder.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 #include "capture/ConstPixels.hpp"
+#include "config/layout/window_icon_text/WindowIconTextConfig.hpp"
 
 namespace Amb
 {
@@ -74,6 +75,11 @@ namespace Amb
                             window.rect.x = rect.x - TibiaWindow::BeginOfWindowPatternOffset.x;
                             window.rect.y = rect.y - TibiaWindow::BeginOfWindowPatternOffset.y;
                             rect.y += TibiaWindow::MinPixelsBetweenPatterns;
+
+                            auto iconRect = Config::Layout::WindowIconText::WindowIconTextConfig::IconOffsetRect;
+                            iconRect.y += window.rect.y;
+
+                            window.icon = capturedStrip.getSprite(iconRect);
                         }
                         else if (sprite == TibiaWindow::EndOfWindowPatternPixels)
                         {

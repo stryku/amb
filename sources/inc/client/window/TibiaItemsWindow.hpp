@@ -22,6 +22,11 @@ namespace Amb
                     return Pos{ static_cast<int>((itemNumber % 4) * 37 + 20), 
                                 static_cast<int>((itemNumber / 4) * 37 + 20) };
                 }
+
+                Pos itemPosition(const size_t itemNumber) const
+                {
+                    return rect.pos() + itemOffset(itemNumber);
+                }
             };
         }
     }
