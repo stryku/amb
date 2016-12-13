@@ -31,3 +31,6 @@ helpers
      
 items
     smp
+    blood preservation
+    tooth file
+    vampire's cape chain
