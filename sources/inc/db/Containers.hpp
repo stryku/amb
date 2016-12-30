@@ -1,5 +1,7 @@
 #pragma once
 
+#include "db/static/containers/ContainersDbItem.hpp"
+
 #include <cexpr/crypto.hpp>
 
 #include <vector>
@@ -17,22 +19,10 @@ namespace Amb
         public:
             static const ItemId BadId{ static_cast<ItemId>(-1) };
 
-            struct Container
-            {
-                std::string name;
-                cexpr::hash_t iconHash;
-                cexpr::hash_t textHash;
-
-                bool isValid() const
-                {
-                    return !name.empty();
-                }
-            };
-
             Containers();
 
-            Container get(ItemId id) const;
-            Container get(const std::string &name) const;
+            Static::Containers::Item get(ItemId id) const;
+            Static::Containers::Item get(const std::string &name) const;
             ItemId getId(const std::string &name) const;
             ItemId getIdByHash(const cexpr::hash_t &hash) const;
 
