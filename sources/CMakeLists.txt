@@ -43,10 +43,13 @@ set (AMB_inc
             
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBars.hpp
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.hpp
-            
+
             ${inc_dir}/db/Database.hpp
             ${inc_dir}/db/Items.hpp
             ${inc_dir}/db/Containers.hpp
+            
+            ${inc_dir}/db/static/containers/ContainersDbItem.hpp
+            ${inc_dir}/db/static/containers/ContainersDbData.hpp
             
             ${inc_dir}/graphics/Image.hpp
             
@@ -125,6 +128,8 @@ set (AMB_src
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
             
             ${src_dir}/db/Containers.cpp
+            
+            ${src_dir}/db/static/containers/ContainersDbData.cpp
             
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
