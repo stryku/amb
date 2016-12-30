@@ -43,10 +43,12 @@ set (AMB_inc
             
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBars.hpp
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.hpp
-            
+
             ${inc_dir}/db/Database.hpp
             ${inc_dir}/db/Items.hpp
             ${inc_dir}/db/Containers.hpp
+            
+            ${inc_dir}/db/static/containers/ContainerDbItem.hpp
             
             ${inc_dir}/graphics/Image.hpp
             
