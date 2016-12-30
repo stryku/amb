@@ -21,7 +21,7 @@ namespace Amb
             return !(*this == rhs);
         }
 
-        Pos& operator+(const Pos &rhs)
+        Pos operator+(const Pos &rhs)
         {
             return Pos{ x + rhs.x, y + rhs.y };
         }
