@@ -51,6 +51,9 @@ set (AMB_inc
             ${inc_dir}/db/static/containers/ContainersDbItem.hpp
             ${inc_dir}/db/static/containers/ContainersDbData.hpp
             
+            ${inc_dir}/db/static/items/ItemsDbItem.hpp
+            ${inc_dir}/db/static/items/ItemsDbData.hpp
+            
             ${inc_dir}/graphics/Image.hpp
             
             ${inc_dir}/module/Module.hpp
@@ -130,6 +133,8 @@ set (AMB_src
             ${src_dir}/db/Containers.cpp
             
             ${src_dir}/db/static/containers/ContainersDbData.cpp
+            
+            ${src_dir}/db/static/items/ItemsDbData.cpp
             
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
