@@ -10,7 +10,7 @@ namespace Amb
         {
             namespace Items
             {
-                extern const std::array<Item, 1825> ItemsDb;
+                extern const std::array<Item, 1829> ItemsDb;
             }
         }
     }
