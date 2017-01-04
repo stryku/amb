@@ -15,11 +15,6 @@ namespace Amb
         class Simulator
         {
         public:
-            Simulator()
-            {}
-            ~Simulator()
-            {}
-
             void mouseClick(const Pos &pos) const;
 
             void hotkey( Utils::Hotkey hotkey,
