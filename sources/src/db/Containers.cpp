@@ -64,6 +64,11 @@ namespace Amb
             const auto id = it->second;
             return id;
         }
+
+        bool Containers::existByName(const std::string &name) const
+        {
+            return nameToIdMap.find(name) != std::cend(nameToIdMap);
+        }
     }
 }
 

@@ -33,6 +33,8 @@ namespace Amb
                 return nameToIdMap.size();
             }
 
+            bool existByName(const std::string &name) const;
+
         private:
             std::map<std::string, ItemId> nameToIdMap;
             std::map<cexpr::hash_t, ItemId> iconHashToId;
