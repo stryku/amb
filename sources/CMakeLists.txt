@@ -94,6 +94,9 @@ set (AMB_inc
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
             
+            ${inc_dir}/utils/random/RandomBetween.hpp
+            ${inc_dir}/utils/random/RandomOffsetFromRect.hpp
+            
             ${inc_dir}/utils/traits/traits.hpp
             
             ${inc_dir}/simulate/MouseSimulator.hpp
