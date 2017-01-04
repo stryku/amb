@@ -10,6 +10,26 @@
 #include <algorithm>
 #include <experimental/filesystem>
 
+namespace
+{
+    template <typename Container, typename Parent>
+    QCompleter* createCompleter(const Container &container, Parent *parent)
+    {
+        QCompleter *completer;
+        QStringList strList;
+
+        strList.reserve(container.size());
+
+        for (const auto &item : container)
+            strList << QString::fromStdString(item);
+
+        completer = new QCompleter(strList, parent);
+        completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+        return completer;
+    }
+}
+
 MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     : QMainWindow(parent)
     , ui{ new Ui::MainWindow }
@@ -22,16 +42,12 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
     
     updateTibiaClientsComboBox();
-    QStringList strList;
 
-    strList.reserve(db.items.size());
-
-    for (const auto &item : db.items.getNames())
-        strList << QString::fromStdString(item);
-
-    itemsCompleter = new QCompleter(strList, this);
-    itemsCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);
+
+    containersCompleter = createCompleter(db.containers.getNames(), this);
+    ui->editLooterCategoriesNewCategoryDestination->setCompleter(containersCompleter);
 }
 
 MainWindow::~MainWindow()

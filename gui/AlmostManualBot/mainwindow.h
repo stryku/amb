@@ -91,6 +91,7 @@ private:
     Ui::MainWindow *ui;
 
     QCompleter *itemsCompleter;
+    QCompleter *containersCompleter;
 
     const Amb::Db::Database &db;
     Amb::Config::ConfigFileManager configFileManager;
