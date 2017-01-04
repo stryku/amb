@@ -19,7 +19,8 @@ modules
     looter
         check out potions images
         
-        
+logs
+    logs
         
 helpers
     db updater
