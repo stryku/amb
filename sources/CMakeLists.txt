@@ -93,9 +93,10 @@ set (AMB_inc
             ${inc_dir}/utils/ToString.hpp
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
+            ${inc_dir}/utils/ForwardDeclarePos.hpp
             
             ${inc_dir}/utils/random/RandomBetween.hpp
-            ${inc_dir}/utils/random/RandomOffsetFromRect.hpp
+            ${inc_dir}/utils/random/RandomOffset.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
             

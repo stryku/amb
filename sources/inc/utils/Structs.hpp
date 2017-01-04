@@ -35,6 +35,12 @@ namespace Amb
                 y += rhs.y;
                 return *this;
             }
+
+            template <typename RhsPointType>
+            static PosImpl from(const PosImpl<RhsPointType> &rhs)
+            {
+                return PosImpl{ static_cast<T>(rhs.x), static_cast<T>(rhs.y) };
+            }
         };
     }
 

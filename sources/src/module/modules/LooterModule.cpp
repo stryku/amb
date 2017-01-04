@@ -1,5 +1,6 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
+#include "utils/random/RandomOffset.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 
@@ -126,8 +127,9 @@ namespace Amb
                                                    const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
                                                    const RelativeRect &capturedRect)
             {
-                auto windowRelativePos = Pos{ windowToLootFrom.rect.x + 20, 
-                                              windowToLootFrom.rect.y + 20 };
+                static const Utils::Random::RandomOffset randomOffset{ 32, 32 };
+
+                auto windowRelativePos = windowToLootFrom.itemPosition(0) + Pos::from(randomOffset.get());
 
                 windowRelativePos = capturedRect.relativeToThis(windowRelativePos);
 

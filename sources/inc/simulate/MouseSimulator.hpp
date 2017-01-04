@@ -1,10 +1,11 @@
 #pragma once
 
+#include "utils/ForwardDeclarePos.hpp"
+
 #include <Windows.h>
 
 namespace Amb
 {
-    struct Pos;
 
     namespace Simulate
     {

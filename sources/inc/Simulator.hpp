@@ -2,6 +2,7 @@
 
 #include "utils.hpp"
 #include "TibiaFinder.hpp"
+#include "utils/ForwardDeclarePos.hpp"
 
 #include <Windows.h>
 
@@ -9,8 +10,6 @@
 
 namespace Amb
 {
-    struct Pos;
-
     namespace Simulate
     {
         class Simulator
