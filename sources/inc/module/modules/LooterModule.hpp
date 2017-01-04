@@ -23,9 +23,7 @@ namespace Amb
                 LooterModule(const Configs::Looter &config,
                              const Configs::AdvancedSettings &advancedSettings,
                              Simulate::Simulator &simulator,
-                             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo/*,
-                             const Db::Items &itemsDb,
-                             const Db::Containers &containers*/);
+                             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
 
             private:
                 Db::Items items;
