@@ -362,7 +362,7 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
 {
     Amb::Ui::Module::Looter::Category category;
 
-    auto name = ui->editLooterCategoriesNewCategorName->text();
+    const auto name = ui->editLooterCategoriesNewCategorName->text();
 
     if (looterCategoriesTable->categoryExists(name.toStdString()))
     {
@@ -371,8 +371,17 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
         return;
     }
 
+    const auto destination = ui->editLooterCategoriesNewCategoryDestination->text();
+
+    if (!db.containers.existByName(destination.toStdString()))
+    {
+        auto msg = QString("Container '%1' doesn't exist.").arg(destination);
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
     category.name = name.toStdString();
-    category.destination = ui->editLooterCategoriesNewCategoryDestination->text().toStdString();
+    category.destination = destination.toStdString();
     category.toOnto = ui->comboBoxLooterCategoriesToOnto->currentIndex();
 
     looterCategoriesTable->add(category);
