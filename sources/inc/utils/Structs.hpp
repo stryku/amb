@@ -8,31 +8,38 @@
 
 namespace Amb
 {
-    struct Pos
+    namespace details
     {
-        int x, y;
-        bool operator==(const Pos &rhs) const
+        template <typename T>
+        struct PosImpl
         {
-            return x == rhs.x && y == rhs.y;
-        }
+            T x, y;
+            bool operator==(const PosImpl &rhs) const
+            {
+                return x == rhs.x && y == rhs.y;
+            }
 
-        bool operator!=(const Pos &rhs) const
-        {
-            return !(*this == rhs);
-        }
+            bool operator!=(const PosImpl &rhs) const
+            {
+                return !(*this == rhs);
+            }
 
-        Pos operator+(const Pos &rhs)
-        {
-            return Pos{ x + rhs.x, y + rhs.y };
-        }
+            PosImpl operator+(const PosImpl &rhs)
+            {
+                return PosImpl{ x + rhs.x, y + rhs.y };
+            }
 
-        Pos& operator+=(const Pos &rhs)
-        {
-            x += rhs.x;
-            y += rhs.y;
-            return *this;
-        }
-    };
+            PosImpl& operator+=(const PosImpl &rhs)
+            {
+                x += rhs.x;
+                y += rhs.y;
+                return *this;
+            }
+        };
+    }
+
+    using Pos = details::PosImpl<int>;
+    using Offset = details::PosImpl<size_t>;
 
     struct Size
     {
