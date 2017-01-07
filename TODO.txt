@@ -1,7 +1,5 @@
 gui
-    remove reset layout button
     improve window title changes
-    open config to window title
     menu item about
     
     
@@ -21,7 +19,7 @@ simulators
         
 modules
     looter
-        items directly from monsters
+        loot items directly from monsters loot list
         
 logs
     logs

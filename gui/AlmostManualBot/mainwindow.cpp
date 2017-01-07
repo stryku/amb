@@ -256,11 +256,6 @@ void MainWindow::setTtibiaWindowChangedHandler( std::function<void(const std::ws
     tibiaWindowChangedHandler = newHandler;
 }
 
-void MainWindow::setRefreshLayoutHandler(std::function<void()> newHandler)
-{
-    refreshLayoutHandler = newHandler;
-}
-
 void MainWindow::setConfigProvider(std::function<std::string()> provider)
 {
     configToSaveProvider = provider;
@@ -302,12 +297,6 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
     {
         qDebug()<<"Catch std::exception: "<<e.what();
     }
-}
-
-
-void MainWindow::on_refreshLayoutButton_clicked()
-{
-    refreshLayoutHandler();
 }
 
 void MainWindow::on_actionOpen_triggered()
