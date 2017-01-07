@@ -27,7 +27,7 @@ namespace Amb
 
             private:
                 Db::Items items;
-                Db::Containers containers;
+                Db::Containers containersDb;
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
 
                 const Configs::Looter &config;
@@ -45,6 +45,10 @@ namespace Amb
                 bool lootableItem(const Db::ItemId &id) const;
 
                 std::string findLootableItemDestination(const Db::ItemId &id) const;
+                const Amb::Ui::Module::Looter::Category findLootableItemCategory(const Db::ItemId &id) const;
+
+                boost::optional<Pos> findCategoryDestinationPosition(const Amb::Ui::Module::Looter::Category &category,
+                                                                     const std::vector<Client::Window::TibiaItemsWindow> &playerContainers) const;
 
                 Pos findPosToMoveLootItem(const Db::ItemId &id, const std::vector<Client::Window::TibiaItemsWindow> &to) const;
                 const Amb::Ui::Module::Looter::LootItem& findLootableItem(const Db::ItemId &id) const;

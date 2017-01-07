@@ -11,6 +11,8 @@
 #include "capture/CaptureMode.hpp"
 #include "client/TibiaClientWindowInfo.hpp"
 
+#include <boost/assert.hpp>
+
 #include <vector>
 #include <iostream>
 #include "client/TibiaClientType.hpp"
@@ -106,6 +108,22 @@ namespace Amb
         {
             std::vector<Amb::Ui::Module::Looter::Category> categories;
             std::vector<Amb::Ui::Module::Looter::LootItem> items;
+
+            Amb::Ui::Module::Looter::Category findCategory(const std::string &categoryName) const
+            {
+                auto pred = [&categoryName](const auto &category)
+                {
+                    return category.name == categoryName;
+                };
+
+                const auto it = std::find_if(std::cbegin(categories),
+                                             std::cend(categories),
+                                             pred);
+
+                BOOST_ASSERT_MSG(it != std::cend(categories), "Could not fing category");
+
+                return *it;
+            }
 
             auto toPtree() const
             {

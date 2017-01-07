@@ -3,6 +3,7 @@
 #include "utils/random/RandomOffset.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
+#include <boost/assert.hpp>
 
 #include <chrono>
 
@@ -137,12 +138,12 @@ namespace Amb
                 {
                     const auto &itemId = windowToLootFrom.items[itemPositionInWindow];
 
-                    const auto destinationName = findLootableItemDestination(itemId);
-                    auto toOptional = findDestinationPosition(destinationName, playerContainers);
+                    const auto category = findLootableItemCategory(itemId);
+                    auto toOptional = findCategoryDestinationPosition(category, playerContainers);
 
                     if (!toOptional)
                     {
-                        qDebug("Destination not found: %s", destinationName.c_str());
+                        qDebug("Destination not found: %s", category.destination.c_str());
                         continue;
                     }
 
@@ -158,30 +159,46 @@ namespace Amb
                 }
             }
 
-            std::string LooterModule::findLootableItemDestination(const Db::ItemId &id) const
+            const Amb::Ui::Module::Looter::Category LooterModule::findLootableItemCategory(const Db::ItemId &id) const
             {
                 const auto &item = findLootableItem(id);
                 const auto &categoryName = item.category;
+                return config.findCategory(categoryName);
+            }
 
-                const auto pred = [&categoryName](const Amb::Ui::Module::Looter::Category &category)
+            std::string LooterModule::findLootableItemDestination(const Db::ItemId &id) const
+            {
+                const auto itemLootCategory = findLootableItemCategory(id);
+                return itemLootCategory.destination;
+            }
+
+            boost::optional<Pos> LooterModule::findCategoryDestinationPosition(const Amb::Ui::Module::Looter::Category &category,
+                                                                               const std::vector<Client::Window::TibiaItemsWindow> &playerContainers) const
+            {
+                if (category.toOnto == Ui::Module::Looter::ToOnto::To)
                 {
-                    return categoryName == category.name;
-                };
-
-                const auto found = std::find_if(std::cbegin(config.categories),
-                                                std::cend(config.categories),
-                                                pred);
-
-                if (found != std::cend(config.categories))
-                    return found->destination;
+                    return findDestinationPosition(category.destination, playerContainers);
+                }
                 else
-                    assert(false);
+                {
+                    const auto destinationContainerItemId = items.getByName(category.destination);
+
+                    for (const auto &window : playerContainers)
+                    {
+                        const auto items = itemsWindowReader.readItems(window);
+                        for (size_t i = 0; i < items.size(); ++i)
+                            if (items[i] == destinationContainerItemId)
+                                return window.itemPosition(i);
+                    }
+
+                    return{};
+                }
             }
 
             boost::optional<Pos> LooterModule::findDestinationPosition(const std::string &destinationName,
                                                                        const std::vector<Client::Window::TibiaItemsWindow> &playerContainers) const
             {
-                const auto destinationContainerDbItem = containers.get(destinationName);
+                const auto destinationContainerDbItem = containersDb.get(destinationName);
 
                 for (const auto &window : playerContainers)
                     if (window.icon.hash() == destinationContainerDbItem.iconHash)

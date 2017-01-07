@@ -25,7 +25,7 @@ namespace Amb
 
                 Pos itemPosition(const size_t itemNumber) const
                 {
-                    return rect.pos() + itemOffset(itemNumber);
+                    return rect.pos() + itemOffset(itemNumber) + Pos::from(FirstItemOffset);
                 }
             };
         }

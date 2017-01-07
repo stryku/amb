@@ -1,6 +1,8 @@
 #include "db/Items.hpp"
 #include "db/static/items/ItemsDbData.hpp"
 
+#include <QDebug>
+
 namespace Amb
 {
     namespace Db
@@ -75,6 +77,16 @@ namespace Amb
             const cexpr::hash_t emptyHash{ 11876655800301230214 };
 
             return Static::Items::ItemsDb[id].hashes[0] == emptyHash;
+        }
+
+        ItemId Items::getByName(const std::string &name) const
+        {
+            const auto found = map.find(name);
+
+            if (found == std::cend(map))
+                qDebug("Item %s not found", name.c_str());
+            else
+                return found->second;
         }
     }
 }
