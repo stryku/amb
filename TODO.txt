@@ -4,6 +4,7 @@ gui
     open config to window title
     menu item about
     
+    
 cmake 
     get rid of hardcoded boost and qt path
 
@@ -20,7 +21,7 @@ simulators
         
 modules
     looter
-        check out potions images
+        items directly from monsters
         
 logs
     logs
