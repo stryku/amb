@@ -1,8 +1,11 @@
 gui
     remove reset layout button
-    character nick to window title
+    improve window title changes
     open config to window title
     menu item about
+    
+cmake 
+    get rid of hardcoded boost and qt path
 
 config
     detect corrupted file
@@ -21,6 +24,9 @@ modules
         
 logs
     logs
+
+db
+    create generic database class
         
 helpers
     db updater
