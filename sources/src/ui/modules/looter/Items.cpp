@@ -84,7 +84,10 @@ namespace Amb
             const auto found = map.find(name);
 
             if (found == std::cend(map))
+            {
                 qDebug("Item %s not found", name.c_str());
+                return BadId;
+            }
             else
                 return found->second;
         }
