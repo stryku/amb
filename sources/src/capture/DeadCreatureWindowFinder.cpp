@@ -16,7 +16,7 @@ namespace Amb
             Pos pos{ 1186 + 20, 257 + 10 };
             const auto maxY = screen.h - 32;
 
-            while (pos.y < maxY)
+            while (static_cast<size_t>(pos.y) < maxY)
             {
                 const auto sprite = screen.getSprite(pos.x, pos.y, 28, 1);
                 if (sprite == ConstPixels::Dead || sprite == ConstPixels::Slain)

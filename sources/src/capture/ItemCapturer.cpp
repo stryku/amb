@@ -11,6 +11,7 @@ namespace Amb
         size_t ItemCapturer::captureId(const Pos &pos) const
         {
             const auto itemSprite = screen.getSprite(pos.x, pos.y, 32, 21);
+            itemSprite.toCb();
             const auto hash = itemSprite.hash();
 
             return itemsDb.getIdByHash(hash);

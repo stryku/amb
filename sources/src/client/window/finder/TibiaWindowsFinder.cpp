@@ -1,5 +1,7 @@
 #include "client/window/finder/TibiaWindowsFinder.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
+#include "capture/ConstPixels.hpp"
+#include "config/layout/window_icon_text/WindowIconTextConfig.hpp"
 
 namespace Amb
 {
@@ -9,7 +11,7 @@ namespace Amb
         {
             namespace Finder
             {
-                std::vector<TibiaWindow> TibiaWindowsFinder::findAll(const RelativeRect &lastCapturedRect)
+                std::vector<TibiaWindow> TibiaWindowsFinder::findAll(const RelativeRect &lastCapturedRect) const
                 {
                     auto rect = createInitialWindowPatternRect(lastCapturedRect);
 
@@ -34,6 +36,31 @@ namespace Amb
                     return rect.relativeToRect(lastCapturedRect);
                 }
 
+                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findPlayerContainerWindows(const RelativeRect &lastCapturedRect) const
+                {
+                    const auto allWindows = findAll(lastCapturedRect);
+
+                    std::vector<TibiaItemsWindow> windows;
+
+                    for (const auto &window : allWindows)
+                        if (!isMonsterLootWindow(window))
+                            windows.emplace_back(window);
+
+                    return windows;
+                }
+
+                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findMonsterLootWindows(const RelativeRect &lastCapturedRect) const
+                {
+                    const auto allWindows = findAll(lastCapturedRect);
+
+                    std::vector<TibiaItemsWindow> monsterLootWindows;
+
+                    for (const auto &window : allWindows)
+                        if (isMonsterLootWindow(window))
+                            monsterLootWindows.emplace_back(window);
+
+                    return monsterLootWindows;
+                }
 
                 boost::optional<TibiaWindow> TibiaWindowsFinder::findNextWindow(Rect &rect, const Graphics::Image &capturedStrip) const
                 {
@@ -48,6 +75,11 @@ namespace Amb
                             window.rect.x = rect.x - TibiaWindow::BeginOfWindowPatternOffset.x;
                             window.rect.y = rect.y - TibiaWindow::BeginOfWindowPatternOffset.y;
                             rect.y += TibiaWindow::MinPixelsBetweenPatterns;
+
+                            auto iconRect = Config::Layout::WindowIconText::WindowIconTextConfig::IconOffsetRect;
+                            iconRect.y += window.rect.y;
+
+                            window.icon = capturedStrip.getSprite(iconRect);
                         }
                         else if (sprite == TibiaWindow::EndOfWindowPatternPixels)
                         {
@@ -59,6 +91,23 @@ namespace Amb
 
                     return{};
                 }
+
+                bool TibiaWindowsFinder::isMonsterLootWindow(const TibiaWindow &window) const
+                {
+                    constexpr Pos patternOffsetFromWindow{ 20,10 };
+                    constexpr Size patternSize{ 28,1 };
+
+                    const Rect rect{ window.rect.x + patternOffsetFromWindow.x,
+                                     window.rect.y + patternOffsetFromWindow.y,
+                                     patternSize.w,
+                                     patternSize.h };
+
+                    const auto sprite = screen.getSprite(rect);
+
+                    return sprite == ConstPixels::Dead || sprite == ConstPixels::Slain;
+                }
+
+
                 /*std::vector<MonsterLootWindow> TibiaWindowsFinder::findMonsterLootWindows()
                 {}
                 std::vector<PlayerContainerWindow> TibiaWindowsFinder::findPlayerContainerWindows()

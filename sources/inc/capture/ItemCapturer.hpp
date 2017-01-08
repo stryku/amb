@@ -7,7 +7,7 @@ namespace Amb
 {
     namespace Graphics
     {
-        class Image;
+        struct Image;
     }
 
     namespace Db

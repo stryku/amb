@@ -43,9 +43,16 @@ set (AMB_inc
             
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBars.hpp
             ${inc_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.hpp
-            
+
             ${inc_dir}/db/Database.hpp
             ${inc_dir}/db/Items.hpp
+            ${inc_dir}/db/Containers.hpp
+            
+            ${inc_dir}/db/static/containers/ContainersDbItem.hpp
+            ${inc_dir}/db/static/containers/ContainersDbData.hpp
+            
+            ${inc_dir}/db/static/items/ItemsDbItem.hpp
+            ${inc_dir}/db/static/items/ItemsDbData.hpp
             
             ${inc_dir}/graphics/Image.hpp
             
@@ -86,8 +93,14 @@ set (AMB_inc
             ${inc_dir}/utils/ToString.hpp
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
+            ${inc_dir}/utils/ForwardDeclarePos.hpp
+            
+            ${inc_dir}/utils/random/RandomBetween.hpp
+            ${inc_dir}/utils/random/RandomOffset.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
+            
+            ${inc_dir}/simulate/MouseSimulator.hpp
                     
             PARENT_SCOPE)
 					
@@ -121,6 +134,12 @@ set (AMB_src
             
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
             
+            ${src_dir}/db/Containers.cpp
+            
+            ${src_dir}/db/static/containers/ContainersDbData.cpp
+            
+            ${src_dir}/db/static/items/ItemsDbData.cpp
+            
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
             ${src_dir}/module/ModulesFactory.cpp
@@ -138,5 +157,7 @@ set (AMB_src
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
+            
+            ${src_dir}/simulate/MouseSimulator.cpp
             
             PARENT_SCOPE)

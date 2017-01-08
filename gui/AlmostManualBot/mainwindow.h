@@ -61,7 +61,6 @@ public:
 private slots:
     void on_checkBoxHealerRun_clicked();
     void on_cbTibiaClients_currentIndexChanged(const QString &arg1);
-    void on_refreshLayoutButton_clicked();
 
     void on_actionOpen_triggered();
     void on_actionExit_triggered();
@@ -91,6 +90,7 @@ private:
     Ui::MainWindow *ui;
 
     QCompleter *itemsCompleter;
+    QCompleter *containersCompleter;
 
     const Amb::Db::Database &db;
     Amb::Config::ConfigFileManager configFileManager;
@@ -101,7 +101,6 @@ private:
 
     std::function<bool(Amb::Module::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
-    std::function<void()> refreshLayoutHandler;
     std::function<std::string()> configToSaveProvider;
     std::function<std::string()> currentConfigFilePathProvider;
     std::function<void(const std::string&)> configLoader;

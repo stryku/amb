@@ -1,14 +1,39 @@
 gui
-    remove reset layout button
-    character nick to window title
-    open config to window title
+    improve window title changes
     menu item about
+    
+    
+cmake 
+    get rid of hardcoded boost and qt path
 
 config
-    config loader
     detect corrupted file
     config different versions loader
     
+simulators
+    mouse
+        click
+        move
+    kb
+        ctrl, shift klick
+        
 modules
     looter
-        create
+        loot items directly from monsters loot list
+        
+logs
+    logs
+
+db
+    create generic database class
+        
+helpers
+    db updater
+        items
+        monsters
+        run it on raspberry
+    amb_helper
+        db manager
+     
+items
+    potions
