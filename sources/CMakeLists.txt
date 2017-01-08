@@ -101,6 +101,7 @@ set (AMB_inc
             ${inc_dir}/utils/traits/traits.hpp
             
             ${inc_dir}/security/debug/DebugModeChecker.hpp
+            ${inc_dir}/security/debug/DebugModeCheckerFactory.hpp
             
             ${inc_dir}/simulate/MouseSimulator.hpp
                     
@@ -161,6 +162,7 @@ set (AMB_src
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
 
             ${src_dir}/security/debug/DebugModeChecker.cpp
+            ${src_dir}/security/debug/DebugModeCheckerFactory.cpp
             
             ${src_dir}/simulate/MouseSimulator.cpp
             

@@ -12,11 +12,10 @@ namespace Amb
         {
             class DebugModeChecker
             {
-            private: 
-                using Callback = std::function<void()>;
-
             public:
-                DebugModeChecker(Callback debugModeDetectedCallback);
+                using CallbackType = std::function<void()>;
+
+                DebugModeChecker(CallbackType debugModeDetectedCallback);
                 ~DebugModeChecker();
 
             private:
@@ -33,7 +32,7 @@ namespace Amb
                 bool checkNtQueryInformationProcess() const;
                 bool checkCheckRemoteDebuggerPresent() const;
 
-                Callback debugModeDetectedCallback;
+                CallbackType debugModeDetectedCallback;
                 Utils::ThreadWorker threadWorker;
             };
         }

@@ -1,5 +1,7 @@
 #include "security/debug/DebugModeChecker.hpp"
 
+#include <spdlog/spdlog.h>
+
 #include <Windows.h>
 #include <Winternl.h>
 
@@ -9,7 +11,7 @@ namespace Amb
     {
         namespace Debug
         {
-            DebugModeChecker::DebugModeChecker(Callback debugModeDetectedCallback)
+            DebugModeChecker::DebugModeChecker(CallbackType debugModeDetectedCallback)
             {
                 auto loop = [this, debugModeDetectedCallback]
                 {
