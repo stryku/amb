@@ -91,7 +91,7 @@ add_executable(Amb ${AMB_src_qt}
 						  ${AMB_inc} 
 						  $<TARGET_OBJECTS:AMBMocObjects>)
 						  
-target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
+target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES} ntdll.lib)
 
 
 install(TARGETS Amb DESTINATION  ${install_dir}/)
