@@ -25,6 +25,11 @@ if (AMB_PRO_COMPILATION)
     add_definitions(-DAMB_PRO_COMPILATION)
 endif()
 
+option(PREVENT_DEBUG "Add code to prevent debugging" OFF)
+if (PREVENT_DEBUG)
+    add_definitions(-DAMB_PREVENT_DEBUG)
+endif()
+
 set(BOOST_ROOT C:/moje/libs/boost/boost_1_61_0)
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
@@ -91,7 +96,7 @@ add_executable(Amb ${AMB_src_qt}
 						  ${AMB_inc} 
 						  $<TARGET_OBJECTS:AMBMocObjects>)
 						  
-target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES})
+target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES} ntdll.lib)
 
 
 install(TARGETS Amb DESTINATION  ${install_dir}/)
