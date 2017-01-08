@@ -10,10 +10,15 @@ namespace Amb
         {
             Logger::Logger()
             {
-                std::vector<spdlog::sink_ptr> sinks;
-                sinks.push_back(std::make_shared<spdlog::sinks::stdout_sink_st>());
-                sinks.push_back(std::make_shared<spdlog::sinks::simple_file_sink_mt>("log.txt"));
-                logger = std::make_shared<spdlog::logger>(LoggerName, std::begin(sinks), std::end(sinks));
+                file = spdlog::basic_logger_mt("file_logger", "lodadsdg.txt");
+                console = spdlog::stdout_color_mt("console");
+            }
+
+
+            Logger& Logger::get()
+            {
+                static Logger l;
+                return l;
             }
 
             Logger::~Logger()

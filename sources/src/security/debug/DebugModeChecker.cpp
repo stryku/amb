@@ -1,6 +1,5 @@
 #include "security/debug/DebugModeChecker.hpp"
-
-#include <spdlog/spdlog.h>
+#include "log/log.hpp"
 
 #include <Windows.h>
 #include <Winternl.h>
@@ -33,14 +32,20 @@ namespace Amb
                     checkIsDebuggerPresent() ||
                     checkIsDebugged() ||
                     checkNtGlobalFlags() ||
-                    checkHeapFlags() ||
+                    //checkHeapFlags() ||
                     checkNtQueryInformationProcess() ||
                     checkCheckRemoteDebuggerPresent();
             }
 
             bool DebugModeChecker::checkIsDebuggerPresent() const
             {
-                return IsDebuggerPresent();
+                if (IsDebuggerPresent())
+                {
+                    LOG_DEBUG("IsDebuggerPresent success");
+                    return true;
+                }
+
+                return false;
             }
 
             bool DebugModeChecker::checkIsDebugged() const
@@ -70,6 +75,10 @@ namespace Amb
                     pop eax
                 }
 
+                if (ret)
+                {
+                    LOG_DEBUG("checkIsDebugged success");
+                }
                 return ret;
             }
 
@@ -100,6 +109,11 @@ namespace Amb
                     pop eax
                 }
 
+                if (ret)
+                {
+                    LOG_DEBUG("checkNtGlobalFlags success");
+                }
+
                 return ret;
             }
 
@@ -128,6 +142,11 @@ namespace Amb
                 end:
                     pop ebx
                     pop eax
+                }
+
+                if (ret)
+                {
+                    LOG_DEBUG("checkHeapFlags success");
                 }
 
                 return ret;
@@ -178,6 +197,11 @@ namespace Amb
                     pop eax
                 }
 
+                if (ret)
+                {
+                    LOG_DEBUG("checkVista success");
+                }
+
                 return ret;
             }
 
@@ -187,7 +211,13 @@ namespace Amb
 
                 NtQueryInformationProcess(HANDLE(-1), PROCESSINFOCLASS(7), &pBasicInfo, 4, 0);
 
-                return pBasicInfo == -1;
+                if (pBasicInfo == 1)
+                {
+                    LOG_DEBUG("checkNtQueryInformationProcess success");
+                    return true;
+                }
+
+                return false;
             }
 
             bool DebugModeChecker::checkCheckRemoteDebuggerPresent() const
@@ -195,7 +225,13 @@ namespace Amb
                 BOOL isDebugged;
                 CheckRemoteDebuggerPresent(HANDLE(-1), &isDebugged);
 
-                return isDebugged == 1;
+                if (isDebugged == 1)
+                {
+                    LOG_DEBUG("checkCheckRemoteDebuggerPresent success");
+                    return true;
+                }
+
+                return false;
             }
         }
     }

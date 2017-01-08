@@ -1,5 +1,6 @@
 ﻿#include "Bot.hpp"
 #include "security/debug/DebugModeCheckerFactory.hpp"
+#include "log/log.hpp"
 
 #include <QMessageBox>
 
@@ -27,20 +28,27 @@ namespace Amb
     {
         auto cb = []
         {
-            try
-            {
-                throw;
-            }
-            catch (...)
-            {
-                throw;
-            }
+            LOG_DEBUG("DebugModeChecker Callback!");
+            //try
+            //{
+                //throw;
+            //}
+            //catch (...)
+            //{
+                //throw;
+            //}
         };
 
+        LOG_DEBUG("Creating DebugModeChecker");
         const auto debugModeChecker = Security::Debug::DebugModeCheckerFactory{}.create(cb);
 
+        LOG_DEBUG("Showing window");
         window.show();
+
+        LOG_DEBUG("Starting ClientRectObserver");
         clientRectObserver.run();
+
+        LOG_DEBUG("Starting application");
         return application.exec();
     }
 
