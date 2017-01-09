@@ -2,7 +2,13 @@ gui
     improve window title changes
     menu item about
     
-    
+graphics
+    get tibia11 'slain', 'dead' and 'remains' pixels
+    tibia11 offsets of container icon
+
+utils
+    rewrite hash to not be recursive
+   
 cmake 
     get rid of hardcoded boost and qt path
 

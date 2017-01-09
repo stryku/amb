@@ -8,6 +8,7 @@
 #include "ui/updaters/MainWindowTitleUpdater.hpp"
 #include "client/TibiaClientWindowRectObserver.hpp"
 #include "client/TibiaClientRectCornersObserver.hpp"
+#include "log/details/Logger.hpp"
 
 #include "mainwindow.h"
 
