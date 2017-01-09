@@ -32,7 +32,6 @@ namespace Amb
                     checkIsDebuggerPresent() ||
                     checkIsDebugged() ||
                     checkNtGlobalFlags() ||
-                    //checkHeapFlags() ||
                     checkNtQueryInformationProcess() ||
                     checkCheckRemoteDebuggerPresent();
             }
