@@ -14,7 +14,6 @@ set (AMB_inc
             ${inc_dir}/capture/CaptureMode.hpp
             ${inc_dir}/capture/ConstPixels.hpp
             ${inc_dir}/capture/CoveredWindowCapturer.hpp
-            ${inc_dir}/capture/DeadCreatureWindowFinder.hpp
             ${inc_dir}/capture/ItemCapturer.hpp
             ${inc_dir}/capture/ItemsWindowReader.hpp
             ${inc_dir}/capture/NotCoveredWindowCapturer.hpp
@@ -123,7 +122,6 @@ set (AMB_src
             ${src_dir}/TibiaFinder.cpp
             ${src_dir}/utils.cpp
             
-            ${src_dir}/capture/DeadCreatureWindowFinder.cpp
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp
             ${src_dir}/capture/FrameCapturer.cpp
