@@ -32,6 +32,8 @@ set (AMB_inc
             ${inc_dir}/client/TibiaClientRectCornersObserver.hpp
             
             ${inc_dir}/client/window/finder/TibiaWindowsFinder.hpp
+            ${inc_dir}/client/window/finder/DeadCreatureWindowFinder.hpp
+            ${inc_dir}/client/window/finder/DeadCreatureWindowFinderFactory.hpp
             
             ${inc_dir}/config/ConfigFileManager.hpp
             
@@ -134,6 +136,8 @@ set (AMB_src
             ${src_dir}/client/TibiaClientRectCornersObserver.cpp
             
             ${src_dir}/client/window/finder/TibiaWindowsFinder.cpp
+            ${src_dir}/client/window/finder/DeadCreatureWindowFinder.cpp
+            ${src_dir}/client/window/finder/DeadCreatureWindowFinderFactory.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
             
