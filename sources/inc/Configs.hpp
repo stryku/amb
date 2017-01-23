@@ -180,8 +180,8 @@ namespace Amb
                 : tibiaClientWindowInfo{ tibiaClientWindowInfo }
             {}
 
-            DWORD pid;
-            HWND hwnd;
+            DWORD pid{ NULL };
+            HWND hwnd{ NULL };
             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo;
             std::string currentConfigFilePath;
             std::string currentCharacterName;

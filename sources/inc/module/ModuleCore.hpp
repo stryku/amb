@@ -30,6 +30,8 @@ namespace Amb
 
             void attachToNewWindow(HWND hwnd);
 
+            virtual void attachToNewProcess(DWORD pid) {}
+
         protected:
             std::unique_ptr<std::thread> runThread;
             Simulate::Simulator &simulator;

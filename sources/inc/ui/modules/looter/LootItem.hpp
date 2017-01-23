@@ -39,7 +39,7 @@ namespace Amb
                         {
                             Utils::PtreeElement<>{ "name", name },
                             Utils::PtreeElement<>{ "category", category },
-                            Utils::PtreeElement<>{ "min_cap", minCap }
+                            Utils::PtreeElement<>{ "min_cap", std::to_string(minCap) }
                         };
 
                         return builder.addElements(elements).buildTree();

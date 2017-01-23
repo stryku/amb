@@ -16,13 +16,16 @@ namespace Amb
 
         void ProcessMemoryReader::attachNewProcess(DWORD pid)
         {
-            safeCloseAndNullHandle(processHandle);
+            if (pid != NULL)
+            {
+                safeCloseAndNullHandle(processHandle);
 
-            processHandle = OpenProcess(PROCESS_ALL_ACCESS,
-                                        TRUE,
-                                        pid);
+                processHandle = OpenProcess(PROCESS_ALL_ACCESS,
+                                            TRUE,
+                                            pid);
 
-            baseAddress = getModuleBase(pid);
+                baseAddress = getModuleBase(pid);
+            }
         }
 
         DWORD ProcessMemoryReader::getModuleBase(DWORD pid, const char *sModuleName)

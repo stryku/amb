@@ -16,6 +16,7 @@ namespace Amb
             public:
                 TibiaClientMemoryReader(DWORD pid);
 
+                void attachToNewProcess(DWORD pid) override;
                 size_t readCap() override;
 
             private:

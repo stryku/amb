@@ -1,6 +1,7 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 #include "utils/random/RandomOffset.hpp"
+#include "utils/log.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
@@ -27,6 +28,14 @@ namespace Amb
                 , itemsWindowReader{ screen, items }
                 , deadCreatureWindowFinderFactory( std::move(factory) )
             {}
+
+            void LooterModule::attachToNewProcess(DWORD pid)
+            {
+                BOOST_ASSERT_MSG(tibiaClientReader, "TibiaClientReader should be valid at this point!");
+                LOG("LooterModule attaching to process: " << pid);
+
+                tibiaClientReader->attachToNewProcess(pid);
+            }
 
             void LooterModule::runDetails()
             {
@@ -66,18 +75,11 @@ namespace Amb
 
             std::vector<size_t> LooterModule::findLootableItemsPositions(const std::vector<Db::ItemId> &items) const
             {
-                std::vector<size_t> ret(items.size());
+                std::vector<size_t> ret;
 
-                auto pred = [this](const Db::ItemId &id)
-                {
-                    return lootableItem(id);
-                };
-
-                auto end = std::copy_if(std::cbegin(items), std::cend(items),
-                                        std::begin(ret),
-                                        pred);
-
-                ret.erase(end, std::cend(ret));
+                for (size_t i = 0; i < items.size(); ++i)
+                    if (lootableItem(items[i]))
+                        ret.push_back(i);
 
                 return ret;
             }
@@ -90,12 +92,17 @@ namespace Amb
                 deadCreatureWindowFinder = boost::in_place(deadCreatureWindowFinderFactory.create(clientType)); //todo test this
             }
 
+            bool LooterModule::haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const
+            {
+                return tibiaClientReader->readCap() >= item.minCap;
+            }
+
             bool LooterModule::lootableItem(const Db::ItemId &id) const
             {
                 const auto pred = [this, id](const Amb::Ui::Module::Looter::LootItem &item)
                 {
                     const auto itemId = items.getId(item.name);
-                    return itemId == id;
+                    return itemId == id && haveEnoughCap(item);
                 };
 
                 const auto found = std::find_if(std::cbegin(config.items), 
@@ -117,10 +124,9 @@ namespace Amb
                                                 std::cend(config.items),
                                                 pred);
 
-                if (found != std::cend(config.items))
-                    return *found;
-                else
-                    assert(false);
+                BOOST_ASSERT_MSG(found != std::cend(config.items), "We should alway find item in the list from gui");
+
+                return *found;
             }
 
             Pos LooterModule::findPosToMoveLootItem(const Db::ItemId &id, 
