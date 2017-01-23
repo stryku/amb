@@ -63,6 +63,8 @@ set (AMB_inc
             
             ${inc_dir}/log/details/Logger.hpp
             
+            ${inc_dir}/memory/Addresses.hpp
+            
             ${inc_dir}/module/Module.hpp
             ${inc_dir}/module/ModuleCore.hpp
             ${inc_dir}/module/ModuleCore.hpp
