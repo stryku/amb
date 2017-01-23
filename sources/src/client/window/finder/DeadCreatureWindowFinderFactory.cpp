@@ -11,7 +11,7 @@ namespace Amb
         {
             namespace Finder
             {
-                DeadCreatureWindowFinder create(TibiaClientType clientType)
+                DeadCreatureWindowFinder DeadCreatureWindowFinderFactory::create(TibiaClientType clientType) const
                 {
                     switch (clientType)
                     {

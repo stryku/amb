@@ -4,6 +4,7 @@
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
+#include <boost/utility/in_place_factory.hpp>
 
 #include <chrono>
 
@@ -16,23 +17,28 @@ namespace Amb
             LooterModule::LooterModule(const Configs::Looter &config,
                                        const Configs::AdvancedSettings &advancedSettings,
                                        Simulate::Simulator &simulator,
-                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                       Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory)
                 : ModuleCore{ simulator, tibiaClientWindowInfo }
                 , windowsFinder{ screen }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , itemsWindowReader{ screen, items }
+                , deadCreatureWindowFinderFactory( std::move(factory) )
             {}
 
             void LooterModule::runDetails()
             {
+                BOOST_ASSERT_MSG(deadCreatureWindowFinder, "DeadCreatureWindowFinder should be valid at this point!");
+
                 frameCapturer.captureRightStrip();
                 const auto &lastCapturedRect = frameCapturer.getLastCaptureRect();
-                auto monsterWindows = windowsFinder.findMonsterLootWindows(lastCapturedRect);
+                const auto allPlayerWindows = windowsFinder.findAll(lastCapturedRect);
+                auto monsterWindows = deadCreatureWindowFinder.get().find(allPlayerWindows, screen);
 
                 if (!monsterWindows.empty())
                 {
-                    const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect);
+                    const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect, allPlayerWindows);
 
                     if (!playerWindows.empty())
                     {
@@ -71,6 +77,9 @@ namespace Amb
             void LooterModule::applyConfigs()
             {
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
+
+                const auto clientType = advancedSettings.common.clientType;
+                deadCreatureWindowFinder = boost::in_place(deadCreatureWindowFinderFactory.create(clientType)); //todo test this
             }
 
             bool LooterModule::lootableItem(const Db::ItemId &id) const

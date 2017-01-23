@@ -15,7 +15,7 @@ namespace Amb
                 class DeadCreatureWindowFinderFactory
                 {
                 public:
-                    DeadCreatureWindowFinder create(TibiaClientType clientType);
+                    DeadCreatureWindowFinder create(TibiaClientType clientType) const;
                 };
             }
         }

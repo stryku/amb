@@ -1,7 +1,8 @@
 #include "client/window/finder/DeadCreatureWindowFinder.hpp"
-
+#include "graphics/Image.hpp"
 #include "utils/Structs.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
+#include "client/window/TibiaWindow.hpp"
 
 namespace Amb
 {
@@ -20,7 +21,7 @@ namespace Amb
                     , remainsPattern{ remainsPattern }
                 {}
 
-                Rect DeadCreatureWindowFinder::getPatternRectForWindow(const TibiaWindow& window) const
+                Rect DeadCreatureWindowFinder::getPatternRectForWindow(const TibiaItemsWindow& window) const
                 {
                     constexpr Offset PatternOffset{ 20, 10 };
 
@@ -33,7 +34,7 @@ namespace Amb
 
 
                 std::vector<TibiaItemsWindow> DeadCreatureWindowFinder::find(const std::vector<TibiaWindow>& allFoundWindows,
-                                                                             const Graphics::Image& rightStripSprite)
+                                                                             const Graphics::Image& rightStripSprite) const
                 {
 
                     std::vector<TibiaItemsWindow> ret;

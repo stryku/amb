@@ -25,6 +25,7 @@ namespace
 
 #ifdef AMB_PRO_COMPILATION
 #include "module/modules/LooterModule.hpp"
+#include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 namespace
 {
     std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
@@ -33,7 +34,8 @@ namespace
         return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
                                                                    config.advancedSettings,
                                                                    simulator,
-                                                                   config.tibiaClientWindowInfo);
+                                                                   config.tibiaClientWindowInfo,
+                                                                   Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{});
     }
 }
 #else
