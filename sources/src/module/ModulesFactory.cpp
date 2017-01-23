@@ -9,6 +9,7 @@
 #include "ui_mainwindow.h"
 
 #include "module/modules/Healer.hpp"
+#include "client/reader/TibiaClientMemoryReader.hpp"
 
 namespace 
 {
@@ -31,11 +32,14 @@ namespace
     std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
                                                                     Amb::Simulate::Simulator &simulator)
     {
+        using TibiaReader = Amb::Client::Reader::TibiaClientMemoryReader;
+
         return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
                                                                    config.advancedSettings,
                                                                    simulator,
                                                                    config.tibiaClientWindowInfo,
-                                                                   Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{});
+                                                                   Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{},
+                                                                   std::make_unique<TibiaReader>(config.pid));
     }
 }
 #else

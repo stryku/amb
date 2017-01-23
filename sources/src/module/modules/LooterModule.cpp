@@ -18,8 +18,9 @@ namespace Amb
                                        const Configs::AdvancedSettings &advancedSettings,
                                        Simulate::Simulator &simulator,
                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
-                                       Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory)
-                : ModuleCore{ simulator, tibiaClientWindowInfo }
+                                       Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
+                                       std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
+                : ModuleCore{ simulator, tibiaClientWindowInfo, std::move(tibiaClientReader) }
                 , windowsFinder{ screen }
                 , config{ config }
                 , advancedSettings{ advancedSettings }

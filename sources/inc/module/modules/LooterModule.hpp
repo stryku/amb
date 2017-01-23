@@ -26,7 +26,8 @@ namespace Amb
                              const Configs::AdvancedSettings &advancedSettings,
                              Simulate::Simulator &simulator,
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
-                             Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory);
+                             Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
+                             std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
 
             private:
                 Db::Items items;

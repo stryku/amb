@@ -7,20 +7,22 @@
 #include "client/TibiaClientType.hpp"
 #include "client/TibiaClientWindowInfo.hpp"
 #include "simulate/MouseSimulator.hpp"
+#include "client/reader/TibiaClientReader.hpp"
 
 #include <thread>
 #include <memory>
 
 namespace Amb
 {
-
     namespace Module
     {
         class ModuleCore
         {
         public:
-            explicit ModuleCore(Simulate::Simulator &simulator, const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
-            ~ModuleCore();
+            explicit ModuleCore(Simulate::Simulator &simulator,
+                                const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
+            virtual ~ModuleCore();
 
             void run();
             void stop();
@@ -35,6 +37,7 @@ namespace Amb
             Graphics::Image screen;
             Capture::FrameCapturer frameCapturer;
             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo;
+            std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader;
 
             bool continueRun{ false };
 
