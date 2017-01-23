@@ -64,6 +64,7 @@ set (AMB_inc
             ${inc_dir}/log/details/Logger.hpp
             
             ${inc_dir}/memory/Addresses.hpp
+            ${inc_dir}/memory/ProcessMemoryReader.hpp
             
             ${inc_dir}/module/Module.hpp
             ${inc_dir}/module/ModuleCore.hpp
@@ -155,6 +156,8 @@ set (AMB_src
             ${src_dir}/db/static/items/ItemsDbData.cpp
             
             ${src_dir}/log/details/Logger.cpp
+            
+            ${src_dir}/memory/ProcessMemoryReader.cpp
             
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "client/reader/TibiaClientReader.hpp"
+#include "memory/ProcessMemoryReader.hpp"
+
+#include <Windows.h>
 
 namespace Amb
 {
@@ -11,7 +14,12 @@ namespace Amb
             class TibiaClientMemoryReader : public TibiaClientReader
             {
             public:
+                TibiaClientMemoryReader(DWORD pid);
+
                 size_t readCap() override;
+
+            private:
+                Memory::ProcessMemoryReader processMemoryReader;
             };
         }
     }
