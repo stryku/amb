@@ -66,11 +66,18 @@ namespace Amb
 
             std::vector<size_t> LooterModule::findLootableItemsPositions(const std::vector<Db::ItemId> &items) const
             {
-                std::vector<size_t> ret;
+                std::vector<size_t> ret(items.size());
 
-                for(size_t i = 0; i < items.size(); ++i)
-                    if (lootableItem(items[i]))
-                        ret.push_back(i);
+                auto pred = [this](const Db::ItemId &id)
+                {
+                    return lootableItem(id);
+                };
+
+                auto end = std::copy_if(std::cbegin(items), std::cend(items),
+                                        std::begin(ret),
+                                        pred);
+
+                ret.erase(end, std::cend(ret));
 
                 return ret;
             }
