@@ -26,7 +26,10 @@ namespace Amb
                              const Configs::AdvancedSettings &advancedSettings,
                              Simulate::Simulator &simulator,
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
-                             Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory);
+                             Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
+                             std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
+
+                void attachToNewProcess(DWORD pid) override;
 
             private:
                 Db::Items items;
@@ -48,6 +51,9 @@ namespace Amb
                                          const RelativeRect &capturedRect);
 
                 bool lootableItem(const Db::ItemId &id) const;
+                bool haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const;
+                bool haveEnoughCap(const Db::ItemId& id) const;
+                boost::optional<Ui::Module::Looter::LootItem> findLootItemById(const Db::ItemId &id) const;
 
                 std::string findLootableItemDestination(const Db::ItemId &id) const;
                 const Amb::Ui::Module::Looter::Category findLootableItemCategory(const Db::ItemId &id) const;

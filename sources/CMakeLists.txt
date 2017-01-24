@@ -26,6 +26,8 @@ set (AMB_inc
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
             
             ${inc_dir}/client/reader/HealthManaReader.hpp
+            ${inc_dir}/client/reader/TibiaClientReader.hpp
+            ${inc_dir}/client/reader/TibiaClientMemoryReader.hpp
             
             ${inc_dir}/client/TibiaClientWindowRectObserver.hpp
             ${inc_dir}/client/TibiaClientRectCornersObserver.hpp
@@ -60,6 +62,9 @@ set (AMB_inc
             ${inc_dir}/log/log.hpp
             
             ${inc_dir}/log/details/Logger.hpp
+            
+            ${inc_dir}/memory/Addresses.hpp
+            ${inc_dir}/memory/ProcessMemoryReader.hpp
             
             ${inc_dir}/module/Module.hpp
             ${inc_dir}/module/ModuleCore.hpp
@@ -129,6 +134,7 @@ set (AMB_src
             ${src_dir}/client/TibiaClientType.cpp
             
             ${src_dir}/client/reader/HealthManaReader.cpp
+            ${src_dir}/client/reader/TibiaClientMemoryReader.cpp
             
             ${src_dir}/client/TibiaClientWindowRectObserver.cpp
             ${src_dir}/client/TibiaClientRectCornersObserver.cpp
@@ -150,6 +156,8 @@ set (AMB_src
             ${src_dir}/db/static/items/ItemsDbData.cpp
             
             ${src_dir}/log/details/Logger.cpp
+            
+            ${src_dir}/memory/ProcessMemoryReader.cpp
             
             ${src_dir}/module/Module.cpp
             ${src_dir}/module/ModuleCore.cpp
