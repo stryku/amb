@@ -34,7 +34,7 @@
     <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabHealer">
        <attribute name="title">
@@ -289,7 +289,7 @@
         <item row="1" column="0">
          <widget class="QTabWidget" name="tabWidgetLooter">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="looterTabCategories">
            <attribute name="title">
