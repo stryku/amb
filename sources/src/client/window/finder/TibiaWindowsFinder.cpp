@@ -11,6 +11,10 @@ namespace Amb
         {
             namespace Finder
             {
+                TibiaWindowsFinder::TibiaWindowsFinder(const Graphics::Image &screen)
+                    : screen{ screen }
+                {}
+
                 std::vector<TibiaWindow> TibiaWindowsFinder::findAll(const RelativeRect &lastCapturedRect) const
                 {
                     auto rect = createInitialWindowPatternRect(lastCapturedRect);
@@ -36,10 +40,9 @@ namespace Amb
                     return rect.relativeToRect(lastCapturedRect);
                 }
 
-                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findPlayerContainerWindows(const RelativeRect &lastCapturedRect) const
+                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findPlayerContainerWindows(const RelativeRect &lastCapturedRect,
+                                                                                             const std::vector<TibiaWindow>& allWindows) const
                 {
-                    const auto allWindows = findAll(lastCapturedRect);
-
                     std::vector<TibiaItemsWindow> windows;
 
                     for (const auto &window : allWindows)
@@ -47,6 +50,13 @@ namespace Amb
                             windows.emplace_back(window);
 
                     return windows;
+                }
+
+
+                std::vector<TibiaItemsWindow> TibiaWindowsFinder::findPlayerContainerWindows(const RelativeRect &lastCapturedRect) const
+                {
+                    const auto allWindows = findAll(lastCapturedRect);
+                    return findPlayerContainerWindows(lastCapturedRect, allWindows);
                 }
 
                 std::vector<TibiaItemsWindow> TibiaWindowsFinder::findMonsterLootWindows(const RelativeRect &lastCapturedRect) const

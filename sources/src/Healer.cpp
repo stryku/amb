@@ -1,7 +1,5 @@
 #include "module/modules/Healer.hpp"
 
-#include "capture/DeadCreatureWindowFinder.hpp"
-
 namespace Amb
 {
     namespace Module

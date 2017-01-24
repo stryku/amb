@@ -7,6 +7,8 @@
 #include "db/Items.hpp"
 #include "db/Containers.hpp"
 #include "client/window/finder/TibiaWindowsFinder.hpp"
+#include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
+#include "client/window/finder/DeadCreatureWindowFinder.hpp"
 #include "capture/ItemsWindowReader.hpp"
 
 #include <chrono>
@@ -23,12 +25,18 @@ namespace Amb
                 LooterModule(const Configs::Looter &config,
                              const Configs::AdvancedSettings &advancedSettings,
                              Simulate::Simulator &simulator,
-                             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
+                             const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                             Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
+                             std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
+
+                void attachToNewProcess(DWORD pid) override;
 
             private:
                 Db::Items items;
                 Db::Containers containersDb;
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
+                boost::optional<Client::Window::Finder::DeadCreatureWindowFinder> deadCreatureWindowFinder;
+                const Client::Window::Finder::DeadCreatureWindowFinderFactory deadCreatureWindowFinderFactory;
 
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;
@@ -43,6 +51,9 @@ namespace Amb
                                          const RelativeRect &capturedRect);
 
                 bool lootableItem(const Db::ItemId &id) const;
+                bool haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const;
+                bool haveEnoughCap(const Db::ItemId& id) const;
+                boost::optional<Ui::Module::Looter::LootItem> findLootItemById(const Db::ItemId &id) const;
 
                 std::string findLootableItemDestination(const Db::ItemId &id) const;
                 const Amb::Ui::Module::Looter::Category findLootableItemCategory(const Db::ItemId &id) const;

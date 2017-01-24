@@ -104,6 +104,11 @@ namespace Amb
             return topLeft();
         }
 
+        Rect operator+(const Offset &pos) const
+        {
+            return *this + Pos::from(pos);
+        }
+
         Rect operator+(const Pos &pos) const
         {
             Rect ret = *this;

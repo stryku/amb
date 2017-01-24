@@ -1,9 +1,11 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 #include "utils/random/RandomOffset.hpp"
+#include "utils/log.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
+#include <boost/utility/in_place_factory.hpp>
 
 #include <chrono>
 
@@ -16,23 +18,37 @@ namespace Amb
             LooterModule::LooterModule(const Configs::Looter &config,
                                        const Configs::AdvancedSettings &advancedSettings,
                                        Simulate::Simulator &simulator,
-                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
-                : ModuleCore{ simulator, tibiaClientWindowInfo }
+                                       const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                       Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
+                                       std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
+                : ModuleCore{ simulator, tibiaClientWindowInfo, std::move(tibiaClientReader) }
                 , windowsFinder{ screen }
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , itemsWindowReader{ screen, items }
+                , deadCreatureWindowFinderFactory( std::move(factory) )
             {}
+
+            void LooterModule::attachToNewProcess(DWORD pid)
+            {
+                BOOST_ASSERT_MSG(tibiaClientReader, "TibiaClientReader should be valid at this point!");
+                LOG("LooterModule attaching to process: " << pid);
+
+                tibiaClientReader->attachToNewProcess(pid);
+            }
 
             void LooterModule::runDetails()
             {
+                BOOST_ASSERT_MSG(deadCreatureWindowFinder, "DeadCreatureWindowFinder should be valid at this point!");
+
                 frameCapturer.captureRightStrip();
                 const auto &lastCapturedRect = frameCapturer.getLastCaptureRect();
-                auto monsterWindows = windowsFinder.findMonsterLootWindows(lastCapturedRect);
+                const auto allPlayerWindows = windowsFinder.findAll(lastCapturedRect);
+                auto monsterWindows = deadCreatureWindowFinder.get().find(allPlayerWindows, screen);
 
                 if (!monsterWindows.empty())
                 {
-                    const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect);
+                    const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect, allPlayerWindows);
 
                     if (!playerWindows.empty())
                     {
@@ -61,7 +77,7 @@ namespace Amb
             {
                 std::vector<size_t> ret;
 
-                for(size_t i = 0; i < items.size(); ++i)
+                for (size_t i = 0; i < items.size(); ++i)
                     if (lootableItem(items[i]))
                         ret.push_back(i);
 
@@ -71,9 +87,12 @@ namespace Amb
             void LooterModule::applyConfigs()
             {
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
+
+                const auto clientType = advancedSettings.common.clientType;
+                deadCreatureWindowFinder = boost::in_place(deadCreatureWindowFinderFactory.create(clientType)); //todo test this
             }
 
-            bool LooterModule::lootableItem(const Db::ItemId &id) const
+            boost::optional<Ui::Module::Looter::LootItem> LooterModule::findLootItemById(const Db::ItemId &id) const
             {
                 const auto pred = [this, id](const Amb::Ui::Module::Looter::LootItem &item)
                 {
@@ -81,11 +100,33 @@ namespace Amb
                     return itemId == id;
                 };
 
-                const auto found = std::find_if(std::cbegin(config.items), 
-                                                std::cend(config.items), 
+                const auto found = std::find_if(std::cbegin(config.items),
+                                                std::cend(config.items),
                                                 pred);
 
-                return found != std::cend(config.items);
+                return (found != std::cend(config.items))
+                        ? *found
+                        : boost::optional<Ui::Module::Looter::LootItem>{};
+            }
+
+            bool LooterModule::haveEnoughCap(const Db::ItemId& id) const
+            {
+                const auto optionalItem = findLootItemById(id);
+
+                if (!optionalItem)
+                    return false;
+
+                return haveEnoughCap(optionalItem.get());
+            }
+
+            bool LooterModule::haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const
+            {
+                return tibiaClientReader->readCap() >= item.minCap;
+            }
+
+            bool LooterModule::lootableItem(const Db::ItemId &id) const
+            {
+                return findLootItemById(id).is_initialized();
             }
 
             const Amb::Ui::Module::Looter::LootItem& LooterModule::findLootableItem(const Db::ItemId &id) const
@@ -100,10 +141,11 @@ namespace Amb
                                                 std::cend(config.items),
                                                 pred);
 
-                if (found != std::cend(config.items))
-                    return *found;
-                else
-                    assert(false);
+                BOOST_ASSERT_MSG(found != std::cend(config.items), 
+                                 "Item with id: %d not found! We should always find item in the list from gui", 
+                                 id);
+
+                return *found;
             }
 
             Pos LooterModule::findPosToMoveLootItem(const Db::ItemId &id, 
@@ -127,7 +169,7 @@ namespace Amb
                                                    const Client::Window::TibiaItemsWindow &windowToLootFrom,
                                                    const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
                                                    const RelativeRect &capturedRect)
-            {
+            { 
                 static const Utils::Random::RandomOffset randomOffset{ 32, 32 };
 
                 auto windowRelativePos = windowToLootFrom.itemPosition(0) + Pos::from(randomOffset.get());
@@ -137,6 +179,12 @@ namespace Amb
                 for (auto itemPositionInWindow : boost::adaptors::reverse(itemsPositions))
                 {
                     const auto &itemId = windowToLootFrom.items[itemPositionInWindow];
+
+                    if (!haveEnoughCap(itemId))
+                    {
+                        LOG("No enough cap (" << tibiaClientReader->readCap() << ") for item: " << itemId);
+                        continue;
+                    }
 
                     const auto category = findLootableItemCategory(itemId);
                     auto toOptional = findCategoryDestinationPosition(category, playerContainers);

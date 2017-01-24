@@ -480,8 +480,9 @@ void MainWindow::on_pushButtonLooterItemsAdd_clicked()
 
     const size_t categoryIdx = ui->comboBoxLooterItemsCategories->currentIndex();
     const auto category = looterCategoriesTable->getCategory(categoryIdx);
+    const auto minCap = ui->spinBoxLooterItemsCapAbove->value();
 
-    looterItemsTable->add({ itemName, category.name });
+    looterItemsTable->add({ itemName, category.name, std::to_string(minCap) });
 }
 
 

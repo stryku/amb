@@ -34,7 +34,7 @@
     <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabHealer">
        <attribute name="title">
@@ -289,7 +289,7 @@
         <item row="1" column="0">
          <widget class="QTabWidget" name="tabWidgetLooter">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="looterTabCategories">
            <attribute name="title">
@@ -421,7 +421,7 @@
               <x>0</x>
               <y>10</y>
               <width>188</width>
-              <height>77</height>
+              <height>103</height>
              </rect>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
@@ -435,6 +435,16 @@
              <item row="0" column="1">
               <widget class="QLineEdit" name="editLooterItemsItem"/>
              </item>
+             <item row="3" column="1">
+              <widget class="QPushButton" name="pushButtonLooterItemsAdd">
+               <property name="text">
+                <string>Add</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBoxLooterItemsCategories"/>
+             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_15">
                <property name="text">
@@ -442,13 +452,17 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="comboBoxLooterItemsCategories"/>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Cap &gt;</string>
+               </property>
+              </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QPushButton" name="pushButtonLooterItemsAdd">
-               <property name="text">
-                <string>Add</string>
+              <widget class="QSpinBox" name="spinBoxLooterItemsCapAbove">
+               <property name="maximum">
+                <number>99999</number>
                </property>
               </widget>
              </item>
