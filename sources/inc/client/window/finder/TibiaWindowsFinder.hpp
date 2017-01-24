@@ -13,7 +13,7 @@ namespace Amb
 
     namespace Graphics
     {
-        class Image;
+        struct Image;
     }
 
     namespace Client
@@ -27,22 +27,24 @@ namespace Amb
 
             namespace Finder
             {
+
                 class TibiaWindowsFinder
                 {
                 public:
-                    TibiaWindowsFinder(const Graphics::Image &screen)
-                        : screen{ screen }
-                    {}
+                    TibiaWindowsFinder(const Graphics::Image &screen);
 
-                    std::vector<TibiaWindow> findAll(const RelativeRect &lastCapturedRect);/*
-                    std::vector<MonsterLootWindow> findMonsterLootWindows();
-                    std::vector<PlayerContainerWindow> findPlayerContainerWindows();*/
+                    std::vector<TibiaWindow> findAll(const RelativeRect &lastCapturedRect) const;
+                    std::vector<TibiaItemsWindow> findMonsterLootWindows(const RelativeRect &lastCapturedRect) const;
+                    std::vector<TibiaItemsWindow> findPlayerContainerWindows(const RelativeRect &lastCapturedRect,
+                                                                             const std::vector<TibiaWindow>& allWindows) const;
+                    std::vector<TibiaItemsWindow> findPlayerContainerWindows(const RelativeRect &lastCapturedRect) const;
 
                 private:
                     boost::optional<TibiaWindow> findNextWindow(Rect &rect, const Graphics::Image &capturedStrip) const;
                     Rect createInitialWindowPatternRect(const RelativeRect &lastCapturedRect) const;
+                    bool isMonsterLootWindow(const TibiaWindow &window) const;
 
-                    const Graphics::Image &screen;
+                    const Graphics::Image& screen;
                 };
             }
         }

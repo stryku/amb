@@ -8,19 +8,44 @@
 
 namespace Amb
 {
-    struct Pos
+    namespace details
     {
-        int x, y;
-        bool operator==(const Pos &rhs) const
+        template <typename T>
+        struct PosImpl
         {
-            return x == rhs.x && y == rhs.y;
-        }
+            T x, y;
+            bool operator==(const PosImpl &rhs) const
+            {
+                return x == rhs.x && y == rhs.y;
+            }
 
-        bool operator!=(const Pos &rhs) const
-        {
-            return !(*this == rhs);
-        }
-    };
+            bool operator!=(const PosImpl &rhs) const
+            {
+                return !(*this == rhs);
+            }
+
+            PosImpl operator+(const PosImpl &rhs)
+            {
+                return PosImpl{ x + rhs.x, y + rhs.y };
+            }
+
+            PosImpl& operator+=(const PosImpl &rhs)
+            {
+                x += rhs.x;
+                y += rhs.y;
+                return *this;
+            }
+
+            template <typename RhsPointType>
+            static PosImpl from(const PosImpl<RhsPointType> &rhs)
+            {
+                return PosImpl{ static_cast<T>(rhs.x), static_cast<T>(rhs.y) };
+            }
+        };
+    }
+
+    using Pos = details::PosImpl<int>;
+    using Offset = details::PosImpl<size_t>;
 
     struct Size
     {
@@ -73,6 +98,26 @@ namespace Amb
         {
             return Pos{ x + static_cast<int>(w), y + static_cast<int>(h) };
         }
+
+        Pos pos() const
+        {
+            return topLeft();
+        }
+
+        Rect operator+(const Offset &pos) const
+        {
+            return *this + Pos::from(pos);
+        }
+
+        Rect operator+(const Pos &pos) const
+        {
+            Rect ret = *this;
+
+            ret.x += pos.x;
+            ret.y += pos.y;
+
+            return ret;
+        }
     };
 
 
@@ -120,6 +165,16 @@ namespace Amb
                 ret.x += relationPoint.x - point.x;
                 ret.y += relationPoint.y - point.y;
             }
+
+            return ret;
+        }
+
+        Pos relativeToThis(const Pos &point) const
+        {
+            Pos ret = Pos{ relationPoint.x + rect.x, relationPoint.y + rect.y };;
+
+            ret.x += point.x;
+            ret.y += point.y;
 
             return ret;
         }

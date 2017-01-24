@@ -4,10 +4,13 @@
 #include "Configs.hpp"
 #include "Simulator.hpp"
 #include "utils/Structs.hpp"
+#include "db/Items.hpp"
 
 #include "ui_mainwindow.h"
 
 #include "module/modules/Healer.hpp"
+#include "client/reader/TibiaClientMemoryReader.hpp"
+
 namespace 
 {
     std::unique_ptr<Amb::Module::Heal::Healer> createHealer(const Amb::Configs::GlobalConfig &config,
@@ -23,15 +26,20 @@ namespace
 
 #ifdef AMB_PRO_COMPILATION
 #include "module/modules/LooterModule.hpp"
+#include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 namespace
 {
     std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
                                                                     Amb::Simulate::Simulator &simulator)
     {
+        using TibiaReader = Amb::Client::Reader::TibiaClientMemoryReader;
+
         return std::make_unique<Amb::Module::Looter::LooterModule>(config.looter,
                                                                    config.advancedSettings,
                                                                    simulator,
-                                                                   config.tibiaClientWindowInfo);
+                                                                   config.tibiaClientWindowInfo,
+                                                                   Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{},
+                                                                   std::make_unique<TibiaReader>(config.pid));
     }
 }
 #else

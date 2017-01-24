@@ -44,5 +44,11 @@ namespace Amb
             for (auto &module : modules)
                 module.second->attachToNewWindow(hwnd);
         }
+
+        void ModulesManager::attachToNewProcess(DWORD pid)
+        {
+            for (auto &module : modules)
+                module.second->attachToNewProcess(pid);
+        }
     }
 }

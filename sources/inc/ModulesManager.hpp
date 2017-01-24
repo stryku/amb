@@ -33,6 +33,7 @@ namespace Amb
             bool isRunning( ModuleId modId );
 
             void attachToNewWindow(HWND hwnd);
+            void attachToNewProcess(DWORD pid);
         };
     }
 }

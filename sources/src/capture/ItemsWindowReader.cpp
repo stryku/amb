@@ -1,21 +1,22 @@
 #include "capture/ItemsWindowReader.hpp"
 #include "graphics/Image.hpp"
+#include "client/window/TibiaItemsWindow.hpp"
 
 namespace Amb
 {
     namespace Capture
     {
+        ItemsWindowReader::ItemsWindowReader(const Graphics::Image &screen,
+                                             const Db::Items &itemsDb)
+            : screen{ screen }
+            , itemsDb{ itemsDb }
+            , itemCapturer{ screen, this->itemsDb }
+        {}
 
-
-        ItemWindow ItemsWindowReader::read(const Pos &pos) const
+        std::vector<Db::ItemId> ItemsWindowReader::readItems(const Client::Window::TibiaItemsWindow &window) const
         {
-            ItemWindow ret;
-
-            ret.startPos = pos;
-            const auto rows = countVisibleItemsRows(pos);
-            ret.items = readItems(pos, rows);
-
-            return ret;
+            const auto rows = countVisibleItemsRows(window.rect.pos());
+            return readItems(window.rect.pos(), rows);
         }
 
         size_t ItemsWindowReader::countVisibleItemsRows(const Pos &pos) const
@@ -41,7 +42,7 @@ namespace Amb
         {
             const Pos rowOffset{ 12, 20 };
             const size_t offset{ 37 };
-            Pos rowStart{ pos.x + rowOffset.x, pos.y + rowOffset.y };
+            const Pos rowStart{ pos.x + rowOffset.x, pos.y + rowOffset.y };
             std::vector<size_t> items;
 
             for (size_t i = 0; i < rows; ++i)
@@ -51,7 +52,7 @@ namespace Amb
                     const auto itemId = itemCapturer.captureId({ static_cast<int>(rowStart.x + j *offset), 
                                                                  static_cast<int>(rowStart.y + i *offset) });
 
-                    if (itemsDb.isThisEmpty(itemId))
+                    if (itemId != Db::Items::BadId && itemsDb.isThisEmpty(itemId))
                         return items;
 
                     items.emplace_back(itemId);
@@ -67,7 +68,7 @@ namespace Amb
             const Rgba pattern{ 114,114,114,255 };
             Rgba px{ 0,0,0,0 };
 
-            while (pos.y < screen.h)
+            while (pos.y < static_cast<int>(screen.h))
             {
                 px = screen.cpixel(pos.x, pos.y);
 

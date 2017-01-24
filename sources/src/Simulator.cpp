@@ -46,5 +46,30 @@ namespace Amb
         {
             windowHwnd = hwnd;
         }
+
+        void Simulator::mouseClick(const Pos &pos) const
+        {
+            PostMessage(windowHwnd, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(500, 200));
+            PostMessage(windowHwnd, WM_LBUTTONUP, MK_LBUTTON, MAKELPARAM(500, 200));
+        }
+
+        void Simulator::ctrlDown()
+        {
+            PostMessage(windowHwnd, WM_KEYDOWN, VK_CONTROL, 0);
+        }
+        void Simulator::ctrlUp()
+        {
+            PostMessage(windowHwnd, WM_KEYUP, VK_CONTROL, 0);
+        }
+
+        void Simulator::shiftDown()
+        {
+            PostMessage(windowHwnd, WM_KEYDOWN, VK_SHIFT, 0);
+        }
+        void Simulator::shiftUp()
+        {
+            PostMessage(windowHwnd, WM_KEYUP, VK_SHIFT, 0);
+        }
+
     }
 }

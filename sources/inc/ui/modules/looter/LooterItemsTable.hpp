@@ -6,7 +6,7 @@
 
 namespace
 {
-    const size_t NumberOfTableColumns = 2;
+    const size_t NumberOfTableColumns = 3;
 }
 
 namespace Amb
@@ -25,7 +25,7 @@ namespace Amb
 
                 public:
                     LooterItemsTable(QTableView *view)
-                        : Table(view, { "Item", "Category" })
+                        : Table(view, { "Item", "Category", "Min Cap" })
                     {}
 
                     std::vector<ItemType> getItems() const
@@ -56,19 +56,21 @@ namespace Amb
                     void add(const ItemType &item)
                     {
                         Table::add(item.name,
-                                   item.category);
+                                   item.category,
+                                   std::to_string(item.minCap));
                     }
 
-                    void add(const std::string &name, const Category &category)
+                    void add(const std::string &name, const Category &category, size_t minCap)
                     {
-                        add(ItemType{ name, category.name });
+                        add(ItemType{ name, category.name, std::to_string(minCap) });
                     }
 
                     void set(const ItemType &item, size_t row)
                     {
                         Table::set(row,
                                    item.name,
-                                   item.category);
+                                   item.category,
+                                   std::to_string(item.minCap));
                     }
 
                     bool itemExists(const std::string &name) const

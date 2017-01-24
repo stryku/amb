@@ -18,10 +18,13 @@ namespace Amb
             }
         }
 
-        ModuleCore::ModuleCore(Simulate::Simulator &simulator, const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
+        ModuleCore::ModuleCore(Simulate::Simulator &simulator, 
+                               const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                               std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
             : simulator{ simulator }
             , frameCapturer{ screen, tibiaClientWindowInfo }
             , tibiaClientWindowInfo{ tibiaClientWindowInfo }
+            , tibiaClientReader{ std::move(tibiaClientReader) }
         {}
 
         ModuleCore::~ModuleCore()
@@ -60,6 +63,7 @@ namespace Amb
         {
             frameCapturer.attachToNewWindow(hwnd);
             simulator.attachToNewWindow(hwnd);
+            mouseSimulator.attachToWindow(hwnd);
         }
     }
 }

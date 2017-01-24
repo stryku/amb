@@ -1,3 +1,10 @@
+v0.3-beta - 24.01.2017
+-spent: todo
+-loc: 8,4k
+-introduce looter
+-fixed minor bugs in healer
+-removed unnecessary gui elements
+
 v0.2-beta - 01.12.2016
 -spent: 109,5h
 -loc: 4,4k
