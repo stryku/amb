@@ -6,24 +6,23 @@
 
 namespace Amb
 {
+    namespace Client
+    {
+        namespace Window
+        {
+            struct TibiaItemsWindow;
+        }
+    }
+
     namespace Capture
     {
-        struct ItemWindow
-        {
-            Pos startPos;
-            std::vector<size_t> items;
-        };
-
         class ItemsWindowReader
         {
         public:
             ItemsWindowReader(const Graphics::Image &screen,
-                              const Db::Items &itemsDb)
-                : screen{ screen }
-                , itemCapturer{ screen,itemsDb }
-            {}
+                              const Db::Items &itemsDb);
 
-            ItemWindow read(const Pos &pos) const;
+            std::vector<Db::ItemId> readItems(const Client::Window::TibiaItemsWindow &window) const;
 
         private:
             size_t readWindowHeight(const Pos &pos) const;

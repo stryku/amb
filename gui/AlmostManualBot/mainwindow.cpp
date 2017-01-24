@@ -10,6 +10,26 @@
 #include <algorithm>
 #include <experimental/filesystem>
 
+namespace
+{
+    template <typename Container, typename Parent>
+    QCompleter* createCompleter(const Container &container, Parent *parent)
+    {
+        QCompleter *completer;
+        QStringList strList;
+
+        strList.reserve(container.size());
+
+        for (const auto &item : container)
+            strList << QString::fromStdString(item);
+
+        completer = new QCompleter(strList, parent);
+        completer->setCaseSensitivity(Qt::CaseInsensitive);
+
+        return completer;
+    }
+}
+
 MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     : QMainWindow(parent)
     , ui{ new Ui::MainWindow }
@@ -22,16 +42,12 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
     
     updateTibiaClientsComboBox();
-    QStringList strList;
 
-    strList.reserve(db.items.size());
-
-    for (const auto &item : db.items.getNames())
-        strList << QString::fromStdString(item);
-
-    itemsCompleter = new QCompleter(strList, this);
-    itemsCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);
+
+    containersCompleter = createCompleter(db.containers.getNames(), this);
+    ui->editLooterCategoriesNewCategoryDestination->setCompleter(containersCompleter);
 }
 
 MainWindow::~MainWindow()
@@ -240,11 +256,6 @@ void MainWindow::setTtibiaWindowChangedHandler( std::function<void(const std::ws
     tibiaWindowChangedHandler = newHandler;
 }
 
-void MainWindow::setRefreshLayoutHandler(std::function<void()> newHandler)
-{
-    refreshLayoutHandler = newHandler;
-}
-
 void MainWindow::setConfigProvider(std::function<std::string()> provider)
 {
     configToSaveProvider = provider;
@@ -286,12 +297,6 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
     {
         qDebug()<<"Catch std::exception: "<<e.what();
     }
-}
-
-
-void MainWindow::on_refreshLayoutButton_clicked()
-{
-    refreshLayoutHandler();
 }
 
 void MainWindow::on_actionOpen_triggered()
@@ -346,7 +351,7 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
 {
     Amb::Ui::Module::Looter::Category category;
 
-    auto name = ui->editLooterCategoriesNewCategorName->text();
+    const auto name = ui->editLooterCategoriesNewCategorName->text();
 
     if (looterCategoriesTable->categoryExists(name.toStdString()))
     {
@@ -355,8 +360,17 @@ void MainWindow::on_pushButtonLooterCategoriesNewCategoryAdd_clicked()
         return;
     }
 
+    const auto destination = ui->editLooterCategoriesNewCategoryDestination->text();
+
+    if (!db.containers.existByName(destination.toStdString()))
+    {
+        auto msg = QString("Container '%1' doesn't exist.").arg(destination);
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
     category.name = name.toStdString();
-    category.destination = ui->editLooterCategoriesNewCategoryDestination->text().toStdString();
+    category.destination = destination.toStdString();
     category.toOnto = ui->comboBoxLooterCategoriesToOnto->currentIndex();
 
     looterCategoriesTable->add(category);
@@ -421,7 +435,7 @@ void MainWindow::on_pushButtonLooterItemsEdit_clicked()
 
     if (it == std::end(categories))
     {
-        auto msg = QString("Category '%1' doesn't exist anymore.").arg(item.name.c_str());
+        auto msg = QString("Category '%1' doesn't exist anymore.").arg(item.category.c_str());
         QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
         setCombobox = false;
     }
@@ -466,8 +480,9 @@ void MainWindow::on_pushButtonLooterItemsAdd_clicked()
 
     const size_t categoryIdx = ui->comboBoxLooterItemsCategories->currentIndex();
     const auto category = looterCategoriesTable->getCategory(categoryIdx);
+    const auto minCap = ui->spinBoxLooterItemsCapAbove->value();
 
-    looterItemsTable->add({ itemName, category.name });
+    looterItemsTable->add({ itemName, category.name, std::to_string(minCap) });
 }
 
 

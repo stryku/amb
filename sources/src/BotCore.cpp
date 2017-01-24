@@ -19,6 +19,8 @@ namespace Amb
         auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);
         simulator.attachToNewWindow(hwnd);
         modulesManager.attachToNewWindow(hwnd);
+        modulesManager.attachToNewProcess(pid);
+
         attachedProcess = pid;
     }
 

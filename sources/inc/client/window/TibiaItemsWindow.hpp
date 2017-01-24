@@ -11,12 +11,23 @@ namespace Amb
         {
             struct TibiaItemsWindow : public TibiaWindow
             {
-                std::vector<Db::ItemId> items;
-            };
+                TibiaItemsWindow() = default;
+                TibiaItemsWindow(const TibiaWindow &window)
+                    : TibiaWindow(window)
+                {}
 
-            //using MonsterLootWindow = TibiaItemsWindow;
-            //using PlayerContainerWindow = TibiaItemsWindow;
+                std::vector<Db::ItemId> items;
+                static constexpr Pos itemOffset(const size_t itemNumber)
+                {
+                    return Pos{ static_cast<int>((itemNumber % 4) * 37), 
+                                static_cast<int>((itemNumber / 4) * 37) };
+                }
+
+                Pos itemPosition(const size_t itemNumber) const
+                {
+                    return rect.pos() + itemOffset(itemNumber) + Pos::from(FirstItemOffset);
+                }
+            };
         }
     }
 }
-

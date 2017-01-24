@@ -37,6 +37,7 @@ namespace Amb
 
                     default:
                         assert(false);
+                        return static_cast<size_t>(-1);
                 }
             }
 

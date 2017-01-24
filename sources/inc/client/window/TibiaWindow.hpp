@@ -22,7 +22,9 @@ namespace Amb
                 static constexpr std::array<Rgba, PatternSize.w*PatternSize.h> EndOfWindowPatternPixels = { Rgba{ 67, 67, 67, 255 }, Rgba{ 64, 64, 64, 255 }, Rgba{ 64, 64, 64, 255 }, Rgba{ 88, 88, 88, 255 }, Rgba{ 112, 112, 112, 255 }, Rgba{ 136, 136, 136, 255 }, Rgba{ 108, 108, 108, 255 }, Rgba{ 67, 67, 67, 255 }, Rgba{ 67, 67, 67, 255 }, Rgba{ 67, 67, 67, 255 }, Rgba{ 39, 39, 39, 255 }, Rgba{ 48, 48, 48, 255 }, Rgba{ 64, 64, 64, 255 }, Rgba{ 88, 88, 88, 255 }, Rgba{ 112, 112, 112, 255 }, Rgba{ 124, 124, 124, 255 }, Rgba{ 77, 77, 77, 255 }, Rgba{ 67, 67, 67, 255 }, Rgba{ 56, 56, 56, 255 }, Rgba{ 7, 7, 7, 255 }, Rgba{ 16, 16, 16, 255 }, Rgba{ 48, 48, 48, 255 }, Rgba{ 64, 64, 64, 255 }, Rgba{ 88, 88, 88, 255 }, Rgba{ 112, 112, 112, 255 }, Rgba{ 98, 98, 98, 255 }, Rgba{ 68, 68, 68, 255 } };
 
                 static constexpr Rect IconRect = Rect{ 5,2, 11,11 };
-                static constexpr Pos TitleOffset = Pos{ 20,10 };
+                static constexpr Rect IconRect_11 = Rect{ 5,3, 11,11 };
+                static constexpr Offset TitleOffset = Offset{ 20,10 };
+                static constexpr Offset FirstItemOffset = Offset{ 13, 21 };
 
 
                 Graphics::Image icon;
