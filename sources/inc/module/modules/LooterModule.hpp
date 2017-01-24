@@ -52,6 +52,8 @@ namespace Amb
 
                 bool lootableItem(const Db::ItemId &id) const;
                 bool haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const;
+                bool haveEnoughCap(const Db::ItemId& id) const;
+                boost::optional<Ui::Module::Looter::LootItem> findLootItemById(const Db::ItemId &id) const;
 
                 std::string findLootableItemDestination(const Db::ItemId &id) const;
                 const Amb::Ui::Module::Looter::Category findLootableItemCategory(const Db::ItemId &id) const;

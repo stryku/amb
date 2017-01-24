@@ -92,6 +92,33 @@ namespace Amb
                 deadCreatureWindowFinder = boost::in_place(deadCreatureWindowFinderFactory.create(clientType)); //todo test this
             }
 
+            boost::optional<Ui::Module::Looter::LootItem> LooterModule::findLootItemById(const Db::ItemId &id) const
+            {
+                const auto pred = [this, id](const Amb::Ui::Module::Looter::LootItem &item)
+                {
+                    const auto itemId = items.getId(item.name);
+                    return itemId == id;
+                };
+
+                const auto found = std::find_if(std::cbegin(config.items),
+                                                std::cend(config.items),
+                                                pred);
+
+                return (found != std::cend(config.items))
+                        ? *found
+                        : boost::optional<Ui::Module::Looter::LootItem>{};
+            }
+
+            bool LooterModule::haveEnoughCap(const Db::ItemId& id) const
+            {
+                const auto optionalItem = findLootItemById(id);
+
+                if (!optionalItem)
+                    return false;
+
+                return haveEnoughCap(optionalItem.get());
+            }
+
             bool LooterModule::haveEnoughCap(const Amb::Ui::Module::Looter::LootItem &item) const
             {
                 return tibiaClientReader->readCap() >= item.minCap;
@@ -99,17 +126,7 @@ namespace Amb
 
             bool LooterModule::lootableItem(const Db::ItemId &id) const
             {
-                const auto pred = [this, id](const Amb::Ui::Module::Looter::LootItem &item)
-                {
-                    const auto itemId = items.getId(item.name);
-                    return itemId == id && haveEnoughCap(item);
-                };
-
-                const auto found = std::find_if(std::cbegin(config.items), 
-                                                std::cend(config.items), 
-                                                pred);
-
-                return found != std::cend(config.items);
+                return findLootItemById(id).is_initialized();
             }
 
             const Amb::Ui::Module::Looter::LootItem& LooterModule::findLootableItem(const Db::ItemId &id) const
@@ -124,7 +141,9 @@ namespace Amb
                                                 std::cend(config.items),
                                                 pred);
 
-                BOOST_ASSERT_MSG(found != std::cend(config.items), "We should alway find item in the list from gui");
+                BOOST_ASSERT_MSG(found != std::cend(config.items), 
+                                 "Item with id: %d not found! We should always find item in the list from gui", 
+                                 id);
 
                 return *found;
             }
@@ -150,7 +169,7 @@ namespace Amb
                                                    const Client::Window::TibiaItemsWindow &windowToLootFrom,
                                                    const std::vector<Client::Window::TibiaItemsWindow> &playerContainers,
                                                    const RelativeRect &capturedRect)
-            {
+            { 
                 static const Utils::Random::RandomOffset randomOffset{ 32, 32 };
 
                 auto windowRelativePos = windowToLootFrom.itemPosition(0) + Pos::from(randomOffset.get());
@@ -160,6 +179,12 @@ namespace Amb
                 for (auto itemPositionInWindow : boost::adaptors::reverse(itemsPositions))
                 {
                     const auto &itemId = windowToLootFrom.items[itemPositionInWindow];
+
+                    if (!haveEnoughCap(itemId))
+                    {
+                        LOG("No enough cap (" << tibiaClientReader->readCap() << ") for item: " << itemId);
+                        continue;
+                    }
 
                     const auto category = findLootableItemCategory(itemId);
                     auto toOptional = findCategoryDestinationPosition(category, playerContainers);
