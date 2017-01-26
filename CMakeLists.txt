@@ -7,15 +7,6 @@ project(${PROJECT_NAME_STR})
 
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/external_projects)
 
-add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
-
-add_definitions(${MSVC_COMPILER_DEFS})
-enable_testing()
-set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_tests)
-
-include_directories(${GTEST_INCLUDE_DIRS} ${GMOCK_INCLUDE_DIRS} ${COMMON_INCLUDES})
-
-
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -71,8 +62,6 @@ set (inc_dir ${src_root}/sources/inc)
 set (ui_dir ${src_root}/gui/AlmostManualBot)
 set (resources_dir ${src_root}/resources)
 set (install_dir ${src_root}/bin)
-set (test_src_dir ${src_root}/tests)
-set (test_inc_dir ${test_src_dir}/details)
 
 message (${program_name} " will be installed in:")
 message (${install_dir})
@@ -89,9 +78,6 @@ set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
 
 add_subdirectory(sources)                    
              
-
-                     
-                     
 set (AMB_hdr ${inc_dir_qt}/mainwindow.h)
 set (AMB_ui  ${ui_dir}/mainwindow.ui)
 set (AMB_gui_src ${src_dir_qt}/main.cpp)
@@ -116,36 +102,8 @@ add_executable(Amb ${AMB_src_qt}
 target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES} ntdll.lib)
 
 
-set( TEST_SRC_FILES ${test_src_dir}/main.cpp)
-                    
-set (TEST_INC_FILES )
-
-add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} ${TEST_INC_FILES})
-add_dependencies(${PROJECT_TEST_NAME} googletest googlemock)
-
-if(NOT WIN32 OR MINGW)
-    target_link_libraries(${PROJECT_TEST_NAME}
-        ${GTEST_LIBS_DIR}/libgtest.a
-        ${GTEST_LIBS_DIR}/libgtest_main.a
-        ${GMOCK_LIBS_DIR}/libgmock.a
-        ${GMOCK_LIBS_DIR}/libmock_main.a
-        )
-else()
-    target_link_libraries(${PROJECT_TEST_NAME}
-        debug ${GTEST_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GTEST_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_FIND_LIBRARY_SUFFIXES}
-        debug ${GMOCK_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gmock${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GMOCK_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gmock${CMAKE_FIND_LIBRARY_SUFFIXES}
-        )
-    target_link_libraries(${PROJECT_TEST_NAME}
-        debug ${GTEST_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GTEST_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_FIND_LIBRARY_SUFFIXES}
-        debug ${GMOCK_LIBS_DIR}/DebugLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gmock_main${CMAKE_FIND_LIBRARY_SUFFIXES}
-        optimized ${GMOCK_LIBS_DIR}/ReleaseLibs/${CMAKE_FIND_LIBRARY_PREFIXES}gmock_main${CMAKE_FIND_LIBRARY_SUFFIXES}
-        )
-endif()
-
-target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
+add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
+add_subdirectory(tests)  
 
 install(TARGETS Amb DESTINATION  ${install_dir}/)
 install(
