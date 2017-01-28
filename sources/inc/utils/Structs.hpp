@@ -182,36 +182,6 @@ namespace Amb
         }
     };
 
-    struct RelativeRectToReferencePoint
-    {
-        RelativeRectToReferencePoint() = default;
-        RelativeRectToReferencePoint(std::reference_wrapper<const Pos> relativePoint)
-            : relativePoint{ relativePoint }
-        {}
-
-        std::reference_wrapper<const Pos> relativePoint;
-        Rect rect;
-
-        Rect calculate() const
-        {
-            const auto& pos = relativePoint.get();
-
-            return Rect{ pos.x - rect.x,
-                         pos.y - rect.y,
-                         rect.w,
-                         rect.h };
-        }
-        Rect relativeToRect(const RelativeRect &rhs) const
-        {
-            RelativeRect relative;
-
-            relative.rect = rect;
-            relative.relationPoint = relativePoint.get();
-
-            return relative.relativeToRect(rhs);
-        }
-    };
-
     struct FromTo
     {
         int from, to;
