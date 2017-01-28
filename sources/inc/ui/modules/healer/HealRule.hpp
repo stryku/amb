@@ -16,9 +16,9 @@ namespace Amb
 
                 HealRule() = default;
                 HealRule(size_t minHp,
-                         size_t &maxHp,
-                         size_t &minMana,
-                         size_t &maxMana,
+                         size_t maxHp,
+                         size_t minMana,
+                         size_t maxMana,
                          Utils::Hotkey hotkey)
                     : minHp{ minHp }
                     , maxHp{ maxHp }

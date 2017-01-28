@@ -11,6 +11,7 @@ set (test_inc_dir ${test_src_dir}/details)
 set( TEST_SRC_FILES ${test_src_dir}/main.cpp)
 set (TEST_INC_FILES )
 
+add_subdirectory(ui)
 add_subdirectory(utils)
 
 add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES} ${TEST_INC_FILES})
