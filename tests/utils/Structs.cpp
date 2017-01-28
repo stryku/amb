@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-TEST(structs, pos_eq_operators)
+TEST(Structs, Pos_EqOperators)
 {
     Amb::Pos a, b;
 
@@ -19,7 +19,7 @@ TEST(structs, pos_eq_operators)
     ASSERT_NE(a, b);
 }
 
-TEST(structs, rect_eq_operators)
+TEST(Structs, Rect_EqOperators)
 {
     Amb::Rect a, b;
 
@@ -44,7 +44,7 @@ TEST(structs, rect_eq_operators)
     ASSERT_NE(a, b);
 }
 
-TEST(structs, rect_corners_getters)
+TEST(Structs, Rect_CornersGetters)
 {
     Amb::Rect a;
     Amb::Pos pos;
@@ -64,7 +64,7 @@ TEST(structs, rect_corners_getters)
     ASSERT_EQ(a.bottomRight(), pos);
 }
 
-TEST(structs, rest_plus_operator)
+TEST(Structs, Rest_PlusOperator)
 {
     const auto rect = Amb::Rect{ 10, 20, 30, 40 };
     const auto pos = Amb::Pos{ 100, 200 };
