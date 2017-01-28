@@ -120,7 +120,7 @@ namespace Amb
                                              std::cend(categories),
                                              pred);
 
-                BOOST_ASSERT_MSG(it != std::cend(categories), "Could not fing category");
+                BOOST_ASSERT_MSG(it != std::cend(categories), "Could not find category");
 
                 return *it;
             }
