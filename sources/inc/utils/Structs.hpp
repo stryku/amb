@@ -149,10 +149,12 @@ namespace Amb
 
         Rect relativeToRect(const RelativeRect &rhs) const
         {
-            Rect ret = relativeToPoint(rhs.relationPoint);
+            const auto rhsTopLeft = rhs.relativeToPoint(Pos{ 0,0 }).topLeft();
+            Rect ret = relativeToPoint(Pos{ 0,0 });
 
-            ret.x = rect.x - rhs.rect.x;
-            ret.y = rect.y - rhs.rect.y;
+            ret.x -= rhsTopLeft.x;
+            ret.y -= rhsTopLeft.y;
+
 
             return ret;
         }
