@@ -10,7 +10,8 @@ namespace Amb
         class Observable
         {
         public:
-            using CallbackType = std::function<void(const WrappedType&)>;
+            using CallbackParameterType = const WrappedType&;
+            using CallbackType = std::function<void(CallbackParameterType)>;
 
             Observable() = default;
 
