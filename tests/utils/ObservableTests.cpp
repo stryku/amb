@@ -8,6 +8,12 @@ namespace tests
     using Observable = Amb::Utils::Observable<int>;
     using Observator = Mock::Observator<int>;
 
+    TEST(Observable, EmptyCallback_NoThrow)
+    {
+        Observable observable;
+        EXPECT_NO_THROW(observable.set(1));
+    }
+
     TEST(Observable, ExpectCallbackCall)
     {
         Observator observator;
@@ -16,7 +22,9 @@ namespace tests
         EXPECT_CALL(observator, changedCallback(1));
         observable.set(1);
 
-        EXPECT_CALL(observator, changedCallback(-20));
+        EXPECT_CALL(observator, changedCallback(-20))
+            .Times(1);
+        observable.set(-20);
         observable.set(-20);
     }
 }
