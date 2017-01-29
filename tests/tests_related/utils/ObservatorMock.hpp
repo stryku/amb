@@ -10,6 +10,8 @@ namespace tests
         struct Observator
         {
             using Observable = Amb::Utils::Observable<WrappedType>;
+            WrappedType value;
+
             MOCK_METHOD1_T(changedCallback, void(typename Observable::CallbackParameterType));
 
             auto getCallback()
@@ -17,6 +19,7 @@ namespace tests
                 return [this](Observable::CallbackParameterType newVal)
                 {
                     changedCallback(newVal);
+                    value = newVal;
                 };
             }
         };
