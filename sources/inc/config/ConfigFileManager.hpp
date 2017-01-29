@@ -20,7 +20,7 @@ namespace Amb
                 currentFilePath.setCallback(cb);
             }
 
-            void save(const std::string &configs, std::string path = "");
+            bool save(const std::string &configs, std::string path = "");
             std::string load(const std::string &path);
             bool isPathEmpty() const;
 
