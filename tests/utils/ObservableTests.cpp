@@ -1,23 +1,12 @@
 #include <utils/Observable.hpp>
+#include <tests/tests_related/utils/ObservatorMock.hpp>
+
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
 namespace tests
 {
     using Observable = Amb::Utils::Observable<int>;
-
-    struct Observator
-    {
-        MOCK_METHOD1(changedCallback, void(Observable::CallbackParameterType));
-
-        auto getCallback()
-        {
-            return [this](Observable::CallbackParameterType newVal)
-            {
-                changedCallback(newVal);
-            };
-        }
-    };
+    using Observator = Mock::Observator<int>;
 
     TEST(Observable, ExpectCallbackCall)
     {
