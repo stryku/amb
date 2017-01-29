@@ -172,6 +172,10 @@ namespace Amb
         std::string readWholeFileIntoString(const std::string &path)
         {
             std::ifstream t(path);
+
+            if (!t.is_open())
+                return{};
+
             t.seekg(0, std::ios::end);
             size_t size = t.tellg();
             std::string buffer(size, ' ');
