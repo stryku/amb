@@ -78,6 +78,7 @@ namespace tests
             TEST_P(UpdateObservablePathTest, ObservablePathUpdate)
             {
                 const auto state = GetParam();
+                observer.setCallbackCallPolicy(false);
 
                 for (const auto& singleTestState : state.states)
                 {

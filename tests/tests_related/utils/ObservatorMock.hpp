@@ -18,10 +18,20 @@ namespace tests
             {
                 return [this](Observable::CallbackParameterType newVal)
                 {
-                    changedCallback(newVal);
+                    if(shouldCall)
+                        changedCallback(newVal);
+
                     value = newVal;
                 };
             }
+
+            void setCallbackCallPolicy(bool newShouldCall)
+            {
+                shouldCall = newShouldCall;
+            }
+
+        private:
+            bool shouldCall{ true };
         };
     }
 }
