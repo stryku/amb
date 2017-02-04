@@ -44,3 +44,7 @@ helpers
 items
     potions
     small saphire
+    life crystal
+    shockwave amulet
+    platinum amulet
+    strange talisman
