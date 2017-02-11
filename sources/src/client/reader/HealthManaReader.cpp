@@ -49,6 +49,7 @@ namespace Amb
 
             bool HealthManaReader::findHeart(const RelativeRect &lastCapturedRect)
             {
+                heartLayoutConfig_2.rect.relationPoint = lastCapturedRect.relationPoint;
                 auto rect = heartLayoutConfig_2.rect.relativeToRect(lastCapturedRect);
                 //const auto x = screen.w - heartLayoutConfig.offsetFromRight - 1;
                 screen.toCb();
@@ -78,7 +79,9 @@ namespace Amb
 
             bool HealthManaReader::isVisible(const RelativeRect &lastCapturedRect) const
             {
-                const auto rect = heartLayoutConfig_2.rect.relativeToRect(lastCapturedRect);
+                auto heartLayout = heartLayoutConfig_2;
+                heartLayout.rect.relationPoint = lastCapturedRect.relationPoint;
+                const auto rect = heartLayout.rect.relativeToRect(lastCapturedRect);
                 return screen.getSprite(rect) == heartLayoutConfig.pixels;
 
                 /*const auto x = lastCapturedRect.w - heartLayoutConfig.offsetFromRight - 1;
