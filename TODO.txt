@@ -48,3 +48,5 @@ items
     shockwave amulet
     platinum amulet
     strange talisman
+    knight legs
+    ghp
