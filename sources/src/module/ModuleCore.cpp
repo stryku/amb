@@ -1,4 +1,5 @@
 ﻿#include "module/ModuleCore.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -14,7 +15,7 @@ namespace Amb
             }
             catch (std::exception& e)
             {
-                qDebug("ModuleCore cought exception: %s", e.what());
+                LOG_DEBUG("ModuleCore cought exception: %s", e.what());
             }
         }
 

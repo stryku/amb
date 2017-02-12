@@ -1,4 +1,5 @@
 #include "client/TibiaClientWindowRectObserver.hpp"
+#include "log/log.hpp"
 
 #include <thread>
 
@@ -23,11 +24,11 @@ namespace Amb
                 ClientToScreen(tibiaWindowHandle, reinterpret_cast<POINT*>(&rcOnMonitor.right));
                 if (rc.bottom == 0 && rc.right == 0)
                 {
-                    qDebug("Window is minimized!");
+                    LOG_DEBUG("Window is minimized!");
                     return;
                 }
 
-                qDebug("TibiaClientWindowRectObserver Rect: { %d, %d, %d, %d }!", rcOnMonitor.left, rcOnMonitor.right, rcOnMonitor.top, rcOnMonitor.bottom);
+                LOG_DEBUG("TibiaClientWindowRectObserver Rect: { %d, %d, %d, %d }!", rcOnMonitor.left, rcOnMonitor.right, rcOnMonitor.top, rcOnMonitor.bottom);
 
                 TibiaClientWindowInfo value;
                 value.rect = Rect::fromWindowsRect(rc);
@@ -40,13 +41,17 @@ namespace Amb
 
         void TibiaClientWindowRectObserver::run(HWND tibiaWindowHandle)
         {
-            qDebug("TibiaClientWindowRectObserver::run( %x )", tibiaWindowHandle);
-            if (tibiaWindowHandle != NULL)
+            LOG_DEBUG("TibiaClientWindowRectObserver::run");
+
+            if (tibiaWindowHandle == NULL)
             {
-                qDebug("TibiaClientWindowRectObserver Starting!");
-                thread.start(getLoopFunction(tibiaWindowHandle),
-                             Utils::RandomBetween{ 1000,1000 });
+                LOG_DEBUG("TibiaClientWindowRectObserver::run window handle is NULL");
+                return;
             }
+
+            LOG_DEBUG("TibiaClientWindowRectObserver Starting!");
+            thread.start(getLoopFunction(tibiaWindowHandle),
+                         Utils::RandomBetween{ 1000,1000 });
         }
 
         void TibiaClientWindowRectObserver::attachToNewWindow(HWND tibiaWindowHandle)

@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "log/log.hpp"
 
 #include "utils.hpp"
 
@@ -291,11 +292,11 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
     }
     catch( std::bad_function_call &e )
     {
-        qDebug()<<"Catch std::bad_function_call: " << e.what();
+        LOG_DEBUG("Catch std::bad_function_call: %s", e.what());
     }
     catch( std::exception &e )
     {
-        qDebug()<<"Catch std::exception: "<<e.what();
+        LOG_DEBUG("Catch std::exception: %s", e.what());
     }
 }
 

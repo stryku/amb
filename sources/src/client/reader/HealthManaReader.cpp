@@ -1,10 +1,10 @@
 #include "client/reader/HealthManaReader.hpp"
-
 #include "graphics/Image.hpp"
 #include "config/layout/health_heart/HealthHeartConfig.hpp"
 #include "config/layout/health_mana_bars/HealthManaBars.hpp"
 #include "config/layout/health_heart/HealthHeartConfigFactory.hpp"
 #include "config/layout/health_mana_bars/HealthManaBarsConfigFactory.hpp"
+#include "log/log.hpp"
 
 #include <QDebug>
 
@@ -54,19 +54,19 @@ namespace Amb
                 //const auto x = screen.w - heartLayoutConfig.offsetFromRight - 1;
                 screen.toCb();
 
-                qDebug("TibiaScreenReader refinding heart. Before: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                LOG_DEBUG("TibiaScreenReader refinding heart. Before: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
 
                 for (rect.y = 0; rect.y < screen.h - heartLayoutConfig_2.rect.rect.h; ++rect.y)
                 {
                     if (screen.getSprite(rect) == heartLayoutConfig.pixels)
                     {
                         heartLayoutConfig_2.rect.rect.y = rect.y;
-                        qDebug("TibiaScreenReader heart found: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                        LOG_DEBUG("TibiaScreenReader heart found: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
                         return true;
                     }
                 }
 
-                qDebug("TibiaScreenReader heart NOT found!");
+                LOG_DEBUG("TibiaScreenReader heart NOT found!");
                 return false;
             }
 

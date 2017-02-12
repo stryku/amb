@@ -6,7 +6,7 @@
 #ifdef NDEBUG
 #define LOG_DEBUG(msg)
 #else
-#define LOG_DEBUG(msg, ...) Log::details::Logger::get().log(msg, __VA_ARGS__)
+#define LOG_DEBUG(msg, ...) Amb::Log::details::Logger::get().log(msg, __VA_ARGS__)
 #endif
 //#define LOG_DEBUG(msg) spdlog::get(Log::details::Logger::LoggerName)->debug(msg)
 

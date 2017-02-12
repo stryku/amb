@@ -1,4 +1,5 @@
 #include "module/modules/Healer.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -33,10 +34,10 @@ namespace Amb
                     //captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
                     //frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
 
-                    qDebug("Heart not on its place, refinding...");
+                    LOG_DEBUG("Heart not on its place, refinding...");
                     if (!healthManaReader.findHeart(captureRect))
                     {
-                        qDebug("Couldn't locate health and mana status!");
+                        LOG_DEBUG("Couldn't locate health and mana status!");
                         return;
                     }
                 }
@@ -48,7 +49,7 @@ namespace Amb
                 {
                     if (rule.passed(hp, mana))
                     {
-                        qDebug("Rule passed");
+                        LOG_DEBUG("Rule passed");
                         executeRule(rule);
                     }
                 }

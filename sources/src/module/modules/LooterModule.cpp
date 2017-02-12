@@ -191,7 +191,7 @@ namespace Amb
 
                     if (!toOptional)
                     {
-                        qDebug("Destination not found: %s", category.destination.c_str());
+                        LOG_DEBUG("Destination not found: %s", category.destination.c_str());
                         continue;
                     }
 
