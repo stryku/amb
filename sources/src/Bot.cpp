@@ -119,11 +119,16 @@ namespace Amb
 
     void Bot::tibiaWindowChanged( const std::wstring &newWindowTitle )
     {
+        const auto stringTitle = Utils::wstringToString(newWindowTitle);
+
+        if (stringTitle.find("Tibia - ") == std::string::npos)
+            return;
+
         DWORD pid = Utils::TibiaFinder::findProcessId( newWindowTitle );
 
         botCore.attachNewProcess(pid);
 
-        const auto charName = Utils::wstringToString(newWindowTitle).substr(std::size("Tibia - ") - 1);
+        const auto charName = stringTitle.substr(std::size("Tibia - ") - 1);
         currentCharacterName.set(charName);
 
         const auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);
