@@ -1,7 +1,7 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 #include "utils/random/RandomOffset.hpp"
-#include "utils/log.hpp"
+#include "log/log.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
@@ -32,7 +32,7 @@ namespace Amb
             void LooterModule::attachToNewProcess(DWORD pid)
             {
                 BOOST_ASSERT_MSG(tibiaClientReader, "TibiaClientReader should be valid at this point!");
-                LOG("LooterModule attaching to process: " << pid);
+                LOG_DEBUG("LooterModule attaching to process: %d", pid);
 
                 tibiaClientReader->attachToNewProcess(pid);
             }
@@ -182,7 +182,7 @@ namespace Amb
 
                     if (!haveEnoughCap(itemId))
                     {
-                        LOG("No enough cap (" << tibiaClientReader->readCap() << ") for item: " << itemId);
+                        LOG_DEBUG("No enough cap (%d) for item: %d", tibiaClientReader->readCap(), itemId);
                         continue;
                     }
 

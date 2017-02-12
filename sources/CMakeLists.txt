@@ -97,7 +97,6 @@ set (AMB_inc
             
             ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
             
-            ${inc_dir}/utils/log.hpp
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/utils/ToString.hpp
