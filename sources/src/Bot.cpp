@@ -39,8 +39,8 @@ namespace Amb
             //}
         };
 
-        LOG_DEBUG("Creating DebugModeChecker");
-        const auto debugModeChecker = Security::Debug::DebugModeCheckerFactory{}.create(cb);
+        //LOG_DEBUG("Creating DebugModeChecker");
+        //const auto debugModeChecker = Security::Debug::DebugModeCheckerFactory{}.create(cb);
 
         LOG_DEBUG("Showing window");
         window.show();
@@ -96,6 +96,8 @@ namespace Amb
 
     bool Bot::toggleModule( Module::ModuleId modId )
     {
+        LOG_DEBUG("Bot::toggleModule( %d )", static_cast<int>(modId));
+
         if (botCore.getAttachedProcess() == NULL)
         {
             QMessageBox msgBox;

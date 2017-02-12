@@ -133,8 +133,15 @@ bool MainWindow::startModule( QCheckBox *moduleCheckBox,
         moduleCheckBox->setText("Running");
         return true;
     }
+    else
+    {
+        auto p = moduleCheckBox->palette();
 
-    return false;
+        p.setColor(QPalette::Active, QPalette::WindowText, QColor("black"));
+        moduleCheckBox->setPalette(p);
+        moduleCheckBox->setText("Not running");
+        return false;
+    }
 }
 
 void MainWindow::stopModule( QCheckBox *moduleCheckBox,
