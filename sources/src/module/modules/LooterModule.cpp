@@ -26,7 +26,9 @@ namespace Amb
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , itemsWindowReader{ screen, items }
-                , deadCreatureWindowFinderFactory( std::move(factory) )
+                , deadCreatureWindowFinderFactory(std::move(factory))
+                , missingItemsLogger{ "missing_items_logger", "logs/missing_items.txt" }
+                , unknowWindowsLogger{ "unknow_windows_logger", "logs/unknow_windows.txt" }
             {}
 
             void LooterModule::attachToNewProcess(DWORD pid)
@@ -36,6 +38,14 @@ namespace Amb
 
                 tibiaClientReader->attachToNewProcess(pid);
             }
+
+            void LooterModule::setEnableDebugLogs(bool enabled)
+            {
+                LOG_DEBUG("LooterModule enabling debug logs: %s", enabled ? "true" : "false");
+                missingItemsLogger.setExternalBool(enabled);
+                unknowWindowsLogger.setExternalBool(enabled);
+            }
+
 
             void LooterModule::runDetails()
             {

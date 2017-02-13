@@ -15,12 +15,14 @@ namespace Amb
         , window{ db }
         , currentCharacterName{ getCharacterNameObserver() }
         , clientRectObserver{ getClientRectObserver() }
+        , debugLogsEnabled{ botCore.getEnableDebugLogsObserver() }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
         window.setConfigLoader(getConfigLoader());
         window.setScriptNameObserver(getScriptNameObserver());
+        window.setEnableDebugLogObserver(getEnableDebugLogsObserver());
         mainWindowTitleUpdater.setBasic();
     }
 
@@ -74,6 +76,15 @@ namespace Amb
             tibiaClientWindowInfo = info;
         };
     }
+
+    Bot::EnableDebugLogsObserver Bot::getEnableDebugLogsObserver()
+    {
+        return [this](bool enabled)
+        {
+            debugLogsEnabled.set(enabled);
+        };
+    }
+
 
     Bot::StringValueObserver Bot::getCharacterNameObserver()
     {

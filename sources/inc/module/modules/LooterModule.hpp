@@ -10,6 +10,7 @@
 #include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 #include "client/window/finder/DeadCreatureWindowFinder.hpp"
 #include "capture/ItemsWindowReader.hpp"
+#include "log/ImageConditionalLogger.hpp"
 
 #include <chrono>
 
@@ -31,12 +32,17 @@ namespace Amb
 
                 void attachToNewProcess(DWORD pid) override;
 
+                void setEnableDebugLogs(bool enabled) override;
+
             private:
                 Db::Items items;
                 Db::Containers containersDb;
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
                 boost::optional<Client::Window::Finder::DeadCreatureWindowFinder> deadCreatureWindowFinder;
                 const Client::Window::Finder::DeadCreatureWindowFinderFactory deadCreatureWindowFinderFactory;
+                Log::ImageConditionalLogger missingItemsLogger;
+                Log::ImageConditionalLogger unknowWindowsLogger;
+
 
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;

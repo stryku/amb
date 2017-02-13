@@ -50,5 +50,11 @@ namespace Amb
             for (auto &module : modules)
                 module.second->attachToNewProcess(pid);
         }
+
+        void ModulesManager::setEnableDebugLogs(bool enabled)
+        {
+            for (auto &module : modules)
+                module.second->setEnableDebugLogs(enabled);
+        }
     }
 }

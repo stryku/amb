@@ -17,6 +17,8 @@ namespace Amb
     class BotCore
     {
     private:
+        using EnableDebugLogsObserver = Utils::Observable<bool>::CallbackType;
+
         DWORD attachedProcess{ NULL };
         Simulate::Simulator simulator;
         Module::ModulesManager modulesManager;
@@ -30,5 +32,6 @@ namespace Amb
         void toggleModule( Amb::Module::ModuleId modId );
         bool isModuleRunning( Module::ModuleId modId );
         DWORD getAttachedProcess() const { return attachedProcess; }
+        EnableDebugLogsObserver getEnableDebugLogsObserver();
     };
 }

@@ -252,7 +252,6 @@ void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> o
     });
 }
 
-
 void MainWindow::setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler )
 {
     moduleToggleHandler = newHandler;
@@ -532,3 +531,13 @@ void MainWindow::on_checkBoxLooterRunning_clicked()
     toggleLooter();
 }
 
+void MainWindow::setEnableDebugLogObserver(std::function<void(bool)> observer)
+{
+    enableDebugLogObserver = observer;
+}
+
+
+void MainWindow::on_actionEnable_debug_logs_toggled(bool checked)
+{
+    enableDebugLogObserver(checked);
+}
