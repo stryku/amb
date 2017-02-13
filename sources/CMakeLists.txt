@@ -60,6 +60,7 @@ set (AMB_inc
             ${inc_dir}/graphics/Image.hpp
             
             ${inc_dir}/log/log.hpp
+            ${inc_dir}/log/ILogger.hpp
             ${inc_dir}/log/ItemLogger.hpp
             
             ${inc_dir}/log/details/Logger.hpp
