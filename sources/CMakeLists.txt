@@ -60,8 +60,8 @@ set (AMB_inc
             ${inc_dir}/graphics/Image.hpp
             
             ${inc_dir}/log/log.hpp
-            ${inc_dir}/log/ILogger.hpp
-            ${inc_dir}/log/ItemLogger.hpp
+            ${inc_dir}/log/ImageLogger.hpp
+            ${inc_dir}/log/ImageConditionalLogger.hpp
             
             ${inc_dir}/log/details/Logger.hpp
             
@@ -156,7 +156,8 @@ set (AMB_src
             
             ${src_dir}/db/static/items/ItemsDbData.cpp
             
-            ${src_dir}/log/ItemLogger.cpp
+            ${src_dir}/log/ImageLogger.cpp
+            ${src_dir}/log/ImageConditionalLogger.cpp
             
             ${src_dir}/log/details/Logger.cpp
             
