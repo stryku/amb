@@ -31,13 +31,11 @@ namespace Amb
 
                 if (!healthManaReader.isVisible(captureRect))
                 {
-                    //captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
-                    //frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
-
                     LOG_DEBUG("Heart not on its place, refinding...");
                     if (!healthManaReader.findHeart(captureRect))
                     {
                         LOG_DEBUG("Couldn't locate health and mana status!");
+                        screenLogger.log(screen);
                         return;
                     }
                 }
@@ -66,12 +64,18 @@ namespace Amb
                 , advancedSettings{ advancedSettings }
                 , healthManaReader{ screen }
                 //, topRightCorner{ topRightCorner }
+                , screenLogger{ "not_found_heart_logger", "logs/heart_not_found.txt" }
             {}
 
             void Healer::applyConfigs()
             {
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
+            }
+
+            void Healer::setEnableDebugLogs(bool enabled)
+            {
+                screenLogger.setExternalBool(enabled);
             }
         }
     }

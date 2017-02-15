@@ -15,7 +15,7 @@ namespace Amb
                 bool shouldLog(const Args&... args) const
                 {
                     return externalBool && 
-                           static_cast<DerivedCondition>(this)->shouldLogDerived(std::forward<Args>(args)...);
+                           static_cast<const DerivedCondition*>(this)->shouldLogDerived(args...);
                 }
 
                 void setExternalBool(bool cond) 

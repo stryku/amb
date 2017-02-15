@@ -13,7 +13,7 @@ namespace Amb
             class ImageLogOnceCondition : public LoggerCondition<ImageLogOnceCondition, cexpr::hash_t>
             {
             public:
-                bool shouldLogDerived(const cexpr::hash_t&);
+                bool shouldLogDerived(const cexpr::hash_t&) const;
                 void willLogThis(const cexpr::hash_t&) override;
 
             private:
