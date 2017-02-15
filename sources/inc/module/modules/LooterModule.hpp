@@ -43,7 +43,6 @@ namespace Amb
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
                 boost::optional<Client::Window::Finder::DeadCreatureWindowFinder> deadCreatureWindowFinder;
                 const Client::Window::Finder::DeadCreatureWindowFinderFactory deadCreatureWindowFinderFactory;
-                UniqueImageLogger missingItemsLogger;
                 UniqueImageLogger unknowWindowsLogger;
 
 

@@ -27,7 +27,6 @@ namespace Amb
                 , advancedSettings{ advancedSettings }
                 , itemsWindowReader{ screen, items }
                 , deadCreatureWindowFinderFactory(std::move(factory))
-                , missingItemsLogger{ "missing_items_logger", "logs/missing_items.txt" }
                 , unknowWindowsLogger{ "unknow_windows_logger", "logs/unknow_windows.txt" }
             {}
 
@@ -42,10 +41,9 @@ namespace Amb
             void LooterModule::setEnableDebugLogs(bool enabled)
             {
                 LOG_DEBUG("LooterModule enabling debug logs: %s", enabled ? "true" : "false");
-                missingItemsLogger.setExternalBool(enabled);
+                itemsWindowReader.setEnableDebugLogs(enabled);
                 unknowWindowsLogger.setExternalBool(enabled);
             }
-
 
             void LooterModule::runDetails()
             {
