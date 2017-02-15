@@ -61,12 +61,14 @@ set (AMB_inc
             
             ${inc_dir}/log/log.hpp
             ${inc_dir}/log/ImageLogger.hpp
+            ${inc_dir}/log/RectLogger.hpp
             ${inc_dir}/log/ConditionalLogger.hpp
             ${inc_dir}/log/ImageConditionalLogger.hpp
             
             ${inc_dir}/log/condition/LoggerCondition.hpp
             ${inc_dir}/log/condition/ImageLogUniqueCondition.hpp
             ${inc_dir}/log/condition/ImageLogOnceCondition.hpp
+            ${inc_dir}/log/condition/LogDifferentThanLastCondition.hpp
             
             ${inc_dir}/log/details/Logger.hpp
             
@@ -114,6 +116,9 @@ set (AMB_inc
             ${inc_dir}/utils/random/RandomBetween.hpp
             ${inc_dir}/utils/random/RandomOffset.hpp
             
+            ${inc_dir}/utils/to_string/ImageToSimpleStringConverter.hpp
+            ${inc_dir}/utils/to_string/RectToStringConverter.hpp
+            
             ${inc_dir}/utils/traits/traits.hpp
             
             ${inc_dir}/security/debug/DebugModeChecker.hpp
@@ -160,8 +165,6 @@ set (AMB_src
             ${src_dir}/db/static/containers/ContainersDbData.cpp
             
             ${src_dir}/db/static/items/ItemsDbData.cpp
-            
-            ${src_dir}/log/ImageLogger.cpp
             
             ${src_dir}/log/condition/ImageLogUniqueCondition.cpp
             ${src_dir}/log/condition/ImageLogOnceCondition.cpp

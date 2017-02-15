@@ -11,6 +11,7 @@ namespace Amb
     {
         TibiaClientWindowRectObserver::TibiaClientWindowRectObserver(Observable::CallbackType cb)
             : rect{ cb }
+            , logger{ "general_logger", "logs/general_log.txt" }
         {}
 
         auto TibiaClientWindowRectObserver::getLoopFunction(HWND tibiaWindowHandle)
@@ -28,10 +29,12 @@ namespace Amb
                     return;
                 }
 
-                LOG_DEBUG("TibiaClientWindowRectObserver Rect: { %d, %d, %d, %d }!", rcOnMonitor.left, rcOnMonitor.right, rcOnMonitor.top, rcOnMonitor.bottom);
+                const auto translatedRect = Rect::fromWindowsRect(rc);
+
+                logger.log(translatedRect);
 
                 TibiaClientWindowInfo value;
-                value.rect = Rect::fromWindowsRect(rc);
+                value.rect = translatedRect;
                 value.rectOnMonitors = Rect::fromWindowsRect(rcOnMonitor);
                 value.corners = RectCorners::fromRect(value.rect);
 
