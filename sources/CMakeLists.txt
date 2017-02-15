@@ -61,6 +61,7 @@ set (AMB_inc
             
             ${inc_dir}/log/log.hpp
             ${inc_dir}/log/ImageLogger.hpp
+            ${inc_dir}/log/ConditionalLogger.hpp
             ${inc_dir}/log/ImageConditionalLogger.hpp
             
             ${inc_dir}/log/condition/LoggerCondition.hpp

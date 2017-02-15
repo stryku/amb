@@ -6,12 +6,12 @@ namespace Amb
     {
         namespace Condition
         {
-            bool ImageLogOnceCondition::shouldLogDerived(const cexpr::hash_t&) const
+            bool ImageLogOnceCondition::shouldLogDerived(const Graphics::Image&) const
             {
                 return !alreadyLogged;
             }
 
-            void ImageLogOnceCondition::willLogThis(const cexpr::hash_t&)
+            void ImageLogOnceCondition::willLogThis(const Graphics::Image&)
             {
                 alreadyLogged = true;
             }

@@ -6,15 +6,20 @@
 
 namespace Amb
 {
+    namespace Graphics
+    {
+        struct Image;
+    }
+
     namespace Log
     {
         namespace Condition
         {
-            class ImageLogOnceCondition : public LoggerCondition<ImageLogOnceCondition, cexpr::hash_t>
+            class ImageLogOnceCondition : public LoggerCondition<ImageLogOnceCondition, Graphics::Image>
             {
             public:
-                bool shouldLogDerived(const cexpr::hash_t&) const;
-                void willLogThis(const cexpr::hash_t&) override;
+                bool shouldLogDerived(const Graphics::Image&) const;
+                void willLogThis(const Graphics::Image&) override;
 
             private:
                 bool alreadyLogged{ false };

@@ -1,4 +1,5 @@
 #include "log/condition/ImageLogUniqueCondition.hpp"
+#include "graphics/Image.hpp"
 
 #include <algorithm>
 
@@ -8,16 +9,16 @@ namespace Amb
     {
         namespace Condition
         {
-            bool ImageLogUniqueCondition::shouldLogDerived(const cexpr::hash_t& hash) const
+            bool ImageLogUniqueCondition::shouldLogDerived(const Graphics::Image& img) const
             {
                 return std::find(std::cbegin(alreadyLoggerImagesHashes),
                                  std::cend(alreadyLoggerImagesHashes),
-                                 hash) == std::cend(alreadyLoggerImagesHashes);
+                                 img.hash()) == std::cend(alreadyLoggerImagesHashes);
             }
 
-            void ImageLogUniqueCondition::willLogThis(const cexpr::hash_t& hash)
+            void ImageLogUniqueCondition::willLogThis(const Graphics::Image& img)
             {
-                alreadyLoggerImagesHashes.push_back(hash);
+                alreadyLoggerImagesHashes.push_back(img.hash());
             }
         }
     }

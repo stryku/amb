@@ -8,15 +8,20 @@
 
 namespace Amb
 {
+    namespace Graphics
+    {
+        struct Image;
+    }
+
     namespace Log
     {
         namespace Condition
         {
-            class ImageLogUniqueCondition : public LoggerCondition<ImageLogUniqueCondition, cexpr::hash_t>
+            class ImageLogUniqueCondition : public LoggerCondition<ImageLogUniqueCondition, Graphics::Image>
             {
             public:
-                bool shouldLogDerived(const cexpr::hash_t& hash) const;
-                void willLogThis(const cexpr::hash_t& hash) override;
+                bool shouldLogDerived(const Graphics::Image& img) const;
+                void willLogThis(const Graphics::Image& img) override;
 
             private:
                 std::vector<cexpr::hash_t> alreadyLoggerImagesHashes;
