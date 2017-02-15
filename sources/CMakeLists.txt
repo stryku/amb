@@ -63,7 +63,9 @@ set (AMB_inc
             ${inc_dir}/log/ImageLogger.hpp
             ${inc_dir}/log/ImageConditionalLogger.hpp
             
-            ${inc_dir}/log/condition/ILoggerCondition.hpp
+            ${inc_dir}/log/condition/LoggerCondition.hpp
+            ${inc_dir}/log/condition/ImageLogUniqueCondition.hpp
+            ${inc_dir}/log/condition/ImageLogOnceCondition.hpp
             
             ${inc_dir}/log/details/Logger.hpp
             
@@ -159,7 +161,9 @@ set (AMB_src
             ${src_dir}/db/static/items/ItemsDbData.cpp
             
             ${src_dir}/log/ImageLogger.cpp
-            ${src_dir}/log/ImageConditionalLogger.cpp
+            
+            ${src_dir}/log/condition/ImageLogUniqueCondition.cpp
+            ${src_dir}/log/condition/ImageLogOnceCondition.cpp
             
             ${src_dir}/log/details/Logger.cpp
             

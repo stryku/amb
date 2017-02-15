@@ -1,6 +1,6 @@
 #pragma once
 
-#include "log/condition/ILoggerCondition.hpp"
+#include "log/condition/LoggerCondition.hpp"
 
 #include <cexpr/crypto.hpp>
 
@@ -10,11 +10,11 @@ namespace Amb
     {
         namespace Condition
         {
-            class ImageLogOnceCondition : public ILoggerCondition<cexpr::hash_t>
+            class ImageLogOnceCondition : public LoggerCondition<ImageLogOnceCondition, cexpr::hash_t>
             {
             public:
-                bool shouldLog(const cexpr::hash_t&) override;
-                bool willLogThis(const cexpr::hash_t&) override;
+                bool shouldLogDerived(const cexpr::hash_t&);
+                void willLogThis(const cexpr::hash_t&) override;
 
             private:
                 bool alreadyLogged{ false };
