@@ -11,6 +11,8 @@ namespace Amb
             {
             public:
                 virtual bool shouldLog(const Args&... args) = 0;
+                virtual bool willLogThis(const Args&... args) = 0;
+
             };
         }
     }
