@@ -42,13 +42,14 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     looterCategoriesTable = std::make_unique<Amb::Ui::Module::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
     
-    updateTibiaClientsComboBox();
-
     itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);
 
     containersCompleter = createCompleter(db.containers.getNames(), this);
     ui->editLooterCategoriesNewCategoryDestination->setCompleter(containersCompleter);
+
+    clientComboboxUpdater.setCombobox(ui->cbTibiaClients);
+    updateTibiaClientsComboBox();
 }
 
 MainWindow::~MainWindow()
@@ -58,16 +59,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTibiaClientsComboBox()
 {
-    auto clientsTitles = Amb::Utils::TibiaFinder::findAllClientsTitles();
-    auto comboBox = ui->cbTibiaClients;
-
-    comboBox->clear();
-
-    comboBox->addItem( "Select client" );
-    comboBox->addItem( "-------------" );
-
-    for( auto &clientTitle : clientsTitles )
-        comboBox->addItem( QString::fromStdWString( clientTitle ) );
+    const auto hideNick = ui->actionHide_nick->isChecked();
+    clientComboboxUpdater.update(hideNick);
 }
 
 void MainWindow::on_btnRefreshClientsComboBox_clicked()
@@ -540,4 +533,11 @@ void MainWindow::setEnableDebugLogObserver(std::function<void(bool)> observer)
 void MainWindow::on_actionEnable_debug_logs_toggled(bool checked)
 {
     enableDebugLogObserver(checked);
+}
+
+void MainWindow::on_actionHide_nick_toggled(bool checked)
+{
+    updateTibiaClientsComboBox();
+    const auto title = clientComboboxUpdater.getCurrent(checked);
+    tibiaWindowChangedHandler(Amb::Utils::stringToWstring(title));
 }

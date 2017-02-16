@@ -8,6 +8,7 @@
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
+#include "ui/updaters/TibiaClientsComboboxUpdater.hpp"
 
 #include "db/Database.hpp"
 
@@ -89,6 +90,8 @@ private slots:
     void on_checkBoxLooterRunning_clicked();
 
 
+    void on_actionHide_nick_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 
@@ -97,6 +100,7 @@ private:
 
     const Amb::Db::Database &db;
     Amb::Config::ConfigFileManager configFileManager;
+    Amb::Ui::Updaters::TibiaClientsComboboxUpdater clientComboboxUpdater;
 
     std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;

@@ -16,13 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QComboBox" name="cbTibiaClients">
-      <item>
-       <property name="text">
-        <string>Select client</string>
-       </property>
-      </item>
-     </widget>
+     <widget class="QComboBox" name="cbTibiaClients"/>
     </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="btnRefreshClientsComboBox">
@@ -689,9 +683,11 @@
    </widget>
    <widget class="QMenu" name="menuLog">
     <property name="title">
-     <string>Log</string>
+     <string>Options</string>
     </property>
     <addaction name="actionEnable_debug_logs"/>
+    <addaction name="separator"/>
+    <addaction name="actionHide_nick"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLog"/>
@@ -734,6 +730,14 @@
    </property>
    <property name="text">
     <string>Enable debug logs</string>
+   </property>
+  </action>
+  <action name="actionHide_nick">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hide nick</string>
    </property>
   </action>
  </widget>

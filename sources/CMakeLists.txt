@@ -96,15 +96,17 @@ set (AMB_inc
             ${inc_dir}/ui/modules/looter/LooterCategoriesTable.hpp
             ${inc_dir}/ui/modules/looter/LooterItemsTable.hpp
             ${inc_dir}/ui/modules/looter/LootItem.hpp
-            ${inc_dir}/ui/modules/looter/ToOnto.hpp
+            ${inc_dir}/ui/modules/looter/ToOnto.hpp 
             
             ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
             ${inc_dir}/ui/updaters/LooterUiUpdater.hpp
             ${inc_dir}/ui/updaters/UiUpdater.hpp
             ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
+            ${inc_dir}/ui/updaters/TibiaClientsComboboxUpdater.hpp
             
             ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
+            ${inc_dir}/ui/updaters/details/TibiaNickHider.hpp
             
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
@@ -188,8 +190,10 @@ set (AMB_src
             ${src_dir}/utils/ThreadWorker.cpp
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
+            ${src_dir}/ui/updaters/TibiaClientsComboboxUpdater.cpp
             
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
+            ${src_dir}/ui/updaters/details/TibiaNickHider.cpp
 
             ${src_dir}/security/debug/DebugModeChecker.cpp
             ${src_dir}/security/debug/DebugModeCheckerFactory.cpp
