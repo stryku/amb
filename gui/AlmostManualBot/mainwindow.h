@@ -92,6 +92,8 @@ private slots:
 
     void on_actionHide_nick_toggled(bool arg1);
 
+    void on_actionShow_console_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 

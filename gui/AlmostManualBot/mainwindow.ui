@@ -688,6 +688,8 @@
     <addaction name="actionEnable_debug_logs"/>
     <addaction name="separator"/>
     <addaction name="actionHide_nick"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_console"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuLog"/>
@@ -738,6 +740,17 @@
    </property>
    <property name="text">
     <string>Hide nick</string>
+   </property>
+  </action>
+  <action name="actionShow_console">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show console</string>
    </property>
   </action>
  </widget>

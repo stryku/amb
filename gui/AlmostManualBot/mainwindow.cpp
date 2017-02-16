@@ -541,3 +541,10 @@ void MainWindow::on_actionHide_nick_toggled(bool checked)
     const auto title = clientComboboxUpdater.getCurrent(checked);
     tibiaWindowChangedHandler(Amb::Utils::stringToWstring(title));
 }
+
+void MainWindow::on_actionShow_console_toggled(bool checked)
+{
+    //todo
+    //if(checked)
+        
+}
