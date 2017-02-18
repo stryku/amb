@@ -47,7 +47,7 @@ namespace Amb
 
                 if (screen.cpixel(base.x, base.y) != config.firstPixel)
                 {
-                    LOG_DEBUG("first pixel doesn't match, retutning 0");
+                    LOG_DEBUG("first pixel doesn't match, returning 0");
                     return 0;
                 }
 
@@ -62,35 +62,38 @@ namespace Amb
 
             bool HealthManaReader::findHeart(const RelativeRect &lastCapturedRect)
             {
-                heartLayoutConfig_2.rect.relationPoint = lastCapturedRect.relationPoint;
-                auto rect = heartLayoutConfig_2.rect.relativeToRect(lastCapturedRect);
-                //const auto x = screen.w - heartLayoutConfig.offsetFromRight - 1;
-                screen.toCb();
+                //heartLayoutConfig_2.rect.relationPoint = lastCapturedRect.relationPoint;
+                //auto rect = heartLayoutConfig_2.rect.relativeToRect(lastCapturedRect);
+                ////const auto x = screen.w - heartLayoutConfig.offsetFromRight - 1;
+                //screen.toCb();
 
-                LOG_DEBUG("TibiaScreenReader refinding heart. Before: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                //LOG_DEBUG("TibiaScreenReader refinding heart. Before: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
 
-                for (rect.y = 0; 
-                     static_cast<size_t>(rect.y) < screen.h - heartLayoutConfig_2.rect.rect.h; 
-                     ++rect.y)
-                {
-                    if (screen.getSprite(rect) == heartLayoutConfig.pixels)
-                    {
-                        heartLayoutConfig_2.rect.rect.y = rect.y;
-                        LOG_DEBUG("TibiaScreenReader heart found: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
-                        return true;
-                    }
-                }
+                //for (rect.y = 0; 
+                //     static_cast<size_t>(rect.y) < screen.h - heartLayoutConfig_2.rect.rect.h; 
+                //     ++rect.y)
+                //{
+                //    if (screen.getSprite(rect) == heartLayoutConfig_2.pixels)
+                //    {
+                //        heartLayoutConfig_2.rect.rect.y = rect.y;
+                //        LOG_DEBUG("TibiaScreenReader heart found: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                //        return true;
+                //    }
+                //}
 
-                LOG_DEBUG("TibiaScreenReader heart NOT found!");
-                return false;
+                //LOG_DEBUG("TibiaScreenReader heart NOT found!");
+                //return false;
             }
 
             void HealthManaReader::setTibiaClientType(Client::TibiaClientType clientType)
             {
                 LOG_DEBUG("HealthManaReader setting client type: %d", Client::toSize_t(clientType));
 
-                heartLayoutConfig = Config::Layout::HealthHeart::Factory{}.create(clientType);
+                //heartLayoutConfig = Config::Layout::HealthHeart::Factory{}.create(clientType);
                 heartLayoutConfig_2 = Config::Layout::HealthHeart::Factory{}.create_2(clientType);
+                //heartLayoutConfig_11_big = heartLayoutConfig_2;
+                //heartLayoutConfig_11_big.pixels = Config::Layout::HealthHeart::Static::pixels_big;
+                //heartLayoutConfig_11_big.rect.rect.x = -static_cast<int>(Config::Layout::HealthHeart::Static::offsetFromRight_11_big);
                 barsConfig = Config::Layout::HealthManaBars::Factory{}.create(clientType);
             }
 
@@ -103,7 +106,8 @@ namespace Amb
                 LOG_DEBUG("HealthManaReader isVisible. Checking heart at rect:");
                 LOG_DEBUG_RECT(rect);
 
-                const auto ret = screen.getSprite(rect) == heartLayoutConfig.pixels;
+                const auto ret = screen.getSprite(rect) == heartLayoutConfig_2.pixels;
+            
                 LOG_DEBUG("HealthManaReader isVisible retutning: %d", static_cast<int>(ret));
 
                 return ret;
