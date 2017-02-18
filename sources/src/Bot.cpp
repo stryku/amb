@@ -15,12 +15,14 @@ namespace Amb
         , window{ db }
         , currentCharacterName{ getCharacterNameObserver() }
         , clientRectObserver{ getClientRectObserver() }
+        , debugLogsEnabled{ botCore.getEnableDebugLogsObserver() }
     {
         window.setModuleToggleHandler(getModuleToggleMethod());
         window.setTtibiaWindowChangedHandler(getTibiaWindowChangedHandler());
         window.setConfigProvider(getConfigProvider());
         window.setConfigLoader(getConfigLoader());
         window.setScriptNameObserver(getScriptNameObserver());
+        window.setEnableDebugLogObserver(getEnableDebugLogsObserver());
         mainWindowTitleUpdater.setBasic();
     }
 
@@ -39,8 +41,8 @@ namespace Amb
             //}
         };
 
-        LOG_DEBUG("Creating DebugModeChecker");
-        const auto debugModeChecker = Security::Debug::DebugModeCheckerFactory{}.create(cb);
+        //LOG_DEBUG("Creating DebugModeChecker");
+        //const auto debugModeChecker = Security::Debug::DebugModeCheckerFactory{}.create(cb);
 
         LOG_DEBUG("Showing window");
         window.show();
@@ -75,6 +77,15 @@ namespace Amb
         };
     }
 
+    Bot::EnableDebugLogsObserver Bot::getEnableDebugLogsObserver()
+    {
+        return [this](bool enabled)
+        {
+            debugLogsEnabled.set(enabled);
+        };
+    }
+
+
     Bot::StringValueObserver Bot::getCharacterNameObserver()
     {
         return [this](const std::string &str) 
@@ -96,6 +107,8 @@ namespace Amb
 
     bool Bot::toggleModule( Module::ModuleId modId )
     {
+        LOG_DEBUG("Bot::toggleModule( %d )", static_cast<int>(modId));
+
         if (botCore.getAttachedProcess() == NULL)
         {
             QMessageBox msgBox;
@@ -119,11 +132,16 @@ namespace Amb
 
     void Bot::tibiaWindowChanged( const std::wstring &newWindowTitle )
     {
+        const auto stringTitle = Utils::wstringToString(newWindowTitle);
+
+        if (stringTitle.find("Tibia - ") == std::string::npos)
+            return;
+
         DWORD pid = Utils::TibiaFinder::findProcessId( newWindowTitle );
 
         botCore.attachNewProcess(pid);
 
-        const auto charName = Utils::wstringToString(newWindowTitle).substr(std::size("Tibia - ") - 1);
+        const auto charName = stringTitle.substr(std::size("Tibia - ") - 1);
         currentCharacterName.set(charName);
 
         const auto hwnd = Utils::TibiaFinder::pidToHwnd(pid);

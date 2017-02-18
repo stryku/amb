@@ -28,6 +28,7 @@ namespace Amb
         using ConfigLoader = std::function<void(const std::string&)>;
         using StringValueObserver = Utils::Observable<std::string>::CallbackType;
         using ClientInfoObserver = std::function<void(const Client::TibiaClientWindowInfo&)>;
+        using EnableDebugLogsObserver = std::function<void(bool)>;
 
         Bot(int &argc, char *argv[]);
         ~Bot() {}
@@ -59,6 +60,7 @@ namespace Amb
         StringValueObserver getCharacterNameObserver();
         StringValueObserver getScriptNameObserver();
         ClientInfoObserver getClientRectObserver();
+        EnableDebugLogsObserver getEnableDebugLogsObserver();
 
         QApplication application;
         MainWindow window;
@@ -68,6 +70,7 @@ namespace Amb
         Amb::Ui::Updaters::UiUpdater uiUpdater;
         Utils::Observable<std::string> currentConfigFilePath;
         Utils::Observable<std::string> currentCharacterName;
+        Utils::Observable<bool> debugLogsEnabled;
         //RectCorners currentTibiaClientWindowRectCorners;
         //Rect currentTibiaClientWindowRect;
         Client::TibiaClientWindowInfo tibiaClientWindowInfo;
@@ -75,5 +78,4 @@ namespace Amb
         Amb::BotCore botCore;
         const Amb::Db::Database db;
     };
-
 }

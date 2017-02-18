@@ -1,4 +1,5 @@
 #include "module/modules/Healer.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -30,13 +31,11 @@ namespace Amb
 
                 if (!healthManaReader.isVisible(captureRect))
                 {
-                    //captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
-                    //frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
-
-                    qDebug("Heart not on its place, refinding...");
+                    LOG_DEBUG("Heart not on its place, refinding...");
                     if (!healthManaReader.findHeart(captureRect))
                     {
-                        qDebug("Couldn't locate health and mana status!");
+                        LOG_DEBUG("Couldn't locate health and mana status!");
+                        screenLogger.log(screen);
                         return;
                     }
                 }
@@ -48,7 +47,7 @@ namespace Amb
                 {
                     if (rule.passed(hp, mana))
                     {
-                        qDebug("Rule passed");
+                        LOG_DEBUG("Rule passed");
                         executeRule(rule);
                     }
                 }
@@ -65,12 +64,18 @@ namespace Amb
                 , advancedSettings{ advancedSettings }
                 , healthManaReader{ screen }
                 //, topRightCorner{ topRightCorner }
+                , screenLogger{ "not_found_heart_logger", "logs/heart_not_found.txt" }
             {}
 
             void Healer::applyConfigs()
             {
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
+            }
+
+            void Healer::setEnableDebugLogs(bool enabled)
+            {
+                screenLogger.setExternalBool(enabled);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Amb
         {
             Logger::Logger()
             {
-                file = spdlog::basic_logger_mt("file_logger", "lodadsdg.txt");
+                file = spdlog::basic_logger_mt("file_logger", "amb_log.txt");
                 console = spdlog::stdout_color_mt("console");
             }
 

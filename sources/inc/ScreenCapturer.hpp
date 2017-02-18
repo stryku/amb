@@ -32,7 +32,7 @@ namespace Amb
                     GetClientRect(windowHandle, &rc);
                     if (rc.bottom == 0 && rc.right == 0)
                     {
-                        qDebug("Window is minimized!");
+                        LOG_DEBUG("Window is minimized!");
                         return {};
                     }
 

@@ -13,6 +13,12 @@ namespace Amb
             , itemCapturer{ screen, this->itemsDb }
         {}
 
+        void ItemsWindowReader::setEnableDebugLogs(bool enabled)
+        {
+            itemCapturer.setEnableDebugLogs(enabled);
+        }
+
+
         std::vector<Db::ItemId> ItemsWindowReader::readItems(const Client::Window::TibiaItemsWindow &window) const
         {
             const auto rows = countVisibleItemsRows(window.rect.pos());
