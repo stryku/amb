@@ -3,6 +3,8 @@
 #include "utils.hpp"
 #include "graphics/Image.hpp"
 
+#include <string>
+
 namespace Amb
 {
     namespace Utils
@@ -11,7 +13,7 @@ namespace Amb
         {
             static auto convert(const Graphics::Image& img)
             {
-                return Utils::imageToSimpleString(img);
+                return std::to_string(img.w) + " " + Utils::imageToSimpleString(img);
             }
         };
     }

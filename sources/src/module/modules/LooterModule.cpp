@@ -54,6 +54,13 @@ namespace Amb
                 const auto allPlayerWindows = windowsFinder.findAll(lastCapturedRect);
                 auto monsterWindows = deadCreatureWindowFinder.get().find(allPlayerWindows, screen);
 
+                for (const auto& window : allPlayerWindows)
+                {
+                    auto rect = window.rect;
+                    rect.h = Client::Window::TibiaWindow::BarHeight;
+                    unknowWindowsLogger.log(screen.getSprite(rect));
+                }
+
                 if (!monsterWindows.empty())
                 {
                     const auto playerWindows = windowsFinder.findPlayerContainerWindows(lastCapturedRect, allPlayerWindows);

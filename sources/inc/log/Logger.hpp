@@ -20,6 +20,7 @@ namespace Amb
             void log(const Args&... args)
             {
                 logger->info(ToStringConverter::convert(args...)); // todo std::forward
+                logger->flush();
             }
 
         private:
