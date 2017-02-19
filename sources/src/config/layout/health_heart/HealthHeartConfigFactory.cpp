@@ -45,6 +45,7 @@ namespace Amb
                     config.rect.rect.h = Static::size.h;
                     config.rect.rect.y = basicConfig.pos.y;
                     config.rect.rect.x = basicConfig.pos.x;
+                    config.rect.relationPoint = basicConfig.relationPoint;
 
                     if (basicConfig.isSmall)
                         config.pixels = Static::pixels;

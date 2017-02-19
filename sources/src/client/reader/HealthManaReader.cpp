@@ -16,7 +16,10 @@ namespace Amb
         {
             HealthManaReader::HealthManaReader(const Graphics::Image &screen)
                 : screen{ screen }
-            {}
+            {
+                heartLayoutConfig_2.rect.relationPoint = { 0,0 };
+                heartLayoutConfig_2.rect.rect = { 0, 0, 0, 0 };
+            }
 
             size_t HealthManaReader::getHpPercent(const RelativeRect &lastCapturedRect) const
             {
@@ -83,6 +86,7 @@ namespace Amb
 
                 //LOG_DEBUG("TibiaScreenReader heart NOT found!");
                 //return false;
+                return true;
             }
 
             void HealthManaReader::setTibiaClientType(Client::TibiaClientType clientType)
@@ -90,7 +94,7 @@ namespace Amb
                 LOG_DEBUG("HealthManaReader setting client type: %d", Client::toSize_t(clientType));
 
                 //heartLayoutConfig = Config::Layout::HealthHeart::Factory{}.create(clientType);
-                heartLayoutConfig_2 = Config::Layout::HealthHeart::Factory{}.create_2(clientType);
+                //heartLayoutConfig_2 = Config::Layout::HealthHeart::Factory{}.create_2(clientType);
                 //heartLayoutConfig_11_big = heartLayoutConfig_2;
                 //heartLayoutConfig_11_big.pixels = Config::Layout::HealthHeart::Static::pixels_big;
                 //heartLayoutConfig_11_big.rect.rect.x = -static_cast<int>(Config::Layout::HealthHeart::Static::offsetFromRight_11_big);
@@ -100,7 +104,7 @@ namespace Amb
             bool HealthManaReader::isVisible(const RelativeRect &lastCapturedRect) const
             {
                 auto heartLayout = heartLayoutConfig_2;
-                heartLayout.rect.relationPoint = lastCapturedRect.relationPoint;
+                //heartLayout.rect.relationPoint = lastCapturedRect.relationPoint;
                 const auto rect = heartLayout.rect.relativeToRect(lastCapturedRect);
 
                 LOG_DEBUG("HealthManaReader isVisible. Checking heart at rect:");

@@ -31,6 +31,7 @@ namespace Amb
 
                 struct HealthHeartBasicConfig
                 {
+                    Pos relationPoint;
                     Pos pos;
                     bool isSmall{ true };
                 };

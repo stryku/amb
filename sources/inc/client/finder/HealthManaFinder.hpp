@@ -24,6 +24,8 @@ namespace Amb
                     Config::Layout::HealthHeart::HealthHeartBasicConfig config;
                     Rect rect = getBasicRect(clientType);
 
+                    config.relationPoint = lastCapturedRect.relationPoint;
+
                     for (rect.y = 0;
                          static_cast<size_t>(rect.y) < screen.h - 50;
                          ++rect.y)
@@ -46,7 +48,7 @@ namespace Amb
                     Config::Layout::HealthHeart::HealthHeartBasicConfig config;
                     Rect rect = getBasicRect(clientType);
 
-                    for (; rect.x > screen.w / 2; --rect.x)
+                    for (; rect.x > static_cast<int>(screen.w / 2); --rect.x)
                     {
                         for (rect.y = 0;
                              static_cast<size_t>(rect.y) < screen.h - 50;

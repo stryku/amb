@@ -21,8 +21,8 @@ namespace Amb
                         static constexpr Amb::Rgba firstPixel{ 79, 79, 211, 255 };
                         static constexpr Amb::Rgba otherPixels{ 79, 79, 219, 255 };
 
-                        static constexpr Amb::Rgba firstPixel{ 209, 81, 81, 255 };
-                        static constexpr Amb::Rgba otherPixels{ 223, 82, 82, 255 };
+                        static constexpr Amb::Rgba firstPixel_big{ 209, 81, 81, 255 };
+                        static constexpr Amb::Rgba otherPixels_big{ 223, 82, 82, 255 };
                     }
 
                     namespace ManaBar
