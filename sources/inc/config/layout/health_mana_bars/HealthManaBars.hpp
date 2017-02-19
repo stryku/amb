@@ -16,7 +16,7 @@ namespace Amb
                     {
                         static constexpr size_t healthBarOffsetFromHeartY_10 = 4;
                         static constexpr size_t healthBarOffsetFromHeartY_11 = 5;
-                        static constexpr size_t healthBarOffsetFromHeartY_11_big = 5;
+                        static constexpr size_t healthBarOffsetFromHeartY_11_big = 14;
 
                         static constexpr Amb::Rgba firstPixel{ 79, 79, 211, 255 };
                         static constexpr Amb::Rgba otherPixels{ 79, 79, 219, 255 };
@@ -29,7 +29,7 @@ namespace Amb
                     {
                         static constexpr size_t manaBarOffsetFromHeartY_10 = 17;
                         static constexpr size_t manaBarOffsetFromHeartY_11 = 18;
-                        static constexpr size_t manaBarOffsetFromHeartY_11_big = 18;
+                        static constexpr size_t manaBarOffsetFromHeartY_11_big = 43;
 
                         static constexpr Amb::Rgba firstPixel{ 211, 79, 82, 255 };
                         static constexpr Amb::Rgba otherPixels{ 218, 80, 83, 255 };
