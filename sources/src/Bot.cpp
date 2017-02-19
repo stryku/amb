@@ -107,7 +107,7 @@ namespace Amb
 
     bool Bot::toggleModule( Module::ModuleId modId )
     {
-        LOG_DEBUG("Bot::toggleModule( %d )", static_cast<int>(modId));
+        LOG_DEBUG("Bot::toggleModule( {} )", static_cast<int>(modId));
 
         if (botCore.getAttachedProcess() == NULL)
         {

@@ -2,6 +2,7 @@
 
 #include "ui/modules/healer/HealRule.hpp"
 #include "client/reader/HealthManaReader.hpp"
+#include "client/finder/HealthManaFinder.hpp"
 #include "module/ModuleCore.hpp"
 #include "Simulator.hpp"
 #include "tibiareader.hpp"
@@ -35,6 +36,7 @@ namespace Amb
                 const Configs::HealerConfig &config;
                 const Configs::AdvancedSettings &advancedSettings;
                 Client::Reader::HealthManaReader healthManaReader;
+                Client::Finder::HealthManaFinder healthManaFinder;
                 Log::ImageConditionalLogger<Log::Condition::ImageLogOnceCondition> screenLogger;
             };
         }

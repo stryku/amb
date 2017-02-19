@@ -27,7 +27,7 @@ namespace Amb
         void Simulator::hotkey( Utils::Hotkey hotkey,
                                 Utils::RandomBetween randomBetween )
         {
-            LOG_DEBUG("simulating hotkey: %d", static_cast<int>(hotkey));
+            LOG_DEBUG("simulating hotkey: {}", static_cast<int>(hotkey));
             keyDownAndUp( hotkeyToWparam( hotkey ),
                           randomBetween );
         }

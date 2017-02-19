@@ -32,11 +32,41 @@ namespace Amb
                 if (!healthManaReader.isVisible(captureRect))
                 {
                     LOG_DEBUG("Heart not on its place, refinding...");
-                    if (!healthManaReader.findHeart(captureRect))
+                    const auto basicConfig = healthManaFinder.find(advancedSettings.common.clientType,
+                                                              captureRect);
+                    if (basicConfig)
                     {
-                        LOG_DEBUG("Couldn't locate health and mana status!");
-                        screenLogger.log(screen);
-                        return;
+                        const auto config = Config::Layout::HealthHeart::Factory{}.create_2(advancedSettings.common.clientType, 
+                                                                                            basicConfig.get());
+                        healthManaReader.setHeartConfig(config);
+                    }
+                    else
+                    {
+                        captureRect.relationPoint = tibiaClientWindowInfo.corners.topLeft;
+                        captureRect.rect.x = 0;
+                        captureRect.rect.y = 0;
+                        captureRect.rect.w = tibiaClientWindowInfo.corners.bottomRight.x - tibiaClientWindowInfo.corners.bottomLeft.x;
+                        captureRect.rect.h = tibiaClientWindowInfo.corners.bottomLeft.y - tibiaClientWindowInfo.corners.topLeft.y;
+
+                        frameCapturer.newFrame(captureRect.rect);
+
+                        LOG_DEBUG("Couldn't locate health and mana status! Trying brutefoce.");
+                        const auto bruteForceResult = healthManaFinder.find(advancedSettings.common.clientType,
+                                                                            captureRect);
+
+                        if (bruteForceResult)
+                        {
+                            const auto config = Config::Layout::HealthHeart::Factory{}.create_2(advancedSettings.common.clientType,
+                                                                                                bruteForceResult.get());
+                            healthManaReader.setHeartConfig(config);
+                        }
+                        else
+                        {
+                            LOG_DEBUG("Couldn't locate health and mana after bruteforce.");
+                            LOG_DEBUG("Logging screen. It may take a while, please wait...");
+                            screenLogger.log(screen);
+                            return;
+                        }
                     }
                 }
 
@@ -63,6 +93,7 @@ namespace Amb
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , healthManaReader{ screen }
+                , healthManaFinder{ screen }
                 //, topRightCorner{ topRightCorner }
                 , screenLogger{ "not_found_heart_logger", "logs/heart_not_found.txt" }
             {}

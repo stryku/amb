@@ -28,6 +28,13 @@ namespace Amb
 
                     std::array<Amb::Rgba, Static::pixelsSize> pixels;
                 };
+
+                struct HealthHeartBasicConfig
+                {
+                    Pos relationPoint;
+                    Pos pos;
+                    bool isSmall{ true };
+                };
             }
         }
     }
