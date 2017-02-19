@@ -1,5 +1,6 @@
 #include "db/Items.hpp"
 #include "db/static/items/ItemsDbData.hpp"
+#include "log/log.hpp"
 
 #include <QDebug>
 
@@ -85,7 +86,7 @@ namespace Amb
 
             if (found == std::cend(map))
             {
-                qDebug("Item %s not found", name.c_str());
+                LOG_DEBUG("Item %s not found", name.c_str());
                 return BadId;
             }
             else

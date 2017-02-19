@@ -54,7 +54,7 @@ namespace Amb
                     const auto x = screen.w - heartConfig.offsetFromRight - 1;
                     screen.toCb();
 
-                    qDebug("TibiaScreenReader refinding heart. Before: %d, %d", x, heartConfig.y);
+                    LOG_DEBUG("TibiaScreenReader refinding heart. Before: {}, {}", x, heartConfig.y);
 
                     for (size_t y = 0; y < screen.h - heartConfig.size.h; ++y)
                     {
@@ -63,12 +63,12 @@ namespace Amb
                                              heartConfig.size.h) == heartConfig.pixels)
                         {
                             heartConfig.y = y;
-                            qDebug("TibiaScreenReader heart found: %d, %d", x, heartConfig.y);
+                            LOG_DEBUG("TibiaScreenReader heart found: {}, {}", x, heartConfig.y);
                             return true;
                         }
                     }
 
-                    qDebug("TibiaScreenReader heart NOT found!");
+                    LOG_DEBUG("TibiaScreenReader heart NOT found!");
                     return false;
                 }
 

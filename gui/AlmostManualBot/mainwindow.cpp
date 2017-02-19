@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "log/log.hpp"
 
 #include "utils.hpp"
 
@@ -41,13 +42,14 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     looterCategoriesTable = std::make_unique<Amb::Ui::Module::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
     
-    updateTibiaClientsComboBox();
-
     itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);
 
     containersCompleter = createCompleter(db.containers.getNames(), this);
     ui->editLooterCategoriesNewCategoryDestination->setCompleter(containersCompleter);
+
+    clientComboboxUpdater.setCombobox(ui->cbTibiaClients);
+    updateTibiaClientsComboBox();
 }
 
 MainWindow::~MainWindow()
@@ -57,16 +59,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTibiaClientsComboBox()
 {
-    auto clientsTitles = Amb::Utils::TibiaFinder::findAllClientsTitles();
-    auto comboBox = ui->cbTibiaClients;
-
-    comboBox->clear();
-
-    comboBox->addItem( "Select client" );
-    comboBox->addItem( "-------------" );
-
-    for( auto &clientTitle : clientsTitles )
-        comboBox->addItem( QString::fromStdWString( clientTitle ) );
+    const auto hideNick = ui->actionHide_nick->isChecked();
+    clientComboboxUpdater.update(hideNick);
 }
 
 void MainWindow::on_btnRefreshClientsComboBox_clicked()
@@ -132,8 +126,15 @@ bool MainWindow::startModule( QCheckBox *moduleCheckBox,
         moduleCheckBox->setText("Running");
         return true;
     }
+    else
+    {
+        auto p = moduleCheckBox->palette();
 
-    return false;
+        p.setColor(QPalette::Active, QPalette::WindowText, QColor("black"));
+        moduleCheckBox->setPalette(p);
+        moduleCheckBox->setText("Not running");
+        return false;
+    }
 }
 
 void MainWindow::stopModule( QCheckBox *moduleCheckBox,
@@ -244,7 +245,6 @@ void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> o
     });
 }
 
-
 void MainWindow::setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler )
 {
     moduleToggleHandler = newHandler;
@@ -291,11 +291,11 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
     }
     catch( std::bad_function_call &e )
     {
-        qDebug()<<"Catch std::bad_function_call: " << e.what();
+        LOG_DEBUG("Catch std::bad_function_call: %s", e.what());
     }
     catch( std::exception &e )
     {
-        qDebug()<<"Catch std::exception: "<<e.what();
+        LOG_DEBUG("Catch std::exception: %s", e.what());
     }
 }
 
@@ -524,3 +524,27 @@ void MainWindow::on_checkBoxLooterRunning_clicked()
     toggleLooter();
 }
 
+void MainWindow::setEnableDebugLogObserver(std::function<void(bool)> observer)
+{
+    enableDebugLogObserver = observer;
+}
+
+
+void MainWindow::on_actionEnable_debug_logs_toggled(bool checked)
+{
+    enableDebugLogObserver(checked);
+}
+
+void MainWindow::on_actionHide_nick_toggled(bool checked)
+{
+    updateTibiaClientsComboBox();
+    const auto title = clientComboboxUpdater.getCurrent(checked);
+    tibiaWindowChangedHandler(Amb::Utils::stringToWstring(title));
+}
+
+void MainWindow::on_actionShow_console_toggled(bool checked)
+{
+    //todo
+    //if(checked)
+        
+}

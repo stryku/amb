@@ -30,7 +30,7 @@ namespace Amb
 
                 Rect TibiaWindowsFinder::createInitialWindowPatternRect(const RelativeRect &lastCapturedRect) const
                 {
-                    RelativeRect rect;
+                    RelativeRect rect = lastCapturedRect;
 
                     rect.rect.w = TibiaWindow::PatternSize.w;
                     rect.rect.h = TibiaWindow::PatternSize.h;

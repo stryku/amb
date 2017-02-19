@@ -1,7 +1,7 @@
 #include "module/modules/LooterModule.hpp"
 #include "client/window/TibiaItemsWindow.hpp"
 #include "utils/random/RandomOffset.hpp"
-#include "utils/log.hpp"
+#include "log/log.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
@@ -26,15 +26,23 @@ namespace Amb
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , itemsWindowReader{ screen, items }
-                , deadCreatureWindowFinderFactory( std::move(factory) )
+                , deadCreatureWindowFinderFactory(std::move(factory))
+                , unknowWindowsLogger{ "unknow_windows_logger", "logs/unknow_windows.txt" }
             {}
 
             void LooterModule::attachToNewProcess(DWORD pid)
             {
                 BOOST_ASSERT_MSG(tibiaClientReader, "TibiaClientReader should be valid at this point!");
-                LOG("LooterModule attaching to process: " << pid);
+                LOG_DEBUG("LooterModule attaching to process: {}", pid);
 
                 tibiaClientReader->attachToNewProcess(pid);
+            }
+
+            void LooterModule::setEnableDebugLogs(bool enabled)
+            {
+                LOG_DEBUG("LooterModule enabling debug logs: %s", enabled ? "true" : "false");
+                itemsWindowReader.setEnableDebugLogs(enabled);
+                unknowWindowsLogger.setExternalBool(enabled);
             }
 
             void LooterModule::runDetails()
@@ -45,6 +53,13 @@ namespace Amb
                 const auto &lastCapturedRect = frameCapturer.getLastCaptureRect();
                 const auto allPlayerWindows = windowsFinder.findAll(lastCapturedRect);
                 auto monsterWindows = deadCreatureWindowFinder.get().find(allPlayerWindows, screen);
+
+                for (const auto& window : allPlayerWindows)
+                {
+                    auto rect = window.rect;
+                    rect.h = Client::Window::TibiaWindow::BarHeight;
+                    unknowWindowsLogger.log(screen.getSprite(rect));
+                }
 
                 if (!monsterWindows.empty())
                 {
@@ -142,7 +157,7 @@ namespace Amb
                                                 pred);
 
                 BOOST_ASSERT_MSG(found != std::cend(config.items), 
-                                 "Item with id: %d not found! We should always find item in the list from gui", 
+                                 "Item with id: {} not found! We should always find item in the list from gui", 
                                  id);
 
                 return *found;
@@ -182,7 +197,7 @@ namespace Amb
 
                     if (!haveEnoughCap(itemId))
                     {
-                        LOG("No enough cap (" << tibiaClientReader->readCap() << ") for item: " << itemId);
+                        LOG_DEBUG("No enough cap ({}) for item: {}", tibiaClientReader->readCap(), itemId);
                         continue;
                     }
 
@@ -191,7 +206,7 @@ namespace Amb
 
                     if (!toOptional)
                     {
-                        qDebug("Destination not found: %s", category.destination.c_str());
+                        LOG_DEBUG("Destination not found: %s", category.destination.c_str());
                         continue;
                     }
 

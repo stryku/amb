@@ -149,10 +149,12 @@ namespace Amb
 
         Rect relativeToRect(const RelativeRect &rhs) const
         {
-            Rect ret = relativeToPoint(rhs.relationPoint);
+            const auto rhsTopLeft = rhs.relativeToPoint(Pos{ 0,0 }).topLeft();
+            Rect ret = relativeToPoint(Pos{ 0,0 });
 
-            ret.x = rect.x - rhs.rect.x;
-            ret.y = rect.y - rhs.rect.y;
+            ret.x -= rhsTopLeft.x;
+            ret.y -= rhsTopLeft.y;
+
 
             return ret;
         }
@@ -177,36 +179,6 @@ namespace Amb
             ret.y += point.y;
 
             return ret;
-        }
-    };
-
-    struct RelativeRectToReferencePoint
-    {
-        RelativeRectToReferencePoint() = default;
-        RelativeRectToReferencePoint(std::reference_wrapper<const Pos> relativePoint)
-            : relativePoint{ relativePoint }
-        {}
-
-        std::reference_wrapper<const Pos> relativePoint;
-        Rect rect;
-
-        Rect calculate() const
-        {
-            const auto& pos = relativePoint.get();
-
-            return Rect{ pos.x - rect.x,
-                         pos.y - rect.y,
-                         rect.w,
-                         rect.h };
-        }
-        Rect relativeToRect(const RelativeRect &rhs) const
-        {
-            RelativeRect relative;
-
-            relative.rect = rect;
-            relative.relationPoint = relativePoint.get();
-
-            return relative.relativeToRect(rhs);
         }
     };
 

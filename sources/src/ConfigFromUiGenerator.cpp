@@ -1,4 +1,6 @@
 #include "ConfigFromUiGenerator.hpp"
+#include "log/log.hpp"
+
 #include <mainwindow.h>
 
 #include <QComboBox>
@@ -46,20 +48,20 @@ namespace Amb
 
         void ConfigFromUiGenerator::regenerateHealer()
         {
-            qDebug("regenerating healer config");
+            LOG_DEBUG("regenerating healer config");
             config.healerConfig.rules = healerRulesTable.getRules();
         }
         
         void ConfigFromUiGenerator::regenerateLooter()
         {
-            qDebug("regenerating looter config");
+            LOG_DEBUG("regenerating looter config");
             config.looter.categories = looterCategoriesTable.getCategories();
             config.looter.items = looterItemsTable.getItems();
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()
         {
-            qDebug("ConfigFromUiGenerator::regenerateAdvancedSettings");
+            LOG_DEBUG("ConfigFromUiGenerator::regenerateAdvancedSettings");
             const auto healerSettingsControls = mainWindow->getAdvancedSettingsHealer();
             config.advancedSettings.healer = {
                 Utils::getFromToFromEdits(healerSettingsControls.betweenChecks),

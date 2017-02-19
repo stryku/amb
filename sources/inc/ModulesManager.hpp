@@ -34,6 +34,8 @@ namespace Amb
 
             void attachToNewWindow(HWND hwnd);
             void attachToNewProcess(DWORD pid);
+
+            void setEnableDebugLogs(bool enabled);
         };
     }
 }

@@ -20,14 +20,24 @@ namespace Amb
                     return *this;
                 }
 
+                MainWindowTitleBuilder& MainWindowTitleBuilder::withHideNick(bool hide)
+                {
+                    hideNick = hide;
+                    return *this;
+                }
+
+
                 std::string MainWindowTitleBuilder::build() const
                 {
                     std::string ret{ name };
 
                     ret += std::string{ version };
                     
-                    if(!characterName.empty())
-                        ret += " - " + characterName;
+                    if (!characterName.empty())
+                    {
+                        const auto name = hideNick ? "****" : characterName;
+                        ret += " - " + name;
+                    }
 
                     if (!scriptName.empty())
                         ret += " (" + scriptName + ")";

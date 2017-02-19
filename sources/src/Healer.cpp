@@ -1,4 +1,5 @@
 #include "module/modules/Healer.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -30,14 +31,42 @@ namespace Amb
 
                 if (!healthManaReader.isVisible(captureRect))
                 {
-                    //captureRect.relationPoint = tibiaClientWindowInfo.corners.topRight;
-                    //frameCapturer.newFrame(captureRect.relativeToPoint(Pos{ 0,0 }));
-
-                    qDebug("Heart not on its place, refinding...");
-                    if (!healthManaReader.findHeart(captureRect))
+                    LOG_DEBUG("Heart not on its place, refinding...");
+                    const auto basicConfig = healthManaFinder.find(advancedSettings.common.clientType,
+                                                              captureRect);
+                    if (basicConfig)
                     {
-                        qDebug("Couldn't locate health and mana status!");
-                        return;
+                        const auto config = Config::Layout::HealthHeart::Factory{}.create_2(advancedSettings.common.clientType, 
+                                                                                            basicConfig.get());
+                        healthManaReader.setHeartConfig(config);
+                    }
+                    else
+                    {
+                        captureRect.relationPoint = tibiaClientWindowInfo.corners.topLeft;
+                        captureRect.rect.x = 0;
+                        captureRect.rect.y = 0;
+                        captureRect.rect.w = tibiaClientWindowInfo.corners.bottomRight.x - tibiaClientWindowInfo.corners.bottomLeft.x;
+                        captureRect.rect.h = tibiaClientWindowInfo.corners.bottomLeft.y - tibiaClientWindowInfo.corners.topLeft.y;
+
+                        frameCapturer.newFrame(captureRect.rect);
+
+                        LOG_DEBUG("Couldn't locate health and mana status! Trying brutefoce.");
+                        const auto bruteForceResult = healthManaFinder.find(advancedSettings.common.clientType,
+                                                                            captureRect);
+
+                        if (bruteForceResult)
+                        {
+                            const auto config = Config::Layout::HealthHeart::Factory{}.create_2(advancedSettings.common.clientType,
+                                                                                                bruteForceResult.get());
+                            healthManaReader.setHeartConfig(config);
+                        }
+                        else
+                        {
+                            LOG_DEBUG("Couldn't locate health and mana after bruteforce.");
+                            LOG_DEBUG("Logging screen. It may take a while, please wait...");
+                            screenLogger.log(screen);
+                            return;
+                        }
                     }
                 }
 
@@ -48,7 +77,7 @@ namespace Amb
                 {
                     if (rule.passed(hp, mana))
                     {
-                        qDebug("Rule passed");
+                        LOG_DEBUG("Rule passed");
                         executeRule(rule);
                     }
                 }
@@ -64,13 +93,20 @@ namespace Amb
                 , config{ config }
                 , advancedSettings{ advancedSettings }
                 , healthManaReader{ screen }
+                , healthManaFinder{ screen }
                 //, topRightCorner{ topRightCorner }
+                , screenLogger{ "not_found_heart_logger", "logs/heart_not_found.txt" }
             {}
 
             void Healer::applyConfigs()
             {
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);
+            }
+
+            void Healer::setEnableDebugLogs(bool enabled)
+            {
+                screenLogger.setExternalBool(enabled);
             }
         }
     }

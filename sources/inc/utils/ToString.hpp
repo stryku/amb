@@ -5,7 +5,7 @@
 
 #include <string>
 
-namespace utils
+namespace utils // todo Amb::Utils
 {
     template <typename T>
     typename std::enable_if_t<std::is_convertible<T, std::string>::value, std::string>

@@ -8,6 +8,7 @@
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
+#include "ui/updaters/TibiaClientsComboboxUpdater.hpp"
 
 #include "db/Database.hpp"
 
@@ -54,7 +55,8 @@ public:
     void setConfigProvider(std::function<std::string()> provider);
     void setCurrentConfigFilePathProvider(std::function<std::string()> provider);
     void setConfigLoader(std::function<void(const std::string&)> loader);
-    void setScriptNameObserver( std::function<void(const std::string&)> observer);
+    void setScriptNameObserver(std::function<void(const std::string&)> observer);
+    void setEnableDebugLogObserver(std::function<void(bool)> observer);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -66,6 +68,7 @@ private slots:
     void on_actionExit_triggered();
     void on_actionSave_as_triggered();
     void on_actionSave_triggered();
+    void on_actionEnable_debug_logs_toggled(bool checked);
 
     void on_pushButtonHealerEdit_clicked();
     void on_pushButtonHealerUp_clicked();
@@ -86,6 +89,11 @@ private slots:
 
     void on_checkBoxLooterRunning_clicked();
 
+
+    void on_actionHide_nick_toggled(bool arg1);
+
+    void on_actionShow_console_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 
@@ -94,6 +102,7 @@ private:
 
     const Amb::Db::Database &db;
     Amb::Config::ConfigFileManager configFileManager;
+    Amb::Ui::Updaters::TibiaClientsComboboxUpdater clientComboboxUpdater;
 
     std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;
@@ -104,6 +113,7 @@ private:
     std::function<std::string()> configToSaveProvider;
     std::function<std::string()> currentConfigFilePathProvider;
     std::function<void(const std::string&)> configLoader;
+    std::function<void(bool)> enableDebugLogObserver;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();

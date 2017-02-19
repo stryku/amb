@@ -33,4 +33,12 @@ namespace Amb
     {
         return modulesManager.isRunning( modId );
     }
+
+    BotCore::EnableDebugLogsObserver BotCore::getEnableDebugLogsObserver()
+    {
+        return [this](bool enabled)
+        {
+            modulesManager.setEnableDebugLogs(enabled);
+        };
+    }
 }

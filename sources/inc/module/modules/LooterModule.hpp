@@ -10,6 +10,8 @@
 #include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 #include "client/window/finder/DeadCreatureWindowFinder.hpp"
 #include "capture/ItemsWindowReader.hpp"
+#include "log/ImageConditionalLogger.hpp"
+#include "log/condition/ImageLogUniqueCondition.hpp"
 
 #include <chrono>
 
@@ -31,12 +33,18 @@ namespace Amb
 
                 void attachToNewProcess(DWORD pid) override;
 
+                void setEnableDebugLogs(bool enabled) override;
+
             private:
+                using UniqueImageLogger = Log::ImageConditionalLogger<Log::Condition::ImageLogUniqueCondition>;
+
                 Db::Items items;
                 Db::Containers containersDb;
                 Client::Window::Finder::TibiaWindowsFinder windowsFinder;
                 boost::optional<Client::Window::Finder::DeadCreatureWindowFinder> deadCreatureWindowFinder;
                 const Client::Window::Finder::DeadCreatureWindowFinderFactory deadCreatureWindowFinderFactory;
+                UniqueImageLogger unknowWindowsLogger;
+
 
                 const Configs::Looter &config;
                 const Configs::AdvancedSettings &advancedSettings;

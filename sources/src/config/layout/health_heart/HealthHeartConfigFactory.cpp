@@ -37,29 +37,20 @@ namespace Amb
                     return config;
                 }
 
-                HealthHeartConfig_2 Factory::create_2(Client::TibiaClientType clientType) const
+                HealthHeartConfig_2 Factory::create_2(Client::TibiaClientType clientType,
+                                                      const HealthHeartBasicConfig& basicConfig) const
                 {
                     HealthHeartConfig_2 config;
                     config.rect.rect.w = Static::size.w;
                     config.rect.rect.h = Static::size.h;
-                    config.rect.rect.y = 0;
+                    config.rect.rect.y = basicConfig.pos.y;
+                    config.rect.rect.x = basicConfig.pos.x;
+                    config.rect.relationPoint = basicConfig.relationPoint;
 
-
-
-                    switch (clientType)
-                    {
-                        case Amb::Client::TibiaClientType::Tibia10: 
-                            config.rect.rect.x = -static_cast<int>(Static::offsetFromRight_10);
-                        break;
-
-                        case Amb::Client::TibiaClientType::Tibia11:
-                            config.rect.rect.x = -static_cast<int>(Static::offsetFromRight_11);
-                        break;
-
-                        case Amb::Client::TibiaClientType::Flash:
-                        default:
-                            assert(false);
-                    }
+                    if (basicConfig.isSmall)
+                        config.pixels = Static::pixels;
+                    else
+                        config.pixels = Static::pixels_big;
 
                     return config;
                 }

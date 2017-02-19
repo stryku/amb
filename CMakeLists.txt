@@ -1,5 +1,11 @@
 cmake_minimum_required (VERSION 2.8.12)
-project (Amb)
+
+set(PROJECT_NAME_STR Amb)
+
+project(${PROJECT_NAME_STR})
+
+
+set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/external_projects)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++14" COMPILER_SUPPORTS_CXX14)
@@ -39,7 +45,7 @@ include_directories (${Boost_INCLUDE_DIRS})
 
 set( CMAKE_PREFIX_PATH C:/Qt/Qt5.7.0/5.7/msvc2015/)
 
-set(AMB_VERSION "v0.3.1-beta" CACHE STRING "Version tag")
+set(AMB_VERSION "v0.3.2-beta" CACHE STRING "Version tag")
 add_definitions(-DAMB_VERSION=${AMB_VERSION})
 
 set (program_name "Almost Manual Bot")
@@ -72,9 +78,6 @@ set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
 
 add_subdirectory(sources)                    
              
-
-                     
-                     
 set (AMB_hdr ${inc_dir_qt}/mainwindow.h)
 set (AMB_ui  ${ui_dir}/mainwindow.ui)
 set (AMB_gui_src ${src_dir_qt}/main.cpp)
@@ -98,6 +101,9 @@ add_executable(Amb ${AMB_src_qt}
 						  
 target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES} ntdll.lib)
 
+
+add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
+add_subdirectory(tests)  
 
 install(TARGETS Amb DESTINATION  ${install_dir}/)
 install(

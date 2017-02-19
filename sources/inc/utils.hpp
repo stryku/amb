@@ -11,6 +11,11 @@
 
 namespace Amb
 {
+    namespace Graphics
+    {
+        struct Image;
+    }
+
     namespace Utils
     {
         enum class Hotkey
@@ -74,7 +79,6 @@ namespace Amb
         std::string readWholeFileIntoString(const std::string &path);
         std::string wstringToString(const std::wstring &wstr);
         std::wstring stringToWstring(const std::string &str);
+        std::string imageToSimpleString(const Graphics::Image& img);
     }
-
-
 }

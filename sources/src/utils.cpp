@@ -1,4 +1,6 @@
 ﻿#include "utils.hpp"
+#include "graphics/Image.hpp"
+
 #include <iostream>
 #include <locale>
 #include <codecvt>
@@ -172,6 +174,10 @@ namespace Amb
         std::string readWholeFileIntoString(const std::string &path)
         {
             std::ifstream t(path);
+
+            if (!t.is_open())
+                return{};
+
             t.seekg(0, std::ios::end);
             size_t size = t.tellg();
             std::string buffer(size, ' ');
@@ -194,6 +200,20 @@ namespace Amb
             std::wstring_convert<convert_typeX, wchar_t> converterX;
 
             return converterX.to_bytes(wstr);
+        }
+
+        std::string imageToSimpleString(const Graphics::Image& img)
+        {
+            std::string out;
+            for (const auto &pixel : img.pixels)
+            {
+                out += std::to_string(pixel.r) + " "
+                    + std::to_string(pixel.g) + " "
+                    + std::to_string(pixel.b) + " "
+                    + std::to_string(pixel.a) + " ";
+            }
+
+            return out;
         }
     }
 }

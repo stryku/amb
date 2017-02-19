@@ -16,13 +16,7 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
-     <widget class="QComboBox" name="cbTibiaClients">
-      <item>
-       <property name="text">
-        <string>Select client</string>
-       </property>
-      </item>
-     </widget>
+     <widget class="QComboBox" name="cbTibiaClients"/>
     </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="btnRefreshClientsComboBox">
@@ -63,14 +57,14 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Max HP (max == 87)</string>
+            <string>Max HP [%]</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Min HP (min == 0)</string>
+            <string>Min HP [%]</string>
            </property>
           </widget>
          </item>
@@ -84,14 +78,14 @@
          <item row="4" column="0">
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Min Mana (min == 0)</string>
+            <string>Min Mana [%]</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Max Mana (max == 87)</string>
+            <string>Max Mana [%]</string>
            </property>
           </widget>
          </item>
@@ -172,7 +166,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>89</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -182,7 +176,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -192,7 +186,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -202,7 +196,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -687,7 +681,18 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuLog">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionEnable_debug_logs"/>
+    <addaction name="separator"/>
+    <addaction name="actionHide_nick"/>
+    <addaction name="separator"/>
+    <addaction name="actionShow_console"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuLog"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -716,6 +721,36 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="actionEnable_debug_logs">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Enable debug logs</string>
+   </property>
+  </action>
+  <action name="actionHide_nick">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Hide nick</string>
+   </property>
+  </action>
+  <action name="actionShow_console">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show console</string>
    </property>
   </action>
  </widget>

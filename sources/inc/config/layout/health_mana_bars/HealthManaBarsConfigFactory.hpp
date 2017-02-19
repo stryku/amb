@@ -15,7 +15,7 @@ namespace Amb
                 class Factory
                 {
                 public:
-                    BarsConfig create(Amb::Client::TibiaClientType clientType) const;
+                    BarsConfig create(Amb::Client::TibiaClientType clientType, bool isSmall = true) const;
                 };
             }
         }
