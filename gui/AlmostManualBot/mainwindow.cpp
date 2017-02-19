@@ -548,3 +548,8 @@ void MainWindow::on_actionShow_console_toggled(bool checked)
     //if(checked)
         
 }
+
+void MainWindow::on_checkBoxMlvlRunning_toggled(bool checked)
+{
+
+}

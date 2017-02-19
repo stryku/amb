@@ -27,6 +27,7 @@ namespace Amb
                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
 
                 void setEnableDebugLogs(bool enabled) override;
+                void attachToNewWindow(HWND hwnd) override;
 
             private:
                 void executeRule(const Amb::Module::Heal::HealRule &rule);

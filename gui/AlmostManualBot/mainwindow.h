@@ -94,6 +94,8 @@ private slots:
 
     void on_actionShow_console_toggled(bool arg1);
 
+    void on_checkBoxMlvlRunning_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
