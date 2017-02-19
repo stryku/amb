@@ -33,7 +33,7 @@ namespace Amb
             void LooterModule::attachToNewProcess(DWORD pid)
             {
                 BOOST_ASSERT_MSG(tibiaClientReader, "TibiaClientReader should be valid at this point!");
-                LOG_DEBUG("LooterModule attaching to process: %d", pid);
+                LOG_DEBUG("LooterModule attaching to process: {}", pid);
 
                 tibiaClientReader->attachToNewProcess(pid);
             }
@@ -157,7 +157,7 @@ namespace Amb
                                                 pred);
 
                 BOOST_ASSERT_MSG(found != std::cend(config.items), 
-                                 "Item with id: %d not found! We should always find item in the list from gui", 
+                                 "Item with id: {} not found! We should always find item in the list from gui", 
                                  id);
 
                 return *found;
@@ -197,7 +197,7 @@ namespace Amb
 
                     if (!haveEnoughCap(itemId))
                     {
-                        LOG_DEBUG("No enough cap (%d) for item: %d", tibiaClientReader->readCap(), itemId);
+                        LOG_DEBUG("No enough cap ({}) for item: {}", tibiaClientReader->readCap(), itemId);
                         continue;
                     }
 

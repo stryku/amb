@@ -57,14 +57,14 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Max HP (max == 87)</string>
+            <string>Max HP [%]</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Min HP (min == 0)</string>
+            <string>Min HP [%]</string>
            </property>
           </widget>
          </item>
@@ -78,14 +78,14 @@
          <item row="4" column="0">
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Min Mana (min == 0)</string>
+            <string>Min Mana [%]</string>
            </property>
           </widget>
          </item>
          <item row="6" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Max Mana (max == 87)</string>
+            <string>Max Mana [%]</string>
            </property>
           </widget>
          </item>
@@ -166,7 +166,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>89</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -176,7 +176,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -186,7 +186,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>
@@ -196,7 +196,7 @@
             <string/>
            </property>
            <property name="maximum">
-            <number>87</number>
+            <number>100</number>
            </property>
           </widget>
          </item>

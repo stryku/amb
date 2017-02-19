@@ -36,17 +36,17 @@ namespace Amb
             size_t HealthManaReader::getPercent(const Config::Layout::HealthManaBars::BarConfig &config, const RelativeRect &lastCapturedRect) const
             {
                 LOG_DEBUG("HealthManaReader reading pixels. Config:");
-                LOG_DEBUG("first pixel: r = %d, g = %d, b = %d", config.firstPixel.r, config.firstPixel.g, config.firstPixel.b);
-                LOG_DEBUG("other pixel: r = %d, g = %d, b = %d", config.otherPixels.r, config.otherPixels.g, config.otherPixels.b);
-                LOG_DEBUG("offset from hearth: x = %d, y = %d", config.offsetFromHeart.x, config.offsetFromHeart.y);
-                LOG_DEBUG("max len = %d", config.maxLength);
+                LOG_DEBUG("first pixel: r = {}, g = {}, b = {}", config.firstPixel.r, config.firstPixel.g, config.firstPixel.b);
+                LOG_DEBUG("other pixel: r = {}, g = {}, b = {}", config.otherPixels.r, config.otherPixels.g, config.otherPixels.b);
+                LOG_DEBUG("offset from hearth: x = {}, y = {}", config.offsetFromHeart.x, config.offsetFromHeart.y);
+                LOG_DEBUG("max len = {}", config.maxLength);
 
                 auto rect = heartLayoutConfig_2.rect.relativeToRect(lastCapturedRect);
                 size_t px{ 0 };
                 const Pos base{ config.offsetFromHeart.x + rect.x,
                                 config.offsetFromHeart.y + rect.y };
 
-                LOG_DEBUG("base: x = %d, y = %d", base.x, base.y);
+                LOG_DEBUG("base: x = {}, y = {}", base.x, base.y);
 
                 if (screen.cpixel(base.x, base.y) != config.firstPixel)
                 {
@@ -59,8 +59,12 @@ namespace Amb
                 while (screen.cpixel(base.x + px, base.y) == config.otherPixels && px < config.maxLength)
                     ++px;
 
-                LOG_DEBUG("Returning bar pixels: %d", px);
-                return px;
+                LOG_DEBUG("Returning bar pixels: {}", px);
+
+
+                const auto percent = px * 100 / config.maxLength;
+
+                return percent;
             }
 
             bool HealthManaReader::findHeart(const RelativeRect &lastCapturedRect)
@@ -70,7 +74,7 @@ namespace Amb
                 ////const auto x = screen.w - heartLayoutConfig.offsetFromRight - 1;
                 //screen.toCb();
 
-                //LOG_DEBUG("TibiaScreenReader refinding heart. Before: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                //LOG_DEBUG("TibiaScreenReader refinding heart. Before: {}, {}", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
 
                 //for (rect.y = 0; 
                 //     static_cast<size_t>(rect.y) < screen.h - heartLayoutConfig_2.rect.rect.h; 
@@ -79,7 +83,7 @@ namespace Amb
                 //    if (screen.getSprite(rect) == heartLayoutConfig_2.pixels)
                 //    {
                 //        heartLayoutConfig_2.rect.rect.y = rect.y;
-                //        LOG_DEBUG("TibiaScreenReader heart found: %d, %d", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
+                //        LOG_DEBUG("TibiaScreenReader heart found: {}, {}", heartLayoutConfig_2.rect.rect.x, heartLayoutConfig_2.rect.rect.y);
                 //        return true;
                 //    }
                 //}
@@ -91,7 +95,7 @@ namespace Amb
 
             void HealthManaReader::setTibiaClientType(Client::TibiaClientType clientType)
             {
-                LOG_DEBUG("HealthManaReader setting client type: %d", Client::toSize_t(clientType));
+                LOG_DEBUG("HealthManaReader setting client type: {}", Client::toSize_t(clientType));
 
                 //heartLayoutConfig = Config::Layout::HealthHeart::Factory{}.create(clientType);
                 //heartLayoutConfig_2 = Config::Layout::HealthHeart::Factory{}.create_2(clientType);
@@ -112,7 +116,7 @@ namespace Amb
 
                 const auto ret = screen.getSprite(rect) == heartLayoutConfig_2.pixels;
             
-                LOG_DEBUG("HealthManaReader isVisible retutning: %d", static_cast<int>(ret));
+                LOG_DEBUG("HealthManaReader isVisible retutning: {}", static_cast<int>(ret));
 
                 return ret;
             }
