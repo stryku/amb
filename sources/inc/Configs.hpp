@@ -174,6 +174,38 @@ namespace Amb
             }
         };
 
+        struct Mlvl
+        {
+            size_t manaPercent;
+            Utils::Hotkey spellHotkey;
+            Utils::Hotkey foodHotkey;
+
+            auto toPtree() const
+            {
+                Utils::PropertyTreeBuilder builder;
+                builder.addElement(Utils::PtreeElement<>{"mana_percent", std::to_string(manaPercent)});
+                builder.addElement(Utils::PtreeElement<>{"spell_hotkey", Utils::hotkeyToStdString(spellHotkey)});
+                builder.addElement(Utils::PtreeElement<>{"food_hotkey", Utils::hotkeyToStdString(foodHotkey)});
+
+                return builder.buildTree();
+            }
+
+            static Mlvl fromPtree(boost::property_tree::ptree &tree)
+            {
+                Mlvl mlvl;
+
+                mlvl.manaPercent = tree.get_child("mana_percent").get_value<size_t>();
+
+                auto strhot = tree.get_child("spell_hotkey").get_value<std::string>();
+                mlvl.spellHotkey = Utils::stdStringToHotkey(strhot);
+
+                strhot = tree.get_child("food_hotkey").get_value<std::string>();
+                mlvl.foodHotkey = Utils::stdStringToHotkey(strhot);
+
+                return mlvl;
+            }
+        };
+
         struct GlobalConfig
         {
             GlobalConfig(const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
