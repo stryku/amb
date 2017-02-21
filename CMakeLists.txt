@@ -22,9 +22,6 @@ else()
 endif()
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
-set (HOST_LIBS_DIR "C:/moje/libs/lib/x86")
-set (HOST_INC_DIR "C:/moje/libs/include")
-
 
 option(AMB_PRO_COMPILATION "compile healer module" ON)
 if (AMB_PRO_COMPILATION)
