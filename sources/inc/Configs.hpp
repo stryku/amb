@@ -221,6 +221,7 @@ namespace Amb
             HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
             Looter looter;
+            Mlvl mlvl;
 
             std::string toString() const
             {

@@ -6,7 +6,7 @@ namespace Amb
     {
         namespace Mlvl
         {
-            MlvlModule::MlvlModule(const Configs::Looter &config,
+           /* MlvlModule::MlvlModule(const Configs::Looter &config,
                         const Configs::AdvancedSettings &advancedSettings,
                         std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
             {}
@@ -22,7 +22,7 @@ namespace Amb
             void MlvlModule::runDetails()
             {}
             void MlvlModule::applyConfigs()
-            {}
+            {}*/
         }
     }
 }

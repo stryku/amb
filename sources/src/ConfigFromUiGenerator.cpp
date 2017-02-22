@@ -40,6 +40,7 @@ namespace Amb
                 case Module::ModuleId::MOD_HEALER: regenerateHealer();
 #ifdef AMB_PRO_COMPILATION
                 case Module::ModuleId::MOD_LOOTER: regenerateLooter();
+                case Module::ModuleId::MOD_MLVL: regenerateMlvl();
 #endif
             }
         }
@@ -57,6 +58,12 @@ namespace Amb
             LOG_DEBUG("regenerating looter config");
             config.looter.categories = looterCategoriesTable.getCategories();
             config.looter.items = looterItemsTable.getItems();
+        }
+
+        void ConfigFromUiGenerator::regenerateMlvl()
+        {
+            LOG_DEBUG("regenerating mlvl config");
+            //config.mlvl.manaPercent = 
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()
@@ -95,6 +102,7 @@ namespace Amb
 
 #ifdef AMB_PRO_COMPILATION
             regenerateModule(Module::ModuleId::MOD_LOOTER);
+            regenerateModule(Module::ModuleId::MOD_MLVL);
 #endif
         }
 

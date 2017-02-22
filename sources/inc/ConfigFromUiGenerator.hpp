@@ -43,6 +43,7 @@ namespace Amb
 
             void regenerateHealer();
             void regenerateLooter();
+            void regenerateMlvl();
             void regeneratePid();
             void regenerateCommon();
             void regenerateAllModules();

@@ -8,7 +8,7 @@ namespace Amb
     {
         namespace Mlvl
         {
-            class MlvlModule final : public ModuleCore
+            /*class MlvlModule final : public ModuleCore
             {
             public:
                 MlvlModule(const Configs::Looter &config,
@@ -25,7 +25,7 @@ namespace Amb
 
                 void runDetails() override;
                 void applyConfigs() override;
-            };
+            };*/
         }
     }
 }
