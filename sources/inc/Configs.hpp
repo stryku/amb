@@ -176,14 +176,16 @@ namespace Amb
 
         struct Mlvl
         {
-            size_t manaPercent;
+            size_t manaPercentFrom;
+            size_t manaPercentTo;
             Utils::Hotkey spellHotkey;
             Utils::Hotkey foodHotkey;
 
             auto toPtree() const
             {
                 Utils::PropertyTreeBuilder builder;
-                builder.addElement(Utils::PtreeElement<>{"mana_percent", std::to_string(manaPercent)});
+                builder.addElement(Utils::PtreeElement<>{"mana_percent_from", std::to_string(manaPercentFrom)});
+                builder.addElement(Utils::PtreeElement<>{"mana_percent_to", std::to_string(manaPercentTo)});
                 builder.addElement(Utils::PtreeElement<>{"spell_hotkey", Utils::hotkeyToStdString(spellHotkey)});
                 builder.addElement(Utils::PtreeElement<>{"food_hotkey", Utils::hotkeyToStdString(foodHotkey)});
 
@@ -194,7 +196,8 @@ namespace Amb
             {
                 Mlvl mlvl;
 
-                mlvl.manaPercent = tree.get_child("mana_percent").get_value<size_t>();
+                mlvl.manaPercentFrom = tree.get_child("mana_percent_from").get_value<size_t>();
+                mlvl.manaPercentTo = tree.get_child("mana_percent_to").get_value<size_t>();
 
                 auto strhot = tree.get_child("spell_hotkey").get_value<std::string>();
                 mlvl.spellHotkey = Utils::stdStringToHotkey(strhot);

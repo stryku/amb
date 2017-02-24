@@ -15,15 +15,15 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QComboBox" name="cbTibiaClients"/>
-    </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="btnRefreshClientsComboBox">
       <property name="text">
        <string>Refresh clients</string>
       </property>
      </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QComboBox" name="cbTibiaClients"/>
     </item>
     <item row="1" column="0" colspan="3">
      <widget class="QTabWidget" name="tabWidget">
@@ -497,12 +497,12 @@
          <string>Mana [%]</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="editMlvlMana">
+       <widget class="QLineEdit" name="editMlvlManaFrom">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>60</y>
-          <width>113</width>
+          <width>41</width>
           <height>20</height>
          </rect>
         </property>
@@ -672,6 +672,29 @@
           <string>F12</string>
          </property>
         </item>
+       </widget>
+       <widget class="QLineEdit" name="editMlvlManaTo">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>60</y>
+          <width>41</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_20">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>60</y>
+          <width>21</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>to</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tabAdvancedSettings">

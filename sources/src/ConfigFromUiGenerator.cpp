@@ -38,10 +38,8 @@ namespace Amb
             switch (moduleId)
             {
                 case Module::ModuleId::MOD_HEALER: regenerateHealer();
-#ifdef AMB_PRO_COMPILATION
                 case Module::ModuleId::MOD_LOOTER: regenerateLooter();
                 case Module::ModuleId::MOD_MLVL: regenerateMlvl();
-#endif
             }
         }
 
@@ -64,7 +62,8 @@ namespace Amb
         {
             LOG_DEBUG("regenerating mlvl config");
             const auto controls = mainWindow->getMlvlControls();
-            config.mlvl.manaPercent = controls.manaPercent->text().toUInt();
+            config.mlvl.manaPercentFrom = controls.editMlvlManaFrom->text().toUInt();
+            config.mlvl.manaPercentTo = controls.editMlvlManaTo->text().toUInt();
 
             const auto spellHotSelected = static_cast<size_t>(controls.spellCombobox->currentIndex());
             config.mlvl.spellHotkey = Utils::size_tToHotkey(spellHotSelected);

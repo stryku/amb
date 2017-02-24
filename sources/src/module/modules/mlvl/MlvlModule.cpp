@@ -34,7 +34,6 @@ namespace Amb
             {
                 LOG_DEBUG("MlvlModule::runDetails");
 
-                foodEater->eat();
 
                 const int offsetFromRight = 176;
                 RelativeRect captureRect;
@@ -67,12 +66,8 @@ namespace Amb
                     }
                 }
 
-                const auto mana = healthManaReader.getManaPercent(captureRect);
-
-                if (mana >= config.manaPercent)
-                {
-                    simulator.hotkey(config.spellHotkey);
-                }
+                foodEater->eat();
+                spellCaster->cast(captureRect);
 
                 std::this_thread::sleep_for(std::chrono::seconds{ 1 });
             }
@@ -80,6 +75,12 @@ namespace Amb
             void MlvlModule::applyConfigs()
             {
                 foodEater = std::make_unique<FoodEater>(simulator, config.foodHotkey);
+                spellCaster = std::make_unique<SpellCaster>(simulator,
+                                                            healthManaReader,
+                                                            config.spellHotkey,
+                                                            config.manaPercentFrom,
+                                                            config.manaPercentTo);
+
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 healthManaFinder.setCaptureMode(advancedSettings.common.captureMode.mode);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);

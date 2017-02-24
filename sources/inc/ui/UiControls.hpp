@@ -60,7 +60,8 @@ namespace Amb
 
             struct Mlvl
             {
-                QLineEdit *manaPercent;
+                QLineEdit *editMlvlManaFrom;
+                QLineEdit *editMlvlManaTo;
                 QComboBox *foodCombobox;
                 QComboBox *spellCombobox;
             };

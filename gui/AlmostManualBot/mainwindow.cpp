@@ -208,7 +208,8 @@ Amb::Ui::Controls::Mlvl MainWindow::getMlvlControls() const
 {
     Amb::Ui::Controls::Mlvl controls;
 
-    controls.manaPercent = ui->editMlvlMana;
+    controls.editMlvlManaFrom = ui->editMlvlManaFrom;
+    controls.editMlvlManaTo = ui->editMlvlManaTo;
     controls.foodCombobox = ui->cbMlvlFoodHotkey;
     controls.spellCombobox = ui->cbMlvSpelllHotkey;
 

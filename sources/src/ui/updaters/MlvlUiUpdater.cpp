@@ -13,7 +13,8 @@ namespace Amb
         {
             void Mlvl::update(const Configs::Mlvl &configs, const Controls::Mlvl &controls) const
             {
-                controls.manaPercent->setText(QString::number(configs.manaPercent));
+                controls.editMlvlManaFrom->setText(QString::number(configs.manaPercentFrom));
+                controls.editMlvlManaTo->setText(QString::number(configs.manaPercentTo));
 
                 controls.spellCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.spellHotkey));
                 controls.foodCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.foodHotkey));
