@@ -36,14 +36,14 @@ if (PREVENT_DEBUG)
     add_definitions(-DAMB_PREVENT_DEBUG)
 endif()
 
-set(BOOST_ROOT C:/moje/libs/boost/boost_1_61_0)
+set(BOOST_ROOT C:/moje/dev/include/boost/boost_1_63_0)
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
     message (ERROR "Boost not found!")
 endif()
 include_directories (${Boost_INCLUDE_DIRS})
 
-set( CMAKE_PREFIX_PATH C:/Qt/Qt5.7.0/5.7/msvc2015/)
+set( CMAKE_PREFIX_PATH C:/Qt/Qt5.8.0_x86/5.8/msvc2015/)
 
 set(AMB_VERSION "v0.3.3.1-tests" CACHE STRING "Version tag")
 add_definitions(-DAMB_VERSION=${AMB_VERSION})

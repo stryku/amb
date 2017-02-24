@@ -13,6 +13,8 @@ namespace Amb
             public:
                 MlvlModule(const Configs::Looter &config,
                            const Configs::AdvancedSettings &advancedSettings,
+                           Simulate::Simulator &simulator,
+                           const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                            std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
 
                 void attachToNewProcess(DWORD pid) override;

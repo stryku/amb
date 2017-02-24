@@ -65,6 +65,7 @@ namespace Amb
             frameCapturer.attachToNewWindow(hwnd);
             simulator.attachToNewWindow(hwnd);
             mouseSimulator.attachToWindow(hwnd);
+            this->hwnd = hwnd;
         }
     }
 }

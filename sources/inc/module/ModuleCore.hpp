@@ -34,6 +34,7 @@ namespace Amb
             virtual void attachToNewProcess(DWORD pid) {}
 
         protected:
+            HWND hwnd;
             std::unique_ptr<std::thread> runThread;
             Simulate::Simulator &simulator;
             Simulate::MouseSimulator mouseSimulator;

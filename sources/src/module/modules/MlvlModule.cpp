@@ -8,16 +8,18 @@ namespace Amb
         {
            /* MlvlModule::MlvlModule(const Configs::Looter &config,
                         const Configs::AdvancedSettings &advancedSettings,
-                        std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
+                            Simulate::Simulator &simulator,
+                                   const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                   std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
+                : ModuleCore(simulator, tibiaClientWindowInfo, std::move(tibiaClientReader))
+                , config{ config }
+                , advancedSettings{ advancedSettings }
             {}
 
             void MlvlModule::attachToNewProcess(DWORD pid)
             {}
             void MlvlModule::setEnableDebugLogs(bool enabled)
             {}
-
-            const Configs::Looter &config;
-            const Configs::AdvancedSettings &advancedSettings;
 
             void MlvlModule::runDetails()
             {}
