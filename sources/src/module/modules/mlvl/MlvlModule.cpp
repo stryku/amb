@@ -1,4 +1,5 @@
-#include "module/modules/MlvlModule.hpp"
+#include "module/modules/mlvl/MlvlModule.hpp"
+#include "module/modules/mlvl/FoodEater.hpp"
 
 #include "log/log.hpp"
 
@@ -32,6 +33,8 @@ namespace Amb
             void MlvlModule::runDetails()
             {
                 LOG_DEBUG("MlvlModule::runDetails");
+
+                foodEater->eat();
 
                 const int offsetFromRight = 176;
                 RelativeRect captureRect;
@@ -68,7 +71,6 @@ namespace Amb
 
                 if (mana >= config.manaPercent)
                 {
-                    LOG_DEBUG("MlvlModule pressing spell hotkey");
                     simulator.hotkey(config.spellHotkey);
                 }
 
@@ -77,6 +79,7 @@ namespace Amb
 
             void MlvlModule::applyConfigs()
             {
+                foodEater = std::make_unique<FoodEater>(simulator, config.foodHotkey);
                 healthManaReader.setTibiaClientType(advancedSettings.common.clientType);
                 healthManaFinder.setCaptureMode(advancedSettings.common.captureMode.mode);
                 frameCapturer.setCaptureMode(advancedSettings.common.captureMode.mode);

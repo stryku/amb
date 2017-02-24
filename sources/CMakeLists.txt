@@ -82,7 +82,9 @@ set (AMB_inc
             
             ${inc_dir}/module/modules/Healer.hpp
             ${inc_dir}/module/modules/LooterModule.hpp
-            ${inc_dir}/module/modules/MlvlModule.hpp
+			
+            ${inc_dir}/module/modules/mlvl/FoodEater.hpp
+            ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -182,7 +184,9 @@ set (AMB_src
             ${src_dir}/module/ModulesFactory.cpp
             
             ${src_dir}/module/modules/LooterModule.cpp
-            ${src_dir}/module/modules/MlvlModule.cpp
+			
+            ${src_dir}/module/modules/mlvl/FoodEater.cpp
+            ${src_dir}/module/modules/mlvl/MlvlModule.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             

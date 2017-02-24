@@ -10,7 +10,7 @@
 
 #include "module/modules/Healer.hpp"
 #include "module/modules/LooterModule.hpp"
-#include "module/modules/MlvlModule.hpp"
+#include "module/modules/mlvl/MlvlModule.hpp"
 #include "client/reader/TibiaClientMemoryReader.hpp"
 #include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 
