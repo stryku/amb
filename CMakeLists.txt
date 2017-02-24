@@ -36,6 +36,11 @@ if (PREVENT_DEBUG)
     add_definitions(-DAMB_PREVENT_DEBUG)
 endif()
 
+option(USE_CLIPBOARD "Copy images to clipboard" OFF)
+if (PREVENT_DEBUG)
+    add_definitions(-DAMB_USE_CLIPBOARD)
+endif()
+
 set(BOOST_ROOT C:/moje/dev/include/boost/boost_1_63_0)
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
