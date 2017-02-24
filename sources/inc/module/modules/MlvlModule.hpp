@@ -8,10 +8,10 @@ namespace Amb
     {
         namespace Mlvl
         {
-            /*class MlvlModule final : public ModuleCore
+            class MlvlModule final : public ModuleCore
             {
             public:
-                MlvlModule(const Configs::Looter &config,
+                MlvlModule(const Configs::Mlvl &config,
                            const Configs::AdvancedSettings &advancedSettings,
                            Simulate::Simulator &simulator,
                            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
@@ -21,13 +21,13 @@ namespace Amb
                 void setEnableDebugLogs(bool enabled) override;
 
             private:
-                const Configs::Looter &config;
+                const Configs::Mlvl &config;
                 const Configs::AdvancedSettings &advancedSettings;
                 std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader;
 
                 void runDetails() override;
                 void applyConfigs() override;
-            };*/
+            };
         }
     }
 }

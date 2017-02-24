@@ -6,7 +6,7 @@ namespace Amb
     {
         namespace Mlvl
         {
-           /* MlvlModule::MlvlModule(const Configs::Looter &config,
+            MlvlModule::MlvlModule(const Configs::Mlvl &config,
                         const Configs::AdvancedSettings &advancedSettings,
                             Simulate::Simulator &simulator,
                                    const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
@@ -24,9 +24,7 @@ namespace Amb
             void MlvlModule::runDetails()
             {}
             void MlvlModule::applyConfigs()
-            {}*/
+            {}
         }
     }
 }
-
-
