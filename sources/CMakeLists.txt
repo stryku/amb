@@ -193,6 +193,10 @@ set (AMB_src
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             ${src_dir}/ui/updaters/TibiaClientsComboboxUpdater.cpp
+            ${src_dir}/ui/updaters/UiUpdater.cpp
+            ${src_dir}/ui/updaters/AdvancedSettingsUiUpdater.cpp
+            ${src_dir}/ui/updaters/HealerUiUpdater.cpp
+            ${src_dir}/ui/updaters/LooterUiUpdater.cpp
             
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
             ${src_dir}/ui/updaters/details/TibiaNickHider.cpp

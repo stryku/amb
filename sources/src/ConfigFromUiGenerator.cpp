@@ -119,6 +119,7 @@ namespace Amb
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;
+            config.mlvl = newConfig.mlvl;
         }
     }
 }
