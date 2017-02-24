@@ -232,6 +232,7 @@ namespace Amb
                 builder.addTree("amb.healer_config", healerConfig.toPtree());
                 advancedSettings.toPropertyTreeBuilder(builder, "amb.advanced_settings");
                 builder.addTree("amb.looter", looter.toPtree());
+                builder.addTree("amb.mlvl", mlvl.toPtree());
 
                 return builder.build();
             }
@@ -247,6 +248,7 @@ namespace Amb
                 ret.healerConfig = HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
                 ret.advancedSettings = AdvancedSettings::fromPtree(tree.get_child("amb.advanced_settings"));
                 ret.looter = Looter::fromPtree(tree.get_child("amb.looter"));
+                ret.mlvl = Mlvl::fromPtree(tree.get_child("amb.mlvl"));
 
                 return ret;
             }

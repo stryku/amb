@@ -63,7 +63,14 @@ namespace Amb
         void ConfigFromUiGenerator::regenerateMlvl()
         {
             LOG_DEBUG("regenerating mlvl config");
-            //config.mlvl.manaPercent = 
+            const auto controls = mainWindow->getMlvlControls();
+            config.mlvl.manaPercent = controls.manaPercent->text().toUInt();
+
+            const auto spellHotSelected = static_cast<size_t>(controls.spellCombobox->currentIndex());
+            config.mlvl.spellHotkey = Utils::size_tToHotkey(spellHotSelected);
+
+            const auto foodHotSelected = static_cast<size_t>(controls.foodCombobox->currentIndex());
+            config.mlvl.foodHotkey = Utils::size_tToHotkey(foodHotSelected);
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()

@@ -42,6 +42,7 @@ public:
     Amb::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
     Amb::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
     Amb::Ui::Controls::Looter getLotterControls() const;
+    Amb::Ui::Controls::Mlvl getMlvlControls() const;
     Amb::Ui::Controls::Healer getHealer() const;
     Amb::Ui::Controls::GlobalControls getControls() const;
 

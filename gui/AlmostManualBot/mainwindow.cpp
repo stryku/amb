@@ -187,6 +187,18 @@ Amb::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
     return controls;
 }
 
+Amb::Ui::Controls::Mlvl MainWindow::getMlvlControls() const
+{
+    Amb::Ui::Controls::Mlvl controls;
+
+    controls.manaPercent = ui->editMlvlMana;
+    controls.foodCombobox = ui->cbMlvlFoodHotkey;
+    controls.spellCombobox = ui->cbMlvSpelllHotkey;
+
+    return controls;
+}
+
+
 Amb::Ui::Controls::Looter MainWindow::getLotterControls() const
 {
     Amb::Ui::Controls::Looter controls;
@@ -215,6 +227,7 @@ Amb::Ui::Controls::GlobalControls MainWindow::getControls() const
     controls.healer = getHealer();
     controls.advancedSettings = getAdvancedSettings();
     controls.looter = getLotterControls();
+    controls.mlvl = getMlvlControls();
 
     return controls;
 }

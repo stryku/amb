@@ -58,11 +58,19 @@ namespace Amb
                 QComboBox *categoriesCombobox;
             };
 
+            struct Mlvl
+            {
+                QLineEdit *manaPercent;
+                QComboBox *foodCombobox;
+                QComboBox *spellCombobox;
+            };
+
             struct GlobalControls
             {
                 Healer healer;
                 AdvancedSettings advancedSettings;
                 Looter looter;
+                Mlvl mlvl;
             };
         }
     }
