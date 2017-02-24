@@ -3,6 +3,7 @@
 #include "ui/updaters/AdvancedSettingsUiUpdater.hpp"
 #include "ui/updaters/HealerUiUpdater.hpp"
 #include "ui/updaters/LooterUiUpdater.hpp"
+#include "ui/updaters/MlvlUiUpdater.hpp"
 
 #include <QLineEdit>
 
@@ -31,6 +32,7 @@ namespace Amb
                 Healer healerUpdater;
                 AdvancedSettings advSettingsUpdater;
                 Looter looterUpdater;
+                Mlvl mlvlUpdater;
             };
         }
     }

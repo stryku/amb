@@ -13,6 +13,7 @@ namespace Amb
                 healerUpdater.update(config.healerConfig, controls.healer);
                 advSettingsUpdater.update(config.advancedSettings, controls.advancedSettings);
                 looterUpdater.update(config.looter, controls.looter);
+                mlvlUpdater.update(config.mlvl, controls.mlvl);
             }
         }
     }

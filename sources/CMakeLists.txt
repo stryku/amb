@@ -105,6 +105,7 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/UiUpdater.hpp
             ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
             ${inc_dir}/ui/updaters/TibiaClientsComboboxUpdater.hpp
+            ${inc_dir}/ui/updaters/MlvlUiUpdater.hpp
             
             ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
             ${inc_dir}/ui/updaters/details/TibiaNickHider.hpp
@@ -197,6 +198,7 @@ set (AMB_src
             ${src_dir}/ui/updaters/AdvancedSettingsUiUpdater.cpp
             ${src_dir}/ui/updaters/HealerUiUpdater.cpp
             ${src_dir}/ui/updaters/LooterUiUpdater.cpp
+            ${src_dir}/ui/updaters/MlvlUiUpdater.cpp
             
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
             ${src_dir}/ui/updaters/details/TibiaNickHider.cpp
