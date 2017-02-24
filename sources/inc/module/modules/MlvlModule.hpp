@@ -1,6 +1,10 @@
 #pragma once
 
 #include "module/ModuleCore.hpp"
+#include "client/reader/HealthManaReader.hpp"
+#include "client/finder/HealthManaFinder.hpp"
+#include "log/ImageConditionalLogger.hpp"
+#include "log/condition/ImageLogOnceCondition.hpp"
 
 namespace Amb
 {
@@ -17,16 +21,20 @@ namespace Amb
                            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                            std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
 
-                void attachToNewProcess(DWORD pid) override;
+                //void attachToNewProcess(DWORD pid) override;
                 void setEnableDebugLogs(bool enabled) override;
+                void attachToNewWindow(HWND hwnd) override;
 
             private:
+                void runDetails() override;
+                void applyConfigs() override;
+
                 const Configs::Mlvl &config;
                 const Configs::AdvancedSettings &advancedSettings;
                 std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader;
-
-                void runDetails() override;
-                void applyConfigs() override;
+                Client::Reader::HealthManaReader healthManaReader;
+                Client::Finder::HealthManaFinder healthManaFinder;
+                Log::ImageConditionalLogger<Log::Condition::ImageLogOnceCondition> screenLogger;
             };
         }
     }

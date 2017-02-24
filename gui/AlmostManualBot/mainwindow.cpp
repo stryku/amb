@@ -114,6 +114,23 @@ void MainWindow::toggleHealer()
     }
 }
 
+void MainWindow::toggleMlvl()
+{
+    if (!ui->checkBoxMlvlRunning->isChecked())
+    {
+        stopModule(ui->checkBoxMlvlRunning,
+                   Amb::Module::ModuleId::MOD_MLVL);
+    }
+    else
+    {
+        if (!startModule(ui->checkBoxMlvlRunning,
+            Amb::Module::ModuleId::MOD_MLVL))
+        {
+            ui->checkBoxHealerRun->setChecked(false);
+        }
+    }
+}
+
 bool MainWindow::startModule( QCheckBox *moduleCheckBox,
                               Amb::Module::ModuleId modId )
 {
@@ -564,5 +581,5 @@ void MainWindow::on_actionShow_console_toggled(bool checked)
 
 void MainWindow::on_checkBoxMlvlRunning_toggled(bool checked)
 {
-
+    toggleMlvl();
 }

@@ -121,6 +121,7 @@ private:
     void updateTibiaClientsComboBox();
     void toggleHealer();
     void toggleLooter();
+    void toggleMlvl();
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,
