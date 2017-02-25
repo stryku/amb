@@ -91,6 +91,7 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/FoodEater.hpp
             ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
             ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
+            ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -197,6 +198,7 @@ set (AMB_src
             ${src_dir}/module/modules/mlvl/FoodEater.cpp
             ${src_dir}/module/modules/mlvl/MlvlModule.cpp
             ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
+            ${src_dir}/module/modules/mlvl/AntiIdler.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
