@@ -7,6 +7,7 @@
 #include "log/condition/ImageLogOnceCondition.hpp"
 #include "module/modules/mlvl/FoodEater.hpp"
 #include "module/modules/mlvl/MlvlSpellCaster.hpp"
+#include "module/modules/mlvl/AntiIdler.hpp"
 
 namespace Amb
 {
@@ -37,6 +38,7 @@ namespace Amb
                 Client::Reader::HealthManaReader healthManaReader;
                 Client::Finder::HealthManaFinder healthManaFinder;
                 Log::ImageConditionalLogger<Log::Condition::ImageLogOnceCondition> screenLogger;
+                AntiIdler antiIdler;
                 std::unique_ptr<FoodEater> foodEater;
                 std::unique_ptr<SpellCaster> spellCaster;
             };

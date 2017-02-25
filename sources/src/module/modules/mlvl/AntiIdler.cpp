@@ -26,12 +26,10 @@ namespace Amb
 
                     const auto movesCount = Utils::Random::RandomBetween{ 2, 6 }.get();
 
-                    simulator.ctrlDown();
+                    //for (size_t i = 0; i < movesCount; ++i)
+                    randMove();
 
-                    for (size_t i = 0; i < movesCount; ++i)
-                        randMove();
-
-                    simulator.ctrlUp();
+                    nextMove = current + std::chrono::milliseconds{ waitFor };
                 }
             }
 
@@ -40,7 +38,11 @@ namespace Amb
                 const auto move = Utils::Random::RandomBetween{ 0, 3 }.get();
                 constexpr WPARAM moves[] = { VK_LEFT, VK_UP, VK_DOWN, VK_RIGHT };
 
-                simulator.keyDownAndUp(moves[move]);
+                //simulator.ctrlDown();
+                //simulator.keyDownAndUp(moves[move]);
+                simulator.keyDownAndUp(VK_LEFT);
+                simulator.keyDownAndUp(VK_RIGHT);
+                //simulator.ctrlUp();
             }
         }
     }

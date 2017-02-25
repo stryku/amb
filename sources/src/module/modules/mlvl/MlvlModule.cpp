@@ -20,6 +20,7 @@ namespace Amb
                 , healthManaReader{ screen }
                 , healthManaFinder{ tibiaClientWindowInfo }
                 , screenLogger{ "mlvl_logger", "logs/mlvl.txt" }
+                , antiIdler{ simulator }
             {}
 
             //void MlvlModule::attachToNewProcess(DWORD pid)
@@ -68,6 +69,7 @@ namespace Amb
 
                 foodEater->eat();
                 spellCaster->cast(captureRect);
+                antiIdler.andiIdle();
 
                 std::this_thread::sleep_for(std::chrono::seconds{ 1 });
             }
