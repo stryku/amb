@@ -2,6 +2,8 @@
 
 #include "client/EqItems.hpp"
 
+#include <boost/optional.hpp>
+
 namespace Amb
 {
     namespace Client
@@ -11,7 +13,7 @@ namespace Amb
             class IEqReader
             {
             public:
-                virtual EqItems read() = 0;
+                virtual boost::optional<EqItems> read() = 0;
             };
         }
     }

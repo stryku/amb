@@ -26,6 +26,8 @@ set (AMB_inc
             ${inc_dir}/client/window/TibiaWindow.hpp
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
             
+            ${inc_dir}/client/finder/GraphicEqFinder.hpp
+			
             ${inc_dir}/client/reader/IEqReader.hpp
             ${inc_dir}/client/reader/GraphicEqReader.hpp
             ${inc_dir}/client/reader/HealthManaReader.hpp
@@ -88,6 +90,7 @@ set (AMB_inc
 			
             ${inc_dir}/module/modules/mlvl/FoodEater.hpp
             ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
+            ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -149,9 +152,11 @@ set (AMB_src
             
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp 
-            ${src_dir}/capture/FrameCapturer.cpp
+            ${src_dir}/capture/FrameCapturer.cpp 
             
             ${src_dir}/client/TibiaClientType.cpp
+			
+            ${src_dir}/client/finder/GraphicEqFinder.cpp
             
             ${src_dir}/client/reader/GraphicEqReader.cpp
             ${src_dir}/client/reader/HealthManaReader.cpp
@@ -191,6 +196,7 @@ set (AMB_src
 			
             ${src_dir}/module/modules/mlvl/FoodEater.cpp
             ${src_dir}/module/modules/mlvl/MlvlModule.cpp
+            ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
