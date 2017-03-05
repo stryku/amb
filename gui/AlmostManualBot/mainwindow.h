@@ -97,6 +97,8 @@ private slots:
 
     void on_checkBoxMlvlRunning_toggled(bool checked);
 
+    void on_cbTibiaClients_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 

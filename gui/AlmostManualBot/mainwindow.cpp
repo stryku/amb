@@ -318,7 +318,7 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
 {
     try
     {
-        tibiaWindowChangedHandler( arg1.toStdWString() );
+        //tibiaWindowChangedHandler( arg1.toStdWString() );
     }
     catch( std::bad_function_call &e )
     {
@@ -583,4 +583,21 @@ void MainWindow::on_actionShow_console_toggled(bool checked)
 void MainWindow::on_checkBoxMlvlRunning_toggled(bool checked)
 {
     toggleMlvl();
+}
+
+void MainWindow::on_cbTibiaClients_currentIndexChanged(int index)
+{
+    try
+    {
+        const auto current = clientComboboxUpdater.getCurrent();
+        tibiaWindowChangedHandler(Amb::Utils::stringToWstring(current));
+    }
+    catch (std::bad_function_call &e)
+    {
+        LOG_DEBUG("Catch std::bad_function_call: %s", e.what());
+    }
+    catch (std::exception &e)
+    {
+        LOG_DEBUG("Catch std::exception: %s", e.what());
+    }
 }
