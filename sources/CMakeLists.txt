@@ -21,10 +21,15 @@ set (AMB_inc
             ${inc_dir}/capture/FrameCapturer.hpp
             
             ${inc_dir}/client/TibiaClientType.hpp
+            ${inc_dir}/client/EqItems.hpp
             
             ${inc_dir}/client/window/TibiaWindow.hpp
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
             
+            ${inc_dir}/client/finder/GraphicEqFinder.hpp
+			
+            ${inc_dir}/client/reader/IEqReader.hpp
+            ${inc_dir}/client/reader/GraphicEqReader.hpp
             ${inc_dir}/client/reader/HealthManaReader.hpp
             ${inc_dir}/client/reader/TibiaClientReader.hpp
             ${inc_dir}/client/reader/TibiaClientMemoryReader.hpp
@@ -82,6 +87,11 @@ set (AMB_inc
             
             ${inc_dir}/module/modules/Healer.hpp
             ${inc_dir}/module/modules/LooterModule.hpp
+			
+            ${inc_dir}/module/modules/mlvl/FoodEater.hpp
+            ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
+            ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
+            ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
             
@@ -104,6 +114,7 @@ set (AMB_inc
             ${inc_dir}/ui/updaters/UiUpdater.hpp
             ${inc_dir}/ui/updaters/MainWindowTitleUpdater.hpp
             ${inc_dir}/ui/updaters/TibiaClientsComboboxUpdater.hpp
+            ${inc_dir}/ui/updaters/MlvlUiUpdater.hpp
             
             ${inc_dir}/ui/updaters/details/MainWindowTitleBuilder.hpp
             ${inc_dir}/ui/updaters/details/TibiaNickHider.hpp
@@ -141,11 +152,14 @@ set (AMB_src
             ${src_dir}/utils.cpp
             
             ${src_dir}/capture/ItemCapturer.cpp
-            ${src_dir}/capture/ItemsWindowReader.cpp
-            ${src_dir}/capture/FrameCapturer.cpp
+            ${src_dir}/capture/ItemsWindowReader.cpp 
+            ${src_dir}/capture/FrameCapturer.cpp 
             
             ${src_dir}/client/TibiaClientType.cpp
+			
+            ${src_dir}/client/finder/GraphicEqFinder.cpp
             
+            ${src_dir}/client/reader/GraphicEqReader.cpp
             ${src_dir}/client/reader/HealthManaReader.cpp
             ${src_dir}/client/reader/TibiaClientMemoryReader.cpp
             
@@ -180,6 +194,11 @@ set (AMB_src
             ${src_dir}/module/ModulesFactory.cpp
             
             ${src_dir}/module/modules/LooterModule.cpp
+			
+            ${src_dir}/module/modules/mlvl/FoodEater.cpp
+            ${src_dir}/module/modules/mlvl/MlvlModule.cpp
+            ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
+            ${src_dir}/module/modules/mlvl/AntiIdler.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
             
@@ -191,6 +210,11 @@ set (AMB_src
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             ${src_dir}/ui/updaters/TibiaClientsComboboxUpdater.cpp
+            ${src_dir}/ui/updaters/UiUpdater.cpp
+            ${src_dir}/ui/updaters/AdvancedSettingsUiUpdater.cpp
+            ${src_dir}/ui/updaters/HealerUiUpdater.cpp
+            ${src_dir}/ui/updaters/LooterUiUpdater.cpp
+            ${src_dir}/ui/updaters/MlvlUiUpdater.cpp
             
             ${src_dir}/ui/updaters/details/MainWindowTitleBuilder.cpp
             ${src_dir}/ui/updaters/details/TibiaNickHider.cpp

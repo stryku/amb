@@ -28,12 +28,13 @@ namespace Amb
             void stop();
             bool isRunning() const;
 
-            void attachToNewWindow(HWND hwnd);
+            virtual void attachToNewWindow(HWND hwnd);
             virtual void setEnableDebugLogs(bool enabled) {};
 
             virtual void attachToNewProcess(DWORD pid) {}
 
         protected:
+            HWND hwnd;
             std::unique_ptr<std::thread> runThread;
             Simulate::Simulator &simulator;
             Simulate::MouseSimulator mouseSimulator;

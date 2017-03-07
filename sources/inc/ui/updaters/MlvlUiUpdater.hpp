@@ -4,23 +4,22 @@ namespace Amb
 {
     namespace Configs
     {
-        struct HealerConfig;
+        struct Mlvl;
     }
 
     namespace Ui
     {
         namespace Controls
         {
-            struct Healer;
+            struct Mlvl;
         }
 
         namespace Updaters
         {
-            class Healer
+            class Mlvl
             {
             public:
-                void update(const Configs::HealerConfig &healerConfigs, 
-                            const Controls::Healer &healerControls) const;
+                void update(const Configs::Mlvl &configs, const Controls::Mlvl &controls) const;
             };
         }
     }

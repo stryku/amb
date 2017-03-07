@@ -114,6 +114,23 @@ void MainWindow::toggleHealer()
     }
 }
 
+void MainWindow::toggleMlvl()
+{
+    if (!ui->checkBoxMlvlRunning->isChecked())
+    {
+        stopModule(ui->checkBoxMlvlRunning,
+                   Amb::Module::ModuleId::MOD_MLVL);
+    }
+    else
+    {
+        if (!startModule(ui->checkBoxMlvlRunning,
+            Amb::Module::ModuleId::MOD_MLVL))
+        {
+            ui->checkBoxHealerRun->setChecked(false);
+        }
+    }
+}
+
 bool MainWindow::startModule( QCheckBox *moduleCheckBox,
                               Amb::Module::ModuleId modId )
 {
@@ -187,6 +204,19 @@ Amb::Ui::Controls::AdvancedSettings MainWindow::getAdvancedSettings() const
     return controls;
 }
 
+Amb::Ui::Controls::Mlvl MainWindow::getMlvlControls() const
+{
+    Amb::Ui::Controls::Mlvl controls;
+
+    controls.editMlvlManaFrom = ui->editMlvlManaFrom;
+    controls.editMlvlManaTo = ui->editMlvlManaTo;
+    controls.foodCombobox = ui->cbMlvlFoodHotkey;
+    controls.spellCombobox = ui->cbMlvSpelllHotkey;
+
+    return controls;
+}
+
+
 Amb::Ui::Controls::Looter MainWindow::getLotterControls() const
 {
     Amb::Ui::Controls::Looter controls;
@@ -215,6 +245,7 @@ Amb::Ui::Controls::GlobalControls MainWindow::getControls() const
     controls.healer = getHealer();
     controls.advancedSettings = getAdvancedSettings();
     controls.looter = getLotterControls();
+    controls.mlvl = getMlvlControls();
 
     return controls;
 }
@@ -287,7 +318,7 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged( const QString &arg1 )
 {
     try
     {
-        tibiaWindowChangedHandler( arg1.toStdWString() );
+        //tibiaWindowChangedHandler( arg1.toStdWString() );
     }
     catch( std::bad_function_call &e )
     {
@@ -547,4 +578,26 @@ void MainWindow::on_actionShow_console_toggled(bool checked)
     //todo
     //if(checked)
         
+}
+
+void MainWindow::on_checkBoxMlvlRunning_toggled(bool checked)
+{
+    toggleMlvl();
+}
+
+void MainWindow::on_cbTibiaClients_currentIndexChanged(int index)
+{
+    try
+    {
+        const auto current = clientComboboxUpdater.getCurrent();
+        tibiaWindowChangedHandler(Amb::Utils::stringToWstring(current));
+    }
+    catch (std::bad_function_call &e)
+    {
+        LOG_DEBUG("Catch std::bad_function_call: %s", e.what());
+    }
+    catch (std::exception &e)
+    {
+        LOG_DEBUG("Catch std::exception: %s", e.what());
+    }
 }

@@ -10,6 +10,7 @@ namespace Amb
 
 #ifdef AMB_PRO_COMPILATION
             MOD_LOOTER,
+            MOD_MLVL,
 #endif
 
             DUMMY
