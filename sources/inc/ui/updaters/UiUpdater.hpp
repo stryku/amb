@@ -3,30 +3,36 @@
 #include "ui/updaters/AdvancedSettingsUiUpdater.hpp"
 #include "ui/updaters/HealerUiUpdater.hpp"
 #include "ui/updaters/LooterUiUpdater.hpp"
-#include "ui/UiControls.hpp"
+#include "ui/updaters/MlvlUiUpdater.hpp"
 
 #include <QLineEdit>
 
 namespace Amb
 {
+    namespace Configs
+    {
+        struct GlobalConfig;
+    }
+
     namespace Ui
     {
+        namespace Controls
+        {
+            struct GlobalControls;
+        }
+
         namespace Updaters
         {
             class UiUpdater
             {
             public:
-                void update(const Configs::GlobalConfig &config, const Controls::GlobalControls &controls)
-                {
-                    healerUpdater.update(config.healerConfig, controls.healer);
-                    advSettingsUpdater.update(config.advancedSettings, controls.advancedSettings);
-                    looterUpdater.update(config.looter, controls.looter);
-                }
+                void update(const Configs::GlobalConfig &config, const Controls::GlobalControls &controls);
 
             private:
                 Healer healerUpdater;
                 AdvancedSettings advSettingsUpdater;
                 Looter looterUpdater;
+                Mlvl mlvlUpdater;
             };
         }
     }

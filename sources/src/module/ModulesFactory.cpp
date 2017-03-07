@@ -9,7 +9,10 @@
 #include "ui_mainwindow.h"
 
 #include "module/modules/Healer.hpp"
+#include "module/modules/LooterModule.hpp"
+#include "module/modules/mlvl/MlvlModule.hpp"
 #include "client/reader/TibiaClientMemoryReader.hpp"
+#include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 
 namespace 
 {
@@ -21,14 +24,7 @@ namespace
                                                            simulator,
                                                            config.tibiaClientWindowInfo);
     }
-}
 
-
-#ifdef AMB_PRO_COMPILATION
-#include "module/modules/LooterModule.hpp"
-#include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
-namespace
-{
     std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
                                                                     Amb::Simulate::Simulator &simulator)
     {
@@ -41,20 +37,16 @@ namespace
                                                                    Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{},
                                                                    std::make_unique<TibiaReader>(config.pid));
     }
-}
-#else
-#include "module/ui_remover/LooterUiRemover.hpp"
-namespace
-{
-    void removeProVersionUi(::Ui::MainWindow *ui)
+    
+    std::unique_ptr<Amb::Module::Mlvl::MlvlModule> createMlvl(const Amb::Configs::GlobalConfig &config,
+                                                              Amb::Simulate::Simulator &simulator)
     {
-        const Amb::Module::UiRemover::LooterUiRemover looter;
-        looter.remove(ui);
+        return std::make_unique<Amb::Module::Mlvl::MlvlModule>(config.mlvl,
+                                                               config.advancedSettings,
+                                                               simulator,
+                                                               config.tibiaClientWindowInfo);
     }
 }
-#endif //MODULE_COMPILE_LOOTER
-
-
 
 namespace Amb
 {
@@ -66,11 +58,8 @@ namespace Amb
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> map;
 
             map[ModuleId::MOD_HEALER] = createHealer(config, simulator);
-#ifdef AMB_PRO_COMPILATION
             map[ModuleId::MOD_LOOTER] = createLooter(config, simulator);
-#else
-            removeProVersionUi(ui);
-#endif //MODULE_COMPILE_LOOTER
+            map[ModuleId::MOD_MLVL] = createMlvl(config, simulator);
 
             return std::move(map);
         }

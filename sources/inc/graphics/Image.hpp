@@ -56,7 +56,7 @@ namespace Amb
 
             void toCb() const
             {
-#ifndef NDEBUG
+#ifdef AMB_USE_CLIPBOARD
                 BITMAPINFOHEADER bmih;
                 bmih.biSize = sizeof(BITMAPINFOHEADER);
                 bmih.biWidth = w;

@@ -42,6 +42,7 @@ public:
     Amb::Ui::Controls::AdvancedSettings::Common getAdvancedSettingsCommon() const;
     Amb::Ui::Controls::AdvancedSettings getAdvancedSettings() const;
     Amb::Ui::Controls::Looter getLotterControls() const;
+    Amb::Ui::Controls::Mlvl getMlvlControls() const;
     Amb::Ui::Controls::Healer getHealer() const;
     Amb::Ui::Controls::GlobalControls getControls() const;
 
@@ -94,6 +95,10 @@ private slots:
 
     void on_actionShow_console_toggled(bool arg1);
 
+    void on_checkBoxMlvlRunning_toggled(bool checked);
+
+    void on_cbTibiaClients_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -118,6 +123,7 @@ private:
     void updateTibiaClientsComboBox();
     void toggleHealer();
     void toggleLooter();
+    void toggleMlvl();
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,

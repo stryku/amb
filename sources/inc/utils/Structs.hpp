@@ -29,6 +29,11 @@ namespace Amb
                 return PosImpl{ x + rhs.x, y + rhs.y };
             }
 
+            PosImpl operator+(const PosImpl &rhs) const
+            {
+                return PosImpl{ x + rhs.x, y + rhs.y };
+            }
+
             PosImpl& operator+=(const PosImpl &rhs)
             {
                 x += rhs.x;
@@ -56,6 +61,12 @@ namespace Amb
     {
         int x, y;
         size_t w, h;
+
+        void setPos(Pos pos)
+        {
+            x = pos.x;
+            y = pos.y;
+        }
 
         bool operator==(const Rect &rhs) const
         {

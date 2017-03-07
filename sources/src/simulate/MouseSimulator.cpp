@@ -82,7 +82,11 @@ namespace Amb
         }
 
         void MouseSimulator::leftClick(const Pos &pos)
-        {}
+        {
+            down(pos, Button::LEFT);
+            up(pos, Button::LEFT);
+
+        }
         void MouseSimulator::rightClick(const Pos &pos)
         {}
         void MouseSimulator::moveTo(const Pos &pos)

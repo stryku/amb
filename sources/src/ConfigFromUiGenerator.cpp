@@ -38,9 +38,8 @@ namespace Amb
             switch (moduleId)
             {
                 case Module::ModuleId::MOD_HEALER: regenerateHealer();
-#ifdef AMB_PRO_COMPILATION
                 case Module::ModuleId::MOD_LOOTER: regenerateLooter();
-#endif
+                case Module::ModuleId::MOD_MLVL: regenerateMlvl();
             }
         }
 
@@ -57,6 +56,20 @@ namespace Amb
             LOG_DEBUG("regenerating looter config");
             config.looter.categories = looterCategoriesTable.getCategories();
             config.looter.items = looterItemsTable.getItems();
+        }
+
+        void ConfigFromUiGenerator::regenerateMlvl()
+        {
+            LOG_DEBUG("regenerating mlvl config");
+            const auto controls = mainWindow->getMlvlControls();
+            config.mlvl.manaPercentFrom = controls.editMlvlManaFrom->text().toUInt();
+            config.mlvl.manaPercentTo = controls.editMlvlManaTo->text().toUInt();
+
+            const auto spellHotSelected = static_cast<size_t>(controls.spellCombobox->currentIndex());
+            config.mlvl.spellHotkey = Utils::size_tToHotkey(spellHotSelected);
+
+            const auto foodHotSelected = static_cast<size_t>(controls.foodCombobox->currentIndex());
+            config.mlvl.foodHotkey = Utils::size_tToHotkey(foodHotSelected);
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()
@@ -95,6 +108,7 @@ namespace Amb
 
 #ifdef AMB_PRO_COMPILATION
             regenerateModule(Module::ModuleId::MOD_LOOTER);
+            regenerateModule(Module::ModuleId::MOD_MLVL);
 #endif
         }
 
@@ -104,6 +118,7 @@ namespace Amb
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;
+            config.mlvl = newConfig.mlvl;
         }
     }
 }

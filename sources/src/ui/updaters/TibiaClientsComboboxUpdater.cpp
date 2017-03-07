@@ -2,6 +2,7 @@
 #include "TibiaFinder.hpp"
 #include "utils.hpp"
 #include "ui/updaters/details/TibiaNickHider.hpp"
+#include "log/log.hpp"
 
 #include <boost/assert.hpp>
 
@@ -67,8 +68,11 @@ namespace Amb
                 BOOST_ASSERT_MSG(cb,
                                  "TibiaClientsComboboxUpdater cb pointer is null");
 
-                BOOST_ASSERT_MSG(cb->count() == entries.size(),
-                                 "combobox entries should be same as TibiaClientsComboboxUpdater class entries");
+                if (cb->count() != entries.size())
+                {
+                    LOG_DEBUG("TibiaClientsComboboxUpdater::getCurrent cb->count() != entries.size(). Returning empty string");
+                    return{};
+                }
 
                 const auto selectedIndex = cb->currentIndex();
 

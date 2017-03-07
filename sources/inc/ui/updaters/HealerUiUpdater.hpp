@@ -1,24 +1,26 @@
 #pragma once
 
-#include "ui/UiControls.hpp"
-#include "Configs.hpp"
-#include "utils/Structs.hpp"
-#include "ui/modules/healer/HealerRulesTable.hpp"
-
 namespace Amb
 {
+    namespace Configs
+    {
+        struct HealerConfig;
+    }
+
     namespace Ui
     {
+        namespace Controls
+        {
+            struct Healer;
+        }
+
         namespace Updaters
         {
             class Healer
             {
             public:
-                void update(const Configs::HealerConfig &healerConfigs, const Controls::Healer &healerControls)
-                {
-                    for (const auto &rule : healerConfigs.rules)
-                        healerControls.healerRulesTable->add(rule);
-                }
+                void update(const Configs::HealerConfig &healerConfigs, 
+                            const Controls::Healer &healerControls) const;
             };
         }
     }
