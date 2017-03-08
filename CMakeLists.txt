@@ -47,7 +47,7 @@ include_directories (${Boost_INCLUDE_DIRS})
 
 set( CMAKE_PREFIX_PATH C:/Qt/Qt5.8.0_x86/5.8/msvc2015/)
 
-set(AMB_VERSION "v0.3.3.1-tests" CACHE STRING "Version tag")
+set(AMB_VERSION "v0.4.0-tests" CACHE STRING "Version tag")
 add_definitions(-DAMB_VERSION=${AMB_VERSION})
 
 set (program_name "Almost Manual Bot")

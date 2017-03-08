@@ -99,6 +99,16 @@ private slots:
 
     void on_cbTibiaClients_currentIndexChanged(int index);
 
+    void on_pushButtonMouseHotkeysClear_clicked();
+
+    void on_pushButtonMouseHotkeysEdit_clicked();
+
+    void on_pushButtonMouseHotkeysAdd_clicked();
+
+    void on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checked);
+
+    void on_pushButtonMouseHotkeysCapture_clicked();
+
 private:
     Ui::MainWindow *ui;
 

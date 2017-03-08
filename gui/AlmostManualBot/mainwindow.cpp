@@ -601,3 +601,28 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged(int index)
         LOG_DEBUG("Catch std::exception: %s", e.what());
     }
 }
+
+void MainWindow::on_pushButtonMouseHotkeysClear_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonMouseHotkeysEdit_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonMouseHotkeysAdd_clicked()
+{
+
+}
+
+void MainWindow::on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checked)
+{
+
+}
+
+void MainWindow::on_pushButtonMouseHotkeysCapture_clicked()
+{
+
+}
