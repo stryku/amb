@@ -94,6 +94,11 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
+			
+            ${inc_dir}/monitor/mouse/IMouseMonitor.hpp
+            ${inc_dir}/monitor/mouse/MouseMonitor.hpp
+			
+            ${inc_dir}/mouse/MouseKey.hpp
             
             ${inc_dir}/ui/UiControls.hpp
             
@@ -201,6 +206,8 @@ set (AMB_src
             ${src_dir}/module/modules/mlvl/AntiIdler.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
+			
+            ${src_dir}/monitor/mouse/MouseMonitor.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
