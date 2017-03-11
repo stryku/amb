@@ -8,7 +8,7 @@ namespace Amb
     {
         namespace Module
         {
-            void HealerConfig::toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
+            void HealerConfig::toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path) const
             {
                 if (rules.empty())
                 {
