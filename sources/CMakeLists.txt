@@ -100,6 +100,7 @@ set (AMB_inc
             ${inc_dir}/monitor/mouse/MouseMonitorFactory.hpp
 			
             ${inc_dir}/mouse/MouseKey.hpp
+            ${inc_dir}/mouse/MouseEvent.hpp
             
             ${inc_dir}/ui/UiControls.hpp
             

@@ -8,8 +8,6 @@ namespace Amb
     {
         namespace Mouse
         {
-            class IMouseEventPublisher;
-
             class IMouseEventSubscriber
             {
             public:

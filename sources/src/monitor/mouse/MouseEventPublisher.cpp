@@ -7,6 +7,11 @@ namespace Amb
     {
         namespace Mouse
         {
+
+            std::vector<IMouseEventSubscriber*> MouseEventPublisher::subscribers;
+            HHOOK MouseEventPublisher::hook;
+            std::mutex MouseEventPublisher::mtx;
+
             void MouseEventPublisher::registerSubscriber(IMouseEventSubscriber* sub)
             {
                 std::lock_guard<std::mutex> lock{ mtx };
