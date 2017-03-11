@@ -10,7 +10,7 @@ namespace Amb
     {
         namespace Module
         {
-            struct AdvancedSettings
+            struct AdvancedSettingsConfig
             {
                 struct
                 {
@@ -26,7 +26,7 @@ namespace Amb
 
                 void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const;
 
-                static AdvancedSettings fromPtree(boost::property_tree::ptree &tree);
+                static AdvancedSettingsConfig fromPtree(boost::property_tree::ptree &tree);
             };
         }
     }

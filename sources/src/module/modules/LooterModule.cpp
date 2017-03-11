@@ -2,6 +2,7 @@
 #include "client/window/TibiaItemsWindow.hpp"
 #include "utils/random/RandomOffset.hpp"
 #include "log/log.hpp"
+#include "config/module/AdvancedSettingsConfig.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>
@@ -16,7 +17,7 @@ namespace Amb
         namespace Looter
         {
             LooterModule::LooterModule(const Configs::Looter &config,
-                                       const Configs::AdvancedSettings &advancedSettings,
+                                       const Config::Module::AdvancedSettingsConfig &advancedSettings,
                                        Simulate::Simulator &simulator,
                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                        Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,

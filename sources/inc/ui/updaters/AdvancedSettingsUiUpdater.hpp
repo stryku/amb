@@ -2,9 +2,12 @@
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
-        struct AdvancedSettings;
+        namespace Module
+        {
+            struct AdvancedSettingsConfig;
+        }
     }
 
     namespace Ui
@@ -19,7 +22,7 @@ namespace Amb
             class AdvancedSettings
             {
             public:
-                void update(const Configs::AdvancedSettings &advancedSettingsConfig, 
+                void update(const Config::Module::AdvancedSettingsConfig &advancedSettingsConfig,
                             const Controls::AdvancedSettings &controls) const;
             };
         }

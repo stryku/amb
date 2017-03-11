@@ -1,4 +1,5 @@
 #include "ui/updaters/AdvancedSettingsUiUpdater.hpp"
+#include "config/module/AdvancedSettingsConfig.hpp"
 
 #include "ui/UiControls.hpp"
 #include "Configs.hpp"
@@ -11,7 +12,7 @@ namespace Amb
     {
         namespace Updaters
         {
-            void AdvancedSettings::update(const Configs::AdvancedSettings &advancedSettingsConfig, 
+            void AdvancedSettings::update(const Config::Module::AdvancedSettingsConfig &advancedSettingsConfig,
                                           const Controls::AdvancedSettings &controls) const
             {
                 auto str = QString::fromStdString(utils::toString(advancedSettingsConfig.healer.randBetweenChecks.from));

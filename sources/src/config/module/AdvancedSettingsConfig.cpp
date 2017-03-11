@@ -6,7 +6,7 @@ namespace Amb
     {
         namespace Module
         {
-            void AdvancedSettings::toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path) const
+            void AdvancedSettingsConfig::toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path) const
             {
                 healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.rand_between_checks");
                 healer.sleepAfterHotkey.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
@@ -14,9 +14,9 @@ namespace Amb
                 Amb::Client::toPropertyTreeBuilder(builder, common.clientType, path + ".common");
             }
 
-            AdvancedSettings AdvancedSettings::fromPtree(boost::property_tree::ptree &tree)
+            AdvancedSettingsConfig AdvancedSettingsConfig::fromPtree(boost::property_tree::ptree &tree)
             {
-                AdvancedSettings ret;
+                AdvancedSettingsConfig ret;
 
                 ret.healer.randBetweenChecks = FromTo::fromPtree(tree.get_child("healer.rand_between_checks"));
                 ret.healer.sleepAfterHotkey = FromTo::fromPtree(tree.get_child("healer.sleep_after_hotkey"));

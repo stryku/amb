@@ -15,6 +15,7 @@
 
 
 #include "config/module/HealerConfig.hpp"
+#include "config/module/AdvancedSettingsConfig.hpp"
 
 
 
@@ -29,42 +30,6 @@ namespace Amb
 {
     namespace Configs
     {
-        struct AdvancedSettings
-        {
-            struct
-            {
-                FromTo randBetweenChecks;
-                FromTo sleepAfterHotkey;
-            } healer;
-
-            struct
-            {
-                Capture::Mode captureMode;
-                Amb::Client::TibiaClientType clientType;
-            } common;
-
-            void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
-            {
-                healer.randBetweenChecks.toPropertyTreeBuilder(builder, path + ".healer.rand_between_checks");
-                healer.sleepAfterHotkey.toPropertyTreeBuilder(builder, path + ".healer.sleep_after_hotkey");
-                common.captureMode.toPropertyTreeBuilder(builder, path + ".common");
-                Amb::Client::toPropertyTreeBuilder(builder, common.clientType, path + ".common");
-            }
-
-            static AdvancedSettings fromPtree(boost::property_tree::ptree &tree)
-            {
-                AdvancedSettings ret;
-
-                ret.healer.randBetweenChecks = FromTo::fromPtree(tree.get_child("healer.rand_between_checks"));
-                ret.healer.sleepAfterHotkey = FromTo::fromPtree(tree.get_child("healer.sleep_after_hotkey"));
-
-                ret.common.captureMode = Capture::Mode::fromPtree(tree.get_child("common"));
-                ret.common.clientType = Amb::Client::fromPtree(tree.get_child("common"));
-
-                return ret;
-            }
-        };
-
         struct Looter
         {
             std::vector<Amb::Ui::Module::Looter::Category> categories;
@@ -183,7 +148,7 @@ namespace Amb
             std::string currentCharacterName;
 
             Config::Module::HealerConfig healerConfig;
-            AdvancedSettings advancedSettings;
+            Config::Module::AdvancedSettingsConfig advancedSettings;
             Looter looter;
             Mlvl mlvl;
 
@@ -210,7 +175,7 @@ namespace Amb
                 boost::property_tree::xml_parser::read_xml(iss, tree);
 
                 ret.healerConfig = Config::Module::HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
-                ret.advancedSettings = AdvancedSettings::fromPtree(tree.get_child("amb.advanced_settings"));
+                ret.advancedSettings = Config::Module::AdvancedSettingsConfig::fromPtree(tree.get_child("amb.advanced_settings"));
                 ret.looter = Looter::fromPtree(tree.get_child("amb.looter"));
                 ret.mlvl = Mlvl::fromPtree(tree.get_child("amb.mlvl"));
 

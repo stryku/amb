@@ -19,6 +19,7 @@ namespace Amb
         namespace Module
         {
             struct HealerConfig;
+            struct AdvancedSettingsConfig;
         }
     }
 
@@ -30,7 +31,7 @@ namespace Amb
             {
             public:
                 Healer(const Config::Module::HealerConfig &config,
-                       const Configs::AdvancedSettings &advancedSettings,
+                       const Config::Module::AdvancedSettingsConfig &advancedSettings,
                        Simulate::Simulator &simulator,
                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo);
 
@@ -43,7 +44,7 @@ namespace Amb
                 void applyConfigs() override;
 
                 const Config::Module::HealerConfig &config;
-                const Configs::AdvancedSettings &advancedSettings;
+                const Config::Module::AdvancedSettingsConfig &advancedSettings;
                 Client::Reader::HealthManaReader healthManaReader;
                 Client::Finder::HealthManaFinder healthManaFinder;
                 Log::ImageConditionalLogger<Log::Condition::ImageLogOnceCondition> screenLogger;

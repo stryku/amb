@@ -17,6 +17,14 @@
 
 namespace Amb
 {
+    namespace Config
+    {
+        namespace Module
+        {
+            struct AdvancedSettingsConfig;
+        }
+    }
+
     namespace Module
     {
         namespace Looter
@@ -25,14 +33,13 @@ namespace Amb
             {
             public:
                 LooterModule(const Configs::Looter &config,
-                             const Configs::AdvancedSettings &advancedSettings,
+                             const Config::Module::AdvancedSettingsConfig &advancedSettings,
                              Simulate::Simulator &simulator,
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                              Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
                              std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
 
                 void attachToNewProcess(DWORD pid) override;
-
                 void setEnableDebugLogs(bool enabled) override;
 
             private:
@@ -47,7 +54,7 @@ namespace Amb
 
 
                 const Configs::Looter &config;
-                const Configs::AdvancedSettings &advancedSettings;
+                const Config::Module::AdvancedSettingsConfig &advancedSettings;
                 Capture::ItemsWindowReader itemsWindowReader;
 
                 void runDetails() override;
