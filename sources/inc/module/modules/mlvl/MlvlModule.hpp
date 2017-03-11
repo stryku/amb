@@ -16,6 +16,7 @@ namespace Amb
         namespace Module
         {
             struct AdvancedSettingsConfig;
+            struct MlvlConfig;
         }
     }
 
@@ -26,7 +27,7 @@ namespace Amb
             class MlvlModule final : public ModuleCore
             {
             public:
-                MlvlModule(const Configs::Mlvl &config,
+                MlvlModule(const Config::Module::MlvlConfig &config,
                            const Config::Module::AdvancedSettingsConfig &advancedSettings,
                            Simulate::Simulator &simulator,
                            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
@@ -40,7 +41,7 @@ namespace Amb
                 void runDetails() override;
                 void applyConfigs() override;
 
-                const Configs::Mlvl &config;
+                const Config::Module::MlvlConfig &config;
                 const Config::Module::AdvancedSettingsConfig &advancedSettings;
                 std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader;
                 Client::Reader::HealthManaReader healthManaReader;

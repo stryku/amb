@@ -46,6 +46,7 @@ set (AMB_inc
             ${inc_dir}/config/module/AdvancedSettingsConfig.hpp
             ${inc_dir}/config/module/HealerConfig.hpp
             ${inc_dir}/config/module/LooterConfig.hpp
+            ${inc_dir}/config/module/MlvlConfig.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
              
@@ -189,6 +190,7 @@ set (AMB_src
             ${src_dir}/config/module/AdvancedSettingsConfig.cpp
             ${src_dir}/config/module/HealerConfig.cpp
             ${src_dir}/config/module/LooterConfig.cpp
+            ${src_dir}/config/module/MlvlConfig.cpp
 			
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             
@@ -228,6 +230,7 @@ set (AMB_src
             
             ${src_dir}/ui/modules/looter/Items.cpp
             ${src_dir}/ui/modules/looter/Category.cpp
+            ${src_dir}/ui/modules/looter/LootItem.cpp
             
             ${src_dir}/utils/ThreadWorker.cpp
             
