@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "Configs.hpp"
 #include "Simulator.hpp"
 #include "capture/FrameCapturer.hpp"
 #include "utils/Structs.hpp"

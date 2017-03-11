@@ -2,7 +2,6 @@ set (AMB_inc
             ${inc_dir}/Bot.hpp
             ${inc_dir}/BotCore.hpp
             ${inc_dir}/ConfigFromUiGenerator.hpp
-            ${inc_dir}/Configs.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp
             ${inc_dir}/Simulator.hpp
@@ -41,10 +40,16 @@ set (AMB_inc
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinder.hpp
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinderFactory.hpp
             
-            ${inc_dir}/config/ConfigFileManager.hpp
+            ${inc_dir}/config/ConfigFileManager.hpp 
+            ${inc_dir}/config/GlobalConfig.hpp
+
+            ${inc_dir}/config/module/AdvancedSettingsConfig.hpp
+            ${inc_dir}/config/module/HealerConfig.hpp
+            ${inc_dir}/config/module/LooterConfig.hpp
+            ${inc_dir}/config/module/MlvlConfig.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
-            
+             
             ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
             ${inc_dir}/config/layout/health_heart/HealthHeartConfigFactory.hpp
             ${inc_dir}/config/layout/health_heart/StaticValues.hpp
@@ -96,7 +101,10 @@ set (AMB_inc
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
 			
             ${inc_dir}/monitor/mouse/IMouseMonitor.hpp
+            ${inc_dir}/monitor/mouse/IMouseEventPublisher.hpp
+            ${inc_dir}/monitor/mouse/IMouseEventSubscriber.hpp
             ${inc_dir}/monitor/mouse/MouseMonitor.hpp
+            ${inc_dir}/monitor/mouse/MouseEventPublisher.hpp
             ${inc_dir}/monitor/mouse/MouseMonitorFactory.hpp
 			
             ${inc_dir}/mouse/MouseKey.hpp
@@ -178,7 +186,13 @@ set (AMB_src
             ${src_dir}/client/window/finder/DeadCreatureWindowFinderFactory.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
+            ${src_dir}/config/GlobalConfig.cpp
             
+            ${src_dir}/config/module/AdvancedSettingsConfig.cpp
+            ${src_dir}/config/module/HealerConfig.cpp
+            ${src_dir}/config/module/LooterConfig.cpp
+            ${src_dir}/config/module/MlvlConfig.cpp
+			
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
@@ -210,11 +224,14 @@ set (AMB_src
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
 			
             ${src_dir}/monitor/mouse/MouseMonitor.cpp
+            ${src_dir}/monitor/mouse/MouseEventPublisher.cpp
             ${src_dir}/monitor/mouse/MouseMonitorFactory.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
             ${src_dir}/ui/modules/looter/Items.cpp
+            ${src_dir}/ui/modules/looter/Category.cpp
+            ${src_dir}/ui/modules/looter/LootItem.cpp
             
             ${src_dir}/utils/ThreadWorker.cpp
             

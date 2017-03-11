@@ -12,7 +12,7 @@ namespace Ui
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
         struct GlobalConfig;
     }
@@ -33,7 +33,7 @@ namespace Amb
                 : ui{ ui }
             {}
 
-            std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> create(const Configs::GlobalConfig &config,
+            std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> create(const Config::GlobalConfig &config,
                                                                              Simulate::Simulator &simulator);
 
         private:

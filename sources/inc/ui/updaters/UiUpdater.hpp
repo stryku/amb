@@ -9,7 +9,7 @@
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
         struct GlobalConfig;
     }
@@ -26,7 +26,7 @@ namespace Amb
             class UiUpdater
             {
             public:
-                void update(const Configs::GlobalConfig &config, const Controls::GlobalControls &controls);
+                void update(const Config::GlobalConfig &config, const Controls::GlobalControls &controls);
 
             private:
                 Healer healerUpdater;

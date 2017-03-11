@@ -2,9 +2,12 @@
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
-        struct HealerConfig;
+        namespace Module
+        {
+            struct HealerConfig;
+        }
     }
 
     namespace Ui
@@ -19,7 +22,7 @@ namespace Amb
             class Healer
             {
             public:
-                void update(const Configs::HealerConfig &healerConfigs, 
+                void update(const Config::Module::HealerConfig &healerConfigs,
                             const Controls::Healer &healerControls) const;
             };
         }

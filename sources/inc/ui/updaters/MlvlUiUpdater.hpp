@@ -2,9 +2,12 @@
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
-        struct Mlvl;
+        namespace Module
+        {
+            struct MlvlConfig;
+        }
     }
 
     namespace Ui
@@ -19,7 +22,7 @@ namespace Amb
             class Mlvl
             {
             public:
-                void update(const Configs::Mlvl &configs, const Controls::Mlvl &controls) const;
+                void update(const Config::Module::MlvlConfig& configs, const Controls::Mlvl &controls) const;
             };
         }
     }
