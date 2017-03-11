@@ -20,7 +20,7 @@ namespace Amb
                     rule.toPropertyTreeBuilder(builder, path + ".heal_rules.heal_rule");
             }
 
-            auto HealerConfig::toPtree() const
+            boost::property_tree::ptree HealerConfig::toPtree() const
             {
                 Utils::PropertyTreeBuilder builder;
 

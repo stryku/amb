@@ -3,6 +3,7 @@
 #include "ui/UiControls.hpp"
 #include "Configs.hpp"
 #include "ui/modules/healer/HealerRulesTable.hpp"
+#include "config/module/HealerConfig.hpp"
 
 namespace Amb
 {
@@ -10,7 +11,7 @@ namespace Amb
     {
         namespace Updaters
         {
-            void Healer::update(const Configs::HealerConfig &healerConfigs, 
+            void Healer::update(const Config::Module::HealerConfig &healerConfigs,
                                 const Controls::Healer &healerControls) const
             {
                 for (const auto &rule : healerConfigs.rules)

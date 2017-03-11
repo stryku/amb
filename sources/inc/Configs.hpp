@@ -11,6 +11,13 @@
 #include "capture/CaptureMode.hpp"
 #include "client/TibiaClientWindowInfo.hpp"
 
+
+
+
+#include "config/module/HealerConfig.hpp"
+
+
+
 #include <boost/assert.hpp>
 
 #include <vector>
@@ -22,52 +29,6 @@ namespace Amb
 {
     namespace Configs
     {
-        struct HealerConfig
-        {
-            std::vector<Module::Heal::HealRule> rules;
-
-            void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const
-            {
-                if (rules.empty())
-                {
-                    builder.addElement(Utils::PtreeElement<>{path + ".heal_rules", ""});
-                    return;
-                }
-
-                for (const auto& rule : rules)
-                    rule.toPropertyTreeBuilder(builder, path + ".heal_rules.heal_rule");
-            }
-
-            auto toPtree() const
-            {
-                Utils::PropertyTreeBuilder builder;
-
-                if (rules.empty())
-                    return builder.addElement(Utils::PtreeElement<>{"heal_rules", ""}).buildTree();
-
-                for (const auto& rule : rules)
-                {
-                    auto tree = rule.toPtree();
-                    builder.addTree("heal_rules.heal_rule", tree);
-                }
-
-                return builder.buildTree();
-            }
-
-            static HealerConfig fromPtree(boost::property_tree::ptree &tree)
-            {
-                HealerConfig healer;
-
-                for (auto &child : tree.get_child("heal_rules"))
-                {
-                    const auto rule = Module::Heal::HealRule::fromPtree(child.second);
-                    healer.rules.emplace_back(rule);
-                }
-
-                return healer;
-            }
-        };
-
         struct AdvancedSettings
         {
             struct
@@ -221,7 +182,7 @@ namespace Amb
             std::string currentConfigFilePath;
             std::string currentCharacterName;
 
-            HealerConfig healerConfig;
+            Config::Module::HealerConfig healerConfig;
             AdvancedSettings advancedSettings;
             Looter looter;
             Mlvl mlvl;
@@ -248,7 +209,7 @@ namespace Amb
                 std::istringstream iss(str);
                 boost::property_tree::xml_parser::read_xml(iss, tree);
 
-                ret.healerConfig = HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
+                ret.healerConfig = Config::Module::HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
                 ret.advancedSettings = AdvancedSettings::fromPtree(tree.get_child("amb.advanced_settings"));
                 ret.looter = Looter::fromPtree(tree.get_child("amb.looter"));
                 ret.mlvl = Mlvl::fromPtree(tree.get_child("amb.mlvl"));

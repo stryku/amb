@@ -26,7 +26,7 @@ namespace Amb
             struct HealerConfig
             {
                 void toPropertyTreeBuilder(Utils::PropertyTreeBuilder &builder, const std::string &path = "") const;
-                auto toPtree() const;
+                boost::property_tree::ptree toPtree() const;
                 static HealerConfig fromPtree(boost::property_tree::ptree &tree);
 
                 std::vector<Amb::Module::Heal::HealRule> rules;

@@ -1,5 +1,6 @@
 #include "module/modules/Healer.hpp"
 #include "log/log.hpp"
+#include "config/module/HealerConfig.hpp"
 
 namespace Amb
 {
@@ -63,7 +64,7 @@ namespace Amb
                 std::this_thread::sleep_until(sleepTo);
             }
 
-            Healer::Healer(const Configs::HealerConfig &config,
+            Healer::Healer(const Config::Module::HealerConfig &config,
                            const Configs::AdvancedSettings &advancedSettings,
                            Simulate::Simulator &simulator,
                            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
