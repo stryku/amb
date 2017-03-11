@@ -10,7 +10,7 @@ namespace Amb
     {
         namespace Module
         {
-            Amb::Ui::Module::Looter::Category Looter::findCategory(const std::string &categoryName) const
+            Amb::Ui::Module::Looter::Category LooterConfig::findCategory(const std::string &categoryName) const
             {
                 auto pred = [&categoryName](const auto &category)
                 {
@@ -26,7 +26,7 @@ namespace Amb
                 return *it;
             }
 
-            boost::property_tree::ptree Looter::toPtree() const
+            boost::property_tree::ptree LooterConfig::toPtree() const
             {
                 Utils::PropertyTreeBuilder builder;
 
@@ -55,9 +55,9 @@ namespace Amb
                 return builder.buildTree();
             }
 
-            Looter Looter::fromPtree(boost::property_tree::ptree &tree)
+            LooterConfig LooterConfig::fromPtree(boost::property_tree::ptree &tree)
             {
-                Looter healer;
+                LooterConfig healer;
 
                 for (auto &child : tree.get_child("categories"))
                 {

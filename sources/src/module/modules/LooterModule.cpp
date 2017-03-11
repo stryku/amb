@@ -16,7 +16,7 @@ namespace Amb
     {
         namespace Looter
         {
-            LooterModule::LooterModule(const Configs::Looter &config,
+            LooterModule::LooterModule(const Config::Module::LooterConfig &config,
                                        const Config::Module::AdvancedSettingsConfig &advancedSettings,
                                        Simulate::Simulator &simulator,
                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,

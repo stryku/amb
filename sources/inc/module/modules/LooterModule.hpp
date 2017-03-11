@@ -22,6 +22,7 @@ namespace Amb
         namespace Module
         {
             struct AdvancedSettingsConfig;
+            struct LooterConfig;
         }
     }
 
@@ -32,7 +33,7 @@ namespace Amb
             class LooterModule final : public ModuleCore
             {
             public:
-                LooterModule(const Configs::Looter &config,
+                LooterModule(const Config::Module::LooterConfig &config,
                              const Config::Module::AdvancedSettingsConfig &advancedSettings,
                              Simulate::Simulator &simulator,
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
@@ -53,7 +54,7 @@ namespace Amb
                 UniqueImageLogger unknowWindowsLogger;
 
 
-                const Configs::Looter &config;
+                const Config::Module::LooterConfig &config;
                 const Config::Module::AdvancedSettingsConfig &advancedSettings;
                 Capture::ItemsWindowReader itemsWindowReader;
 

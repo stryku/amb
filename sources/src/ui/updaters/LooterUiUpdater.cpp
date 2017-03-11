@@ -5,6 +5,7 @@
 #include "utils/Structs.hpp"
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
+#include "config/module/LooterConfig.hpp"
 
 #include <QComboBox>
 
@@ -14,7 +15,7 @@ namespace Amb
     {
         namespace Updaters
         {
-            void Looter::update(const Configs::Looter &configs, const Controls::Looter &controls) const
+            void Looter::update(const Config::Module::LooterConfig &configs, const Controls::Looter &controls) const
             {
                 for (const auto &item : configs.items)
                     controls.looterItemsTable->add(item);

@@ -22,14 +22,14 @@ namespace Amb
     {
         namespace Module
         {
-            struct Looter
+            struct LooterConfig
             {
                 std::vector<Amb::Ui::Module::Looter::Category> categories;
                 std::vector<Amb::Ui::Module::Looter::LootItem> items;
 
                 Amb::Ui::Module::Looter::Category findCategory(const std::string &categoryName) const;
                 boost::property_tree::ptree toPtree() const;
-                static Looter fromPtree(boost::property_tree::ptree &tree);
+                static LooterConfig fromPtree(boost::property_tree::ptree &tree);
             };
         }
     }

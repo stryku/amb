@@ -16,6 +16,7 @@
 
 #include "config/module/HealerConfig.hpp"
 #include "config/module/AdvancedSettingsConfig.hpp"
+#include "config/module/LooterConfig.hpp"
 
 
 
@@ -30,76 +31,6 @@ namespace Amb
 {
     namespace Configs
     {
-        struct Looter
-        {
-            std::vector<Amb::Ui::Module::Looter::Category> categories;
-            std::vector<Amb::Ui::Module::Looter::LootItem> items;
-
-            Amb::Ui::Module::Looter::Category findCategory(const std::string &categoryName) const
-            {
-                auto pred = [&categoryName](const auto &category)
-                {
-                    return category.name == categoryName;
-                };
-
-                const auto it = std::find_if(std::cbegin(categories),
-                                             std::cend(categories),
-                                             pred);
-
-                BOOST_ASSERT_MSG(it != std::cend(categories), "Could not find category");
-
-                return *it;
-            }
-
-            auto toPtree() const
-            {
-                Utils::PropertyTreeBuilder builder;
-
-                if (categories.empty())
-                    builder.addElement(Utils::PtreeElement<>{"categories", ""});
-                else
-                {
-                    for (const auto& category : categories)
-                    {
-                        auto tree = category.toPtree();
-                        builder.addTree("categories.category", tree);
-                    }
-                }
-
-                if (items.empty())
-                    builder.addElement(Utils::PtreeElement<>{"items", ""});
-                else
-                {
-                    for (const auto& item : items)
-                    {
-                        auto tree = item.toPtree();
-                        builder.addTree("items.item", tree);
-                    }
-                }
-
-                return builder.buildTree();
-            }
-
-            static Looter fromPtree(boost::property_tree::ptree &tree)
-            {
-                Looter healer;
-
-                for (auto &child : tree.get_child("categories"))
-                {
-                    const auto cat = Amb::Ui::Module::Looter::Category::fromPtree(child.second);
-                    healer.categories.emplace_back(cat);
-                }
-
-                for (auto &child : tree.get_child("items"))
-                {
-                    const auto rule = Amb::Ui::Module::Looter::LootItem::fromPtree(child.second);
-                    healer.items.emplace_back(rule);
-                }
-
-                return healer;
-            }
-        };
-
         struct Mlvl
         {
             size_t manaPercentFrom;
@@ -149,7 +80,7 @@ namespace Amb
 
             Config::Module::HealerConfig healerConfig;
             Config::Module::AdvancedSettingsConfig advancedSettings;
-            Looter looter;
+            Config::Module::LooterConfig looter;
             Mlvl mlvl;
 
             std::string toString() const
@@ -176,7 +107,7 @@ namespace Amb
 
                 ret.healerConfig = Config::Module::HealerConfig::fromPtree(tree.get_child("amb.healer_config"));
                 ret.advancedSettings = Config::Module::AdvancedSettingsConfig::fromPtree(tree.get_child("amb.advanced_settings"));
-                ret.looter = Looter::fromPtree(tree.get_child("amb.looter"));
+                ret.looter = Config::Module::LooterConfig::fromPtree(tree.get_child("amb.looter"));
                 ret.mlvl = Mlvl::fromPtree(tree.get_child("amb.mlvl"));
 
                 return ret;
