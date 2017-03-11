@@ -1,7 +1,8 @@
 #include "module/ModulesFactory.hpp"
 #include "module/ModuleCore.hpp"
 
-#include "Configs.hpp"
+//#include "Configs.hpp"
+#include "config/GlobalConfig.hpp"
 #include "Simulator.hpp"
 #include "utils/Structs.hpp"
 #include "db/Items.hpp"
@@ -16,7 +17,7 @@
 
 namespace 
 {
-    std::unique_ptr<Amb::Module::Heal::Healer> createHealer(const Amb::Configs::GlobalConfig &config,
+    std::unique_ptr<Amb::Module::Heal::Healer> createHealer(const Amb::Config::GlobalConfig &config,
                                                             Amb::Simulate::Simulator &simulator)
     {
         return std::make_unique<Amb::Module::Heal::Healer>(config.healerConfig,
@@ -25,7 +26,7 @@ namespace
                                                            config.tibiaClientWindowInfo);
     }
 
-    std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Configs::GlobalConfig &config,
+    std::unique_ptr<Amb::Module::Looter::LooterModule> createLooter(const Amb::Config::GlobalConfig &config,
                                                                     Amb::Simulate::Simulator &simulator)
     {
         using TibiaReader = Amb::Client::Reader::TibiaClientMemoryReader;
@@ -38,7 +39,7 @@ namespace
                                                                    std::make_unique<TibiaReader>(config.pid));
     }
     
-    std::unique_ptr<Amb::Module::Mlvl::MlvlModule> createMlvl(const Amb::Configs::GlobalConfig &config,
+    std::unique_ptr<Amb::Module::Mlvl::MlvlModule> createMlvl(const Amb::Config::GlobalConfig &config,
                                                               Amb::Simulate::Simulator &simulator)
     {
         return std::make_unique<Amb::Module::Mlvl::MlvlModule>(config.mlvl,
@@ -52,7 +53,7 @@ namespace Amb
 {
     namespace Module
     {
-        std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> Factory::create(const Configs::GlobalConfig &config,
+        std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> Factory::create(const Config::GlobalConfig &config,
                                                                                   Simulate::Simulator &simulator)
         {
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> map;

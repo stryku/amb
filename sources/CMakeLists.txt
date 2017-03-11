@@ -2,7 +2,6 @@ set (AMB_inc
             ${inc_dir}/Bot.hpp
             ${inc_dir}/BotCore.hpp
             ${inc_dir}/ConfigFromUiGenerator.hpp
-            ${inc_dir}/Configs.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp
             ${inc_dir}/Simulator.hpp
@@ -42,6 +41,7 @@ set (AMB_inc
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinderFactory.hpp
             
             ${inc_dir}/config/ConfigFileManager.hpp 
+            ${inc_dir}/config/GlobalConfig.hpp
 
             ${inc_dir}/config/module/AdvancedSettingsConfig.hpp
             ${inc_dir}/config/module/HealerConfig.hpp
@@ -186,6 +186,7 @@ set (AMB_src
             ${src_dir}/client/window/finder/DeadCreatureWindowFinderFactory.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
+            ${src_dir}/config/GlobalConfig.cpp
             
             ${src_dir}/config/module/AdvancedSettingsConfig.cpp
             ${src_dir}/config/module/HealerConfig.cpp

@@ -1,12 +1,13 @@
 ﻿#include "ModulesManager.hpp"
 #include "module/ModulesFactory.hpp"
 #include "Simulator.hpp"
+#include "config/GlobalConfig.hpp"
 
 namespace Amb
 {
     namespace Module
     {
-        ModulesManager::ModulesManager(const Configs::GlobalConfig &config,
+        ModulesManager::ModulesManager(const Config::GlobalConfig &config,
                                        Simulate::Simulator &simulator,
                                        Amb::Module::Factory &modulesFactory)
             : modules{ modulesFactory.create(config, simulator) }

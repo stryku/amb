@@ -28,7 +28,7 @@ namespace Amb
             regenerateAdvancedSettings();
         }
 
-        const Configs::GlobalConfig& ConfigFromUiGenerator::getConfigs() const
+        const Config::GlobalConfig& ConfigFromUiGenerator::getConfigs() const
         {
             return config;
         }
@@ -114,7 +114,7 @@ namespace Amb
 
         void ConfigFromUiGenerator::loadConfigFromString(const std::string &str, const Client::TibiaClientWindowInfo &info)
         {
-            auto newConfig = Amb::Configs::GlobalConfig::fromString(str, info);
+            auto newConfig = Amb::Config::GlobalConfig::fromString(str, info);
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;

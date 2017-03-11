@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "Configs.hpp"
+//#include "Configs.hpp"
 #include "module/ModuleId.hpp"
 #include "module/ModuleCore.hpp"
 
@@ -8,6 +8,11 @@
 
 namespace Amb
 {
+    namespace Config
+    {
+        struct GlobalConfig;
+    }
+
     namespace Simulate
     {
         class Simulator;
@@ -23,7 +28,7 @@ namespace Amb
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> modules;
 
         public:
-            ModulesManager(const Configs::GlobalConfig &config,
+            ModulesManager(const Config::GlobalConfig &config,
                            Simulate::Simulator &simulator,
                            Amb::Module::Factory &modulesFactory);
 

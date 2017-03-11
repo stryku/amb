@@ -2,7 +2,7 @@
 
 namespace Amb
 {
-    BotCore::BotCore(const Configs::GlobalConfig &config,
+    BotCore::BotCore(const Config::GlobalConfig &config,
                      Amb::Module::Factory &modulesFactory) :
         modulesManager(config,
                        simulator,
