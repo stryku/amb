@@ -3,6 +3,7 @@
 #include "Simulator.hpp"
 #include "ModulesManager.hpp"
 #include "module/ModuleId.hpp"
+#include "utils/Observable.hpp"
 
 #include <vector>
 #include <functional>

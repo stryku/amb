@@ -2,9 +2,9 @@
 #include "config/module/AdvancedSettingsConfig.hpp"
 
 #include "ui/UiControls.hpp"
-#include "Configs.hpp"
 
 #include <QComboBox>
+#include <QLineEdit>
 
 namespace Amb
 {

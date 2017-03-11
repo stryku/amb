@@ -12,11 +12,23 @@
 #include "capture/ItemsWindowReader.hpp"
 #include "log/ImageConditionalLogger.hpp"
 #include "log/condition/ImageLogUniqueCondition.hpp"
+#include "ui/modules/looter/LootItem.hpp"
 
 #include <chrono>
 
 namespace Amb
 {
+    namespace Ui
+    {
+        namespace Module
+        {
+            namespace Looter
+            {
+                class Category;
+            }
+        }
+    }
+
     namespace Config
     {
         namespace Module

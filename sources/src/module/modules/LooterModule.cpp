@@ -3,6 +3,8 @@
 #include "utils/random/RandomOffset.hpp"
 #include "log/log.hpp"
 #include "config/module/AdvancedSettingsConfig.hpp"
+#include "config/module/LooterConfig.hpp"
+#include "ui/modules/looter/Category.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
 #include <boost/assert.hpp>

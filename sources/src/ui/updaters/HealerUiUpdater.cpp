@@ -1,7 +1,6 @@
 #include "ui/updaters/HealerUiUpdater.hpp"
 
 #include "ui/UiControls.hpp"
-#include "Configs.hpp"
 #include "ui/modules/healer/HealerRulesTable.hpp"
 #include "config/module/HealerConfig.hpp"
 

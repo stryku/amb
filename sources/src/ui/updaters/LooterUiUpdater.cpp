@@ -1,7 +1,6 @@
 #include "ui/updaters/LooterUiUpdater.hpp"
 
 #include "ui/UiControls.hpp"
-#include "Configs.hpp"
 #include "utils/Structs.hpp"
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
