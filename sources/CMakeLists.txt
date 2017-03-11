@@ -42,9 +42,11 @@ set (AMB_inc
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinderFactory.hpp
             
             ${inc_dir}/config/ConfigFileManager.hpp
+
+            ${inc_dir}/config/module/HealerConfig.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
-            
+             
             ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
             ${inc_dir}/config/layout/health_heart/HealthHeartConfigFactory.hpp
             ${inc_dir}/config/layout/health_heart/StaticValues.hpp
@@ -179,6 +181,8 @@ set (AMB_src
             
             ${src_dir}/config/ConfigFileManager.cpp
             
+            ${src_dir}/config/module/HealerConfig.cpp
+			
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
