@@ -11,7 +11,7 @@ namespace Amb
         , modulesFactory{ window.getUi() }
         , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
         , mainWindowTitleUpdater{ window }
-        , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
+        , botCore(configFromUiGenerator.getConfigs(), modulesFactory, mousMonitorFactory)
         , window{ db }
         , currentCharacterName{ getCharacterNameObserver() }
         , clientRectObserver{ getClientRectObserver() }

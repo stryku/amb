@@ -26,7 +26,9 @@ namespace Amb
                 callback = cb;
             }
             void MouseMonitor::handle(Amb::Mouse::MouseEvent ev)
-            {}
+            {
+                callback(ev);
+            }
         }
     }
 }

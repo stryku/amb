@@ -109,6 +109,8 @@ private slots:
 
     void on_pushButtonMouseHotkeysCapture_clicked();
 
+    void on_checkBoxMouseHotkeysRun_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
@@ -134,6 +136,9 @@ private:
     void toggleHealer();
     void toggleLooter();
     void toggleMlvl();
+    void toggleMouseHotkeys();
+    void toggleModule(QCheckBox *moduleCheckBox,
+                      Amb::Module::ModuleId modId);
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,

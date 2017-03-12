@@ -12,6 +12,7 @@ namespace Amb
             {
             public:
                 virtual ~IMouseEventPublisher() {}
+
                 virtual void registerSubscriber(IMouseEventSubscriber* sub) = 0;
                 virtual void unregisterSubscriber(IMouseEventSubscriber* sub) = 0;
             };

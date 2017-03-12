@@ -31,7 +31,8 @@ namespace Amb
 
     public:
         BotCore(const Config::GlobalConfig &config,
-                Amb::Module::Factory &modulesFactory);
+                Amb::Module::Factory &modulesFactory,
+                Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory);
 
         void startModule( Module::ModuleId moduleId );
         void attachNewProcess( DWORD pid );

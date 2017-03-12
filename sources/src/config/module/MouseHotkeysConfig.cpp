@@ -1,5 +1,4 @@
 #include "config/module/MouseHotkeysConfig.hpp"
-#include "module/modules/mouse_hotkeys/MouseHotkey.hpp"
 #include "utils/PropertyTreeBuilder.hpp"
 
 namespace Amb

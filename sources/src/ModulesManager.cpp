@@ -9,8 +9,9 @@ namespace Amb
     {
         ModulesManager::ModulesManager(const Config::GlobalConfig &config,
                                        Simulate::Simulator &simulator,
-                                       Amb::Module::Factory &modulesFactory)
-            : modules{ modulesFactory.create(config, simulator) }
+                                       Amb::Module::Factory &modulesFactory,
+                                       Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory)
+            : modules{ modulesFactory.create(config, simulator, mousMonitorFactory) }
         {/*
             modules[ModuleId::MOD_HEALER] = std::make_unique<Heal::Healer>(config.healerConfig,
                                                                            config.advancedSettings,

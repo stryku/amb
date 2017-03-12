@@ -1,7 +1,6 @@
 #include "module/ModulesFactory.hpp"
 #include "module/ModuleCore.hpp"
 
-//#include "Configs.hpp"
 #include "config/GlobalConfig.hpp"
 #include "Simulator.hpp"
 #include "utils/Structs.hpp"
@@ -12,6 +11,7 @@
 #include "module/modules/Healer.hpp"
 #include "module/modules/LooterModule.hpp"
 #include "module/modules/mlvl/MlvlModule.hpp"
+#include "module/modules/mouse_hotkeys/MouseHotkeysModule.hpp"
 #include "client/reader/TibiaClientMemoryReader.hpp"
 #include "client/window/finder/DeadCreatureWindowFinderFactory.hpp"
 
@@ -38,7 +38,7 @@ namespace
                                                                    Amb::Client::Window::Finder::DeadCreatureWindowFinderFactory{},
                                                                    std::make_unique<TibiaReader>(config.pid));
     }
-    
+
     std::unique_ptr<Amb::Module::Mlvl::MlvlModule> createMlvl(const Amb::Config::GlobalConfig &config,
                                                               Amb::Simulate::Simulator &simulator)
     {
@@ -47,6 +47,16 @@ namespace
                                                                simulator,
                                                                config.tibiaClientWindowInfo);
     }
+
+    std::unique_ptr<Amb::Module::Modules::MouseHotkeys::MouseHotkeysModule> createMouseHotkeys(const Amb::Config::GlobalConfig &config,
+                                                                                               Amb::Simulate::Simulator &simulator,
+                                                                                               Amb::Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory)
+    {
+        return std::make_unique<Amb::Module::Modules::MouseHotkeys::MouseHotkeysModule>(simulator,
+                                                                                        config.tibiaClientWindowInfo,
+                                                                                        config.mouseHotkeys,
+                                                                                        mousMonitorFactory);
+    }
 }
 
 namespace Amb
@@ -54,13 +64,15 @@ namespace Amb
     namespace Module
     {
         std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> Factory::create(const Config::GlobalConfig &config,
-                                                                                  Simulate::Simulator &simulator)
+                                                                                  Simulate::Simulator &simulator,
+                                                                                  Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory)
         {
             std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> map;
 
             map[ModuleId::MOD_HEALER] = createHealer(config, simulator);
             map[ModuleId::MOD_LOOTER] = createLooter(config, simulator);
             map[ModuleId::MOD_MLVL] = createMlvl(config, simulator);
+            map[ModuleId::MOD_MOUSE_HOTKEYS] = createMouseHotkeys(config, simulator, mousMonitorFactory);
 
             return std::move(map);
         }

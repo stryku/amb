@@ -9,6 +9,7 @@
 #include "client/TibiaClientWindowRectObserver.hpp"
 #include "client/TibiaClientRectCornersObserver.hpp"
 #include "log/details/Logger.hpp"
+#include "monitor/mouse/MouseMonitorFactory.hpp"
 
 #include "mainwindow.h"
 
@@ -65,6 +66,7 @@ namespace Amb
         QApplication application;
         MainWindow window;
         Amb::Module::Factory modulesFactory;
+        Monitor::Mouse::MouseMonitorFactory mousMonitorFactory;
         Amb::Configs::ConfigFromUiGenerator configFromUiGenerator;
         Ui::Updaters::MainWindowTitleUpdater mainWindowTitleUpdater;
         Amb::Ui::Updaters::UiUpdater uiUpdater;

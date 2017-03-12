@@ -15,6 +15,7 @@
 #include "config/module/AdvancedSettingsConfig.hpp"
 #include "config/module/LooterConfig.hpp"
 #include "config/module/MlvlConfig.hpp"
+#include "config/module/MouseHotkeysConfig.hpp"
 
 #include "client/TibiaClientType.hpp"
 
@@ -42,6 +43,7 @@ namespace Amb
             Config::Module::AdvancedSettingsConfig advancedSettings;
             Config::Module::LooterConfig looter;
             Config::Module::MlvlConfig mlvl;
+            Config::Module::MouseHotkeysConfig mouseHotkeys;
         };
     }
 }

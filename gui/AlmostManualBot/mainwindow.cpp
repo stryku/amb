@@ -131,6 +131,26 @@ void MainWindow::toggleMlvl()
     }
 }
 
+void MainWindow::toggleMouseHotkeys()
+{
+    toggleModule(ui->checkBoxMouseHotkeysRun, 
+                 Amb::Module::ModuleId::MOD_MOUSE_HOTKEYS);
+}
+
+void MainWindow::toggleModule(QCheckBox *moduleCheckBox,
+                              Amb::Module::ModuleId modId)
+{
+    if (!moduleCheckBox->isChecked())
+    {
+        stopModule(moduleCheckBox, modId);
+    }
+    else
+    {
+        if (!startModule(moduleCheckBox, modId))
+            moduleCheckBox->setChecked(false);
+    }
+}
+
 bool MainWindow::startModule( QCheckBox *moduleCheckBox,
                               Amb::Module::ModuleId modId )
 {
@@ -625,4 +645,9 @@ void MainWindow::on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checke
 void MainWindow::on_pushButtonMouseHotkeysCapture_clicked()
 {
 
+}
+
+void MainWindow::on_checkBoxMouseHotkeysRun_clicked(bool checked)
+{
+    toggleMouseHotkeys();
 }

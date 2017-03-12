@@ -8,6 +8,14 @@
 
 namespace Amb
 {
+    namespace Monitor
+    {
+        namespace Mouse
+        {
+            class MouseMonitorFactory;
+        }
+    }
+
     namespace Config
     {
         struct GlobalConfig;
@@ -30,7 +38,8 @@ namespace Amb
         public:
             ModulesManager(const Config::GlobalConfig &config,
                            Simulate::Simulator &simulator,
-                           Amb::Module::Factory &modulesFactory);
+                           Amb::Module::Factory &modulesFactory,
+                           Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory);
 
             void run( ModuleId modId );
             void stop( ModuleId modId );

@@ -23,8 +23,8 @@ namespace Amb
                                 std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
             virtual ~ModuleCore();
 
-            void run();
-            void stop();
+            virtual void run();
+            virtual void stop();
             bool isRunning() const;
 
             virtual void attachToNewWindow(HWND hwnd);

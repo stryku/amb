@@ -708,9 +708,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>10</y>
+          <y>30</y>
           <width>311</width>
-          <height>281</height>
+          <height>261</height>
          </rect>
         </property>
        </widget>
@@ -740,11 +740,11 @@
          <string>Edit</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>330</x>
-          <y>10</y>
+          <y>30</y>
           <width>151</width>
           <height>211</height>
          </rect>
@@ -862,6 +862,19 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QCheckBox" name="checkBoxMouseHotkeysRun">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>81</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Not running</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tabAdvancedSettings">

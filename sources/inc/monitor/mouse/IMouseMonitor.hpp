@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mouse/MouseKey.hpp"
+#include "mouse/MouseEvent.hpp"
 
 #include <functional>
 
@@ -13,7 +13,7 @@ namespace Amb
             class IMouseMonitor
             {
             public:
-                using Callback = std::function<void(Amb::Mouse::MouseKey key)>;
+                using Callback = std::function<void(Amb::Mouse::MouseEvent key)>;
 
                 virtual void start() = 0;
                 virtual void stop() = 0;

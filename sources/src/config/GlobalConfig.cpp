@@ -22,6 +22,7 @@ namespace Amb
             advancedSettings.toPropertyTreeBuilder(builder, "amb.advanced_settings");
             builder.addTree("amb.looter", looter.toPtree());
             builder.addTree("amb.mlvl", mlvl.toPtree());
+            builder.addTree("amb.mouse_hotkeys", mouseHotkeys.toPtree());
 
             return builder.build();
         }
@@ -39,6 +40,7 @@ namespace Amb
             ret.advancedSettings = Config::Module::AdvancedSettingsConfig::fromPtree(tree.get_child("amb.advanced_settings"));
             ret.looter = Config::Module::LooterConfig::fromPtree(tree.get_child("amb.looter"));
             ret.mlvl = Config::Module::MlvlConfig::fromPtree(tree.get_child("amb.mlvl"));
+            ret.mouseHotkeys = Config::Module::MouseHotkeysConfig::fromPtree(tree.get_child("amb.mouse_hotkeys"));
 
             return ret;
         }
