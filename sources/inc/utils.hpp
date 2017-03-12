@@ -18,7 +18,7 @@ namespace Amb
 
     namespace Utils
     {
-        enum class Hotkey
+        /*enum class Hotkey
         {
             F1 = 0,
             F2,
@@ -40,7 +40,7 @@ namespace Amb
         Hotkey stdStringToHotkey(const std::string &str);
         Hotkey size_tToHotkey(size_t hotkey);
         std::string size_tHotkeyToStdString(size_t hotkey);
-        size_t hotkeyToSize_t(Hotkey hot);
+        size_t hotkeyToSize_t(Hotkey hot);*/
 
 
         struct RandomBetween

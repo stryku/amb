@@ -13,7 +13,7 @@ namespace Amb
         {
             SpellCaster::SpellCaster(Simulate::Simulator& simulator,
                                      Client::Reader::HealthManaReader& healthManaReader,
-                                     Utils::Hotkey hotkey,
+                                     Client::Hotkey hotkey,
                                      size_t percentFrom,
                                      size_t percentTo)
                 : simulator{ simulator }

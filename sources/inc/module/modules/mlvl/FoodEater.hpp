@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils.hpp"
+#include "client/Hotkey.hpp"
 
 #include <chrono>
 
@@ -18,13 +18,13 @@ namespace Amb
             class FoodEater
             {
             public:
-                explicit FoodEater(Simulate::Simulator& simulator, Utils::Hotkey hotkey);
+                explicit FoodEater(Simulate::Simulator& simulator, Client::Hotkey hotkey);
 
                 void eat();
 
             private:
                 Simulate::Simulator& simulator;
-                Utils::Hotkey hotkey;
+                Client::Hotkey hotkey;
                 std::chrono::time_point<std::chrono::system_clock> nextEat;
             };
         }

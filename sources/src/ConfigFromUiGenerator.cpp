@@ -66,10 +66,10 @@ namespace Amb
             config.mlvl.manaPercentTo = controls.editMlvlManaTo->text().toUInt();
 
             const auto spellHotSelected = static_cast<size_t>(controls.spellCombobox->currentIndex());
-            config.mlvl.spellHotkey = Utils::size_tToHotkey(spellHotSelected);
+            config.mlvl.spellHotkey = Client::size_tToHotkey(spellHotSelected);
 
             const auto foodHotSelected = static_cast<size_t>(controls.foodCombobox->currentIndex());
-            config.mlvl.foodHotkey = Utils::size_tToHotkey(foodHotSelected);
+            config.mlvl.foodHotkey = Client::size_tToHotkey(foodHotSelected);
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()

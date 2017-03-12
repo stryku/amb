@@ -13,8 +13,8 @@ namespace Amb
                 Utils::PropertyTreeBuilder builder;
                 builder.addElement(Utils::PtreeElement<>{"mana_percent_from", std::to_string(manaPercentFrom)});
                 builder.addElement(Utils::PtreeElement<>{"mana_percent_to", std::to_string(manaPercentTo)});
-                builder.addElement(Utils::PtreeElement<>{"spell_hotkey", Utils::hotkeyToStdString(spellHotkey)});
-                builder.addElement(Utils::PtreeElement<>{"food_hotkey", Utils::hotkeyToStdString(foodHotkey)});
+                builder.addElement(Utils::PtreeElement<>{"spell_hotkey", Client::hotkeyToStdString(spellHotkey)});
+                builder.addElement(Utils::PtreeElement<>{"food_hotkey", Client::hotkeyToStdString(foodHotkey)});
 
                 return builder.buildTree();
             }
@@ -27,10 +27,10 @@ namespace Amb
                 mlvl.manaPercentTo = tree.get_child("mana_percent_to").get_value<size_t>();
 
                 auto strhot = tree.get_child("spell_hotkey").get_value<std::string>();
-                mlvl.spellHotkey = Utils::stdStringToHotkey(strhot);
+                mlvl.spellHotkey = Client::stdStringToHotkey(strhot);
 
                 strhot = tree.get_child("food_hotkey").get_value<std::string>();
-                mlvl.foodHotkey = Utils::stdStringToHotkey(strhot);
+                mlvl.foodHotkey = Client::stdStringToHotkey(strhot);
 
                 return mlvl;
             }

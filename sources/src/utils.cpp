@@ -9,7 +9,7 @@ namespace Amb
 {
     namespace Utils
     {
-        std::string hotkeyToStdString( Hotkey hotkey )
+        /*std::string hotkeyToStdString( Hotkey hotkey )
         {
             switch( hotkey )
             {
@@ -111,7 +111,7 @@ namespace Amb
 
                 default: return "UNKNOW";
             }
-        }
+        }*/
 
         size_t RandomBetween::get() const
         {

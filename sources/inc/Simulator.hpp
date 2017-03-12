@@ -1,6 +1,7 @@
 #pragma once
 
-#include "utils.hpp"
+#include "client/Hotkey.hpp"
+#include "utils/random/RandomBetween.hpp"
 #include "TibiaFinder.hpp"
 #include "utils/ForwardDeclarePos.hpp"
 
@@ -17,11 +18,11 @@ namespace Amb
         public:
             void mouseClick(const Pos &pos) const;
 
-            void hotkey( Utils::Hotkey hotkey,
-                         Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
+            void hotkey(Client::Hotkey hotkey,
+                        Utils::Random::RandomBetween randomBetween = { defMinRandomBetween, defMaxRandomBetween } );
 
-            void keyDownAndUp( WPARAM key,
-                               Utils::RandomBetween RandomBetween = { defMinRandomBetween, defMaxRandomBetween } );
+            void keyDownAndUp(WPARAM key,
+                              Utils::Random::RandomBetween randomBetween = { defMinRandomBetween, defMaxRandomBetween } );
 
             void ctrlDown();
             void ctrlUp();
@@ -36,7 +37,7 @@ namespace Amb
 
             HWND windowHwnd;
 
-            static WPARAM hotkeyToWparam(Utils::Hotkey hotkey);
+            static WPARAM hotkeyToWparam(Client::Hotkey hotkey);
         };
     }
 }
