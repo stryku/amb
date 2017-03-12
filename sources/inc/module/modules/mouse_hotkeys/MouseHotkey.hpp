@@ -1,6 +1,9 @@
 #pragma once
 
-#include "mouse/MouseEvent.hpp"
+#include "module/modules/mouse_hotkeys/MonitorableMouseEvent.hpp"
+#include "client/Hotkey.hpp"
+
+#include <boost/property_tree/ptree.hpp>
 
 namespace Amb
 {
@@ -12,7 +15,12 @@ namespace Amb
             {
                 struct MouseHotkey
                 {
-                    Mouse::MouseEvent mouseEvent;
+                    boost::property_tree::ptree toPropertyTree() const;
+                    MouseHotkey fromPtree(const boost::property_tree::ptree& tree);
+
+                    MonitorableMouseEvent mouseEvent;
+                    Client::Hotkey hotkey;
+                    bool onlyWhenTibiaOnTop;
                 };
             }
         }

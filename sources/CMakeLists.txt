@@ -101,6 +101,7 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
 			
             ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkey.hpp
+            ${inc_dir}/module/modules/mouse_hotkeys/MonitorableMouseEvent.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
 			
@@ -147,6 +148,9 @@ set (AMB_inc
             
             ${inc_dir}/utils/random/RandomBetween.hpp
             ${inc_dir}/utils/random/RandomOffset.hpp
+			
+            ${inc_dir}/utils/string/fromString.hpp
+			
             
             ${inc_dir}/utils/to_string/ImageToSimpleStringConverter.hpp
             ${inc_dir}/utils/to_string/RectToStringConverter.hpp
@@ -225,7 +229,9 @@ set (AMB_src
             ${src_dir}/module/modules/mlvl/FoodEater.cpp
             ${src_dir}/module/modules/mlvl/MlvlModule.cpp
             ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
-            ${src_dir}/module/modules/mlvl/AntiIdler.cpp
+            ${src_dir}/module/modules/mlvl/AntiIdler.cpp 
+			
+            ${src_dir}/module/modules/mouse_hotkeys/MouseHotkey.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
 			
@@ -240,6 +246,9 @@ set (AMB_src
             ${src_dir}/ui/modules/looter/LootItem.cpp
             
             ${src_dir}/utils/ThreadWorker.cpp
+			
+            ${src_dir}/utils/string/fromString.cpp
+            ${src_dir}/utils/string/toString.cpp
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             ${src_dir}/ui/updaters/TibiaClientsComboboxUpdater.cpp
