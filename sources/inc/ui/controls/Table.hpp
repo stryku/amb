@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/ToString.hpp"
+#include "utils/string/toString.hpp"
 #include "cexpr/template.hpp"
 
 #include <QTableView>
