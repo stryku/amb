@@ -47,6 +47,7 @@ set (AMB_inc
             ${inc_dir}/config/module/HealerConfig.hpp
             ${inc_dir}/config/module/LooterConfig.hpp
             ${inc_dir}/config/module/MlvlConfig.hpp
+            ${inc_dir}/config/module/MouseHotkeysConfig.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
              
@@ -97,6 +98,8 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
             ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
             ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
+			
+            ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkey.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
 			
@@ -192,6 +195,7 @@ set (AMB_src
             ${src_dir}/config/module/HealerConfig.cpp
             ${src_dir}/config/module/LooterConfig.cpp
             ${src_dir}/config/module/MlvlConfig.cpp
+            ${src_dir}/config/module/MouseHotkeysConfig.cpp
 			
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             
