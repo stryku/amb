@@ -100,6 +100,7 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
             ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
 			
+            ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkeysModule.hpp
             ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkey.hpp
             ${inc_dir}/module/modules/mouse_hotkeys/MonitorableMouseEvent.hpp
             
@@ -231,6 +232,7 @@ set (AMB_src
             ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
             ${src_dir}/module/modules/mlvl/AntiIdler.cpp 
 			
+            ${src_dir}/module/modules/mouse_hotkeys/MouseHotkeysModule.cpp
             ${src_dir}/module/modules/mouse_hotkeys/MouseHotkey.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
