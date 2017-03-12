@@ -141,7 +141,6 @@ set (AMB_inc
             
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
-            ${inc_dir}/utils/ToString.hpp
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
             ${inc_dir}/utils/ForwardDeclarePos.hpp
@@ -149,6 +148,7 @@ set (AMB_inc
             ${inc_dir}/utils/random/RandomBetween.hpp
             ${inc_dir}/utils/random/RandomOffset.hpp
 			
+            ${inc_dir}/utils/string/toString.hpp
             ${inc_dir}/utils/string/fromString.hpp
 			
             
