@@ -16,7 +16,7 @@ namespace Amb
                 struct MouseHotkey
                 {
                     boost::property_tree::ptree toPropertyTree() const;
-                    MouseHotkey fromPtree(const boost::property_tree::ptree& tree);
+                    static MouseHotkey fromPtree(const boost::property_tree::ptree& tree);
 
                     MonitorableMouseEvent mouseEvent;
                     Client::Hotkey hotkey;
