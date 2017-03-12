@@ -128,6 +128,8 @@ set (AMB_inc
             ${inc_dir}/ui/modules/looter/LooterItemsTable.hpp
             ${inc_dir}/ui/modules/looter/LootItem.hpp
             ${inc_dir}/ui/modules/looter/ToOnto.hpp 
+			
+            ${inc_dir}/ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp
             
             ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
@@ -246,6 +248,8 @@ set (AMB_src
             ${src_dir}/ui/modules/looter/Items.cpp
             ${src_dir}/ui/modules/looter/Category.cpp
             ${src_dir}/ui/modules/looter/LootItem.cpp
+			
+            ${src_dir}/ui/modules/mouse_hotkeys/MouseHotkeysTable.cpp
             
             ${src_dir}/utils/ThreadWorker.cpp
 			

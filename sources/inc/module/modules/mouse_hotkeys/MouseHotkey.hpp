@@ -15,6 +15,11 @@ namespace Amb
             {
                 struct MouseHotkey
                 {
+                    MouseHotkey() = default;
+                    MouseHotkey(const std::string& strMouseEvent,
+                                const std::string& strHot,
+                                const std::string& strOnlyWhenTibiaOnTop);
+
                     boost::property_tree::ptree toPropertyTree() const;
                     static MouseHotkey fromPtree(const boost::property_tree::ptree& tree);
 

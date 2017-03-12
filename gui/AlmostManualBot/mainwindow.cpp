@@ -1,6 +1,7 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "log/log.hpp"
+#include "ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp"
 
 #include "utils.hpp"
 
@@ -41,6 +42,7 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     healerRulesTable = std::make_unique<Amb::Ui::Module::Healer::HealerRulesTable>(ui->tableHealerRules);
     looterCategoriesTable = std::make_unique<Amb::Ui::Module::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
+    mouseHotkeysItemsTable = std::make_unique<Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable>(ui->tableMouseHotkeys);
     
     itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);

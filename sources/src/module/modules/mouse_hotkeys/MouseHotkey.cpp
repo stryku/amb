@@ -18,6 +18,14 @@ namespace Amb
         {
             namespace MouseHotkeys
             {
+                MouseHotkey::MouseHotkey(const std::string& strMouseEvent,
+                                         const std::string& strHot,
+                                         const std::string& strBool)
+                    : mouseEvent{ std::stoul(strMouseEvent) }
+                    , hotkey{ Client::stdStringToHotkey(strHot) }
+                    , onlyWhenTibiaOnTop{ Utils::String::fromString(strBool) }
+                {}
+
                 boost::property_tree::ptree MouseHotkey::toPropertyTree() const
                 {
                     Utils::PropertyTreeBuilder builder;

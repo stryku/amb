@@ -8,6 +8,7 @@
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
+
 #include "ui/updaters/TibiaClientsComboboxUpdater.hpp"
 
 #include "db/Database.hpp"
@@ -24,6 +25,20 @@
 #include <functional>
 #include <string>
 
+
+namespace Amb
+{
+    namespace Ui
+    {
+        namespace Modules
+        {
+            namespace MouseHotkeys
+            {
+                class MouseHotkeysTable;
+            }
+        }
+    }
+}
 
 namespace Ui {
 class MainWindow;
@@ -124,6 +139,7 @@ private:
     std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterItemsTable> looterItemsTable;
+    std::unique_ptr<Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable> mouseHotkeysItemsTable;
 
     std::function<bool(Amb::Module::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;

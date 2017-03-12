@@ -704,7 +704,7 @@
        <attribute name="title">
         <string>Mouse hotkeys</string>
        </attribute>
-       <widget class="QTableView" name="tableView">
+       <widget class="QTableView" name="tableMouseHotkeys">
         <property name="geometry">
          <rect>
           <x>10</x>
