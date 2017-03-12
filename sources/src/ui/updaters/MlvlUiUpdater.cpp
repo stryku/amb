@@ -5,6 +5,7 @@
 #include "config/module/MlvlConfig.hpp"
 
 #include <QComboBox>
+#include <QLineEdit>
 
 namespace Amb
 {
@@ -17,8 +18,8 @@ namespace Amb
                 controls.editMlvlManaFrom->setText(QString::number(configs.manaPercentFrom));
                 controls.editMlvlManaTo->setText(QString::number(configs.manaPercentTo));
 
-                controls.spellCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.spellHotkey));
-                controls.foodCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.foodHotkey));
+                controls.spellCombobox->setCurrentIndex(Client::hotkeyToSize_t(configs.spellHotkey));
+                controls.foodCombobox->setCurrentIndex(Client::hotkeyToSize_t(configs.foodHotkey));
             }
         }
     }

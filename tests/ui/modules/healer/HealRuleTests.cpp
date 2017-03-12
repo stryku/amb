@@ -1,4 +1,6 @@
-﻿#include <ui/modules/healer/HealRule.hpp>
+﻿#include "ui/modules/healer/HealRule.hpp"
+#include "client/Hotkey.hpp"
+
 #include <gtest/gtest.h>
 
 using namespace Amb::Module::Heal;
@@ -24,8 +26,8 @@ namespace tests
 
     INSTANTIATE_TEST_CASE_P(HealRulea, HealRuleTest,
                             testing::Values(
-                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Utils::Hotkey::F1), 100, 0, true },
-                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Utils::Hotkey::F1), 0, 100, true },
-                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Utils::Hotkey::F1), 50, 101, false },
-                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Utils::Hotkey::F1), 101, 50, false }));
+                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Client::Hotkey::F1), 100, 0, true },
+                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Client::Hotkey::F1), 0, 100, true },
+                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Client::Hotkey::F1), 50, 101, false },
+                                HealRuleTestState{ HealRule(0, 100, 0, 100, Amb::Client::Hotkey::F1), 101, 50, false }));
 }

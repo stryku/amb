@@ -21,6 +21,7 @@ set (AMB_inc
             
             ${inc_dir}/client/TibiaClientType.hpp
             ${inc_dir}/client/EqItems.hpp
+            ${inc_dir}/client/Hotkey.hpp
             
             ${inc_dir}/client/window/TibiaWindow.hpp
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
@@ -174,6 +175,7 @@ set (AMB_src
             ${src_dir}/capture/FrameCapturer.cpp 
             
             ${src_dir}/client/TibiaClientType.cpp
+            ${src_dir}/client/Hotkey.cpp
 			
             ${src_dir}/client/finder/GraphicEqFinder.cpp
             

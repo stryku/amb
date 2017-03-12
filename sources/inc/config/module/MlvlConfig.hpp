@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils.hpp"
+#include "client/Hotkey.hpp"
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -17,8 +17,8 @@ namespace Amb
 
                 size_t manaPercentFrom;
                 size_t manaPercentTo;
-                Utils::Hotkey spellHotkey;
-                Utils::Hotkey foodHotkey;
+                Client::Hotkey spellHotkey;
+                Client::Hotkey foodHotkey;
             };
         }
     }

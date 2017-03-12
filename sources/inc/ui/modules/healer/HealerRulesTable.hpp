@@ -50,15 +50,15 @@ namespace Amb
                     void add(const HealRule &rule)
                     {
                         Table::add(utils::toString(rule.minHp),
-                                  utils::toString(rule.maxHp),
-                                  utils::toString(rule.minMana),
-                                  utils::toString(rule.maxMana),
-                                  Utils::hotkeyToStdString(rule.hotkey));
+                                   utils::toString(rule.maxHp),
+                                   utils::toString(rule.minMana),
+                                   utils::toString(rule.maxMana),
+                                   Client::hotkeyToStdString(rule.hotkey));
                     }
 
                     void add(size_t minHp, size_t maxHp, size_t minMana, size_t maxMana, size_t hotkey)
                     {
-                        auto hot = Utils::size_tToHotkey(hotkey);
+                        auto hot = Client::size_tToHotkey(hotkey);
 
                         add(HealRule{ minHp,maxHp, minMana,maxMana, hot });
                     }
@@ -70,7 +70,7 @@ namespace Amb
                                   utils::toString(rule.maxHp),
                                   utils::toString(rule.minMana),
                                   utils::toString(rule.maxMana),
-                                  Utils::hotkeyToStdString(rule.hotkey));
+                                   Client::hotkeyToStdString(rule.hotkey));
                     }
                 };
             }

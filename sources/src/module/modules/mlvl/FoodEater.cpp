@@ -1,6 +1,7 @@
 #include "module/modules/mlvl/FoodEater.hpp"
 #include "Simulator.hpp"
 #include "log/log.hpp"
+#include "utils/random/RandomBetween.hpp"
 
 namespace Amb
 {
@@ -8,7 +9,7 @@ namespace Amb
     {
         namespace Mlvl
         {
-            FoodEater::FoodEater(Simulate::Simulator& simulator, Utils::Hotkey hotkey)
+            FoodEater::FoodEater(Simulate::Simulator& simulator, Client::Hotkey hotkey)
                 : simulator{ simulator }
                 , hotkey{ hotkey }
                 , nextEat{ std::chrono::system_clock::now() }
@@ -20,8 +21,8 @@ namespace Amb
 
                 if (current > nextEat)
                 {
-                    const auto sec = Utils::RandomBetween{ static_cast<size_t>(60),
-                                                           static_cast<size_t>(180) }.get();
+                    const auto sec = Utils::Random::RandomBetween{ static_cast<size_t>(60),
+                                                                   static_cast<size_t>(180) }.get();
 
                     nextEat = std::chrono::system_clock::now() + std::chrono::seconds(sec);
 

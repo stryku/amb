@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "utils/PropertyTreeBuilder.hpp"
-#include "utils.hpp"
+#include "client/Hotkey.hpp"
 
 namespace Amb
 {
@@ -12,14 +12,14 @@ namespace Amb
             struct HealRule
             {
                 size_t minHp, maxHp, minMana, maxMana;
-                Utils::Hotkey hotkey;
+                Client::Hotkey hotkey;
 
                 HealRule() = default;
                 HealRule(size_t minHp,
                          size_t maxHp,
                          size_t minMana,
                          size_t maxMana,
-                         Utils::Hotkey hotkey)
+                         Client::Hotkey hotkey)
                     : minHp{ minHp }
                     , maxHp{ maxHp }
                     , minMana{ minMana }
@@ -36,7 +36,7 @@ namespace Amb
                     , maxHp{ std::stoul(maxHp) }
                     , minMana{ std::stoul(minMana) }
                     , maxMana{ std::stoul(maxMana) }
-                    , hotkey{ Utils::stdStringToHotkey(hotkey) }
+                    , hotkey{ Client::stdStringToHotkey(hotkey) }
                 {}
 
                 bool passed( size_t characterHp, size_t characterMana ) const;
@@ -48,7 +48,7 @@ namespace Amb
                         Utils::PtreeElement<>{ path + ".hp.max", utils::toString(maxHp) },
                         Utils::PtreeElement<>{ path + ".mana.min", utils::toString(minMana) },
                         Utils::PtreeElement<>{ path + ".mana.max", utils::toString(maxMana) },
-                        Utils::PtreeElement<>{ path + ".hotkey", Utils::hotkeyToStdString(hotkey) }
+                        Utils::PtreeElement<>{ path + ".hotkey", Client::hotkeyToStdString(hotkey) }
                     };
 
                     builder.addElements(elements);
@@ -64,7 +64,7 @@ namespace Amb
                         Utils::PtreeElement<>{ "hp.max", utils::toString(maxHp) },
                         Utils::PtreeElement<>{ "mana.min", utils::toString(minMana) },
                         Utils::PtreeElement<>{ "mana.max", utils::toString(maxMana) },
-                        Utils::PtreeElement<>{ "hotkey", Utils::hotkeyToStdString(hotkey) }
+                        Utils::PtreeElement<>{ "hotkey", Client::hotkeyToStdString(hotkey) }
                     };
 
                     return builder.addElements(elements).buildTree();
@@ -80,7 +80,7 @@ namespace Amb
                     rule.maxMana = tree.get_child("mana.max").get_value<size_t>();
 
                     auto strhot = tree.get_child("hotkey").get_value<std::string>();
-                    rule.hotkey = Utils::stdStringToHotkey(strhot);
+                    rule.hotkey = Client::stdStringToHotkey(strhot);
 
                     return rule;
                 }

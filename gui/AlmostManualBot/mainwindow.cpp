@@ -434,7 +434,7 @@ void MainWindow::on_pushButtonHealerEdit_clicked()
         ui->spinBoxHealerMaxHp->setValue(rule.maxHp);
         ui->spinBoxHealerMinMana->setValue(rule.minMana);
         ui->spinBoxHealerMaxMana->setValue(rule.maxMana);
-        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(Amb::Utils::hotkeyToSize_t(rule.hotkey)));
+        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(Amb::Client::hotkeyToSize_t(rule.hotkey)));
     }
 }
 

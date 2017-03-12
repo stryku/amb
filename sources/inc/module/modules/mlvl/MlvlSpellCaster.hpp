@@ -1,6 +1,7 @@
 #pragma once
 
-#include "utils.hpp"
+#include "utils/random/RandomBetween.hpp"
+#include "client/Hotkey.hpp"
 
 #include <chrono>
 
@@ -30,7 +31,7 @@ namespace Amb
             public:
                 explicit SpellCaster(Simulate::Simulator& simulator,
                                      Client::Reader::HealthManaReader& healthManaReader,
-                                     Utils::Hotkey hotkey,
+                                     Client::Hotkey hotkey,
                                      size_t percentFrom,
                                      size_t percentTo);
 
@@ -39,8 +40,8 @@ namespace Amb
             private:
                 Simulate::Simulator& simulator;
                 Client::Reader::HealthManaReader& healthManaReader;
-                Utils::Hotkey hotkey;
-                Utils::RandomBetween percentRand;
+                Client::Hotkey hotkey;
+                Utils::Random::RandomBetween percentRand;
                 size_t nextPercentToCast;
             };
         }
