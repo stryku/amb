@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace Amb
 {
     namespace Mouse
@@ -19,5 +21,8 @@ namespace Amb
 
             UNDEF
         };
+
+        std::string mouseEventToString(MouseEvent ev);
+        std::string mouseEventToPrettyString(MouseEvent ev);
     }
 }
