@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "log/log.hpp"
 #include "ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp"
+#include "module/modules/mouse_hotkeys/MouseHotkey.hpp"
 
 #include "utils.hpp"
 
@@ -647,7 +648,16 @@ void MainWindow::on_pushButtonMouseHotkeysClear_clicked()
 
 void MainWindow::on_pushButtonMouseHotkeysEdit_clicked()
 {
+    if (!mouseHotkeysItemsTable->isSelectedEditable())
+        return;
 
+    const auto item = mouseHotkeysItemsTable->getSelectedForEdit();
+    ui->labelMouseHotkeysCaptured->setText(QString::fromStdString(item.mouseEvent.toPrettyString()));
+
+    const auto comboIndex = Amb::Client::hotkeyToSize_t(item.hotkey);
+    ui->comboBoxMouseHotkeysHotkey->setCurrentIndex(comboIndex);
+
+    ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop->setChecked(item.onlyWhenTibiaOnTop);
 }
 
 void MainWindow::on_pushButtonMouseHotkeysAdd_clicked()
