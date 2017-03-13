@@ -121,10 +121,12 @@ namespace Amb
             //ui->labelMouseHotkeysCaptured
             auto label = window.getMouseHotkeys().capturedLabel;
 
+            const auto strEv = Amb::Mouse::mouseEventToPrettyString(ev);
+
             QMetaObject::invokeMethod(static_cast<QObject*>(label), 
                                       "setText", 
                                       Qt::QueuedConnection, 
-                                      Q_ARG(QString, QString::number(static_cast<int>(ev))));
+                                      Q_ARG(QString, QString::fromStdString(strEv)));
         };
 
         mouseHotkeysModuleEventCapturerThreadWorker.startSingleCall(fun);
