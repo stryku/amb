@@ -67,7 +67,6 @@ namespace Amb
                 auto fun = [this, loopFunction]()
                 {
                     loopFunction();
-                    needRunning = false;
                 };
 
                 needRunning = true;

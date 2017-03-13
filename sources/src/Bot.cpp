@@ -118,7 +118,6 @@ namespace Amb
         {
             auto ev = mouseHotkeysModuleEventCapturer.get();
 
-            //ui->labelMouseHotkeysCaptured
             auto label = window.getMouseHotkeys().capturedLabel;
 
             const auto strEv = Amb::Mouse::mouseEventToPrettyString(ev);
