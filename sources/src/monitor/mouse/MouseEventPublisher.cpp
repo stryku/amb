@@ -11,13 +11,14 @@ namespace Amb
             std::vector<IMouseEventSubscriber*> MouseEventPublisher::subscribers;
             HHOOK MouseEventPublisher::hook;
             std::mutex MouseEventPublisher::mtx;
+            Utils::ThreadWorker MouseEventPublisher::peekThread;
 
             void MouseEventPublisher::registerSubscriber(IMouseEventSubscriber* sub)
             {
                 std::lock_guard<std::mutex> lock{ mtx };
 
                 if (subscribers.empty())
-                    hook = SetWindowsHookEx(WH_MOUSE_LL, &lowLevelMouseProc, GetModuleHandle(0), 0);
+                    startListening();
 
                 subscribers.push_back(sub);
             }
@@ -34,7 +35,7 @@ namespace Amb
                 subscribers.erase(it);
 
                 if (subscribers.empty())
-                    UnhookWindowsHookEx(hook);
+                    stopListening();
             }
 
             Amb::Mouse::MouseEvent MouseEventPublisher::translateToMouseKey(WPARAM wParam, LPARAM lParam)
@@ -50,7 +51,7 @@ namespace Amb
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
 
                         return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1_UP
-                                                        : Amb::Mouse::MouseEvent::X2_UP;
+                                                      : Amb::Mouse::MouseEvent::X2_UP;
                     }
                     default: return Amb::Mouse::MouseEvent::UNDEF;
                 }
@@ -77,6 +78,17 @@ namespace Amb
 
                 for (auto sub : subscribers)
                     sub->handle(ev);
+            }
+
+
+            void MouseEventPublisher::startListening()
+            {
+                hook = SetWindowsHookEx(WH_MOUSE_LL, &lowLevelMouseProc, GetModuleHandle(0), 0);
+            }
+
+            void MouseEventPublisher::stopListening()
+            {
+                UnhookWindowsHookEx(hook);
             }
         }
     }
