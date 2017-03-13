@@ -652,7 +652,19 @@ void MainWindow::on_pushButtonMouseHotkeysEdit_clicked()
 
 void MainWindow::on_pushButtonMouseHotkeysAdd_clicked()
 {
+    const auto hotkeyCombo = ui->comboBoxMouseHotkeysHotkey;
+    const auto strMouseEv = ui->labelMouseHotkeysCaptured->text().toStdString();
+    const auto hotkey = hotkeyCombo->currentIndex();
+    const auto onlyIfTop = ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop->isChecked();
 
+    if (mouseHotkeysItemsTable->itemExists(strMouseEv))
+    {
+        auto msg = QString("Mouse event '%1' hotkey bind already exist. Edit existing one or remove it from the list to add new.").arg(strMouseEv.c_str());
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    mouseHotkeysItemsTable->add(strMouseEv, hotkey, onlyIfTop);
 }
 
 void MainWindow::on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checked)

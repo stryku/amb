@@ -24,7 +24,7 @@ namespace Amb
         {
             namespace Looter
             {
-                class Category;
+                struct Category;
             }
         }
     }

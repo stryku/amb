@@ -120,7 +120,7 @@ namespace Amb
 
             auto label = window.getMouseHotkeys().capturedLabel;
 
-            const auto strEv = Amb::Mouse::mouseEventToPrettyString(ev);
+            const auto strEv = ev.toPrettyString();
 
             QMetaObject::invokeMethod(static_cast<QObject*>(label), 
                                       "setText", 

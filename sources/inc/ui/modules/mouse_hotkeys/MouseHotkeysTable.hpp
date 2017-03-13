@@ -38,10 +38,11 @@ namespace Amb
                     bool isSelectedEditable() const;
 
                     void add(const ItemType &item);
+                    void add(const std::string& mouseEvName, size_t hot, bool onlyIfTop);
 
                     void set(const ItemType &item, size_t row);
 
-                    bool itemExists(uint64_t hash) const;
+                    bool itemExists(const std::string& prettyName) const;
                 };
             }
         }

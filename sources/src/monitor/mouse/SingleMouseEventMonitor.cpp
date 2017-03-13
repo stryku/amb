@@ -23,7 +23,7 @@ namespace Amb
 
                 auto cb = [&retEv, &stillWaiting](Amb::Mouse::MouseEvent ev)
                 {
-                    LOG_DEBUG("SingleMouseEventMonitor::get callback with ev: {}", Amb::Mouse::mouseEventToString(ev));
+                    LOG_DEBUG("SingleMouseEventMonitor::get callback with ev: {}", ev.toString());
                     retEv = ev;
                     stillWaiting = false;
                 };
@@ -42,7 +42,7 @@ namespace Amb
 
                 mouseMonitor->stop();
 
-                LOG_DEBUG("SingleMouseEventMonitor::get returning {}", Amb::Mouse::mouseEventToString(retEv));
+                LOG_DEBUG("SingleMouseEventMonitor::get returning {}", retEv.toString());
 
                 return retEv;
             }

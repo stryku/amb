@@ -41,7 +41,7 @@ namespace Amb
 
                 void MouseHotkeysTable::add(const ItemType &item)
                 {
-                    Table::add(utils::toString(item.mouseEvent.hash), 
+                    Table::add(item.mouseEvent.toPrettyString(), 
                                Client::hotkeyToStdString(item.hotkey),
                                utils::toString(item.onlyWhenTibiaOnTop));
                 }
@@ -49,21 +49,35 @@ namespace Amb
                 void MouseHotkeysTable::set(const ItemType &item, size_t row)
                 {
                     Table::set(row,
-                               utils::toString(item.mouseEvent.hash),
+                               item.mouseEvent.toPrettyString(),
                                Client::hotkeyToStdString(item.hotkey),
                                utils::toString(item.onlyWhenTibiaOnTop));
                 }
 
-                bool MouseHotkeysTable::itemExists(uint64_t hash) const
+                bool MouseHotkeysTable::itemExists(const std::string& prettyName) const
                 {
                     const auto items = getItems();
 
                     return std::find_if(std::cbegin(items), std::cend(items),
-                                        [&hash](const auto &item)
+                                        [&prettyName](const auto &item)
                                         {
-                                            return item.mouseEvent.hash == hash;
+                                            return item.mouseEvent.toPrettyString() == prettyName;
                                         }) != std::cend(items);
                 }
+
+                void MouseHotkeysTable::add(const std::string& mouseEvName, 
+                                            size_t hot, 
+                                            bool onlyIfTop)
+                {
+                    ItemType mouseHot;
+
+                    mouseHot.hotkey = Client::size_tToHotkey(hot);
+                    mouseHot.onlyWhenTibiaOnTop = onlyIfTop;
+                    mouseHot.mouseEvent = Amb::Mouse::MouseEvent::fromPrettyString(mouseEvName);
+
+                    add(mouseHot);
+                }
+
             }
         }
     }

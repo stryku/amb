@@ -48,16 +48,25 @@ namespace Amb
 
                 switch (wParam)
                 {
-                    case WM_LBUTTONUP: return Amb::Mouse::MouseEvent::LEFT_UP;
-                    case WM_RBUTTONUP: return Amb::Mouse::MouseEvent::RIGHT_UP;
-                    case WM_XBUTTONUP: 
+                    case WM_LBUTTONUP: return Amb::Mouse::MouseEvent::LeftUp();
+                    case WM_LBUTTONDOWN: return Amb::Mouse::MouseEvent::LeftDown();
+                    case WM_RBUTTONUP: return Amb::Mouse::MouseEvent::RightUp();
+                    case WM_RBUTTONDOWN: return Amb::Mouse::MouseEvent::RightDown();
+                    case WM_XBUTTONDOWN:
                     {
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
 
-                        return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1_UP
-                                                      : Amb::Mouse::MouseEvent::X2_UP;
+                        return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1Down()
+                                                      : Amb::Mouse::MouseEvent::X2Down();
                     }
-                    default: return Amb::Mouse::MouseEvent::UNDEF;
+                    case WM_XBUTTONUP:
+                    {
+                        MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
+
+                        return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1Up()
+                                                      : Amb::Mouse::MouseEvent::X2Up();
+                    }
+                    default: return Amb::Mouse::MouseEvent::Undef();
                 }
             }
 
@@ -65,10 +74,13 @@ namespace Amb
             {
                 if (code == HC_ACTION)
                 {
-                    const auto ev = translateToMouseKey(wParam, lParam);
+                    if (wParam != WM_MOUSEMOVE && wParam != WM_MOUSEFIRST)
+                    {
+                        const auto ev = translateToMouseKey(wParam, lParam);
 
-                    if (ev != Amb::Mouse::MouseEvent::UNDEF)
-                        publish(ev);
+                        if(ev != Amb::Mouse::MouseEvent::Undef())
+                            publish(ev);
+                    }
                 }
 
                 return CallNextHookEx(hook, code, wParam, lParam);
@@ -78,7 +90,7 @@ namespace Amb
             {
                 std::lock_guard<std::mutex> lock{ mtx };
 
-                LOG_DEBUG("MouseEventPublisher::publish {}", static_cast<int>(ev));
+                LOG_DEBUG("MouseEventPublisher::publish {}", ev.toString());
 
                 for (auto sub : subscribers)
                     sub->handle(ev);
