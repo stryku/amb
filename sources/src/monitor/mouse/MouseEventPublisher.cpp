@@ -1,5 +1,6 @@
 #include "monitor/mouse/MouseEventPublisher.hpp"
 #include "monitor/mouse/IMouseEventSubscriber.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -71,6 +72,8 @@ namespace Amb
             void MouseEventPublisher::publish(Amb::Mouse::MouseEvent ev)
             {
                 std::lock_guard<std::mutex> lock{ mtx };
+
+                LOG_DEBUG("MouseEventPublisher::publish %d", static_cast<int>(ev));
 
                 for (auto sub : subscribers)
                     sub->handle(ev);

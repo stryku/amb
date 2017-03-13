@@ -112,6 +112,7 @@ set (AMB_inc
             ${inc_dir}/monitor/mouse/MouseMonitor.hpp
             ${inc_dir}/monitor/mouse/MouseEventPublisher.hpp
             ${inc_dir}/monitor/mouse/MouseMonitorFactory.hpp
+            ${inc_dir}/monitor/mouse/SingleMouseEventMonitor.hpp
 			
             ${inc_dir}/mouse/MouseKey.hpp
             ${inc_dir}/mouse/MouseEvent.hpp
@@ -242,6 +243,7 @@ set (AMB_src
             ${src_dir}/monitor/mouse/MouseMonitor.cpp
             ${src_dir}/monitor/mouse/MouseEventPublisher.cpp
             ${src_dir}/monitor/mouse/MouseMonitorFactory.cpp
+            ${src_dir}/monitor/mouse/SingleMouseEventMonitor.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             

@@ -3,12 +3,14 @@
 #include "log/log.hpp"
 
 #include <QMessageBox>
+#include <QLabel>
 
 namespace Amb
 {
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
+        , mouseHotkeysModuleEventCapturer{ mousMonitorFactory }
         , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
         , mainWindowTitleUpdater{ window }
         , botCore(configFromUiGenerator.getConfigs(), modulesFactory, mousMonitorFactory)
@@ -23,6 +25,7 @@ namespace Amb
         window.setConfigLoader(getConfigLoader());
         window.setScriptNameObserver(getScriptNameObserver());
         window.setEnableDebugLogObserver(getEnableDebugLogsObserver());
+        window.setStartMouseEventsCapturer(getStartMouseEventsCapturer());
         mainWindowTitleUpdater.setBasic();
     }
 
@@ -104,6 +107,28 @@ namespace Amb
         return[this](const std::string &str) { openConfiguration(str); };
     }
 
+    Bot::StartMouseEventsCapturer Bot::getStartMouseEventsCapturer()
+    {
+        return [this]() { startMouseEventsCapturer(); };
+    }
+
+    void Bot::startMouseEventsCapturer()
+    {
+        auto fun = [this]
+        {
+            auto ev = mouseHotkeysModuleEventCapturer.get();
+
+            //ui->labelMouseHotkeysCaptured
+            auto label = window.getMouseHotkeys().capturedLabel;
+
+            QMetaObject::invokeMethod(static_cast<QObject*>(label), 
+                                      "setText", 
+                                      Qt::QueuedConnection, 
+                                      Q_ARG(QString, QString::number(static_cast<int>(ev))));
+        };
+
+        mouseHotkeysModuleEventCapturerThreadWorker.startSingleCall(fun);
+    }
 
     bool Bot::toggleModule( Module::ModuleId modId )
     {

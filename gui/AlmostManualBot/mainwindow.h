@@ -59,6 +59,7 @@ public:
     Amb::Ui::Controls::Looter getLotterControls() const;
     Amb::Ui::Controls::Mlvl getMlvlControls() const;
     Amb::Ui::Controls::Healer getHealer() const;
+    Amb::Ui::Controls::MouseHotkeys getMouseHotkeys() const;
     Amb::Ui::Controls::GlobalControls getControls() const;
 
     const Amb::Ui::Module::Healer::HealerRulesTable& getHealerRulesTable() const;
@@ -73,6 +74,7 @@ public:
     void setConfigLoader(std::function<void(const std::string&)> loader);
     void setScriptNameObserver(std::function<void(const std::string&)> observer);
     void setEnableDebugLogObserver(std::function<void(bool)> observer);
+    void setStartMouseEventsCapturer(std::function<void()> newHandler);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -147,6 +149,7 @@ private:
     std::function<std::string()> currentConfigFilePathProvider;
     std::function<void(const std::string&)> configLoader;
     std::function<void(bool)> enableDebugLogObserver;
+    std::function<void()> startMouseEventsCapturerCallback;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();

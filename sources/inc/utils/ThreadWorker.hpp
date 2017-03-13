@@ -59,6 +59,22 @@ namespace Amb
                 thread = std::thread{ loop };
             }
 
+            template <typename LoopFunction>
+            void startSingleCall(LoopFunction loopFunction)
+            {
+                stop();
+
+                auto fun = [this, loopFunction]()
+                {
+                    loopFunction();
+                    needRunning = false;
+                };
+
+                needRunning = true;
+
+                thread = std::thread{ fun };
+            }
+
             void stop();
 
         private:

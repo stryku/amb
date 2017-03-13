@@ -260,6 +260,18 @@ Amb::Ui::Controls::Healer MainWindow::getHealer() const
     return healer;
 }
 
+Amb::Ui::Controls::MouseHotkeys MainWindow::getMouseHotkeys() const
+{
+    Amb::Ui::Controls::MouseHotkeys controls;
+
+    controls.capturedLabel = ui->labelMouseHotkeysCaptured;
+    controls.onlyIfTibiaOnTop = ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop;
+    controls.hotCombobox = ui->comboBoxMouseHotkeysHotkey;
+
+    return controls;
+}
+
+
 Amb::Ui::Controls::GlobalControls MainWindow::getControls() const
 {
     Amb::Ui::Controls::GlobalControls controls;
@@ -582,6 +594,10 @@ void MainWindow::setEnableDebugLogObserver(std::function<void(bool)> observer)
     enableDebugLogObserver = observer;
 }
 
+void MainWindow::setStartMouseEventsCapturer(std::function<void()> observer)
+{
+    startMouseEventsCapturerCallback = observer;
+}
 
 void MainWindow::on_actionEnable_debug_logs_toggled(bool checked)
 {
@@ -646,7 +662,7 @@ void MainWindow::on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checke
 
 void MainWindow::on_pushButtonMouseHotkeysCapture_clicked()
 {
-
+    startMouseEventsCapturerCallback();
 }
 
 void MainWindow::on_checkBoxMouseHotkeysRun_clicked(bool checked)
