@@ -642,7 +642,7 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged(int index)
 
 void MainWindow::on_pushButtonMouseHotkeysClear_clicked()
 {
-
+    mouseHotkeysItemsTable->clear();
 }
 
 void MainWindow::on_pushButtonMouseHotkeysEdit_clicked()
