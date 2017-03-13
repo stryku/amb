@@ -129,6 +129,10 @@ namespace Amb
                                       Q_ARG(QString, QString::fromStdString(strEv)));
         };
 
+        auto label = window.getMouseHotkeys().capturedLabel;
+
+        label->setText("Waiting for button...");
+
         mouseHotkeysModuleEventCapturerThreadWorker.startSingleCall(fun);
     }
 

@@ -17,6 +17,8 @@ namespace Amb
             {
                 std::lock_guard<std::mutex> lock{ mtx };
 
+                LOG_DEBUG("MouseEventPublisher::registerSubscriber 0x{0:x}", reinterpret_cast<uintptr_t>(sub));
+
                 if (subscribers.empty())
                     startListening();
 
@@ -26,6 +28,8 @@ namespace Amb
             void MouseEventPublisher::unregisterSubscriber(IMouseEventSubscriber* sub)
             {
                 std::lock_guard<std::mutex> lock{ mtx };
+
+                LOG_DEBUG("MouseEventPublisher::unregisterSubscriber 0x{0:x}", reinterpret_cast<uintptr_t>(sub));
 
                 auto it = std::find(std::cbegin(subscribers), std::cend(subscribers), sub);
 
@@ -74,7 +78,7 @@ namespace Amb
             {
                 std::lock_guard<std::mutex> lock{ mtx };
 
-                LOG_DEBUG("MouseEventPublisher::publish %d", static_cast<int>(ev));
+                LOG_DEBUG("MouseEventPublisher::publish {}", static_cast<int>(ev));
 
                 for (auto sub : subscribers)
                     sub->handle(ev);
@@ -83,11 +87,13 @@ namespace Amb
 
             void MouseEventPublisher::startListening()
             {
+                LOG_DEBUG("MouseEventPublisher::startListening");
                 hook = SetWindowsHookEx(WH_MOUSE_LL, &lowLevelMouseProc, GetModuleHandle(0), 0);
             }
 
             void MouseEventPublisher::stopListening()
             {
+                LOG_DEBUG("MouseEventPublisher::stopListening");
                 UnhookWindowsHookEx(hook);
             }
         }
