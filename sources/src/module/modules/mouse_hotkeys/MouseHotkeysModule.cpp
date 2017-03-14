@@ -59,6 +59,7 @@ namespace Amb
 
                 void MouseHotkeysModule::runDetails()
                 {
+                    std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
                 }
 
                 bool MouseHotkeysModule::tibiaIsOnTop()
