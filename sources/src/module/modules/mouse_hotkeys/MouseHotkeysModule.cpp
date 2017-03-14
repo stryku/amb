@@ -1,5 +1,6 @@
 #include "module/modules/mouse_hotkeys/MouseHotkeysModule.hpp"
 #include "config/module/MouseHotkeysConfig.hpp"
+#include "config/GlobalConfig.hpp"
 #include "monitor/mouse/MouseMonitorFactory.hpp"
 #include "monitor/mouse/IMouseMonitor.hpp"
 #include "log/log.hpp"
@@ -14,10 +15,12 @@ namespace Amb
             {
                 MouseHotkeysModule::MouseHotkeysModule(Simulate::Simulator &simulator,
                                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                                       const Config::GlobalConfig& globalConfig,
                                                        const Config::Module::MouseHotkeysConfig& mouseHotkeysConfig,
                                                        Monitor::Mouse::MouseMonitorFactory& mouseMonitorFactory)
                     : ModuleCore(simulator, tibiaClientWindowInfo)
                     , mouseHotkeysConfig{ mouseHotkeysConfig }
+                    , globalConfig{ globalConfig }
                     , mouseMonitor{ mouseMonitorFactory.create() }
                 {
                     auto cb = [this](auto ev)
@@ -31,7 +34,13 @@ namespace Amb
                 MouseHotkeysModule::~MouseHotkeysModule()
                 {}
 
-                boost::optional<Client::Hotkey> MouseHotkeysModule::getHotkeyForEvent(const Mouse::MouseEvent& ev) const
+                void MouseHotkeysModule::attachToNewProcess(DWORD pid)
+                {
+                    currentTibiaPid = pid;
+                }
+
+
+                boost::optional<MouseHotkey> MouseHotkeysModule::getHotkeyForEvent(const Mouse::MouseEvent& ev) const
                 {
                     const auto pred = [&ev](const auto& mouseHotkey)
                     {
@@ -45,11 +54,18 @@ namespace Amb
                     if (it == std::cend(mouseHotkeysConfig.mouseHotkeys))
                         return{};
 
-                    return it->hotkey;
+                    return *it;
                 }
 
                 void MouseHotkeysModule::runDetails()
                 {
+                }
+
+                bool MouseHotkeysModule::tibiaIsOnTop()
+                {
+                    DWORD pid;
+                    GetWindowThreadProcessId(GetForegroundWindow(), &pid);
+                    return currentTibiaPid == pid;
                 }
 
                 void MouseHotkeysModule::mouseEventCallback(Mouse::MouseEvent ev)
@@ -58,8 +74,12 @@ namespace Amb
 
                     if (optionalHot)
                     {
-                        LOG_DEBUG("MouseHotkeysModule::mouseEventCallback simulating hotkey: {}", Client::hotkeyToStdString(*optionalHot));
-                        simulator.hotkey(*optionalHot);
+                        if ((optionalHot->onlyWhenTibiaOnTop && tibiaIsOnTop()) ||
+                            !optionalHot->onlyWhenTibiaOnTop)
+                        {
+                            LOG_DEBUG("MouseHotkeysModule::mouseEventCallback simulating hotkey: {}", Client::hotkeyToStdString(optionalHot->hotkey));
+                            simulator.hotkey(optionalHot->hotkey);
+                        }
                     }
                 }
 
@@ -76,8 +96,7 @@ namespace Amb
                 }
 
                 void MouseHotkeysModule::applyConfigs()
-                {
-                }
+                {}
             }
         }
     }

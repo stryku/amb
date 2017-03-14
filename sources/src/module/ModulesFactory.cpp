@@ -54,6 +54,7 @@ namespace
     {
         return std::make_unique<Amb::Module::Modules::MouseHotkeys::MouseHotkeysModule>(simulator,
                                                                                         config.tibiaClientWindowInfo,
+                                                                                        config,
                                                                                         config.mouseHotkeys,
                                                                                         mousMonitorFactory);
     }

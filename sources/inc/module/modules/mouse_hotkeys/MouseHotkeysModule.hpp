@@ -19,6 +19,8 @@ namespace Amb
 
     namespace Config
     {
+        struct GlobalConfig;
+
         namespace Module
         {
             struct MouseHotkeysConfig;
@@ -31,11 +33,14 @@ namespace Amb
         {
             namespace MouseHotkeys
             {
+                struct MouseHotkey;
+
                 class MouseHotkeysModule final : public ModuleCore
                 {
                 public:
                     MouseHotkeysModule(Simulate::Simulator &simulator,
                                        const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
+                                       const Config::GlobalConfig& globalConfig,
                                        const Config::Module::MouseHotkeysConfig& mouseHotkeysConfig,
                                        Monitor::Mouse::MouseMonitorFactory& mouseMonitorFactory);
                     ~MouseHotkeysModule();
@@ -43,15 +48,21 @@ namespace Amb
                     void run() override;
                     void stop() override;
 
+                    void attachToNewProcess(DWORD pid) override;
+
                 private:
                     void runDetails() override;
                     void applyConfigs() override;
                     void mouseEventCallback(Mouse::MouseEvent ev);
 
-                    boost::optional<Client::Hotkey> getHotkeyForEvent(const Mouse::MouseEvent& ev) const;
+                    bool tibiaIsOnTop();
+
+                    boost::optional<MouseHotkey> getHotkeyForEvent(const Mouse::MouseEvent& ev) const;
 
                     const Config::Module::MouseHotkeysConfig& mouseHotkeysConfig;
+                    const Config::GlobalConfig& globalConfig;
                     std::unique_ptr<Monitor::Mouse::IMouseMonitor> mouseMonitor;
+                    DWORD currentTibiaPid{ NULL };
                 };
             }
         }
