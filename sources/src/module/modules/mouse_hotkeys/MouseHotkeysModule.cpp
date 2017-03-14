@@ -36,7 +36,6 @@ namespace Amb
 
                 void MouseHotkeysModule::mouseEventCallback(Mouse::MouseEvent ev)
                 {
-
                 }
 
                 void MouseHotkeysModule::run()

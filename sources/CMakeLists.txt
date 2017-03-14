@@ -244,6 +244,8 @@ set (AMB_src
             ${src_dir}/monitor/mouse/MouseEventPublisher.cpp
             ${src_dir}/monitor/mouse/MouseMonitorFactory.cpp
             ${src_dir}/monitor/mouse/SingleMouseEventMonitor.cpp
+			
+            ${src_dir}/mouse/MouseEvent.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
