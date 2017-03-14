@@ -10,8 +10,6 @@ namespace Amb
 
         std::string MouseEvent::toString() const
         {
-            LOG_DEBUG("MouseEvent::toString: {}", value);
-
             const auto enumVal = static_cast<KnownMouseEvents>(value);
 
             switch (enumVal)
@@ -34,8 +32,7 @@ namespace Amb
         MouseEvent MouseEvent::fromString(const std::string& str)
         {
             MouseEvent ret;
-            LOG_DEBUG("MouseEvent::fromString: {}", str);
-
+            
             if (str == "LEFT_UP")
                 ret.value = static_cast<size_t>(KnownMouseEvents::LEFT_UP);
             else if (str == "LEFT_DOWN")
@@ -73,8 +70,6 @@ namespace Amb
 
         std::string MouseEvent::toPrettyString() const
         {
-            LOG_DEBUG("MouseEvent::mouseEventToPrettyString: {}", value);
-
             const auto enumVal = static_cast<KnownMouseEvents>(value);
 
             switch (enumVal)
@@ -97,7 +92,6 @@ namespace Amb
         MouseEvent MouseEvent::fromPrettyString(const std::string& str)
         {
             MouseEvent ret;
-            LOG_DEBUG("MouseEvent::fromPrettyString: {}", str);
 
             if (str == "Left button")
                 ret.value = static_cast<size_t>(KnownMouseEvents::LEFT_UP);

@@ -4,6 +4,8 @@
 #include "log/details/Logger.hpp"
 #include "mouse/MouseEvent.hpp"
 
+#include <boost/optional.hpp>
+
 namespace Amb
 {
     namespace Monitor
@@ -45,6 +47,8 @@ namespace Amb
                     void runDetails() override;
                     void applyConfigs() override;
                     void mouseEventCallback(Mouse::MouseEvent ev);
+
+                    boost::optional<Client::Hotkey> getHotkeyForEvent(const Mouse::MouseEvent& ev) const;
 
                     const Config::Module::MouseHotkeysConfig& mouseHotkeysConfig;
                     std::unique_ptr<Monitor::Mouse::IMouseMonitor> mouseMonitor;
