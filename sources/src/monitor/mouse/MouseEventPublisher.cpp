@@ -56,15 +56,15 @@ namespace Amb
                     {
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
 
-                        return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1Down()
-                                                      : Amb::Mouse::MouseEvent::X2Down();
+                        return (GET_XBUTTON_WPARAM(data->mouseData) == 1) ? Amb::Mouse::MouseEvent::X1Down()
+                                                                          : Amb::Mouse::MouseEvent::X2Down();
                     }
                     case WM_XBUTTONUP:
                     {
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
 
-                        return (data->mouseData == 1) ? Amb::Mouse::MouseEvent::X1Up()
-                                                      : Amb::Mouse::MouseEvent::X2Up();
+                        return (GET_XBUTTON_WPARAM(data->mouseData) == 1) ? Amb::Mouse::MouseEvent::X1Up()
+                                                                          : Amb::Mouse::MouseEvent::X2Up();
                     }
                     default: return Amb::Mouse::MouseEvent::Undef();
                 }
