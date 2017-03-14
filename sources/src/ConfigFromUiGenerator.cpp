@@ -1,5 +1,6 @@
 #include "ConfigFromUiGenerator.hpp"
 #include "log/log.hpp"
+#include "ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp"
 
 #include <mainwindow.h>
 
@@ -13,12 +14,14 @@ namespace Amb
                                                      const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                                      const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
                                                      const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
-                                                     const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable)
+                                                     const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable,
+                                                     const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable)
             : mainWindow{ mainWindow }
             , config{ tibiaClientWindowInfo }
             , healerRulesTable{ healerRulesTable }
             , looterCategoriesTable{ looterCategoriesTable }
             , looterItemsTable{ looterItemsTable }
+            , mouseHotkeysTable{ mouseHotkeysTable }
         {}
 
         void ConfigFromUiGenerator::regenerate()
@@ -37,13 +40,18 @@ namespace Amb
         {
             switch (moduleId)
             {
-                case Module::ModuleId::MOD_HEALER: regenerateHealer();
-                case Module::ModuleId::MOD_LOOTER: regenerateLooter();
-                case Module::ModuleId::MOD_MLVL: regenerateMlvl();
+                case Module::ModuleId::MOD_HEALER: regenerateHealer(); break;
+                case Module::ModuleId::MOD_LOOTER: regenerateLooter(); break;
+                case Module::ModuleId::MOD_MLVL: regenerateMlvl(); break;
+                case Module::ModuleId::MOD_MOUSE_HOTKEYS: regenerateMouseHotkeys(); break;
             }
         }
 
-
+        void ConfigFromUiGenerator::regenerateMouseHotkeys()
+        {
+            LOG_DEBUG("ConfigFromUiGenerator::regenerateMouseHotkeys");
+            config.mouseHotkeys.mouseHotkeys = mouseHotkeysTable.getItems();
+        }
 
         void ConfigFromUiGenerator::regenerateHealer()
         {
@@ -109,6 +117,7 @@ namespace Amb
 #ifdef AMB_PRO_COMPILATION
             regenerateModule(Module::ModuleId::MOD_LOOTER);
             regenerateModule(Module::ModuleId::MOD_MLVL);
+            regenerateModule(Module::ModuleId::MOD_MOUSE_HOTKEYS);
 #endif
         }
 

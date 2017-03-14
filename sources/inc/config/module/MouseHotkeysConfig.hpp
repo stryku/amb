@@ -16,7 +16,7 @@ namespace Amb
             {
                 std::vector<Amb::Module::Modules::MouseHotkeys::MouseHotkey> mouseHotkeys;
 
-                boost::property_tree::ptree toPtree(const std::string& path = "") const;
+                boost::property_tree::ptree toPtree(std::string path = "") const;
                 static MouseHotkeysConfig fromPtree(const boost::property_tree::ptree& tree);
             };
         }

@@ -15,6 +15,8 @@ class MainWindow;
 
 namespace Amb
 {
+
+
     namespace Configs
     {
         class ConfigFromUiGenerator
@@ -24,7 +26,8 @@ namespace Amb
                                   const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                   const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
                                   const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
-                                  const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable);
+                                  const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable,
+                                  const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable);
 
             void regenerate();
 
@@ -40,11 +43,13 @@ namespace Amb
             const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable;
             const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable;
             const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable;
+            const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable;
             Config::GlobalConfig config;
 
             void regenerateHealer();
             void regenerateLooter();
             void regenerateMlvl();
+            void regenerateMouseHotkeys();
             void regeneratePid();
             void regenerateCommon();
             void regenerateAllModules();

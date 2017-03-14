@@ -11,7 +11,12 @@ namespace Amb
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
         , mouseHotkeysModuleEventCapturer{ mousMonitorFactory }
-        , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
+        , configFromUiGenerator{ &window, 
+                                 tibiaClientWindowInfo, 
+                                 window.getHealerRulesTable(), 
+                                 window.getLooterCategoriesTable(),
+                                 window.getLooterItemsTable(), 
+                                 window.getMouseHotkeysTable() }
         , mainWindowTitleUpdater{ window }
         , botCore(configFromUiGenerator.getConfigs(), modulesFactory, mousMonitorFactory)
         , window{ db }

@@ -7,18 +7,22 @@ namespace Amb
     {
         namespace Module
         {
-            boost::property_tree::ptree MouseHotkeysConfig::toPtree(const std::string& path) const
+            boost::property_tree::ptree MouseHotkeysConfig::toPtree(std::string path) const
             {
                 Utils::PropertyTreeBuilder builder;
 
+                if (!path.empty())
+                    path += '.';
+
                 if (mouseHotkeys.empty())
                 {
-                    builder.addElement(Utils::PtreeElement<>{path + ".mouse_hotkeys", ""});
+                    builder.addElement(Utils::PtreeElement<>{path + "mouse_hotkeys", ""});
                     return builder.buildTree();
                 }
 
+
                 for (const auto& hot : mouseHotkeys)
-                    builder.addTree(path + ".mouse_hotkeys.mouse_hotkey", hot.toPropertyTree());
+                    builder.addTree(path + "mouse_hotkey", hot.toPropertyTree());
 
                 return builder.buildTree();
             }

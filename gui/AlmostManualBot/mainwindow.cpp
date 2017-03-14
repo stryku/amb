@@ -301,6 +301,11 @@ const Amb::Ui::Module::Looter::LooterItemsTable& MainWindow::getLooterItemsTable
     return *(looterItemsTable.get());
 }
 
+const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& MainWindow::getMouseHotkeysTable() const
+{
+    return *(mouseHotkeysItemsTable.get());
+}
+
 void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> observer)
 {
     configFileManager.setPathObserver(
