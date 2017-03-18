@@ -101,6 +101,8 @@ namespace Amb
 
                 void MouseHotkeysModule::stop()
                 {
+                    LOG_DEBUG("MouseHotkeysModule::stop");
+                    asyncTaskManager.stopAll();
                     mouseMonitor->stop();
                     ModuleCore::stop();
                 }
