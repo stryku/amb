@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cexpr/crypto.hpp"
+#include "hash/Hash.hpp"
 
 #include <string>
 #include <vector>
@@ -16,7 +16,7 @@ namespace Amb
                 struct Item
                 {
                     std::string name;
-                    std::vector<cexpr::hash_t> hashes;
+                    std::vector<Hash::HashType> hashes;
 
                     bool isValid() const
                     {
