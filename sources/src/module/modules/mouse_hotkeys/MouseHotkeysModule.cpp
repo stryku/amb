@@ -79,6 +79,8 @@ namespace Amb
                             !optionalHot->onlyWhenTibiaOnTop)
                         {
                             LOG_DEBUG("MouseHotkeysModule::mouseEventCallback simulating hotkey: {}", Client::hotkeyToStdString(optionalHot->hotkey));
+
+                            std::this_thread::sleep_for(std::chrono::milliseconds{ 300 });
                             simulator.hotkey(optionalHot->hotkey);
                         }
                     }

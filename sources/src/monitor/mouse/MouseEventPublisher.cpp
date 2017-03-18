@@ -49,16 +49,16 @@ namespace Amb
                 switch (wParam)
                 {
                     case WM_LBUTTONUP: return Amb::Mouse::MouseEvent::LeftUp();
-                    case WM_LBUTTONDOWN: return Amb::Mouse::MouseEvent::LeftDown();
+                    //case WM_LBUTTONDOWN: return Amb::Mouse::MouseEvent::LeftDown();
                     case WM_RBUTTONUP: return Amb::Mouse::MouseEvent::RightUp();
-                    case WM_RBUTTONDOWN: return Amb::Mouse::MouseEvent::RightDown();
-                    case WM_XBUTTONDOWN:
+                    //case WM_RBUTTONDOWN: return Amb::Mouse::MouseEvent::RightDown();
+                    /*case WM_XBUTTONDOWN:
                     {
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
 
                         return (GET_XBUTTON_WPARAM(data->mouseData) == 1) ? Amb::Mouse::MouseEvent::X1Down()
                                                                           : Amb::Mouse::MouseEvent::X2Down();
-                    }
+                    }*/
                     case WM_XBUTTONUP:
                     {
                         MSLLHOOKSTRUCT* data{ reinterpret_cast<MSLLHOOKSTRUCT*>(lParam) };
