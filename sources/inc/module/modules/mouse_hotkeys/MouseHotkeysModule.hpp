@@ -3,6 +3,7 @@
 #include "module/ModuleCore.hpp"
 #include "log/details/Logger.hpp"
 #include "mouse/MouseEvent.hpp"
+#include "async/AsyncTasksManager.hpp"
 
 #include <boost/optional.hpp>
 
@@ -63,6 +64,7 @@ namespace Amb
                     const Config::GlobalConfig& globalConfig;
                     std::unique_ptr<Monitor::Mouse::IMouseMonitor> mouseMonitor;
                     DWORD currentTibiaPid{ NULL };
+                    Async::AsyncTasksManager asyncTaskManager;
                 };
             }
         }

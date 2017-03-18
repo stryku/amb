@@ -59,7 +59,8 @@ namespace Amb
 
                 void MouseHotkeysModule::runDetails()
                 {
-                    std::this_thread::sleep_for(std::chrono::milliseconds{ 500 });
+                    asyncTaskManager.tick();
+                    std::this_thread::sleep_for(std::chrono::milliseconds{ 50 });
                 }
 
                 bool MouseHotkeysModule::tibiaIsOnTop()
@@ -78,10 +79,16 @@ namespace Amb
                         if ((optionalHot->onlyWhenTibiaOnTop && tibiaIsOnTop()) ||
                             !optionalHot->onlyWhenTibiaOnTop)
                         {
-                            LOG_DEBUG("MouseHotkeysModule::mouseEventCallback simulating hotkey: {}", Client::hotkeyToStdString(optionalHot->hotkey));
+                            LOG_DEBUG("MouseHotkeysModule::mouseEventCallback Adding hotkey to async tasks: {}", Client::hotkeyToStdString(optionalHot->hotkey));
+                            const auto kDelay = std::chrono::milliseconds{ 300 };
 
-                            std::this_thread::sleep_for(std::chrono::milliseconds{ 300 });
-                            simulator.hotkey(optionalHot->hotkey);
+                            auto task = [hot = optionalHot->hotkey, this]
+                            {
+                                LOG_DEBUG("MouseHotkeysModule simulating hot from async task: {}", Client::hotkeyToStdString(hot));
+                                simulator.hotkey(hot);
+                            };
+
+                            asyncTaskManager.start(task, kDelay);
                         }
                     }
                 }

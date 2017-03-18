@@ -1,4 +1,5 @@
 #include "async/AsyncTasksManager.hpp"
+#include "log/log.hpp"
 
 namespace Amb
 {
@@ -24,7 +25,7 @@ namespace Amb
         void AsyncTasksManager::start(std::function<void()> task, const std::chrono::milliseconds& ms)
         {
             const auto token = tokensProvider.get();
-            tasks.emplace(token, AsyncTask{ task, ms });
+            auto it = tasks.emplace(token, AsyncTask{ task, ms });
         }
 
         void AsyncTasksManager::stopAll()
