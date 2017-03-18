@@ -149,6 +149,7 @@ set (AMB_inc
             ${inc_dir}/utils/Structs.hpp
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
+            ${inc_dir}/utils/TokensProvider.hpp
             ${inc_dir}/utils/ForwardDeclarePos.hpp
             
             ${inc_dir}/utils/random/RandomBetween.hpp
