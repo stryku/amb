@@ -9,6 +9,8 @@ set (AMB_inc
             ${inc_dir}/TibiaReader.hpp
             ${inc_dir}/TibiaScreenReader.hpp
             ${inc_dir}/utils.hpp
+			
+            ${inc_dir}/async/AsyncTasksManager.hpp
             
             ${inc_dir}/capture/CaptureMode.hpp
             ${inc_dir}/capture/ConstPixels.hpp
@@ -177,6 +179,8 @@ set (AMB_src
             ${src_dir}/Simulator.cpp
             ${src_dir}/TibiaFinder.cpp
             ${src_dir}/utils.cpp
+			
+            ${src_dir}/async/AsyncTasksManager.cpp
             
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp 
