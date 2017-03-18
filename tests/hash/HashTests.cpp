@@ -1,4 +1,4 @@
-#include "cexpr/crypto.hpp"
+#include "hash/Hash.hpp"
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
@@ -15,7 +15,7 @@ namespace tests
     struct HashTestsState
     {
         std::vector<uint8_t> data;
-        cexpr::hash_t expectedHash;
+        Amb::Hash::HashType expectedHash;
     };
 
     struct HashTest : testing::Test, testing::WithParamInterface<HashTestsState> {};
@@ -23,9 +23,9 @@ namespace tests
     TEST_P(HashTest, NonEmptyData)
     {
         const auto state = GetParam();
-        const auto begin = static_cast<const cexpr::hash_it>(state.data.data());
+        const auto begin = static_cast<Amb::Hash::HashIt>(state.data.data());
         const auto end = begin + state.data.size() * sizeof(decltype(state.data)::value_type);
-        const auto hash = cexpr::hash(begin, end);
+        const auto hash = Amb::Hash::hash(begin, end);
 
         EXPECT_THAT(hash, state.expectedHash);
     }

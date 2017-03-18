@@ -1,6 +1,5 @@
 #include "capture/ItemCapturer.hpp"
 #include "graphics/Image.hpp"
-#include "cexpr/crypto.hpp"
 #include "db/Items.hpp"
 
 namespace Amb

@@ -166,6 +166,7 @@ set (AMB_inc
             ${inc_dir}/utils/to_string/RectToStringConverter.hpp
             
             ${inc_dir}/utils/traits/traits.hpp
+            ${inc_dir}/utils/traits/TemplateInfo.hpp
             
             ${inc_dir}/security/debug/DebugModeChecker.hpp
             ${inc_dir}/security/debug/DebugModeCheckerFactory.hpp

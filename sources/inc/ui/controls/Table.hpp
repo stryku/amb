@@ -1,7 +1,7 @@
 #pragma once
 
 #include "utils/string/toString.hpp"
-#include "cexpr/template.hpp"
+#include "utils/traits/TemplateInfo.hpp"
 
 #include <QTableView>
 #include <QStandardItemModel>
@@ -58,7 +58,7 @@ namespace Amb
                 void set(const size_t row, const Args&... args)
                 {
                     const std::array<std::string,
-                                     cexpr::TemplateArgs<Args...>::count> items = utils::toStringArray(args...);
+                                     Traits::TemplateArgs<Args...>::count> items = utils::toStringArray(args...);
 
                     for (size_t i = 0; i < items.size(); ++i)
                     {

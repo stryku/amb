@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cexpr/crypto.hpp"
+#include "hash/Hash.hpp"
 
 #include <string>
 
@@ -15,8 +15,8 @@ namespace Amb
                 struct Item
                 {
                     std::string name;
-                    cexpr::hash_t iconHash;
-                    cexpr::hash_t textHash;
+                    Hash::HashType iconHash;
+                    Hash::HashType textHash;
 
                     inline bool isValid() const noexcept
                     {
