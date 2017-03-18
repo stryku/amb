@@ -73,6 +73,8 @@ set (AMB_inc
             ${inc_dir}/db/static/items/ItemsDbData.hpp
             
             ${inc_dir}/graphics/Image.hpp
+			
+            ${inc_dir}/hash/Hash.hpp
             
             ${inc_dir}/log/log.hpp
             ${inc_dir}/log/ImageLogger.hpp
@@ -223,6 +225,8 @@ set (AMB_src
             ${src_dir}/db/static/containers/ContainersDbData.cpp
             
             ${src_dir}/db/static/items/ItemsDbData.cpp
+			
+            ${src_dir}/hash/Hash.cpp
             
             ${src_dir}/log/condition/ImageLogUniqueCondition.cpp
             ${src_dir}/log/condition/ImageLogOnceCondition.cpp
