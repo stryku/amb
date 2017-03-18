@@ -7,6 +7,7 @@
 namespace cexpr
 {
     using hash_t = detail::hash_t;
+    using hash_it = const uint8_t*;
 
     constexpr hash_t hash(const uint8_t* begin,
                                   const uint8_t* end)

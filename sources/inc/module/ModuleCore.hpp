@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "Configs.hpp"
 #include "Simulator.hpp"
 #include "capture/FrameCapturer.hpp"
 #include "utils/Structs.hpp"
@@ -24,8 +23,8 @@ namespace Amb
                                 std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
             virtual ~ModuleCore();
 
-            void run();
-            void stop();
+            virtual void run();
+            virtual void stop();
             bool isRunning() const;
 
             virtual void attachToNewWindow(HWND hwnd);

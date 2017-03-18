@@ -3,12 +3,18 @@
 #include "Simulator.hpp"
 #include "ModulesManager.hpp"
 #include "module/ModuleId.hpp"
+#include "utils/Observable.hpp"
 
 #include <vector>
 #include <functional>
 
 namespace Amb
 {
+    namespace Config
+    {
+        struct GlobalConfig;
+    }
+
     namespace Module
     {
         class Factory;
@@ -24,8 +30,9 @@ namespace Amb
         Module::ModulesManager modulesManager;
 
     public:
-        BotCore(const Configs::GlobalConfig &config,
-                Amb::Module::Factory &modulesFactory);
+        BotCore(const Config::GlobalConfig &config,
+                Amb::Module::Factory &modulesFactory,
+                Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory);
 
         void startModule( Module::ModuleId moduleId );
         void attachNewProcess( DWORD pid );

@@ -12,7 +12,15 @@ namespace Ui
 
 namespace Amb
 {
-    namespace Configs
+    namespace Monitor
+    {
+        namespace Mouse
+        {
+            class MouseMonitorFactory;
+        }
+    }
+
+    namespace Config
     {
         struct GlobalConfig;
     }
@@ -33,8 +41,9 @@ namespace Amb
                 : ui{ ui }
             {}
 
-            std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> create(const Configs::GlobalConfig &config,
-                                                                             Simulate::Simulator &simulator);
+            std::unordered_map<ModuleId, std::unique_ptr<ModuleCore>> create(const Config::GlobalConfig &config,
+                                                                             Simulate::Simulator &simulator,
+                                                                             Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory);
 
         private:
             ::Ui::MainWindow *ui;

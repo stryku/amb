@@ -1,5 +1,7 @@
 #include "module/modules/Healer.hpp"
 #include "log/log.hpp"
+#include "config/module/HealerConfig.hpp"
+#include "config/module/AdvancedSettingsConfig.hpp"
 
 namespace Amb
 {
@@ -63,8 +65,8 @@ namespace Amb
                 std::this_thread::sleep_until(sleepTo);
             }
 
-            Healer::Healer(const Configs::HealerConfig &config,
-                           const Configs::AdvancedSettings &advancedSettings,
+            Healer::Healer(const Config::Module::HealerConfig &config,
+                           const Config::Module::AdvancedSettingsConfig &advancedSettings,
                            Simulate::Simulator &simulator,
                            const Client::TibiaClientWindowInfo &tibiaClientWindowInfo)
                 : ModuleCore{ simulator, tibiaClientWindowInfo }
@@ -72,7 +74,6 @@ namespace Amb
                 , advancedSettings{ advancedSettings }
                 , healthManaReader{ screen }
                 , healthManaFinder{ tibiaClientWindowInfo }
-                //, topRightCorner{ topRightCorner }
                 , screenLogger{ "not_found_heart_logger", "logs/heart_not_found.txt" }
             {}
 

@@ -4,9 +4,10 @@
 
 #include <mainwindow.h>
 
-#include <Configs.hpp>
-#include <module/ModuleId.hpp>
-#include <TibiaFinder.hpp>
+//#include <Configs.hpp>
+#include "module/ModuleId.hpp"
+#include "TibiaFinder.hpp"
+#include "config/GlobalConfig.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -14,6 +15,8 @@ class MainWindow;
 
 namespace Amb
 {
+
+
     namespace Configs
     {
         class ConfigFromUiGenerator
@@ -23,11 +26,12 @@ namespace Amb
                                   const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                   const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
                                   const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
-                                  const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable);
+                                  const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable,
+                                  const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable);
 
             void regenerate();
 
-            const Configs::GlobalConfig& getConfigs() const;
+            const Config::GlobalConfig& getConfigs() const;
 
             void regenerateModule(Module::ModuleId moduleId);
             void regenerateAdvancedSettings(); 
@@ -39,11 +43,13 @@ namespace Amb
             const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable;
             const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable;
             const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable;
-            Amb::Configs::GlobalConfig config;
+            const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable;
+            Config::GlobalConfig config;
 
             void regenerateHealer();
             void regenerateLooter();
             void regenerateMlvl();
+            void regenerateMouseHotkeys();
             void regeneratePid();
             void regenerateCommon();
             void regenerateAllModules();

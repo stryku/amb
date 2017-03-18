@@ -1,5 +1,6 @@
 #include "ConfigFromUiGenerator.hpp"
 #include "log/log.hpp"
+#include "ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp"
 
 #include <mainwindow.h>
 
@@ -13,12 +14,14 @@ namespace Amb
                                                      const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                                      const Amb::Ui::Module::Healer::HealerRulesTable &healerRulesTable,
                                                      const Amb::Ui::Module::Looter::LooterCategoriesTable &looterCategoriesTable,
-                                                     const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable)
+                                                     const Amb::Ui::Module::Looter::LooterItemsTable &looterItemsTable,
+                                                     const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& mouseHotkeysTable)
             : mainWindow{ mainWindow }
             , config{ tibiaClientWindowInfo }
             , healerRulesTable{ healerRulesTable }
             , looterCategoriesTable{ looterCategoriesTable }
             , looterItemsTable{ looterItemsTable }
+            , mouseHotkeysTable{ mouseHotkeysTable }
         {}
 
         void ConfigFromUiGenerator::regenerate()
@@ -28,7 +31,7 @@ namespace Amb
             regenerateAdvancedSettings();
         }
 
-        const Configs::GlobalConfig& ConfigFromUiGenerator::getConfigs() const
+        const Config::GlobalConfig& ConfigFromUiGenerator::getConfigs() const
         {
             return config;
         }
@@ -37,13 +40,18 @@ namespace Amb
         {
             switch (moduleId)
             {
-                case Module::ModuleId::MOD_HEALER: regenerateHealer();
-                case Module::ModuleId::MOD_LOOTER: regenerateLooter();
-                case Module::ModuleId::MOD_MLVL: regenerateMlvl();
+                case Module::ModuleId::MOD_HEALER: regenerateHealer(); break;
+                case Module::ModuleId::MOD_LOOTER: regenerateLooter(); break;
+                case Module::ModuleId::MOD_MLVL: regenerateMlvl(); break;
+                case Module::ModuleId::MOD_MOUSE_HOTKEYS: regenerateMouseHotkeys(); break;
             }
         }
 
-
+        void ConfigFromUiGenerator::regenerateMouseHotkeys()
+        {
+            LOG_DEBUG("ConfigFromUiGenerator::regenerateMouseHotkeys");
+            config.mouseHotkeys.mouseHotkeys = mouseHotkeysTable.getItems();
+        }
 
         void ConfigFromUiGenerator::regenerateHealer()
         {
@@ -66,10 +74,10 @@ namespace Amb
             config.mlvl.manaPercentTo = controls.editMlvlManaTo->text().toUInt();
 
             const auto spellHotSelected = static_cast<size_t>(controls.spellCombobox->currentIndex());
-            config.mlvl.spellHotkey = Utils::size_tToHotkey(spellHotSelected);
+            config.mlvl.spellHotkey = Client::size_tToHotkey(spellHotSelected);
 
             const auto foodHotSelected = static_cast<size_t>(controls.foodCombobox->currentIndex());
-            config.mlvl.foodHotkey = Utils::size_tToHotkey(foodHotSelected);
+            config.mlvl.foodHotkey = Client::size_tToHotkey(foodHotSelected);
         }
 
         void ConfigFromUiGenerator::regenerateAdvancedSettings()
@@ -109,12 +117,13 @@ namespace Amb
 #ifdef AMB_PRO_COMPILATION
             regenerateModule(Module::ModuleId::MOD_LOOTER);
             regenerateModule(Module::ModuleId::MOD_MLVL);
+            regenerateModule(Module::ModuleId::MOD_MOUSE_HOTKEYS);
 #endif
         }
 
         void ConfigFromUiGenerator::loadConfigFromString(const std::string &str, const Client::TibiaClientWindowInfo &info)
         {
-            auto newConfig = Amb::Configs::GlobalConfig::fromString(str, info);
+            auto newConfig = Amb::Config::GlobalConfig::fromString(str, info);
             config.healerConfig = newConfig.healerConfig;
             config.advancedSettings = newConfig.advancedSettings;
             config.looter = newConfig.looter;

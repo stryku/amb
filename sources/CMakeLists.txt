@@ -2,7 +2,6 @@ set (AMB_inc
             ${inc_dir}/Bot.hpp
             ${inc_dir}/BotCore.hpp
             ${inc_dir}/ConfigFromUiGenerator.hpp
-            ${inc_dir}/Configs.hpp
             ${inc_dir}/ModulesManager.hpp
             ${inc_dir}/ScreenCapturer.hpp
             ${inc_dir}/Simulator.hpp
@@ -10,6 +9,9 @@ set (AMB_inc
             ${inc_dir}/TibiaReader.hpp
             ${inc_dir}/TibiaScreenReader.hpp
             ${inc_dir}/utils.hpp
+			
+            ${inc_dir}/async/AsyncTask.hpp
+            ${inc_dir}/async/AsyncTasksManager.hpp
             
             ${inc_dir}/capture/CaptureMode.hpp
             ${inc_dir}/capture/ConstPixels.hpp
@@ -22,6 +24,7 @@ set (AMB_inc
             
             ${inc_dir}/client/TibiaClientType.hpp
             ${inc_dir}/client/EqItems.hpp
+            ${inc_dir}/client/Hotkey.hpp
             
             ${inc_dir}/client/window/TibiaWindow.hpp
             ${inc_dir}/client/window/TibiaItemsWindow.hpp
@@ -41,10 +44,17 @@ set (AMB_inc
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinder.hpp
             ${inc_dir}/client/window/finder/DeadCreatureWindowFinderFactory.hpp
             
-            ${inc_dir}/config/ConfigFileManager.hpp
+            ${inc_dir}/config/ConfigFileManager.hpp 
+            ${inc_dir}/config/GlobalConfig.hpp
+
+            ${inc_dir}/config/module/AdvancedSettingsConfig.hpp
+            ${inc_dir}/config/module/HealerConfig.hpp
+            ${inc_dir}/config/module/LooterConfig.hpp
+            ${inc_dir}/config/module/MlvlConfig.hpp
+            ${inc_dir}/config/module/MouseHotkeysConfig.hpp
             
             ${inc_dir}/config/layout/PixelsLayoutConfig.hpp
-            
+             
             ${inc_dir}/config/layout/health_heart/HealthHeartConfig.hpp
             ${inc_dir}/config/layout/health_heart/HealthHeartConfigFactory.hpp
             ${inc_dir}/config/layout/health_heart/StaticValues.hpp
@@ -92,8 +102,23 @@ set (AMB_inc
             ${inc_dir}/module/modules/mlvl/MlvlModule.hpp
             ${inc_dir}/module/modules/mlvl/MlvlSpellCaster.hpp
             ${inc_dir}/module/modules/mlvl/AntiIdler.hpp
+			
+            ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkeysModule.hpp
+            ${inc_dir}/module/modules/mouse_hotkeys/MouseHotkey.hpp
+            ${inc_dir}/module/modules/mouse_hotkeys/MonitorableMouseEvent.hpp
             
             ${inc_dir}/module/ui_remover/LooterUiRemover.hpp
+			
+            ${inc_dir}/monitor/mouse/IMouseMonitor.hpp
+            ${inc_dir}/monitor/mouse/IMouseEventPublisher.hpp
+            ${inc_dir}/monitor/mouse/IMouseEventSubscriber.hpp
+            ${inc_dir}/monitor/mouse/MouseMonitor.hpp
+            ${inc_dir}/monitor/mouse/MouseEventPublisher.hpp
+            ${inc_dir}/monitor/mouse/MouseMonitorFactory.hpp
+            ${inc_dir}/monitor/mouse/SingleMouseEventMonitor.hpp
+			
+            ${inc_dir}/mouse/MouseKey.hpp
+            ${inc_dir}/mouse/MouseEvent.hpp
             
             ${inc_dir}/ui/UiControls.hpp
             
@@ -107,6 +132,8 @@ set (AMB_inc
             ${inc_dir}/ui/modules/looter/LooterItemsTable.hpp
             ${inc_dir}/ui/modules/looter/LootItem.hpp
             ${inc_dir}/ui/modules/looter/ToOnto.hpp 
+			
+            ${inc_dir}/ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp
             
             ${inc_dir}/ui/updaters/AdvancedSettingsUiUpdater.hpp
             ${inc_dir}/ui/updaters/HealerUiUpdater.hpp
@@ -121,13 +148,17 @@ set (AMB_inc
             
             ${inc_dir}/utils/PropertyTreeBuilder.hpp
             ${inc_dir}/utils/Structs.hpp
-            ${inc_dir}/utils/ToString.hpp
             ${inc_dir}/utils/Observable.hpp
             ${inc_dir}/utils/ThreadWorker.hpp
+            ${inc_dir}/utils/TokensProvider.hpp
             ${inc_dir}/utils/ForwardDeclarePos.hpp
             
             ${inc_dir}/utils/random/RandomBetween.hpp
             ${inc_dir}/utils/random/RandomOffset.hpp
+			
+            ${inc_dir}/utils/string/toString.hpp
+            ${inc_dir}/utils/string/fromString.hpp
+			
             
             ${inc_dir}/utils/to_string/ImageToSimpleStringConverter.hpp
             ${inc_dir}/utils/to_string/RectToStringConverter.hpp
@@ -150,12 +181,16 @@ set (AMB_src
             ${src_dir}/Simulator.cpp
             ${src_dir}/TibiaFinder.cpp
             ${src_dir}/utils.cpp
+			
+            ${src_dir}/async/AsyncTask.cpp
+            ${src_dir}/async/AsyncTasksManager.cpp
             
             ${src_dir}/capture/ItemCapturer.cpp
             ${src_dir}/capture/ItemsWindowReader.cpp 
             ${src_dir}/capture/FrameCapturer.cpp 
             
             ${src_dir}/client/TibiaClientType.cpp
+            ${src_dir}/client/Hotkey.cpp
 			
             ${src_dir}/client/finder/GraphicEqFinder.cpp
             
@@ -171,7 +206,14 @@ set (AMB_src
             ${src_dir}/client/window/finder/DeadCreatureWindowFinderFactory.cpp
             
             ${src_dir}/config/ConfigFileManager.cpp
+            ${src_dir}/config/GlobalConfig.cpp
             
+            ${src_dir}/config/module/AdvancedSettingsConfig.cpp
+            ${src_dir}/config/module/HealerConfig.cpp
+            ${src_dir}/config/module/LooterConfig.cpp
+            ${src_dir}/config/module/MlvlConfig.cpp
+            ${src_dir}/config/module/MouseHotkeysConfig.cpp
+			
             ${src_dir}/config/layout/health_heart/HealthHeartConfigFactory.cpp
             
             ${src_dir}/config/layout/health_mana_bars/HealthManaBarsConfigFactory.cpp
@@ -198,15 +240,32 @@ set (AMB_src
             ${src_dir}/module/modules/mlvl/FoodEater.cpp
             ${src_dir}/module/modules/mlvl/MlvlModule.cpp
             ${src_dir}/module/modules/mlvl/MlvlSpellCaster.cpp
-            ${src_dir}/module/modules/mlvl/AntiIdler.cpp
+            ${src_dir}/module/modules/mlvl/AntiIdler.cpp 
+			
+            ${src_dir}/module/modules/mouse_hotkeys/MouseHotkeysModule.cpp
+            ${src_dir}/module/modules/mouse_hotkeys/MouseHotkey.cpp
             
             ${src_dir}/module/ui_remover/LooterUiRemover.cpp
+			
+            ${src_dir}/monitor/mouse/MouseMonitor.cpp
+            ${src_dir}/monitor/mouse/MouseEventPublisher.cpp
+            ${src_dir}/monitor/mouse/MouseMonitorFactory.cpp
+            ${src_dir}/monitor/mouse/SingleMouseEventMonitor.cpp
+			
+            ${src_dir}/mouse/MouseEvent.cpp
             
             ${src_dir}/ui/modules/healer/HealRule.cpp
             
             ${src_dir}/ui/modules/looter/Items.cpp
+            ${src_dir}/ui/modules/looter/Category.cpp
+            ${src_dir}/ui/modules/looter/LootItem.cpp
+			
+            ${src_dir}/ui/modules/mouse_hotkeys/MouseHotkeysTable.cpp
             
             ${src_dir}/utils/ThreadWorker.cpp
+			
+            ${src_dir}/utils/string/fromString.cpp
+            ${src_dir}/utils/string/toString.cpp
             
             ${src_dir}/ui/updaters/MainWindowTitleUpdater.cpp
             ${src_dir}/ui/updaters/TibiaClientsComboboxUpdater.cpp

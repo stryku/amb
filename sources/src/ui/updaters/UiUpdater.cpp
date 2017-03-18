@@ -1,6 +1,6 @@
 #include "ui/updaters/UiUpdater.hpp"
 #include "ui/UiControls.hpp"
-#include "Configs.hpp"
+#include "config/GlobalConfig.hpp"
 
 namespace Amb
 {
@@ -8,7 +8,7 @@ namespace Amb
     {
         namespace Updaters
         {
-            void UiUpdater::update(const Configs::GlobalConfig &config, const Controls::GlobalControls &controls)
+            void UiUpdater::update(const Config::GlobalConfig &config, const Controls::GlobalControls &controls)
             {
                 healerUpdater.update(config.healerConfig, controls.healer);
                 advSettingsUpdater.update(config.advancedSettings, controls.advancedSettings);
