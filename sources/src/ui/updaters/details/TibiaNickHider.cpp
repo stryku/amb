@@ -29,7 +29,7 @@ namespace Amb
                     if (pos != 0)
                         return title;
 
-                    auto ret = title.substr(0, std::size("Tibia - "));
+                    auto ret = title.substr(0, std::size("Tibia - ") - 1);
 
                     ret += "****";
 
