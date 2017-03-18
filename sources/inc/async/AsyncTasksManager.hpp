@@ -1,7 +1,11 @@
 #pragma once
 
+#include "utils/TokensProvider.hpp"
+#include "async/AsyncTask.hpp"
+
 #include <functional>
 #include <chrono>
+#include <unordered_map>
 
 namespace Amb
 {
@@ -10,11 +14,15 @@ namespace Amb
         class AsyncTasksManager
         {
         public:
-            using Task = std::function<void()>;
-
             void tick();
-            void start(Task task, const std::chrono::milliseconds& ms);
+            void start(std::function<void()> task, const std::chrono::milliseconds& ms);
             void stopAll();
+
+        private:
+            void removeTasksFromList(const std::vector<Utils::TokensProvider::Token>& tokens);
+
+            Utils::TokensProvider tokensProvider;
+            std::unordered_map<Utils::TokensProvider::Token, AsyncTask> tasks;
         };
     }
 }
