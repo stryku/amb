@@ -1,6 +1,8 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "log/log.hpp"
+#include "ui/modules/mouse_hotkeys/MouseHotkeysTable.hpp"
+#include "module/modules/mouse_hotkeys/MouseHotkey.hpp"
 
 #include "utils.hpp"
 
@@ -41,6 +43,7 @@ MainWindow::MainWindow(const Amb::Db::Database &db, QWidget *parent)
     healerRulesTable = std::make_unique<Amb::Ui::Module::Healer::HealerRulesTable>(ui->tableHealerRules);
     looterCategoriesTable = std::make_unique<Amb::Ui::Module::Looter::LooterCategoriesTable>(ui->tableViewLooterCategoriesCategoriesList);
     looterItemsTable = std::make_unique<Amb::Ui::Module::Looter::LooterItemsTable>(ui->tableLooterItems);
+    mouseHotkeysItemsTable = std::make_unique<Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable>(ui->tableMouseHotkeys);
     
     itemsCompleter = createCompleter(db.items.getNames(), this);
     ui->editLooterItemsItem->setCompleter(itemsCompleter);
@@ -128,6 +131,26 @@ void MainWindow::toggleMlvl()
         {
             ui->checkBoxHealerRun->setChecked(false);
         }
+    }
+}
+
+void MainWindow::toggleMouseHotkeys()
+{
+    toggleModule(ui->checkBoxMouseHotkeysRun, 
+                 Amb::Module::ModuleId::MOD_MOUSE_HOTKEYS);
+}
+
+void MainWindow::toggleModule(QCheckBox *moduleCheckBox,
+                              Amb::Module::ModuleId modId)
+{
+    if (!moduleCheckBox->isChecked())
+    {
+        stopModule(moduleCheckBox, modId);
+    }
+    else
+    {
+        if (!startModule(moduleCheckBox, modId))
+            moduleCheckBox->setChecked(false);
     }
 }
 
@@ -238,6 +261,18 @@ Amb::Ui::Controls::Healer MainWindow::getHealer() const
     return healer;
 }
 
+Amb::Ui::Controls::MouseHotkeys MainWindow::getMouseHotkeys() const
+{
+    Amb::Ui::Controls::MouseHotkeys controls;
+
+    controls.capturedLabel = ui->labelMouseHotkeysCaptured;
+    controls.onlyIfTibiaOnTop = ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop;
+    controls.hotCombobox = ui->comboBoxMouseHotkeysHotkey;
+
+    return controls;
+}
+
+
 Amb::Ui::Controls::GlobalControls MainWindow::getControls() const
 {
     Amb::Ui::Controls::GlobalControls controls;
@@ -264,6 +299,11 @@ const Amb::Ui::Module::Looter::LooterCategoriesTable& MainWindow::getLooterCateg
 const Amb::Ui::Module::Looter::LooterItemsTable& MainWindow::getLooterItemsTable() const
 {
     return *(looterItemsTable.get());
+}
+
+const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& MainWindow::getMouseHotkeysTable() const
+{
+    return *(mouseHotkeysItemsTable.get());
 }
 
 void MainWindow::setScriptNameObserver(std::function<void(const std::string&)> observer)
@@ -434,7 +474,7 @@ void MainWindow::on_pushButtonHealerEdit_clicked()
         ui->spinBoxHealerMaxHp->setValue(rule.maxHp);
         ui->spinBoxHealerMinMana->setValue(rule.minMana);
         ui->spinBoxHealerMaxMana->setValue(rule.maxMana);
-        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(Amb::Utils::hotkeyToSize_t(rule.hotkey)));
+        ui->cbHealerHotkey->setCurrentIndex(static_cast<int>(Amb::Client::hotkeyToSize_t(rule.hotkey)));
     }
 }
 
@@ -560,6 +600,10 @@ void MainWindow::setEnableDebugLogObserver(std::function<void(bool)> observer)
     enableDebugLogObserver = observer;
 }
 
+void MainWindow::setStartMouseEventsCapturer(std::function<void()> observer)
+{
+    startMouseEventsCapturerCallback = observer;
+}
 
 void MainWindow::on_actionEnable_debug_logs_toggled(bool checked)
 {
@@ -600,4 +644,55 @@ void MainWindow::on_cbTibiaClients_currentIndexChanged(int index)
     {
         LOG_DEBUG("Catch std::exception: %s", e.what());
     }
+}
+
+void MainWindow::on_pushButtonMouseHotkeysClear_clicked()
+{
+    mouseHotkeysItemsTable->clear();
+}
+
+void MainWindow::on_pushButtonMouseHotkeysEdit_clicked()
+{
+    if (!mouseHotkeysItemsTable->isSelectedEditable())
+        return;
+
+    const auto item = mouseHotkeysItemsTable->getSelectedForEdit();
+    ui->labelMouseHotkeysCaptured->setText(QString::fromStdString(item.mouseEvent.toPrettyString()));
+
+    const auto comboIndex = Amb::Client::hotkeyToSize_t(item.hotkey);
+    ui->comboBoxMouseHotkeysHotkey->setCurrentIndex(comboIndex);
+
+    ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop->setChecked(item.onlyWhenTibiaOnTop);
+}
+
+void MainWindow::on_pushButtonMouseHotkeysAdd_clicked()
+{
+    const auto hotkeyCombo = ui->comboBoxMouseHotkeysHotkey;
+    const auto strMouseEv = ui->labelMouseHotkeysCaptured->text().toStdString();
+    const auto hotkey = hotkeyCombo->currentIndex();
+    const auto onlyIfTop = ui->checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop->isChecked();
+
+    if (mouseHotkeysItemsTable->itemExists(strMouseEv))
+    {
+        auto msg = QString("Mouse event '%1' hotkey bind already exist. Edit existing one or remove it from the list to add new.").arg(strMouseEv.c_str());
+        QMessageBox::information(this, "Error", msg, QMessageBox::Ok);
+        return;
+    }
+
+    mouseHotkeysItemsTable->add(strMouseEv, hotkey, onlyIfTop);
+}
+
+void MainWindow::on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checked)
+{
+
+}
+
+void MainWindow::on_pushButtonMouseHotkeysCapture_clicked()
+{
+    startMouseEventsCapturerCallback();
+}
+
+void MainWindow::on_checkBoxMouseHotkeysRun_clicked(bool checked)
+{
+    toggleMouseHotkeys();
 }

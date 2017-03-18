@@ -1,9 +1,11 @@
 #include "ui/updaters/MlvlUiUpdater.hpp"
 
+
 #include "ui/UiControls.hpp"
-#include "Configs.hpp"
+#include "config/module/MlvlConfig.hpp"
 
 #include <QComboBox>
+#include <QLineEdit>
 
 namespace Amb
 {
@@ -11,13 +13,13 @@ namespace Amb
     {
         namespace Updaters
         {
-            void Mlvl::update(const Configs::Mlvl &configs, const Controls::Mlvl &controls) const
+            void Mlvl::update(const Config::Module::MlvlConfig &configs, const Controls::Mlvl &controls) const
             {
                 controls.editMlvlManaFrom->setText(QString::number(configs.manaPercentFrom));
                 controls.editMlvlManaTo->setText(QString::number(configs.manaPercentTo));
 
-                controls.spellCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.spellHotkey));
-                controls.foodCombobox->setCurrentIndex(Utils::hotkeyToSize_t(configs.foodHotkey));
+                controls.spellCombobox->setCurrentIndex(Client::hotkeyToSize_t(configs.spellHotkey));
+                controls.foodCombobox->setCurrentIndex(Client::hotkeyToSize_t(configs.foodHotkey));
             }
         }
     }

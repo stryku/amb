@@ -8,6 +8,7 @@
 
 #include "ui/modules/looter/LooterCategoriesTable.hpp"
 #include "ui/modules/looter/LooterItemsTable.hpp"
+
 #include "ui/updaters/TibiaClientsComboboxUpdater.hpp"
 
 #include "db/Database.hpp"
@@ -24,6 +25,20 @@
 #include <functional>
 #include <string>
 
+
+namespace Amb
+{
+    namespace Ui
+    {
+        namespace Modules
+        {
+            namespace MouseHotkeys
+            {
+                class MouseHotkeysTable;
+            }
+        }
+    }
+}
 
 namespace Ui {
 class MainWindow;
@@ -44,11 +59,13 @@ public:
     Amb::Ui::Controls::Looter getLotterControls() const;
     Amb::Ui::Controls::Mlvl getMlvlControls() const;
     Amb::Ui::Controls::Healer getHealer() const;
+    Amb::Ui::Controls::MouseHotkeys getMouseHotkeys() const;
     Amb::Ui::Controls::GlobalControls getControls() const;
 
     const Amb::Ui::Module::Healer::HealerRulesTable& getHealerRulesTable() const;
     const Amb::Ui::Module::Looter::LooterCategoriesTable& getLooterCategoriesTable() const;
     const Amb::Ui::Module::Looter::LooterItemsTable& getLooterItemsTable() const;
+    const Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable& getMouseHotkeysTable() const;
 
     void setModuleToggleHandler( std::function<bool( Amb::Module::ModuleId )> newHandler );
     void setTtibiaWindowChangedHandler(std::function<void(const std::wstring&)> newHandler);
@@ -58,6 +75,7 @@ public:
     void setConfigLoader(std::function<void(const std::string&)> loader);
     void setScriptNameObserver(std::function<void(const std::string&)> observer);
     void setEnableDebugLogObserver(std::function<void(bool)> observer);
+    void setStartMouseEventsCapturer(std::function<void()> newHandler);
 
     std::wstring getTibiaWindowTitle() const;
 
@@ -99,6 +117,18 @@ private slots:
 
     void on_cbTibiaClients_currentIndexChanged(int index);
 
+    void on_pushButtonMouseHotkeysClear_clicked();
+
+    void on_pushButtonMouseHotkeysEdit_clicked();
+
+    void on_pushButtonMouseHotkeysAdd_clicked();
+
+    void on_checkBoxMouseHotkeysOnlyWhenTibiaIsOnTop_clicked(bool checked);
+
+    void on_pushButtonMouseHotkeysCapture_clicked();
+
+    void on_checkBoxMouseHotkeysRun_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 
@@ -112,6 +142,7 @@ private:
     std::unique_ptr<Amb::Ui::Module::Healer::HealerRulesTable> healerRulesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterCategoriesTable> looterCategoriesTable;
     std::unique_ptr<Amb::Ui::Module::Looter::LooterItemsTable> looterItemsTable;
+    std::unique_ptr<Amb::Ui::Modules::MouseHotkeys::MouseHotkeysTable> mouseHotkeysItemsTable;
 
     std::function<bool(Amb::Module::ModuleId)> moduleToggleHandler;
     std::function<void(const std::wstring&)> tibiaWindowChangedHandler;
@@ -119,11 +150,15 @@ private:
     std::function<std::string()> currentConfigFilePathProvider;
     std::function<void(const std::string&)> configLoader;
     std::function<void(bool)> enableDebugLogObserver;
+    std::function<void()> startMouseEventsCapturerCallback;
 
     void updateTibiaClientsComboBox();
     void toggleHealer();
     void toggleLooter();
     void toggleMlvl();
+    void toggleMouseHotkeys();
+    void toggleModule(QCheckBox *moduleCheckBox,
+                      Amb::Module::ModuleId modId);
     bool startModule( QCheckBox *moduleCheckBox,
                       Amb::Module::ModuleId modId );
     void stopModule( QCheckBox *moduleCheckBox,

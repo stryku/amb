@@ -1,8 +1,7 @@
 #pragma once
 
 #include "db/static/items/ItemsDbItem.hpp"
-
-#include <cexpr/crypto.hpp>
+#include "hash/Hash.hpp"
 
 #include <vector>
 #include <array>
@@ -26,7 +25,7 @@ namespace Amb
             Static::Items::Item get(ItemId id) const;
             Static::Items::Item get(const std::string &name) const;
             ItemId getId(const std::string &name) const;
-            ItemId getIdByHash(const cexpr::hash_t &hash) const;
+            ItemId getIdByHash(const Hash::HashType &hash) const;
             ItemId getByName(const std::string &name) const;
 
             std::vector<std::string> getNames() const;
@@ -38,7 +37,7 @@ namespace Amb
 
         private:
             std::map<std::string, ItemId> map;
-            std::map<cexpr::hash_t, ItemId> hashMap;
+            std::map<Hash::HashType, ItemId> hashMap;
         };
     }
 }

@@ -1,8 +1,7 @@
 #pragma once
 
 #include "log/condition/LoggerCondition.hpp"
-
-#include <cexpr/crypto.hpp>
+#include "hash/Hash.hpp"
 
 #include <vector>
 
@@ -24,7 +23,7 @@ namespace Amb
                 void willLogThis(const Graphics::Image& img) override;
 
             private:
-                std::vector<cexpr::hash_t> alreadyLoggerImagesHashes;
+                std::vector<Hash::HashType> alreadyLoggerImagesHashes;
             };
         }
     }

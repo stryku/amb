@@ -9,6 +9,8 @@
 #include "client/TibiaClientWindowRectObserver.hpp"
 #include "client/TibiaClientRectCornersObserver.hpp"
 #include "log/details/Logger.hpp"
+#include "monitor/mouse/MouseMonitorFactory.hpp"
+#include "monitor/mouse/SingleMouseEventMonitor.hpp"
 
 #include "mainwindow.h"
 
@@ -29,6 +31,7 @@ namespace Amb
         using StringValueObserver = Utils::Observable<std::string>::CallbackType;
         using ClientInfoObserver = std::function<void(const Client::TibiaClientWindowInfo&)>;
         using EnableDebugLogsObserver = std::function<void(bool)>;
+        using StartMouseEventsCapturer = std::function<void()>;
 
         Bot(int &argc, char *argv[]);
         ~Bot() {}
@@ -51,6 +54,7 @@ namespace Amb
     private:
         bool toggleModule(Module::ModuleId modId);
         void tibiaWindowChanged(const std::wstring &newWindowTitle);
+        void startMouseEventsCapturer();
 
         ModuleToggleMethod getModuleToggleMethod();
         TibiaWindowChangedHandler getTibiaWindowChangedHandler();
@@ -61,10 +65,14 @@ namespace Amb
         StringValueObserver getScriptNameObserver();
         ClientInfoObserver getClientRectObserver();
         EnableDebugLogsObserver getEnableDebugLogsObserver();
+        StartMouseEventsCapturer getStartMouseEventsCapturer();
 
         QApplication application;
         MainWindow window;
         Amb::Module::Factory modulesFactory;
+        Monitor::Mouse::MouseMonitorFactory mousMonitorFactory;
+        Monitor::Mouse::SingleMouseEventMonitor mouseHotkeysModuleEventCapturer;
+        Utils::ThreadWorker mouseHotkeysModuleEventCapturerThreadWorker;
         Amb::Configs::ConfigFromUiGenerator configFromUiGenerator;
         Ui::Updaters::MainWindowTitleUpdater mainWindowTitleUpdater;
         Amb::Ui::Updaters::UiUpdater uiUpdater;

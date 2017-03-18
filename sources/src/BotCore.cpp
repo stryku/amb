@@ -2,11 +2,13 @@
 
 namespace Amb
 {
-    BotCore::BotCore(const Configs::GlobalConfig &config,
-                     Amb::Module::Factory &modulesFactory) :
+    BotCore::BotCore(const Config::GlobalConfig &config,
+                     Amb::Module::Factory &modulesFactory,
+                     Monitor::Mouse::MouseMonitorFactory& mousMonitorFactory) :
         modulesManager(config,
                        simulator,
-                       modulesFactory)
+                       modulesFactory,
+                       mousMonitorFactory)
     {}
 
     void BotCore::startModule( Module::ModuleId moduleId )

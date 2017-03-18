@@ -62,7 +62,7 @@ namespace Amb
             return ret;
         }
 
-        size_t Items::getIdByHash(const cexpr::hash_t &hash) const
+        size_t Items::getIdByHash(const Hash::HashType &hash) const
         {
             const auto it = hashMap.find(hash);
 
@@ -75,7 +75,7 @@ namespace Amb
 
         bool Items::isThisEmpty(size_t id) const
         {
-            const cexpr::hash_t emptyHash{ 11876655800301230214 };
+            const Hash::HashType emptyHash{ 11876655800301230214 };
 
             return Static::Items::ItemsDb[id].hashes[0] == emptyHash;
         }

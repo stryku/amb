@@ -2,6 +2,8 @@
 
 class QLineEdit;
 class QComboBox;
+class QLabel;
+class QCheckBox;
 
 namespace Amb
 {
@@ -66,12 +68,20 @@ namespace Amb
                 QComboBox *spellCombobox;
             };
 
+            struct MouseHotkeys
+            {
+                QLabel *capturedLabel;
+                QCheckBox *onlyIfTibiaOnTop;
+                QComboBox *hotCombobox;
+            };
+
             struct GlobalControls
             {
                 Healer healer;
                 AdvancedSettings advancedSettings;
                 Looter looter;
                 Mlvl mlvl;
+                MouseHotkeys mouseHotkeys;
             };
         }
     }

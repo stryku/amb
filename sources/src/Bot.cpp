@@ -3,15 +3,22 @@
 #include "log/log.hpp"
 
 #include <QMessageBox>
+#include <QLabel>
 
 namespace Amb
 {
     Bot::Bot(int &argc, char *argv[])
         : application(argc, argv)
         , modulesFactory{ window.getUi() }
-        , configFromUiGenerator{ &window, tibiaClientWindowInfo, window.getHealerRulesTable(), window.getLooterCategoriesTable(), window.getLooterItemsTable() }
+        , mouseHotkeysModuleEventCapturer{ mousMonitorFactory }
+        , configFromUiGenerator{ &window, 
+                                 tibiaClientWindowInfo, 
+                                 window.getHealerRulesTable(), 
+                                 window.getLooterCategoriesTable(),
+                                 window.getLooterItemsTable(), 
+                                 window.getMouseHotkeysTable() }
         , mainWindowTitleUpdater{ window }
-        , botCore(configFromUiGenerator.getConfigs(), modulesFactory)
+        , botCore(configFromUiGenerator.getConfigs(), modulesFactory, mousMonitorFactory)
         , window{ db }
         , currentCharacterName{ getCharacterNameObserver() }
         , clientRectObserver{ getClientRectObserver() }
@@ -23,6 +30,7 @@ namespace Amb
         window.setConfigLoader(getConfigLoader());
         window.setScriptNameObserver(getScriptNameObserver());
         window.setEnableDebugLogObserver(getEnableDebugLogsObserver());
+        window.setStartMouseEventsCapturer(getStartMouseEventsCapturer());
         mainWindowTitleUpdater.setBasic();
     }
 
@@ -104,6 +112,33 @@ namespace Amb
         return[this](const std::string &str) { openConfiguration(str); };
     }
 
+    Bot::StartMouseEventsCapturer Bot::getStartMouseEventsCapturer()
+    {
+        return [this]() { startMouseEventsCapturer(); };
+    }
+
+    void Bot::startMouseEventsCapturer()
+    {
+        auto fun = [this]
+        {
+            auto ev = mouseHotkeysModuleEventCapturer.get();
+
+            auto label = window.getMouseHotkeys().capturedLabel;
+
+            const auto strEv = ev.toPrettyString();
+
+            QMetaObject::invokeMethod(static_cast<QObject*>(label), 
+                                      "setText", 
+                                      Qt::QueuedConnection, 
+                                      Q_ARG(QString, QString::fromStdString(strEv)));
+        };
+
+        auto label = window.getMouseHotkeys().capturedLabel;
+
+        label->setText("Waiting for button...");
+
+        mouseHotkeysModuleEventCapturerThreadWorker.startSingleCall(fun);
+    }
 
     bool Bot::toggleModule( Module::ModuleId modId )
     {

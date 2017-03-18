@@ -1,12 +1,12 @@
 #pragma once
 
 #include "utils/Structs.hpp"
+#include "hash/Hash.hpp"
 
 #include <vector>
 #include <array>
 
 #include <Windows.h>
-#include "cexpr/crypto.hpp"
 
 namespace Amb
 {
@@ -126,10 +126,10 @@ namespace Amb
 
             auto hash() const
             {
-                const auto begin = static_cast<const uint8_t*>(cpixelsPtr());
+                const auto begin = static_cast<Hash::HashIt>(cpixelsPtr());
                 const auto end = begin + (sizeof(Rgba) * pixels.size());
 
-                return cexpr::hash(begin, end);
+                return Hash::hash(begin, end);
             }
         };
     }

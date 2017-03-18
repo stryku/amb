@@ -1,5 +1,7 @@
 #include "module/modules/mlvl/MlvlModule.hpp"
 #include "module/modules/mlvl/FoodEater.hpp"
+#include "config/module/AdvancedSettingsConfig.hpp"
+#include "config/module/MlvlConfig.hpp"
 
 #include "log/log.hpp"
 
@@ -9,9 +11,9 @@ namespace Amb
     {
         namespace Mlvl
         {
-            MlvlModule::MlvlModule(const Configs::Mlvl &config,
-                        const Configs::AdvancedSettings &advancedSettings,
-                            Simulate::Simulator &simulator,
+            MlvlModule::MlvlModule(const Config::Module::MlvlConfig &config,
+                                   const Config::Module::AdvancedSettingsConfig &advancedSettings,
+                                   Simulate::Simulator &simulator,
                                    const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                                    std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader)
                 : ModuleCore(simulator, tibiaClientWindowInfo, std::move(tibiaClientReader))

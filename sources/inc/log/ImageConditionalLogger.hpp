@@ -3,8 +3,6 @@
 #include "log/ImageLogger.hpp"
 #include "log/ConditionalLogger.hpp"
 
-#include <cexpr/crypto.hpp>
-
 #include <vector>
 
 namespace Amb

@@ -12,11 +12,32 @@
 #include "capture/ItemsWindowReader.hpp"
 #include "log/ImageConditionalLogger.hpp"
 #include "log/condition/ImageLogUniqueCondition.hpp"
+#include "ui/modules/looter/LootItem.hpp"
 
 #include <chrono>
 
 namespace Amb
 {
+    namespace Ui
+    {
+        namespace Module
+        {
+            namespace Looter
+            {
+                struct Category;
+            }
+        }
+    }
+
+    namespace Config
+    {
+        namespace Module
+        {
+            struct AdvancedSettingsConfig;
+            struct LooterConfig;
+        }
+    }
+
     namespace Module
     {
         namespace Looter
@@ -24,15 +45,14 @@ namespace Amb
             class LooterModule final : public ModuleCore
             {
             public:
-                LooterModule(const Configs::Looter &config,
-                             const Configs::AdvancedSettings &advancedSettings,
+                LooterModule(const Config::Module::LooterConfig &config,
+                             const Config::Module::AdvancedSettingsConfig &advancedSettings,
                              Simulate::Simulator &simulator,
                              const Client::TibiaClientWindowInfo &tibiaClientWindowInfo,
                              Client::Window::Finder::DeadCreatureWindowFinderFactory&& factory,
                              std::unique_ptr<Client::Reader::TibiaClientReader> tibiaClientReader = nullptr);
 
                 void attachToNewProcess(DWORD pid) override;
-
                 void setEnableDebugLogs(bool enabled) override;
 
             private:
@@ -46,8 +66,8 @@ namespace Amb
                 UniqueImageLogger unknowWindowsLogger;
 
 
-                const Configs::Looter &config;
-                const Configs::AdvancedSettings &advancedSettings;
+                const Config::Module::LooterConfig &config;
+                const Config::Module::AdvancedSettingsConfig &advancedSettings;
                 Capture::ItemsWindowReader itemsWindowReader;
 
                 void runDetails() override;

@@ -15,6 +15,7 @@ set(TEST_SRC_FILES
 set(TEST_INC_FILES )
 
 add_subdirectory(config)
+add_subdirectory(hash)
 add_subdirectory(ui)
 add_subdirectory(utils)
 add_subdirectory(tests_related)

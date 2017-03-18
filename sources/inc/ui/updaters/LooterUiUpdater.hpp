@@ -2,9 +2,12 @@
 
 namespace Amb
 {
-    namespace Configs
+    namespace Config
     {
-        struct Looter;
+        namespace Module
+        {
+            struct LooterConfig;
+        }
     }
 
     namespace Ui
@@ -19,7 +22,7 @@ namespace Amb
             class Looter
             {
             public:
-                void update(const Configs::Looter &configs, const Controls::Looter &controls) const;
+                void update(const Config::Module::LooterConfig &configs, const Controls::Looter &controls) const;
             };
         }
     }
