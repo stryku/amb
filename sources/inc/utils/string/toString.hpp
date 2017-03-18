@@ -1,7 +1,7 @@
 #pragma once
 
 #include "utils/traits/traits.hpp"
-#include "cexpr/template.hpp"
+#include "utils/traits/TemplateInfo.hpp"
 
 #include <string>
 
@@ -33,6 +33,6 @@ namespace utils // todo Amb::Utils
     template <typename ...Args>
     auto toStringArray(const Args&... args)
     {
-        return std::array<std::string, cexpr::TemplateArgs<Args...>::count> { toString(args)... };
+        return std::array<std::string, Amb::Traits::TemplateArgs<Args...>::count> { toString(args)... };
     }
 }

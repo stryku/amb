@@ -54,7 +54,7 @@ namespace Amb
             return ret;
         }
 
-        size_t Containers::getIdByHash(const cexpr::hash_t &hash) const
+        size_t Containers::getIdByHash(const Hash::HashType &hash) const
         {
             const auto it = iconHashToId.find(hash);
 
