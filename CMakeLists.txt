@@ -4,7 +4,6 @@ set(PROJECT_NAME_STR Amb)
 
 project(${PROJECT_NAME_STR})
 
-
 set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/external_projects)
 
 include(CheckCXXCompilerFlag)
@@ -23,6 +22,7 @@ endif()
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules")
 
+# OPTIONS
 option(AMB_PRO_COMPILATION "compile healer module" ON)
 if (AMB_PRO_COMPILATION)
     add_definitions(-DAMB_PRO_COMPILATION)
@@ -38,20 +38,30 @@ if (PREVENT_DEBUG)
     add_definitions(-DAMB_USE_CLIPBOARD)
 endif()
 
-set(BOOST_ROOT C:/moje/dev/include/boost/boost_1_63_0)
+# BOOST
+set(BOOST_ROOT $ENV{BOOST_ROOT})
+if(NOT BOOST_ROOT)
+  message(FATAL_ERROR "Make sure that BOOST_ROOT environment variable is set.")
+endif()
+
 find_package(Boost REQUIRED)
 if (NOT Boost_FOUND)
     message (ERROR "Boost not found!")
 endif()
 include_directories (${Boost_INCLUDE_DIRS})
 
-set( CMAKE_PREFIX_PATH C:/Qt/Qt5.8.0_x86/5.8/msvc2015/)
+# QT
+set(QT $ENV{QT})
+if(NOT QT)
+  message(FATAL_ERROR "Make sure that QT environment variable is set.")
+endif()
 
-set(AMB_VERSION "v0.4.0-tests" CACHE STRING "Version tag")
+set( CMAKE_PREFIX_PATH ${QT})
+
+set(AMB_VERSION "\"v0.4.0-tests\"" CACHE STRING "Version tag")
 add_definitions(-DAMB_VERSION=${AMB_VERSION})
 
 set (program_name "Almost Manual Bot")
-
 
 find_package (Qt5Widgets)
 find_package (Qt5UiTools REQUIRED)
@@ -74,9 +84,8 @@ include_directories (${inc_dir}
            
 set (AMB_src_qt	${src_dir_qt}/main.cpp
                         ${src_dir_qt}/mainwindow.cpp)
-					
+
 set (AMB_inc_qt ${inc_dir_qt}/mainwindow.h)
-					
 
 add_subdirectory(sources)                    
              
@@ -96,11 +105,11 @@ add_library (AMBMocObjects OBJECT
 )
 
 add_executable(Amb ${AMB_src_qt}
-						  ${AMB_inc_qt}
-						  ${AMB_src}
-						  ${AMB_inc} 
-						  $<TARGET_OBJECTS:AMBMocObjects>)
-						  
+                          ${AMB_inc_qt}
+                          ${AMB_src}
+                          ${AMB_inc} 
+                          $<TARGET_OBJECTS:AMBMocObjects>)
+
 target_link_libraries (Amb Qt5::Widgets Qt5::UiTools ${ZMQ_LIBRARIES} ntdll.lib)
 
 
@@ -112,3 +121,16 @@ install(
     DIRECTORY ${resources_dir}/
     DESTINATION ${install_dir}
 )
+
+# CREATE LOGS DIRECTORY
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/logs)
+
+# COPY RESOURCES
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/platforms DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Core.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Cored.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Gui.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Guid.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Widgets.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
+file(COPY ${resources_dir}/Qt5Widgetsd.dll DESTINATION ${PROJECT_BINARY_DIR}/Debug)
